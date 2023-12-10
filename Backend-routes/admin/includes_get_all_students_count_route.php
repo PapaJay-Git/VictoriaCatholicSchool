@@ -35,16 +35,56 @@ try {
 
 
     $stmt = $conn->prepare("
-    SELECT
-        COUNT(users.id) AS all_count,
-        COUNT(unregistered_students.student_id) AS unregistered_count
-    FROM users
-    LEFT JOIN unregistered_students ON users.id = unregistered_students.student_id
-    WHERE users.role = ? ");
+    SELECT users.*
+    FROM users 
+    LEFT JOIN checklists ON users.id = checklists.student_id
+    WHERE users.role = ? 
+    AND NOT EXISTS (
+        SELECT 1
+        FROM unregistered_students
+        WHERE unregistered_students.student_id = users.id
+        )
+    AND EXISTS (
+        SELECT 1
+        FROM registered_students
+        WHERE registered_students.student_id = users.id
+        )
+    AND (
+        NOT EXISTS (
+            SELECT 1
+            FROM student_payment
+            WHERE student_payment.student_id = users.id
+        )
+        OR
+        (checklists.is_complete IS NULL OR checklists.is_complete <> ?)
+    )
+    ");
+    $stmt->bind_param("si", $role, $is_complete);
+    $stmt->execute();
+    $students = $stmt->get_result();
+    $registered_count = $students->num_rows;
+
+
+    
+    $stmt = $conn->prepare("
+    SELECT users.*
+    FROM users 
+    WHERE users.role = ? 
+    AND EXISTS (
+        SELECT 1
+        FROM unregistered_students
+        WHERE unregistered_students.student_id = users.id
+        )
+    AND NOT EXISTS (
+        SELECT 1
+        FROM registered_students
+        WHERE registered_students.student_id = users.id
+        )
+    ");
     $stmt->bind_param("s", $role);
     $stmt->execute();
-    $stmt->bind_result($all_count, $unregistered_count);
-    $stmt->fetch();
+    $students = $stmt->get_result();
+    $unregistered_count = $students->num_rows;
 
 } catch (Exception $e) {
     // Log the exception or handle it appropriately

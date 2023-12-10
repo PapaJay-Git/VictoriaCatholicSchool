@@ -93,7 +93,6 @@ try {
 
 
     if($guardian_email == $email_address){
-
         errorSender('Guardian email and student email can\'t be the same!', $fileName);
     }
     

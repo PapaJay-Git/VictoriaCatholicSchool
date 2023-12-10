@@ -59,7 +59,7 @@ require_once "../includes/header_layout.php";
                         <small class="text-dark">REGISTERED</small>
                     </td>
                     <td>
-                        <small class="text-dark"><?php echo $all_count - $unregistered_count ?></small>
+                        <small class="text-dark"><?php echo $registered_count ?></small>
                     </td>
                     <td>
                         <a href="view_registered_students.php" class="btn btn-sm btn-primary fw-bold">OPEN</a>

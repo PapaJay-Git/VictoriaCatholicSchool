@@ -77,6 +77,11 @@ try {
     $date_of_birth = validateBirthday($_POST['birthday']);
     $role = 'student';
     
+    if($student_type == 'new' && $grade != '7'){
+
+        errorSender('New student should always be grade 7!', $fileName);
+    }
+
     $guardian_last_name = validate_name(sanitize_input($_POST['guardian_last_name']));
     $guardian_first_name = validate_name(sanitize_input($_POST['guardian_first_name']));
     $guardian_middle_name = validate_name(sanitize_input($_POST['guardian_middle_name']));
@@ -139,88 +144,111 @@ try {
         $stmt = $conn->prepare("INSERT INTO notifications (data, notifiable_id) VALUES (?, ?)");
         $stmt->bind_param("si", $data, $user['id']);
         $stmt->execute();
+    }                      
+
+
+    function emailBody($first_name, $last_name){
+        return '
+    <html>
+    <head>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+            }
+            h2 {
+                color: #3498db;
+            }
+            h3 {
+                color: #2ecc71;
+            }
+            h4 {
+                color: #333;
+            }
+            li {
+                margin-bottom: 10px;
+            }
+        </style>
+    </head>
+    <body>
+        <h2>Hi ' . $first_name . ' ' . $last_name . ',</h2>
+        <p>Thank you for filling up our enrollment form at Victoria Catholic School of Tarlac.</p>
+        
+        <h3>Enrollment Requirements:</h3>
+        <p>We are pleased to inform you about the requirements needed for enrollment:</p>
+        
+        <h4>New Students:</h4>
+        <ul>
+            <li>Original Form 138-A</li>
+            <li>Certificate of Good Moral</li>
+            <li>Photocopy of Baptismal and Birth Certificate (NSO Certificate)</li>
+            <li>Honorary Dismissal</li>
+            <li>Previous year Report Card</li>
+        </ul>
+        
+        <h4>Transferees:</h4>
+        <ul>
+            <li>Original Form 138-A</li>
+            <li>Certificate of Good Moral</li>
+            <li>Photocopy of Baptismal and Birth Certificate (NSO Certificate)</li>
+            <li>Honorary Dismissal</li>
+            <li>Previous year Report Card</li>
+        </ul>
+        
+        <h3>Mode of Payment:</h3>
+        <p>Payment should be made through the cashier\'s office only.</p>
+        <p><strong>Full Payment:</strong> P21,000-23,000 tuition range</p>
+        <p><strong>Down Payment:</strong> Upon Enrollment - 10% of the school\'s tuition</p>
+        <p><strong>Installment:</strong> P2,875 per month</p>
+        
+        <p>For any further inquiries, please feel free to contact us. We look forward to welcoming you to our school community!</p>
+        
+        <p>Best regards,</p>
+        <p>The Victoria Catholic School of Tarlac Team</p>
+
+        <h3>NOTE:</h3>
+        <h4>Kindly print this message and present it to the admin office for verification. This will serve as your stab verification.</h4>
+    </body>
+    </html>';
     }
-    
-    // $mail = new PHPMailer(true);
-    // $mail->isSMTP();                                       
-    // $mail->Host       = 'smtp.gmail.com';                     
-    // $mail->SMTPAuth   = true;                                  
-    // $mail->Username   = 'vcath0011@gmail.com';                   
-    // $mail->Password   = 'oghwcivzviaybxty';                      
-    // $mail->SMTPSecure = 'TLS';           
-    // $mail->Port       = 587;                          
 
-    // $mail->setFrom('vcath0011@gmail.com', 'Victoria Catholic School');
-    // $mail->addAddress($email_address, $first_name." ".$last_name);    
-    // $mail->isHTML(true);                                  
-    // $mail->Subject = 'Enrollment Requirements';
-    // $mail->Body = '
-    // <html>
-    // <head>
-    //     <style>
-    //         body {
-    //             font-family: Arial, sans-serif;
-    //         }
-    //         h2 {
-    //             color: #3498db;
-    //         }
-    //         h3 {
-    //             color: #2ecc71;
-    //         }
-    //         h4 {
-    //             color: #333;
-    //         }
-    //         li {
-    //             margin-bottom: 10px;
-    //         }
-    //     </style>
-    // </head>
-    // <body>
-    //     <h2>Hi ' . $first_name . ' ' . $last_name . ',</h2>
-    //     <p>Thank you for filling up our enrollment form at Victoria Catholic School of Tarlac.</p>
-        
-    //     <h3>Enrollment Requirements:</h3>
-    //     <p>We are pleased to inform you about the requirements needed for enrollment:</p>
-        
-    //     <h4>New Students:</h4>
-    //     <ul>
-    //         <li>Original Form 138-A</li>
-    //         <li>Certificate of Good Moral</li>
-    //         <li>Photocopy of Baptismal and Birth Certificate (NSO Certificate)</li>
-    //         <li>Honorary Dismissal</li>
-    //         <li>Previous year Report Card</li>
-    //     </ul>
-        
-    //     <h4>Transferees:</h4>
-    //     <ul>
-    //         <li>Original Form 138-A</li>
-    //         <li>Certificate of Good Moral</li>
-    //         <li>Photocopy of Baptismal and Birth Certificate (NSO Certificate)</li>
-    //         <li>Honorary Dismissal</li>
-    //         <li>Previous year Report Card</li>
-    //     </ul>
-        
-    //     <h3>Mode of Payment:</h3>
-    //     <p>Payment should be made through the cashier\'s office only.</p>
-    //     <p><strong>Full Payment:</strong> P21,000-23,000 tuition range</p>
-    //     <p><strong>Down Payment:</strong> Upon Enrollment - 10% of the school\'s tuition</p>
-    //     <p><strong>Installment:</strong> P2,875 per month</p>
-        
-    //     <p>For any further inquiries, please feel free to contact us. We look forward to welcoming you to our school community!</p>
-        
-    //     <p>Best regards,</p>
-    //     <p>The Victoria Catholic School of Tarlac Team</p>
+    $mail1 = new PHPMailer(true);
+    $mail1->isSMTP();                                       
+    $mail1->Host       = 'smtp.gmail.com';                     
+    $mail1->SMTPAuth   = true;                                  
+    $mail1->Username   = 'vcath0011@gmail.com';                   
+    $mail1->Password   = 'oghwcivzviaybxty';                      
+    $mail1->SMTPSecure = 'TLS';           
+    $mail1->Port       = 587;   
 
-    //     <h3>NOTE:</h3>
-    //     <h4>Kindly print this message and present it to the admin office for verification. This will serve as your stab verification.</h4>
-    // </body>
-    // </html>';
+    $mail1->setFrom('vcath0011@gmail.com', 'Victoria Catholic School');
+    $mail1->addAddress($email_address, $first_name." ".$last_name);    
+    $mail1->isHTML(true);                                  
+    $mail1->Subject = 'Enrollment Requirements';
+    $mail1->Body = emailBody($first_name, $last_name);
+    $mail1->send();
 
+    $mail2 = new PHPMailer(true);
+    $mail2->isSMTP();                                       
+    $mail2->Host       = 'smtp.gmail.com';                     
+    $mail2->SMTPAuth   = true;                                  
+    $mail2->Username   = 'vcath0011@gmail.com';                   
+    $mail2->Password   = 'oghwcivzviaybxty';                      
+    $mail2->SMTPSecure = 'TLS';           
+    $mail2->Port       = 587;   
 
-    // $mail->send();
+    $mail2->setFrom('vcath0011@gmail.com', 'Victoria Catholic School');
+    $mail2->addAddress($guardian_email, $guardian_first_name." ".$guardian_last_name);    
+    $mail2->isHTML(true);                                  
+    $mail2->Subject = 'Enrollment Requirements';
+    $mail2->Body = emailBody($guardian_first_name, $guardian_last_name);
+    $mail2->send();
 
     $stmt->close();
     $conn->close();
+    
+    foreach ($required_fields as $field) {
+        unset($_SESSION[$field]);
+    }
     
     successSender("Enrollment Form Submitted Successfully", "Location: ../../Resources/views/login/index.php");
 

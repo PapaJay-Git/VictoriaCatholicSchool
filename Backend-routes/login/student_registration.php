@@ -90,6 +90,12 @@ try {
     $guardian_occupation = sanitize_input($_POST['guardian_occupation']);
     $guardian_username = validate_username(sanitize_input($_POST['guardian_username']));
     $guardian_role = 'guardian';
+
+
+    if($guardian_email == $email_address){
+
+        errorSender('Guardian email and student email can\'t be the same!', $fileName);
+    }
     
     //student
     isUsernameExists($username, $conn);
@@ -249,7 +255,7 @@ try {
     foreach ($required_fields as $field) {
         unset($_SESSION[$field]);
     }
-    
+
     successSender("Enrollment Form Submitted Successfully", "Location: ../../Resources/views/login/index.php");
 
 } catch (Exception $e) {

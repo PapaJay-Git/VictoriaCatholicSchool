@@ -32,6 +32,23 @@ require_once "../includes/header_layout.php";
                   </tr>
                 </thead>
                 <tbody id="tbody-student">
+                  
+                <tr>
+                    <td>
+                        <small class="text-dark">
+                          <?php echo $count++ ?>
+                        </small>
+                    </td>
+                    <td>
+                        <small class="text-dark">ENROLLED STUDENTS</small>
+                    </td>
+                    <td>
+                        <small class="text-dark"><?php echo $enrolled_count ?></small>
+                    </td>
+                    <td>
+                        <a href="enrolled_students.php" class="btn btn-sm btn-primary fw-bold">OPEN</a>
+                    </td>
+                  </tr>
                   <tr>
                     <td>
                         <small class="text-dark">
@@ -62,22 +79,6 @@ require_once "../includes/header_layout.php";
                     </td>
                     <td>
                         <a href="view_pending_students.php?type=pending" class="btn btn-sm btn-primary fw-bold">OPEN</a>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                        <small class="text-dark">
-                          <?php echo $count++ ?>
-                        </small>
-                    </td>
-                    <td>
-                        <small class="text-dark">STUDENTS WITH PAYMENT AND REQUIREMENTS</small>
-                    </td>
-                    <td>
-                        <small class="text-dark"><?php echo $enrolled_count ?></small>
-                    </td>
-                    <td>
-                        <a href="enrolled_students.php" class="btn btn-sm btn-primary fw-bold">OPEN</a>
                     </td>
                   </tr>
                 </tbody>

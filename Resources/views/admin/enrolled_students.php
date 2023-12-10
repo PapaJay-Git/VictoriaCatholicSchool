@@ -21,7 +21,8 @@ function cropText($text, $maxLength = 25, $ellipsis = '...') {
      ?>
      <div class="container mt-5">
         <div class="d-flex justify-content-between align-items-center mb-5">
-            <h4 class="fw-bold">STUDENTS WITH PAYMENT AND REQUIREMENTS</h4>
+            <h4 class="fw-bold">ENROLLED STUDENTS</h4>
+            <a href="students.php" class="btn btn-danger fw-bold btn-sm">BACK</a>
         </div>
 
            <div class="table-responsive">

@@ -1,0 +1,129 @@
+<?php
+
+
+try {
+
+    require_once $_SERVER['DOCUMENT_ROOT']."/Connections/DB_connection.php";
+    require_once $_SERVER['DOCUMENT_ROOT']."/Middleware/CheckIfLoggedIn.php";
+    require_once $_SERVER['DOCUMENT_ROOT']."/Middleware/CheckIfCashier.php";
+
+    // redirection file name
+    $accountID = isset($_POST['id']) ? $_POST['id'] : NULL;
+
+    $fileName = "Location: ../../Resources/views/cashier/update-pending-student.php?id=$accountID";
+    $role = 'student';
+    $error = false;
+    $fieldName = NULL;
+
+    // validations functions
+    require_once $_SERVER['DOCUMENT_ROOT']."/Backend-routes/admin/includes_user_checker_router.php";
+
+    isPOST();
+
+    isPOSTID();
+
+    checkIfUserExists($accountID, $role, $conn);
+
+    $required_fields = ['section', 'first_name', 'middle_name', 'last_name', 'username', 'address', 'school_number', 'phone', 'email', 'gender', 'birthday', 'student_type'];
+
+    // required checker
+    foreach ($required_fields as $field) {
+        $_SESSION[$field] = sanitize_input($_POST[$field]);
+        if (empty($_POST[$field])) {
+            $error = true;
+            $fieldName = $field;
+        }
+    }
+    
+    if($error){
+        errorSender("$fieldName is required", $fileName);
+    }
+
+      // input data
+    $first_name = validate_name(sanitize_input($_POST['first_name']));
+    $middle_name = validate_name(sanitize_input($_POST['middle_name']));
+    $last_name = validate_name(sanitize_input($_POST['last_name']));
+    $username = validate_username(sanitize_input($_POST['username']));
+    $address = sanitize_input($_POST['address']);
+    $school_number = sanitize_input($_POST['school_number']);
+    $phone = validate_phone_number(sanitize_input($_POST['phone']));
+    $email_address = validate_email($_POST['email']);
+    $gender = validate_gender($_POST['gender']);
+    $date_of_birth = validateBirthday($_POST['birthday']);
+    $sectionID = $_POST['section'];
+    $student_type = validate_student_type($_POST['student_type']);
+
+    isUsernameExistsOtherThanMe($username, $conn, $accountID);
+
+    isSchoolNumberExistsOtherThanMe($school_number, $conn, $accountID);
+
+    isPhoneNumberExistsOtherThanMe($phone, $conn, $accountID);
+    
+    isEmailExistsOtherThanMe($email_address, $conn, $accountID);
+
+    isSectionIDExists($sectionID, $conn);
+    
+    $stmt = $conn->prepare("UPDATE users SET first_name = ?, middle_name = ?, last_name = ?, username = ?, address = ?, school_number = ?, phone = ?, email = ?, gender = ?, birthday = ? WHERE id = ?");
+    $stmt->bind_param("ssssssssssi", $first_name, $middle_name, $last_name, $username, $address, $school_number, $phone, $email_address, $gender, $date_of_birth, $accountID);
+    $stmt->execute();
+
+    $stmt = $conn->prepare("DELETE FROM student_sections where student_id = ?");
+    $stmt->bind_param("i", $accountID);
+    $stmt->execute();
+
+    $stmt = $conn->prepare("INSERT INTO student_sections (student_id, section_id) VALUES (?, ?)");
+    $stmt->bind_param("ii", $accountID, $sectionID);
+    $stmt->execute();
+
+    $stmt = $conn->prepare("DELETE FROM registered_students where student_id = ?");
+    $stmt->bind_param("i", $accountID);
+    $stmt->execute();
+
+    $stmt = $conn->prepare("INSERT INTO registered_students (student_id, student_type) VALUES (?, ?)");
+    $stmt->bind_param("is", $accountID, $student_type);
+    $stmt->execute();
+
+    $stmt = $conn->prepare("DELETE FROM unregistered_students where student_id = ?");
+    $stmt->bind_param("i", $accountID);
+    $stmt->execute();
+
+
+    // notifications
+    $data = 'Cashier_confirm_student';
+    $adminTxt = 'admin';
+    $stmt = $conn->prepare("SELECT id FROM users WHERE role = ?");
+    $stmt->bind_param("s", $adminTxt);
+    $stmt->execute();
+    $admins = $stmt->get_result();
+
+
+    foreach($admins as $admin){
+        $stmt = $conn->prepare("DELETE FROM notifications where notifiable_id = ? AND data = ?");
+        $stmt->bind_param("is", $admin['id'], $data);
+        $stmt->execute();
+
+        $stmt = $conn->prepare("INSERT INTO notifications (data, notifiable_id) VALUES (?, ?)");
+        $stmt->bind_param("si", $data, $admin['id']);
+        $stmt->execute();
+    }
+
+    $stmt->close();
+    $conn->close();
+
+    foreach ($required_fields as $field) {
+        unset($_SESSION[$field]);
+    }
+
+    $fileName = "Location: ../../Resources/views/cashier/confirm_students.php";
+
+    foreach ($required_fields as $field) {
+        unset($_SESSION[$field]);
+    }
+    successSender("Student Confirmed Successfully", $fileName);
+
+} catch (Exception $e) {
+
+    errorSender('error '.$e->getMessage(), $fileName);
+}
+
+?>

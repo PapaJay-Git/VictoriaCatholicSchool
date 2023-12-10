@@ -1,0 +1,95 @@
+<?php
+
+try {
+
+    require_once $_SERVER['DOCUMENT_ROOT']."/Connections/DB_connection.php";
+    require_once $_SERVER['DOCUMENT_ROOT']."/Middleware/CheckIfLoggedIn.php";
+    require_once $_SERVER['DOCUMENT_ROOT']."/Middleware/CheckIfAdmin.php";
+
+    // redirection file name
+    $fileName = "Location: ../../Resources/views/admin/view_registered_students.php";
+
+    $error = false;
+    $fieldName = NULL;
+
+    // validations functions
+    require_once $_SERVER['DOCUMENT_ROOT']."/Backend-routes/admin/includes_user_checker_router.php";
+
+    isPOST();
+
+    // required array
+    $required_fields = ['section','first_name', 'middle_name', 'last_name', 'username', 'address', 'school_number', 'phone', 'email', 'birthday', 'gender', 'student_type'];
+
+    // required checker
+    foreach ($required_fields as $field) {
+        $_SESSION[$field] = sanitize_input($_POST[$field]);
+        if (empty($_POST[$field])) {
+            $error = true;
+            $fieldName = $field;
+        }
+    }
+
+    if($error){
+        errorSender("$fieldName is required", $fileName);
+    }
+
+    // input data
+    $default_password = "P@ssword123";
+    $first_name = validate_name(sanitize_input($_POST['first_name']));
+    $middle_name = validate_name(sanitize_input($_POST['middle_name']));
+    $last_name = validate_name(sanitize_input($_POST['last_name']));
+    $username = validate_username(sanitize_input($_POST['username']));
+    $password = password_hash($default_password, PASSWORD_DEFAULT); 
+    $address = sanitize_input($_POST['address']);
+    $school_number = sanitize_input($_POST['school_number']);
+    $phone_number = validate_phone_number(sanitize_input($_POST['phone']));
+    $email_address = validate_email($_POST['email']);
+    $gender = validate_gender($_POST['gender']);
+    $date_of_birth = validateBirthday($_POST['birthday']);
+    $role = 'student';
+    $sectionID = $_POST['section'];
+    $student_type = validate_student_type($_POST['student_type']);
+    
+    
+    isUsernameExists($username, $conn);
+
+    isSchoolNumberExists($school_number, $conn);
+
+    isPhoneNumberExists($phone_number, $conn);
+    
+    isEmailExists($email_address, $conn);
+
+    isSectionIDExists($sectionID, $conn);
+
+    $stmt = $conn->prepare("INSERT INTO users (first_name, middle_name, last_name, username, password, address, school_number, phone, email, gender, birthday, role) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+    $stmt->bind_param("ssssssssssss", $first_name, $middle_name, $last_name, $username, $password, $address, $school_number, $phone_number, $email_address, $gender, $date_of_birth, $role);
+    $stmt->execute();
+    $insertedUserId = $conn->insert_id;
+
+    $stmt = $conn->prepare("DELETE FROM student_sections where student_id = ?");
+    $stmt->bind_param("i", $insertedUserId);
+    $stmt->execute();
+
+    $stmt = $conn->prepare("INSERT INTO student_sections (student_id, section_id) VALUES (?, ?)");
+    $stmt->bind_param("ii", $insertedUserId, $sectionID);
+    $stmt->execute();
+
+    $stmt = $conn->prepare("INSERT INTO registered_students (student_id, student_type) VALUES (?, ?)");
+    $stmt->bind_param("is", $insertedUserId, $student_type);
+    $stmt->execute();
+
+    $stmt->close();
+    $conn->close();
+
+
+    foreach ($required_fields as $field) {
+        unset($_SESSION[$field]);
+    }
+    successSender("Student Added Successfully", $fileName);
+
+} catch (Exception $e) {
+
+    errorSender('error '.$e->getMessage(), $fileName);
+}
+
+?>

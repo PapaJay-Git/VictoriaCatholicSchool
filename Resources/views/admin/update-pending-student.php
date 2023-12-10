@@ -1,0 +1,197 @@
+<?php
+
+require_once $_SERVER['DOCUMENT_ROOT']."/Middleware/CheckIfLoggedIn.php";
+require_once $_SERVER['DOCUMENT_ROOT']."/Middleware/CheckIfAdmin.php";
+require_once $_SERVER['DOCUMENT_ROOT']."/Backend-routes/admin/includes_get_student_pending_route.php";
+
+$title = "Admin - Confirm Pending Student";
+
+require_once "../includes/header_layout.php";
+
+function getSession($data) {
+  global $row;
+
+  if (isset($_SESSION[$data])) {
+    $session_value = $_SESSION[$data];
+    unset($_SESSION[$data]);
+    return $session_value;
+  }
+
+    return $row[$data];
+}
+
+
+function isTabSet($tab){
+
+    if($tab == 'info' && (!isset($_GET['password']) && !isset($_GET['guardian']))){
+        return "style='display:block'";
+    }else if($tab == 'password' || $tab =='guardian'){
+        return isset($_GET[$tab]) ? "style='display:block'" : "style='display:none'";
+    }
+
+    return "style='display:none'";
+}
+
+?>
+<body>
+<?php 
+    include "includes/navbar.php";
+?>
+<div class="container my-5">
+    <div class="d-flex justify-content-between align-items-center">
+        <div class="btn-group mb-5">
+            <div class="btn btn-primary btn-sm fw-bold" onclick="hidePasswordTab2()">BASIC INFO</div>
+            <div class="btn btn-primary btn-sm fw-bold" onclick="showGuadianTab2()">GUARDIAN</div>
+            <div class="btn btn-secondary btn-sm fw-bold" onclick="showPasswordTab2()">PASSWORD</div>
+        </div>
+        
+        <a href="view_pending_students.php" class="btn btn-sm btn-danger fw-bold">BACK</a>
+    </div>
+    <div class="pb-2 px-2"  id="password-tab" <?php echo isTabSet('password') ?>>
+        <form method="POST" action="../../../Backend-routes/admin/update_student_password_pending_route.php" onsubmit="submitRequest('updateStudentFormPassword', event)" id="updateStudentFormPassword">
+            <h5 class="mb-2 fw-bold">CHANGE PASSWORD</h5>
+            <small>(Atleast 8 characters, 1 number, 1 capital and lower case letter, and no spaces)</small>
+            <input type="hidden" name="id" value="<?php echo $row['id'] ?>">
+            <div class="mb-3">
+                <label class="form-label fw-bold text-uppercase">New Password</label>
+                <input type="password" class="form-control form-control-sm" name="new_password" required placeholder="New Password"? >
+            </div>
+            <div class="mb-3">
+                <label class="form-label fw-bold text-uppercase">Confirm New Password</label>
+                <input type="password" class="form-control form-control-sm" name="confirm_password" required placeholder="Confirm New Password" >
+            </div>
+            <div class="d-flex justify-content-end my-5">
+                <button class="btn btn-sm fw-bold btn-primary me-1" type="submit">CHANGE</button>
+                <a href="view_registered_students.php" class="btn btn-danger btn-sm fw-bold">CANCEL</a>
+            </div>
+
+        </form>
+    </div>
+    <div class="pb-2 px-2"  id="guardian-tab" <?php echo isTabSet('guardian') ?>>
+        <form method="POST" action="../../../Backend-routes/admin/update_student_pending_guardian_route.php" onsubmit="submitRequest('updateStudentFormGuardian', event)" id="updateStudentFormGuardian">
+        <h5 class="mb-2 fw-bold text-uppercase" id="exampleModalLabel">GUARDIAN OF PENDING <?php echo $unregistered_info['student_type'] ?> STUDENT</h5>
+        <input type="hidden" name="id" value="<?php echo $row['id'] ?>">
+        <div class="mb-3 mt-5">
+            <label class="form-label fw-bold text-uppercase">Guardian First name</label>
+            <input type="text" class="form-control form-control-sm" name="guardian_first_name" required placeholder="First Name" <?php echo "value='".htmlspecialchars(getSession('guardian_first_name'))."'"  ?> >
+        </div>
+        <div class="mb-3">
+            <label class="form-label fw-bold text-uppercase">Guardian Middle name</label>
+            <input type="text" class="form-control form-control-sm" name="guardian_middle_name" required placeholder="Middle name" <?php echo "value='".htmlspecialchars(getSession('guardian_middle_name'))."'"  ?> >
+        </div>
+        <div class="mb-3">
+            <label class="form-label fw-bold text-uppercase">Guardian Last name</label>
+            <input type="text" class="form-control form-control-sm"name="guardian_last_name" required placeholder="Last name" <?php echo "value='".htmlspecialchars(getSession('guardian_last_name'))."'"  ?> >
+        </div>
+        <div class="mb-3">
+            <label class="form-label fw-bold text-uppercase">Guardian Username</label>
+            <input type="text" class="form-control form-control-sm" name="guardian_username" required placeholder="Guardian Username" <?php echo "value='".htmlspecialchars(getSession('guardian_username'))."'"  ?> >
+        </div>
+        <div class="mb-3">
+            <label class="form-label fw-bold text-uppercase">Guardian Phone Number</label>
+            <input type="text" class="form-control form-control-sm" name="guardian_phone" required placeholder="Phone Number" <?php echo "value='".htmlspecialchars(getSession('guardian_phone'))."'"  ?> >
+        </div>
+        <div class="mb-3">
+            <label class="form-label fw-bold text-uppercase">Guardian Email Address</label>
+            <input type="text" class="form-control form-control-sm" name="guardian_email" required placeholder="Email Adress" <?php echo "value='".htmlspecialchars(getSession('guardian_email'))."'"  ?> >
+        </div>
+        <div class="mb-3">
+            <label class="form-label fw-bold text-uppercase">Guardian Occupation</label>
+            <input type="text" class="form-control form-control-sm" name="guardian_occupation" required placeholder="Occupation" <?php echo "value='".htmlspecialchars(getSession('guardian_occupation'))."'"  ?> >
+        </div>
+
+        <div class="d-flex justify-content-end my-5">
+            <button class="btn btn-sm fw-bold btn-primary me-1" type="submit">UPDATE</button>
+            <a href="view_pending_students.php" class="btn btn-danger btn-sm fw-bold">CANCEL</a>
+        </div>
+                    
+        </form>
+    </div>
+    <div class="pb-2 px-2" id="info-tab" <?php echo isTabSet('info') ?> >
+                    
+     <form method="POST" action="../../../Backend-routes/admin/update_student_pending_route.php" onsubmit="submitRequest('updateStudentForm', event)" id="updateStudentForm">
+        <h5 class="mb-2 fw-bold text-uppercase" id="exampleModalLabel">CONFIRM PENDING <?php echo $unregistered_info['student_type'] ?> STUDENT</h5>
+        <div class="mb-5 ms-1">
+            <label class="fw-bold text-uppercase">Enrolled Grade: <?php echo $unregistered_info['requested_grade'] ?></span></label><span>
+        </div>
+        <input type="hidden" name="id" value="<?php echo $row['id'] ?>">
+        <input type="hidden" name="student_type" value="<?php echo $unregistered_info['student_type'] ?>">
+        <div class="mb-3">
+            <label class="form-label fw-bold text-uppercase">SECTION</label>
+            <small class="d-block">Section is required upon confirmation</small>
+            <select name='section' class='form-control form-control-sm my-2 me-3 border rounded p-1' required>
+                  <option value='' disabled selected>Select an option</option>
+                    <?php
+                        foreach ($sections as $section) {
+                          $isSelected = $section['id'] == $row['section_id'] ? 'selected' : '';
+                          echo "<option value='{$section['id']}' $isSelected>{$section['name']} - {$section['grade']}</option>";
+                      }
+                    ?>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label class="form-label fw-bold text-uppercase">First name</label>
+            <input type="text" class="form-control form-control-sm" name="first_name" required placeholder="First_name" <?php echo "value='".htmlspecialchars(getSession('first_name'))."'"  ?> >
+        </div>
+        <div class="mb-3">
+            <label class="form-label fw-bold text-uppercase">Middle name</label>
+            <input type="text" class="form-control form-control-sm" name="middle_name" required placeholder="Middle name" <?php echo "value='".htmlspecialchars(getSession('middle_name'))."'"  ?> >
+        </div>
+        <div class="mb-3">
+            <label class="form-label fw-bold text-uppercase">Last name</label>
+            <input type="text" class="form-control form-control-sm"name="last_name" required placeholder="Last name" <?php echo "value='".htmlspecialchars(getSession('last_name'))."'"  ?> >
+        </div>
+        <div class="mb-3">
+            <label class="form-label fw-bold text-uppercase">Username</label>
+            <input type="text" class="form-control form-control-sm" name="username" required placeholder="Username" <?php echo "value='".htmlspecialchars(getSession('username'))."'"  ?> >
+        </div>
+        <div class="mb-3">
+            <label class="form-label fw-bold text-uppercase">Address</label>
+            <textarea name="address" class="form-control" id="adress" cols="30" rows="4" placeholder="Address" required><?php echo htmlspecialchars(getSession('address'));  ?> </textarea>
+        </div>
+        <div class="mb-3">
+            <label class="form-label fw-bold text-uppercase">School Number</label>
+            <input type="text" class="form-control form-control-sm" name="school_number" required placeholder="School Number" <?php echo "value='".htmlspecialchars(getSession('school_number'))."'"  ?> >
+        </div>
+        <div class="mb-3">
+            <label class="form-label fw-bold text-uppercase">Phone Number</label>
+            <input type="text" class="form-control form-control-sm" name="phone" required placeholder="Phone Number" <?php echo "value='".htmlspecialchars(getSession('phone'))."'"  ?> >
+        </div>
+        <div class="mb-3">
+            <label class="form-label fw-bold text-uppercase">Email Address</label>
+            <input type="text" class="form-control form-control-sm" name="email" required placeholder="Email Adress" <?php echo "value='".htmlspecialchars(getSession('email'))."'"  ?> >
+        </div>
+        <div class="mb-3">
+            <label class="form-label fw-bold text-uppercase">Gender</label><br>
+            <?php
+                if(getSession('gender') == 'Male'){
+                ?>
+                    <input type="radio" value="Male" checked name="gender"> Male 
+                    <input type="radio" value="Female" name="gender"> Female
+                <?php
+                }else{
+                ?>
+                    <input type="radio" value="Male" name="gender"> Male 
+                    <input type="radio" value="Female" checked name="gender"> Female
+                <?php
+                }
+            ?>
+        </div>
+        <div class="mb-3">
+            <label class="form-label fw-bold text-uppercase">Date of Birth</label>
+            <input type="date" class="form-control form-control-sm" name="birthday" required    <?php echo "value='".htmlspecialchars(getSession('birthday'))."'"  ?> >
+        </div>
+
+        <div class="d-flex justify-content-end my-5">
+            <button class="btn btn-sm fw-bold btn-primary me-1" type="submit">CONFIRM</button>
+            <a href="view_pending_students.php" class="btn btn-danger btn-sm fw-bold">CANCEL</a>
+        </div>
+                    
+        </form>
+    </div>
+</div>
+</body>
+<?php
+	require_once "../includes/includes_scripts.php";
+?>
+<script> setActive('students_tab'); </script>

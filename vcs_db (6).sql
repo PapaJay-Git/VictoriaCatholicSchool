@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 10, 2023 at 03:20 PM
+-- Generation Time: Dec 11, 2023 at 01:19 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -259,13 +259,6 @@ CREATE TABLE `unregistered_students` (
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `unregistered_students`
---
-
-INSERT INTO `unregistered_students` (`id`, `student_id`, `requested_grade`, `student_type`, `created_at`, `updated_at`) VALUES
-(34, 98, '7', 'new', '2023-12-10 14:19:58', '2023-12-10 14:19:58');
-
 -- --------------------------------------------------------
 
 --
@@ -303,10 +296,7 @@ INSERT INTO `users` (`id`, `role`, `school_number`, `first_name`, `middle_name`,
 (69, 'teacher', '10001', 'Nicole', 'G', 'Bautista', 'nicole@gmail.com', '09123456781', 'Female', '2000-02-04', 'Camiling, Tarlac', NULL, 'nicolebautista001', '$2y$10$TnujQGE8fBEtCqS1mFkXCux/T0eLZJNQRc1Uif8L/D4T0UVRyavR.', NULL, '2023-12-07 06:26:10', '2023-12-07 07:18:22'),
 (70, 'cashier', '0000101', 'Roan', 'Garcia', 'Lanuzo', 'roanlanuzo090@gmail.com', '09178736980', 'Male', '2001-03-10', 'Matatalaib , Tarlac', NULL, 'roankarl', '$2y$10$hcG2wGoYaIXOY/qOcDBvYezjFmqH7NOe7y.xDnyyGAfvqZ7jQkm3a', NULL, '2023-12-07 06:55:32', '2023-12-07 06:55:32'),
 (73, 'teacher', '10004', 'Krizelle', 'Julian', 'Dula', 'krizelleamariedula@gmail.com', '09682159982', 'Female', '2002-03-19', 'Concepcion, Tarlac.', NULL, 'krizelledl', '$2y$10$AFLUSRyGF1rP7ljN7d6aNe.3D7C7oiy5lleBKjDY/eWlGoEWAoec2', NULL, '2023-12-07 07:22:32', '2023-12-07 07:22:32'),
-(74, 'teacher', '00005', 'Joe', 'Panlilio', 'Canasa', 'johnlorenzpanlilio51@gmail.com', '09914384304', 'Male', '1999-05-27', 'Cope Alfonso 1440', NULL, 'joepanlilio0', '$2y$10$Onlcg1OaLFgOVr4czuxwM.arEbFUFJQ55nImXwRweeKq/ttLBtmle', NULL, '2023-12-07 07:55:19', '2023-12-07 07:55:19'),
-(76, 'parent', NULL, 'Angel Anne', 'Sabado', 'Garia', 'karllanuzo10@gmail.com', '09832456787', 'Female', '2015-07-12', 'Fiesta Communities Matatalaib Tarlac City', NULL, 'Angelanne', '$2y$10$23VsfD2lrDvREKSHMjo81e0LhfCMM3RMfNjaKkr4yMWbKAyRTA6.S', NULL, '2023-12-08 00:33:39', '2023-12-09 08:11:09'),
-(78, 'parent', '000000123123', 'Kairi', 'Miz', 'Irving', 'nthjolmpuvfpxxy@wireconnected.com', '09111123334', 'Female', NULL, 'Camiling, Tarlac', NULL, 'kairi001', 'P@ssword123', NULL, '2023-12-09 07:04:25', '2023-12-09 07:04:25'),
-(98, 'student', NULL, 'John Mark', 'Seneres', 'Bruno', 'njeverbxkhccq@wireconnected.com', '09657835671', 'Male', '2001-03-13', 'Camiling, Tarlac.', NULL, 'jmbruno', '$2y$10$c.bhgLLVyd1muPrFcTu1NeHOKbQDMijYrfcEDTgidDrdxDlalqe1K', NULL, '2023-12-10 14:19:58', '2023-12-10 14:19:58');
+(74, 'teacher', '00005', 'Joe', 'Panlilio', 'Canasa', 'johnlorenzpanlilio51@gmail.com', '09914384304', 'Male', '1999-05-27', 'Cope Alfonso 1440', NULL, 'joepanlilio0', '$2y$10$Onlcg1OaLFgOVr4czuxwM.arEbFUFJQ55nImXwRweeKq/ttLBtmle', NULL, '2023-12-07 07:55:19', '2023-12-07 07:55:19');
 
 --
 -- Indexes for dumped tables
@@ -401,7 +391,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `checklists`
 --
 ALTER TABLE `checklists`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
 
 --
 -- AUTO_INCREMENT for table `classes`
@@ -413,25 +403,25 @@ ALTER TABLE `classes`
 -- AUTO_INCREMENT for table `guardians`
 --
 ALTER TABLE `guardians`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT for table `notifications`
 --
 ALTER TABLE `notifications`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=117;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=150;
 
 --
 -- AUTO_INCREMENT for table `promissory`
 --
 ALTER TABLE `promissory`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `registered_students`
 --
 ALTER TABLE `registered_students`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `sections`
@@ -449,13 +439,13 @@ ALTER TABLE `student_balance`
 -- AUTO_INCREMENT for table `student_payment`
 --
 ALTER TABLE `student_payment`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `student_sections`
 --
 ALTER TABLE `student_sections`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=90;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=94;
 
 --
 -- AUTO_INCREMENT for table `subjects`
@@ -467,13 +457,13 @@ ALTER TABLE `subjects`
 -- AUTO_INCREMENT for table `unregistered_students`
 --
 ALTER TABLE `unregistered_students`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=100;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=110;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

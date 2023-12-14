@@ -36,10 +36,6 @@ require_once "../includes/header_layout.php";
                 </span>
                 <span class="mt-1 p-2 d-block">
                     <span class="d-block">
-                        <h4 class="bebas-font text-dark d-inline-block">Username:</h4>
-                        <h5 class="bebas-font d-inline-block"><?php echo $auth['username']; ?></h5>
-                    </span>
-                    <span class="d-block">
                         <h4 class="bebas-font text-dark d-inline-block">Email:</h4>
                         <h5 class="bebas-font d-inline-block text-uppercase"><?php echo $auth['email'] ?></h5>
                     </span>

@@ -42,8 +42,6 @@ try {
         'guardian_phone',
         'guardian_email',
         'guardian_occupation',
-        'username',
-        'guardian_username'
     ];
     
 
@@ -69,7 +67,6 @@ try {
     $first_name = validate_name(sanitize_input($_POST['first_name']));
     $middle_name = validate_name(sanitize_input($_POST['middle_name']));
     $gender = validate_gender($_POST['gender']);
-    $username = validate_username(sanitize_input($_POST['username']));
     $password = password_hash($default_password, PASSWORD_DEFAULT); 
     $address = sanitize_input($_POST['address']);
     $phone_number = validate_phone_number(sanitize_input($_POST['phone']));
@@ -88,7 +85,6 @@ try {
     $guardian_phone_number = validate_phone_number(sanitize_input($_POST['guardian_phone']));
     $guardian_email = validate_email($_POST['guardian_email']);
     $guardian_occupation = sanitize_input($_POST['guardian_occupation']);
-    $guardian_username = validate_username(sanitize_input($_POST['guardian_username']));
     $guardian_role = 'guardian';
 
 
@@ -97,7 +93,6 @@ try {
     }
     
     //student
-    isUsernameExists($username, $conn);
 
     isPhoneNumberExists($phone_number, $conn);
     
@@ -106,15 +101,14 @@ try {
     //student
 
     //parent
-    isUsernameExists($username, $conn);
 
     isPhoneNumberExists($guardian_phone_number, $conn);
     
     isEmailExists($guardian_email, $conn);
     //parent
 
-    $stmt = $conn->prepare("INSERT INTO users (first_name, middle_name, last_name, username, password, address, phone, email, gender, birthday, role) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-    $stmt->bind_param("sssssssssss", $first_name, $middle_name, $last_name, $username, $password, $address, $phone_number, $email_address, $gender, $date_of_birth, $role);
+    $stmt = $conn->prepare("INSERT INTO users (first_name, middle_name, last_name, password, address, phone, email, gender, birthday, role) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+    $stmt->bind_param("ssssssssss", $first_name, $middle_name, $last_name, $password, $address, $phone_number, $email_address, $gender, $date_of_birth, $role);
     $stmt->execute();
     $studentID = $conn->insert_id;
 
@@ -123,8 +117,8 @@ try {
     $stmt->bind_param("iss", $studentID, $grade, $student_type);
     $stmt->execute();
 
-    $stmt = $conn->prepare("INSERT INTO users (first_name, middle_name, last_name, username, password, phone, email, occupation, role) VALUES (?,?,?,?,?,?,?,?,?)");
-    $stmt->bind_param("sssssssss", $guardian_first_name, $guardian_middle_name, $guardian_last_name, $guardian_username, $password, $guardian_phone_number, $guardian_email, $guardian_occupation, $guardian_role);
+    $stmt = $conn->prepare("INSERT INTO users (first_name, middle_name, last_name, password, phone, email, occupation, role) VALUES (?,?,?,?,?,?,?,?)");
+    $stmt->bind_param("ssssssss", $guardian_first_name, $guardian_middle_name, $guardian_last_name, $password, $guardian_phone_number, $guardian_email, $guardian_occupation, $guardian_role);
     $stmt->execute();
     $guardianID = $conn->insert_id;
 

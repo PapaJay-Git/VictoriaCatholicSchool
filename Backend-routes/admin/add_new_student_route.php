@@ -18,7 +18,7 @@ try {
     isPOST();
 
     // required array
-    $required_fields = ['section','first_name', 'middle_name', 'last_name', 'username', 'address', 'school_number', 'phone', 'email', 'birthday', 'gender', 'student_type'];
+    $required_fields = ['section','first_name', 'middle_name', 'last_name', 'address', 'school_number', 'phone', 'email', 'birthday', 'gender', 'student_type'];
 
     // required checker
     foreach ($required_fields as $field) {
@@ -38,7 +38,6 @@ try {
     $first_name = validate_name(sanitize_input($_POST['first_name']));
     $middle_name = validate_name(sanitize_input($_POST['middle_name']));
     $last_name = validate_name(sanitize_input($_POST['last_name']));
-    $username = validate_username(sanitize_input($_POST['username']));
     $password = password_hash($default_password, PASSWORD_DEFAULT); 
     $address = sanitize_input($_POST['address']);
     $school_number = sanitize_input($_POST['school_number']);
@@ -50,8 +49,6 @@ try {
     $sectionID = $_POST['section'];
     $student_type = validate_student_type($_POST['student_type']);
     
-    
-    isUsernameExists($username, $conn);
 
     isSchoolNumberExists($school_number, $conn);
 
@@ -61,8 +58,8 @@ try {
 
     isSectionIDExists($sectionID, $conn);
 
-    $stmt = $conn->prepare("INSERT INTO users (first_name, middle_name, last_name, username, password, address, school_number, phone, email, gender, birthday, role) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-    $stmt->bind_param("ssssssssssss", $first_name, $middle_name, $last_name, $username, $password, $address, $school_number, $phone_number, $email_address, $gender, $date_of_birth, $role);
+    $stmt = $conn->prepare("INSERT INTO users (first_name, middle_name, last_name, password, address, school_number, phone, email, gender, birthday, role) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+    $stmt->bind_param("sssssssssss", $first_name, $middle_name, $last_name, $password, $address, $school_number, $phone_number, $email_address, $gender, $date_of_birth, $role);
     $stmt->execute();
     $insertedUserId = $conn->insert_id;
 

@@ -37,7 +37,6 @@ function limitString($inputString, $maxLength = 15) {
                     <tr>
                         <th scope="col">#</th>
                         <th scope="col">Name</th>
-                        <th scope="col">Username</th>
                         <th scope="col">Email</th>
                         <th scope="col">School Number</th>
                         <th scope="col">Section</th>
@@ -57,9 +56,6 @@ function limitString($inputString, $maxLength = 15) {
                             </small></td>
                         <td>
                             <small class="text-dark"><?php echo $promissory['first_name']." ".$promissory['last_name'] ?></small>
-                        </td>
-                        <td>
-                            <small class="text-dark"><?php echo $promissory['username'] ?></small>
                         </td>
                         <td>
                             <small class="text-dark"><?php echo $promissory['email'] ?></small>

@@ -122,3 +122,16 @@ function setActive(id){
 
     tab.classList.add('active-tab');
 }
+
+function showPassword() {
+    var passwordInputs = document.getElementsByClassName("input-password");
+    var checkBox = document.getElementById("checkBox");
+
+    for (var i = 0; i < passwordInputs.length; i++) {
+        if (checkBox.checked) {
+            passwordInputs[i].type = "text";
+        } else {
+            passwordInputs[i].type = "password";
+        }
+    }
+}

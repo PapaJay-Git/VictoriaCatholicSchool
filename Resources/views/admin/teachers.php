@@ -37,7 +37,6 @@ function getSession($data) {
                     <th scope="col">#</th>
                     <th scope="col">First Name</th>
                     <th scope="col">Last Name</th>
-                    <th scope="col">Username</th>
                     <th scope="col">Email</th>
                     <th scope="col">Action</th>
                   </tr>
@@ -56,9 +55,6 @@ function getSession($data) {
                       </td>
                       <td>
                           <small class="text-dark"><?php echo $row['last_name'] ?></small>
-                      </td>
-                      <td>
-                          <small class="text-dark"><?php echo $row['username'] ?></small>
                       </td>
                       <td>
                           <small class="text-dark"><?php echo $row['email'] ?></small>
@@ -100,11 +96,6 @@ function getSession($data) {
                   <label class="form-label fw-bold text-uppercase">Last name</label>
                   <input type="text" class="form-control form-control-sm"name="last_name" required placeholder="Last name"
                   <?php echo "value='".htmlspecialchars(getSession('last_name'))."'"  ?> >
-                </div>
-                <div class="mb-3">
-                  <label class="form-label fw-bold text-uppercase">Username</label>
-                  <input type="text" class="form-control form-control-sm" name="username" required placeholder="Username"
-                  <?php echo "value='".htmlspecialchars(getSession('username'))."'"  ?> >
                 </div>
                 <div class="mb-3">
                   <label class="form-label fw-bold text-uppercase">Default Password</label>

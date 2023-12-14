@@ -7,7 +7,7 @@ try {
     require_once $_SERVER['DOCUMENT_ROOT']."/Middleware/CheckIfAdmin.php";
 
     // redirection file name
-    $fileName = "Location: view_registered_students.php";
+    $fileName = "Location: view_inactive_students.php";
     $role = 'student';
     $accountID = NULL;
 
@@ -22,17 +22,10 @@ try {
 
    
     $stmt = $conn->prepare("
-    SELECT users.*, student_sections.section_id , registered_students.student_type,
-    checklists.form_138, checklists.good_moral, checklists.baptisaml_of_birth,
-    checklists.nso_certificate, checklists.previous_year_report_card, checklists.honorary_dismissal,
-    guardian_user.first_name as guardian_first_name, guardian_user.middle_name as guardian_middle_name, guardian_user.last_name as guardian_last_name, guardian_user.email as guardian_email, guardian_user.phone as guardian_phone, guardian_user.username as guardian_username, guardian_user.occupation as guardian_occupation
+    SELECT users.*, student_sections.section_id , registered_students.student_type
     FROM users 
-    LEFT JOIN student_sections
-    ON users.id = student_sections.student_id
+    LEFT JOIN student_sections ON users.id = student_sections.student_id
     LEFT JOIN registered_students ON users.id = registered_students.student_id
-    LEFT JOIN checklists ON users.id = checklists.student_id
-    LEFT JOIN guardians ON users.id = guardians.student_id
-    LEFT JOIN users as guardian_user ON guardians.guardian_id = guardian_user.id
     WHERE users.id = ?");
     $stmt->bind_param("s", $accountID);
     $stmt->execute();

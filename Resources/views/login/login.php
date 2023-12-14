@@ -56,18 +56,20 @@ function getSession($data) {
 			
 			<!-- Form -->
 			<form class="login" method="post" action="../../../Backend-routes/login/login-router.php">
-				<!-- Username -->
+				<!-- email -->
 				<div class="mb-2">
-					<label class="form-label text-white fw-bold">Username</label>
-					<input type="text" class="form-control form-control-lg bg-light fs-6" name="username" placeholder="Username" <?php echo "value='".htmlspecialchars(getSession('username'))."'"  ?>>
+					<label class="form-label text-white fw-bold">Email</label>
+					<input type="text" class="form-control form-control-lg bg-light fs-6" name="email" placeholder="Email" <?php echo "value='".htmlspecialchars(getSession('email'))."'"  ?>>
 				</div>
-				<!-- Username -->
+				<!-- email -->
 				
 				<!-- Password -->
 				<div class="mb-2">
 					<label class="form-label text-white fw-bold">Password</label>
-					<input type="password" class="form-control form-control-lg bg-light fs-6" name="password" placeholder="Password">
+					<input type="password"  class="form-control input-password form-control-lg bg-light fs-6" name="password" placeholder="Password">
 				</div>
+				<input id="checkBox" type="checkBox" onchange="showPassword()">
+				<label for="checkBox" class="text-light fw-bold">Show</label>
 				<!-- Password -->
 
 				<!-- Login Button -->

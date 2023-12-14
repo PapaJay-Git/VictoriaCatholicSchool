@@ -35,7 +35,6 @@ function getSession($data) {
                   <tr>
                     <th scope="col">#</th>
                     <th scope="col">Name</th>
-                    <th scope="col">Username</th>
                     <th scope="col">Email</th>
                     <th scope="col">Enrolled Grade</th>
                     <th scope="col">Student Type</th>
@@ -51,7 +50,6 @@ function getSession($data) {
                       <tr>
                           <td>".$count++."</td>
                           <td>{$student['first_name']} {$student['last_name']}</td>
-                          <td>{$student['username']}</td>
                           <td>{$student['email']}</td>
                           <td>{$student['requested_grade']}</td>
                           <td>".strtoupper($student['student_type'])."</td>

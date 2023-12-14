@@ -78,7 +78,23 @@ require_once "../includes/header_layout.php";
                         <small class="text-dark"><?php echo $unregistered_count ?></small>
                     </td>
                     <td>
-                        <a href="view_pending_students.php?type=pending" class="btn btn-sm btn-primary fw-bold">OPEN</a>
+                        <a href="view_pending_students.php" class="btn btn-sm btn-primary fw-bold">OPEN</a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                        <small class="text-dark">
+                          <?php echo $count++ ?>
+                        </small>
+                    </td>
+                    <td>
+                        <small class="text-dark">INACTIVE STUDENTS</small>
+                    </td>
+                    <td>
+                        <small class="text-dark"><?php echo $inactive_count ?></small>
+                    </td>
+                    <td>
+                        <a href="view_inactive_students.php" class="btn btn-sm btn-primary fw-bold">OPEN</a>
                     </td>
                   </tr>
                 </tbody>

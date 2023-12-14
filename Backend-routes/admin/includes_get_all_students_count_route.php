@@ -86,6 +86,21 @@ try {
     $students = $stmt->get_result();
     $unregistered_count = $students->num_rows;
 
+
+    $inactive = 'INACTIVE';
+    $stmt = $conn->prepare("
+    SELECT users.*
+    FROM users 
+    LEFT JOIN student_sections ON users.id = student_sections.student_id
+    LEFT JOIN sections ON student_sections.section_id = sections.id
+    WHERE users.role = ?
+    AND sections.name = ?
+    ");
+    $stmt->bind_param("ss", $role, $inactive);
+    $stmt->execute();
+    $students = $stmt->get_result();
+    $inactive_count = $students->num_rows;
+
 } catch (Exception $e) {
     // Log the exception or handle it appropriately
     error_log("Error: " . $e->getMessage());

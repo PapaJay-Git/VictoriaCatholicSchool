@@ -21,16 +21,17 @@ require_once "../includes/header_layout.php";
         <form method="POST" action="../../../Backend-routes/student/update_my_password_route.php" onsubmit="submitRequest('updateMyPasswod', event)" id="updateMyPasswod">
             <div class="mb-3">
                 <label class="form-label fw-bold text-uppercase d-block">Old Password</label>
-                <input type="password" class="form-control form-control-sm" name="old_password" required placeholder="Old Password"? >
+                <input type="password"  class="form-control input-password form-control-sm" name="old_password" required placeholder="Old Password"? >
             </div>
             <div class="mb-3">
                 <label class="form-label fw-bold text-uppercase d-block">New Password</label>
-                <input type="password" class="form-control form-control-sm" name="new_password" required placeholder="New Password"? >
+                <input type="password"  class="form-control input-password form-control-sm" name="new_password" required placeholder="New Password"? >
             </div>
             <div class="mb-3">
                 <label class="form-label fw-bold text-uppercase d-block">Confirm New Password</label>
-                <input type="password" class="form-control form-control-sm" name="confirm_password" required placeholder="Confirm New Password" >
-            </div>
+                <input type="password"  class="form-control input-password form-control-sm" name="confirm_password" required placeholder="Confirm New Password" >
+            </div>	<input id="checkBox" type="checkBox" onchange="showPassword()">
+				<label for="checkBox" class="text-dark fw-bold">Show</label>
             <div class="d-flex justify-content-end my-5">
                 <button class="btn btn-sm fw-bold btn-primary me-1" type="submit">CHANGE</button>
                 <a href="profiles.php" class="btn btn-danger btn-sm fw-bold">BACK</a>

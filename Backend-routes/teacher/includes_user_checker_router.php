@@ -136,22 +136,6 @@ function validate_name($name) {
     return $name;
 }
 
-function validate_username($username) {
-    $min_length = 3;
-    $max_length = 20;
-    global $fileName;
-        
-    $username_length = strlen($username);
-    if ($username_length < $min_length || $username_length > $max_length) {
-        errorSender("Username must be between $min_length and $max_length characters.", $fileName);
-    }
-
-    if (!preg_match('/^[a-zA-Z0-9_]+$/', $username)) {
-        errorSender("Username can only contain letters, numbers, and underscores.", $fileName);
-    }
-
-    return $username;
-}
 
 function validate_phone_number($phone_number) {
     $phone_number = preg_replace('/[^0-9]/', '', $phone_number);
@@ -212,21 +196,6 @@ function isEmailExists($email, $conn) {
     
 }
 
-
-// Function to check if a username already exists
-function isUsernameExists($username, $conn) {
-    global $fileName;
-
-    $query = "SELECT * FROM users WHERE username = ?";
-    $stmt = mysqli_prepare($conn, $query);
-    mysqli_stmt_bind_param($stmt, 's', $username);
-    mysqli_stmt_execute($stmt);
-    mysqli_stmt_store_result($stmt);
-    
-    if(mysqli_stmt_num_rows($stmt) > 0){
-        errorSender('Username already exist!', $fileName);
-    }
-}
 
 function isSectionNameExists($name, $conn) {
     global $fileName;
@@ -429,20 +398,6 @@ function validatePassword($password, $confirmPassword) {
     return $password;
 }
 
-// Function to check if a username already exists
-function isUsernameExistsOtherThanMe($username, $conn, $accountID) {
-    global $fileName;
-
-    $query = "SELECT * FROM users WHERE username = ? AND id != ?";
-    $stmt = mysqli_prepare($conn, $query);
-    mysqli_stmt_bind_param($stmt, 'si', $username, $accountID);
-    mysqli_stmt_execute($stmt);
-    mysqli_stmt_store_result($stmt);
-    
-    if(mysqli_stmt_num_rows($stmt) > 0){
-        errorSender('Username already exist!', $fileName);
-    }
-}
 
 // Function to check if a school number already exists
 function isSchoolNumberExistsOtherThanMe($schoolNumber, $conn, $accountID) {

@@ -24,7 +24,7 @@ try {
 
     checkIfUserExists($accountID, $role, $conn);
 
-    $required_fields = ['guardian_first_name', 'guardian_middle_name', 'guardian_last_name', 'guardian_username', 'guardian_phone', 'guardian_email', 'guardian_occupation'];
+    $required_fields = ['guardian_first_name', 'guardian_middle_name', 'guardian_last_name', 'guardian_phone', 'guardian_email', 'guardian_occupation'];
 
     // required checker
     foreach ($required_fields as $field) {
@@ -43,7 +43,6 @@ try {
     $first_name = validate_name(sanitize_input($_POST['guardian_first_name']));
     $middle_name = validate_name(sanitize_input($_POST['guardian_middle_name']));
     $last_name = validate_name(sanitize_input($_POST['guardian_last_name']));
-    $username = validate_username(sanitize_input($_POST['guardian_username']));
     $phone = validate_phone_number(sanitize_input($_POST['guardian_phone']));
     $guardian_occupation = sanitize_input($_POST['guardian_occupation']);
     $email_address = validate_email($_POST['guardian_email']);
@@ -57,12 +56,11 @@ try {
         $guardian = $result->fetch_assoc();
         $guardian_id = $guardian['guardian_id'];
 
-        isUsernameExistsOtherThanMe($username, $conn, $guardian_id);
         isPhoneNumberExistsOtherThanMe($phone, $conn, $guardian_id);
         isEmailExistsOtherThanMe($email_address, $conn, $guardian_id);
 
-        $stmt = $conn->prepare("UPDATE users SET first_name = ?, middle_name = ?, last_name = ?, username = ?, phone = ?, email = ?, occupation = ? WHERE id = ?");
-        $stmt->bind_param("sssssssi", $first_name, $middle_name, $last_name, $username, $phone, $email_address, $guardian_occupation, $guardian_id);
+        $stmt = $conn->prepare("UPDATE users SET first_name = ?, middle_name = ?, last_name = ?,  phone = ?, email = ?, occupation = ? WHERE id = ?");
+        $stmt->bind_param("ssssssi", $first_name, $middle_name, $last_name, $phone, $email_address, $guardian_occupation, $guardian_id);
         $stmt->execute();
 
     }else{
@@ -70,12 +68,11 @@ try {
         $default_password = "P@ssword123";
         $password = password_hash($default_password, PASSWORD_DEFAULT); 
 
-        isUsernameExists($username, $conn);
-        isPhoneNumberExists($phone_number, $conn);
+        isPhoneNumberExists($phone, $conn);
         isEmailExists($email_address, $conn);
 
-        $stmt = $conn->prepare("INSERT INTO users (first_name, middle_name, last_name, username, password, phone, email, occupation, role) VALUES (?,?,?,?,?,?,?,?,?)");
-        $stmt->bind_param("sssssssss", $first_name, $middle_name, $last_name, $username, $password, $phone, $email_address, $guardian_occupation, $guardian_role);
+        $stmt = $conn->prepare("INSERT INTO users (first_name, middle_name, last_name, password, phone, email, occupation, role) VALUES (?,?,?,?,?,?,?,?)");
+        $stmt->bind_param("ssssssss", $first_name, $middle_name, $last_name, $password, $phone, $email_address, $guardian_occupation, $guardian_role);
         $stmt->execute();
         $guardianID = $conn->insert_id;
     

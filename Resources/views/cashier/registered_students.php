@@ -30,7 +30,6 @@ function cropText($text, $maxLength = 25, $ellipsis = '...') {
                   <tr>
                     <th scope="col">#</th>
                     <th scope="col">Name</th>
-                    <th scope="col">Username</th>
                     <th scope="col">Email</th>
                     <th scope="col">School Number</th>
                     <th scope="col">Section</th>
@@ -44,7 +43,6 @@ function cropText($text, $maxLength = 25, $ellipsis = '...') {
                       <tr>
                           <td>".$count++."</td>
                           <td>{$student['first_name']} {$student['last_name']}</td>
-                          <td>{$student['username']}</td>
                           <td>{$student['email']}</td>
                           <td>{$student['school_number']}</td>
                           <td>".($student['section_name'] == NULL ? 'None' : $student['section_name']." ".$student['section_grade'])."</td>

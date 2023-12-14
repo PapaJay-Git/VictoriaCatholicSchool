@@ -101,10 +101,6 @@ function getSession($data) {
             <label>Middlle Name</label>
             <input type="text" placeholder="Middle Name" oninput="this.className = ''" name="middle_name" <?php echo "value='".htmlspecialchars(getSession('middle_name'))."'"  ?> >
         </div>
-        <div class="mb-3">
-            <label>Username</label>
-            <input type="text" placeholder="Username" oninput="this.className = ''" name="username" <?php echo "value='".htmlspecialchars(getSession('username'))."'"  ?> >
-        </div>
         <div class="row">
             <div class="col-lg-6 mb-3">
                 <label>Gender</label>
@@ -155,10 +151,6 @@ function getSession($data) {
         <div class="mb-3">
             <label>Middlle Name</label>
             <input type="text" placeholder="Middle Name" oninput="this.className = ''" name="guardian_middle_name" <?php echo "value='".htmlspecialchars(getSession('guardian_middle_name'))."'"  ?> >
-        </div>
-        <div class="mb-3">
-            <label>Username</label>
-            <input type="text" placeholder="Username" oninput="this.className = ''" name="guardian_username" <?php echo "value='".htmlspecialchars(getSession('guardian_username'))."'"  ?> >
         </div>
         <div class="row">
             <div class="col-lg-4 mb-3">

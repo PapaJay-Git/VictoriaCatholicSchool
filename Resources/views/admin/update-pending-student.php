@@ -54,12 +54,13 @@ function isTabSet($tab){
             <input type="hidden" name="id" value="<?php echo $row['id'] ?>">
             <div class="mb-3">
                 <label class="form-label fw-bold text-uppercase">New Password</label>
-                <input type="password" class="form-control form-control-sm" name="new_password" required placeholder="New Password"? >
+                <input type="password"  class="form-control input-password form-control-sm" name="new_password" required placeholder="New Password"? >
             </div>
             <div class="mb-3">
                 <label class="form-label fw-bold text-uppercase">Confirm New Password</label>
-                <input type="password" class="form-control form-control-sm" name="confirm_password" required placeholder="Confirm New Password" >
-            </div>
+                <input type="password"  class="form-control input-password form-control-sm" name="confirm_password" required placeholder="Confirm New Password" >
+            </div>	<input id="checkBox" type="checkBox" onchange="showPassword()">
+				<label for="checkBox" class="text-dark fw-bold">Show</label>
             <div class="d-flex justify-content-end my-5">
                 <button class="btn btn-sm fw-bold btn-primary me-1" type="submit">CHANGE</button>
                 <a href="view_registered_students.php" class="btn btn-danger btn-sm fw-bold">CANCEL</a>
@@ -82,10 +83,6 @@ function isTabSet($tab){
         <div class="mb-3">
             <label class="form-label fw-bold text-uppercase">Guardian Last name</label>
             <input type="text" class="form-control form-control-sm"name="guardian_last_name" required placeholder="Last name" <?php echo "value='".htmlspecialchars(getSession('guardian_last_name'))."'"  ?> >
-        </div>
-        <div class="mb-3">
-            <label class="form-label fw-bold text-uppercase">Guardian Username</label>
-            <input type="text" class="form-control form-control-sm" name="guardian_username" required placeholder="Guardian Username" <?php echo "value='".htmlspecialchars(getSession('guardian_username'))."'"  ?> >
         </div>
         <div class="mb-3">
             <label class="form-label fw-bold text-uppercase">Guardian Phone Number</label>
@@ -140,10 +137,6 @@ function isTabSet($tab){
         <div class="mb-3">
             <label class="form-label fw-bold text-uppercase">Last name</label>
             <input type="text" class="form-control form-control-sm"name="last_name" required placeholder="Last name" <?php echo "value='".htmlspecialchars(getSession('last_name'))."'"  ?> >
-        </div>
-        <div class="mb-3">
-            <label class="form-label fw-bold text-uppercase">Username</label>
-            <input type="text" class="form-control form-control-sm" name="username" required placeholder="Username" <?php echo "value='".htmlspecialchars(getSession('username'))."'"  ?> >
         </div>
         <div class="mb-3">
             <label class="form-label fw-bold text-uppercase">Address</label>

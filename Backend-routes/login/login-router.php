@@ -6,19 +6,19 @@ require_once $_SERVER['DOCUMENT_ROOT']."/Connections/DB_connection.php";
 session_unset();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $enteredUsername = $_POST['username'];
+    $enteredEmail = $_POST['email'];
     $enteredPassword = $_POST['password'];
 
-    $stmt = $conn->prepare("SELECT role, id, password FROM users WHERE username = ?");
-    $stmt->bind_param("s", $enteredUsername);
+    $stmt = $conn->prepare("SELECT role, id, password FROM users WHERE email = ?");
+    $stmt->bind_param("s", $enteredEmail);
     $stmt->execute();
     $result = $stmt->get_result();
 
     
-    $_SESSION['username'] = $_POST['username'];
+    $_SESSION['email'] = $_POST['email'];
 
     if ($result->num_rows <= 0) {
-        $_SESSION['error'] = "Invalid username or password";
+        $_SESSION['error'] = "Invalid email or password";
         header('Location: ../../Resources/views/login/login.php?error=1');
         exit();
     } 
@@ -66,12 +66,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $_SESSION['id'] = $dbID;
         $_SESSION['role'] = $role;
 
-        unset($_SESSION['username']);
+        unset($_SESSION['email']);
 
         header("Location: ../../Resources/views/$role");
         exit();
     } else {
-        $_SESSION['error'] = "Invalid username or password";
+        $_SESSION['error'] = "Invalid email or password";
         header('Location: ../../Resources/views/login/login.php?error=1');
         exit();
     }

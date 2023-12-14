@@ -41,7 +41,6 @@ function getSession($data) {
                     <th scope="col">#</th>
                     <th scope="col">First Name</th>
                     <th scope="col">Last Name</th>
-                    <th scope="col">Username</th>
                     <th scope="col">Email</th>
                     <th scope="col">School Number</th>
                     <th scope="col">Section</th>
@@ -56,7 +55,6 @@ function getSession($data) {
                           <td>".$count++."</td>
                           <td>{$student['first_name']}</td>
                           <td>{$student['last_name']}</td>
-                          <td>{$student['username']}</td>
                           <td>{$student['email']}</td>
                           <td>{$student['school_number']}</td>
                           <td>".($student['section_name'] == NULL ? 'None' : $student['section_name']." - ".$student['section_grade'])."</td>
@@ -119,11 +117,6 @@ function getSession($data) {
                   <label class="form-label fw-bold text-uppercase">Last name</label>
                   <input type="text" class="form-control form-control-sm"name="last_name" required placeholder="Last name"
                   <?php echo "value='".htmlspecialchars(getSession('last_name'))."'"  ?> >
-                </div>
-                <div class="mb-3">
-                  <label class="form-label fw-bold text-uppercase">Username</label>
-                  <input type="text" class="form-control form-control-sm" name="username" required placeholder="Username"
-                  <?php echo "value='".htmlspecialchars(getSession('username'))."'"  ?> >
                 </div>
                 <div class="mb-3">
                   <label class="form-label fw-bold text-uppercase">Default Password</label>

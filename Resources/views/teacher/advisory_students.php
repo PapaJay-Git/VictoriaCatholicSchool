@@ -32,7 +32,6 @@ require_once "../includes/header_layout.php";
                     <th scope="col">#</th>
                     <th scope="col">First Name</th>
                     <th scope="col">Last Name</th>
-                    <th scope="col">Username</th>
                     <th scope="col">Email</th>
                     <th scope="col">School Number</th>
                   </tr>
@@ -45,7 +44,6 @@ require_once "../includes/header_layout.php";
                           <td>".$count++."</td>
                           <td>{$student['first_name']}</td>
                           <td>{$student['last_name']}</td>
-                          <td>{$student['username']}</td>
                           <td>{$student['email']}</td>
                           <td>{$student['school_number']}</td>
                       </tr>

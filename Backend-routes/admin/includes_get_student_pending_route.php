@@ -33,7 +33,7 @@ try {
     $unregistered_info = $result->fetch_assoc();
    
     $stmt = $conn->prepare("
-    SELECT users.*, student_sections.section_id, guardian_user.first_name as guardian_first_name, guardian_user.middle_name as guardian_middle_name, guardian_user.last_name as guardian_last_name, guardian_user.email as guardian_email, guardian_user.phone as guardian_phone, guardian_user.username as guardian_username, guardian_user.occupation as guardian_occupation
+    SELECT users.*, student_sections.section_id, guardian_user.first_name as guardian_first_name, guardian_user.middle_name as guardian_middle_name, guardian_user.last_name as guardian_last_name, guardian_user.email as guardian_email, guardian_user.phone as guardian_phone, guardian_user.occupation as guardian_occupation
     FROM users 
     LEFT JOIN student_sections ON users.id = student_sections.student_id
     LEFT JOIN guardians ON users.id = guardians.student_id

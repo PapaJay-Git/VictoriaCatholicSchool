@@ -30,6 +30,9 @@
             <a class="navs nav-link mx-2" href="subjects.php" id="subjects_tab">SUBJECTS</a>
           </li>
           <li class="nav-item">
+            <a class="navs nav-link mx-2" href="events.php" id="events_tab">EVENTS</a>
+          </li>
+          <li class="nav-item">
             <a class="navs nav-link mx-2" href="promissories.php" id="promissories_tab">PROMISSORIES</a>
           </li>
           <li class="nav-item">

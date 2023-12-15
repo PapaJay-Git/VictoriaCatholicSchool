@@ -226,6 +226,19 @@ function validateBirthday($birthday) {
     return $birthday;
 }
 
+
+function validateDate($date) {
+    $dateArray = explode('-', $date);
+    global $fileName;
+
+    if (count($dateArray) != 3 || !checkdate($dateArray[1], $dateArray[2], $dateArray[0])) {
+        errorSender("Invalid date.", $fileName);
+    }
+
+
+    return $date;
+}
+
 // Function to check if an email already exists
 function isEmailExists($email, $conn) {
     global $fileName;

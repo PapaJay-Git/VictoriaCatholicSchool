@@ -12,7 +12,7 @@ try {
     $sections = $stmt->get_result();
 
     $role = 'teacher';
-    $stmt = $conn->prepare("SELECT id, first_name, last_name, school_number FROM users WHERE role = ?");
+    $stmt = $conn->prepare("SELECT id, first_name, last_name, email FROM users WHERE role = ?");
     $stmt->bind_param('s', $role);
     $stmt->execute();
     $teachers = $stmt->get_result();

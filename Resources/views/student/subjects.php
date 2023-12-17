@@ -23,7 +23,7 @@ $days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday'];
                 <div class="card-body">
                     <div>
                         <h5 class="fw-bold">SECTION <?php echo $row['name']."-".$row['grade'] ?></h5>
-                        <small>Adviser: <?php echo $row['first_name']." ".$row['last_name'].", ".$row['school_number'] ?></small>
+                        <small>Adviser: <?php echo $row['first_name']." ".$row['last_name'].", ".$row['email'] ?></small>
                     </div>
                         <?php 
                             $count = 1;
@@ -39,7 +39,7 @@ $days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday'];
                                             <small >Teacher: ";
                                             foreach($teachers as $teacher){
                                                 if($data['teacher_id'] == $teacher['id']){
-                                                    echo $teacher['first_name']." ".$teacher['last_name'].", ".$teacher['school_number'];
+                                                    echo $teacher['first_name']." ".$teacher['last_name'].", ".$teacher['email'];
                                                 }
                                             }
                                             echo "</small>

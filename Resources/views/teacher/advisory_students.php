@@ -33,7 +33,7 @@ require_once "../includes/header_layout.php";
                     <th scope="col">First Name</th>
                     <th scope="col">Last Name</th>
                     <th scope="col">Email</th>
-                    <th scope="col">School ID</th>
+                    <th scope="col">Student No</th>
                   </tr>
                 </thead>
                 <tbody id="tbody-sections">
@@ -45,7 +45,7 @@ require_once "../includes/header_layout.php";
                           <td>{$student['first_name']}</td>
                           <td>{$student['last_name']}</td>
                           <td>{$student['email']}</td>
-                          <td>{$student['school_number']}</td>
+                          <td>VCS00{$student['id']}</td>
                       </tr>
                   ";
                   }

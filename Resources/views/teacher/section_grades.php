@@ -28,8 +28,7 @@ require_once "../includes/header_layout.php";
                             $count = 1;
                             foreach($students as $student){ 
                                 echo "<label class='mt-4 d-block text-uppercase'>".$count++.".<b> ".$student['first_name']." ".$student['last_name']."</b></label>
-                                    <small class='d-block ps-3'>".$student['email']."</small>
-                                    <small class='d-block ps-3'>".$student['school_number']."</small>";
+                                    <small class='d-block ps-3'>".$student['email']."</small>";
 
                                 foreach ($subjects as $subject) {
                                     $stmt = $conn->prepare("SELECT * FROM student_grades  WHERE subject_id = ? AND student_id = ?");

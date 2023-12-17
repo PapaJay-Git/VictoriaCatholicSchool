@@ -41,7 +41,7 @@ function getSession($data) {
                     <th scope="col">First Name</th>
                     <th scope="col">Last Name</th>
                     <th scope="col">Email</th>
-                    <th scope="col">School ID</th>
+                    <th scope="col">Student No</th>
                     <th scope="col">Section</th>
                     <th scope="col">Action</th>
                   </tr>
@@ -55,7 +55,7 @@ function getSession($data) {
                           <td>{$student['first_name']}</td>
                           <td>{$student['last_name']}</td>
                           <td>{$student['email']}</td>
-                          <td>{$student['school_number']}</td>
+                          <td>VCS00{$student['id']}</td>
                           <td>".($student['section_name'] == NULL ? 'None' : $student['section_name']." - ".$student['section_grade'])."</td>
                           <td>
                           <a class='btn btn-sm btn-primary fw-bold' href='update-inactive-student.php?id=".$student['id']."'>UPDATE</a>

@@ -42,7 +42,7 @@ function getSession($data) {
                     <th scope="col">First Name</th>
                     <th scope="col">Last Name</th>
                     <th scope="col">Email</th>
-                    <th scope="col">School ID</th>
+                    <th scope="col">Student No</th>
                     <th scope="col">Section</th>
                     <th scope="col">Action</th>
                   </tr>
@@ -56,7 +56,7 @@ function getSession($data) {
                           <td>{$student['first_name']}</td>
                           <td>{$student['last_name']}</td>
                           <td>{$student['email']}</td>
-                          <td>{$student['school_number']}</td>
+                          <td>VCS00{$student['id']}</td>
                           <td>".($student['section_name'] == NULL ? 'None' : $student['section_name']." - ".$student['section_grade'])."</td>
                           <td>
                           <a class='btn btn-sm btn-primary fw-bold' href='update-student.php?id=".$student['id']."'>UPDATE</a>
@@ -126,8 +126,8 @@ function getSession($data) {
                     <?php echo "value='".htmlspecialchars(getSession('password'))."'"  ?> >
                 </div>
                 <div class="mb-3">
-                  <label class="form-label fw-bold text-uppercase">School ID <b class="text-danger">*</b></label>
-                  <input type="text" class="form-control form-control-sm" name="school_number" required placeholder="School ID"
+                  <label class="form-label fw-bold text-uppercase">Student No <b class="text-danger">*</b></label>
+                  <input type="text" class="form-control form-control-sm" name="school_number" required placeholder="Student No"
                   <?php echo "value='".htmlspecialchars(getSession('school_number'))."'"  ?> >
                 </div>
                 <div class="mb-3">

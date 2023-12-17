@@ -99,7 +99,11 @@ try {
     $date_of_birth = validateBirthday($_POST['birthday']);
     $role = 'student';
 
-    $default_password = strtolower($last_name)."_".date("Y", strtotime($date_of_birth));
+    $default_password = strtolower($last_name) . "_" . date("Y", strtotime($date_of_birth));
+
+// Remove spaces from the password
+$default_password = str_replace(' ', '', $default_password);
+
     $password = password_hash($default_password, PASSWORD_DEFAULT); 
     
     if($student_type == 'new' && $grade != '7'){

@@ -65,4 +65,4 @@ function getSession($data) {
 <?php
 	require_once "../includes/includes_scripts.php";
 ?>
-<script> setActive('students_tab'); </script>
+<script> setActive('student_balance_tab'); </script>

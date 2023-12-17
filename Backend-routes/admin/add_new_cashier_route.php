@@ -42,7 +42,11 @@ try {
     $gender = validate_gender($_POST['gender']);
     $date_of_birth = validateBirthday($_POST['birthday']);
 
-    $default_password = strtolower($last_name)."_".date("Y", strtotime($date_of_birth));
+    $default_password = strtolower($last_name) . "_" . date("Y", strtotime($date_of_birth));
+
+    // Remove spaces from the password
+    $default_password = str_replace(' ', '', $default_password);
+
     $password = password_hash($default_password, PASSWORD_DEFAULT); 
     $role = 'cashier';
     

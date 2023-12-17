@@ -30,7 +30,7 @@ function limitString($inputString, $maxLength = 15) {
             <div class="card-header fw-bold">
                 STUDENT GUARDIAN PROMISSORIES
             </div>
-            <div class="card-body text-center py-5"> 
+            <div class="card-body py-5"> 
                 <div class="table-responsive">
                 <table id="teachersTable">
                     <thead>
@@ -38,7 +38,7 @@ function limitString($inputString, $maxLength = 15) {
                         <th scope="col">#</th>
                         <th scope="col">Name</th>
                         <th scope="col">Email</th>
-                        <th scope="col">School ID</th>
+                        <th scope="col">Student No</th>
                         <th scope="col">Section</th>
                         <th scope="col">Promissory</th>
                         <th scope="col">Date</th>
@@ -61,7 +61,7 @@ function limitString($inputString, $maxLength = 15) {
                             <small class="text-dark"><?php echo $promissory['email'] ?></small>
                         </td>
                         <td>
-                            <small class="text-dark"><?php echo $promissory['school_number'] ?></small>
+                            <small class="text-dark">VSC00<?php echo $promissory['id'] ?></small>
                         </td>
                         <td>
                             <small class="text-dark"><?php echo $promissory['section_name']."-".$promissory['section_grade'] ?></small>

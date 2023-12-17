@@ -26,7 +26,7 @@ try {
 
     $sectionID = $section['section_id'];
     $stmt = $conn->prepare("
-    SELECT sections.*, users.first_name, users.last_name, users.school_number 
+    SELECT sections.*, users.first_name, users.last_name, users.email 
     FROM sections LEFT JOIN
     users ON sections.advisory_teacher_id = users.id
     WHERE sections.id = ?");
@@ -41,7 +41,7 @@ try {
     $subjects = $stmt->get_result();
 
     $role = 'teacher';
-    $stmt = $conn->prepare("SELECT first_name, last_name, id, school_number FROM users where role = ?");
+    $stmt = $conn->prepare("SELECT first_name, last_name, id, email FROM users where role = ?");
     $stmt->bind_param("s", $role);
     $stmt->execute();
     $teachers = $stmt->get_result();

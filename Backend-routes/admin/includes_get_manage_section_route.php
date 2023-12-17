@@ -36,7 +36,7 @@ try {
     $subjects = $stmt->get_result();
 
     $role = 'teacher';
-    $stmt = $conn->prepare("SELECT first_name, last_name, id, school_number FROM users where role = ?");
+    $stmt = $conn->prepare("SELECT first_name, last_name, id, email FROM users where role = ?");
     $stmt->bind_param("s", $role);
     $stmt->execute();
 

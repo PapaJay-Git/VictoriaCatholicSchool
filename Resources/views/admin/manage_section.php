@@ -48,9 +48,9 @@ $days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday'];
                                         <option value='' disabled selected>Select an option</option>";
                                         foreach($teachers as $teacher){
                                             if($data['teacher_id'] == $teacher['id']){
-                                                echo "<option selected value='".$teacher['id']."'>".$teacher['first_name']." ".$teacher['last_name']." : ".$teacher['school_number']."</option>";
+                                                echo "<option selected value='".$teacher['id']."'>".$teacher['first_name']." ".$teacher['last_name']." : ".$teacher['email']."</option>";
                                             }else{
-                                                echo "<option value='".$teacher['id']."'>".$teacher['first_name']." ".$teacher['last_name']." : ".$teacher['school_number']."</option>";
+                                                echo "<option value='".$teacher['id']."'>".$teacher['first_name']." ".$teacher['last_name']." : ".$teacher['email']."</option>";
                                             }
                                         }
                                         echo "</select>
@@ -108,7 +108,7 @@ $days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday'];
                                     <select name='teacher[]' class='border rounded my-2' required>
                                     <option value='' disabled selected>Select an option</option>";
                                     foreach($teachers as $teacher){
-                                        echo "<option value='".$teacher['id']."'>".$teacher['first_name']." ".$teacher['last_name']." : ".$teacher['school_number']."</option>";
+                                        echo "<option value='".$teacher['id']."'>".$teacher['first_name']." ".$teacher['last_name']." : ".$teacher['email']."</option>";
                                     }
                                     echo "</select>
                                 </div>";

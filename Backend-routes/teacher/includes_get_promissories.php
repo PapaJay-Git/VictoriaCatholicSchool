@@ -12,7 +12,7 @@ try {
     isGET();
    
     $stmt = $conn->prepare("
-    select users.first_name, users.last_name, users.email, users.school_number,
+    select users.id, users.first_name, users.last_name, users.email, users.school_number,
     sections.name as section_name, sections.grade as section_grade, promissory.note, promissory.id as note_id,
     promissory.created_at
     FROM promissory 

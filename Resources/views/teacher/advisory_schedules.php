@@ -39,7 +39,7 @@ $days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday'];
                                             <small >Teacher: </small> <small>";
                                             foreach($teachers as $teacher){
                                                 if($data['teacher_id'] == $teacher['id']){
-                                                    echo $teacher['first_name']." ".$teacher['last_name'].", ".$teacher['school_number'];
+                                                    echo $teacher['first_name']." ".$teacher['last_name'].", ".$teacher['email'];
                                                 }
                                             }
                                             echo "</small>

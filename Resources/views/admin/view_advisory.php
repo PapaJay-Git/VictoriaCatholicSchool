@@ -34,7 +34,7 @@ require_once "../includes/header_layout.php";
                             <option value='' disabled selected>Select an option</option>";
                                     foreach ($teachers as $teacher) {
                                     $isSelected = ((string)$teacher['id'] == $section['advisory_teacher_id']) ? 'selected' : '';
-                                    echo "<option value='{$teacher['id']}' $isSelected>{$teacher['first_name']} {$teacher['last_name']} - {$teacher['school_number']}</option>";
+                                    echo "<option value='{$teacher['id']}' $isSelected>{$teacher['first_name']} {$teacher['last_name']} - {$teacher['email']}</option>";
                                     }
                             echo "
                             </select>

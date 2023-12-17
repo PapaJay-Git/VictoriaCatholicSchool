@@ -24,7 +24,7 @@ try {
 
     checkIfUserExists($accountID, $role, $conn);
 
-    $required_fields = ['section', 'first_name', 'middle_name', 'last_name', 'school_number', 'phone', 'email', 'gender', 'birthday', 'student_type','street_no', 'street', 'city_municipality'];
+    $required_fields = ['section', 'first_name', 'middle_name', 'last_name', 'phone', 'email', 'gender', 'birthday', 'student_type','street_no', 'street', 'city_municipality'];
 
     // required checker
     foreach ($required_fields as $field) {
@@ -55,7 +55,6 @@ try {
     $first_name = validate_name(sanitize_input($_POST['first_name']));
     $middle_name = validate_name(sanitize_input($_POST['middle_name']));
     $last_name = validate_name(sanitize_input($_POST['last_name']));
-    $school_number = sanitize_input($_POST['school_number']);
     $phone = validate_phone_number(sanitize_input($_POST['phone']));
     $email_address = validate_email($_POST['email']);
     $gender = validate_gender($_POST['gender']);
@@ -63,16 +62,14 @@ try {
     $sectionID = $_POST['section'];
     $student_type = validate_student_type($_POST['student_type']);
 
-    isSchoolNumberExistsOtherThanMe($school_number, $conn, $accountID);
-
     isPhoneNumberExistsOtherThanMe($phone, $conn, $accountID);
     
     isEmailExistsOtherThanMe($email_address, $conn, $accountID);
 
     isSectionIDExists($sectionID, $conn);
     
-    $stmt = $conn->prepare("UPDATE users SET first_name = ?, middle_name = ?, last_name = ?,  school_number = ?, phone = ?, email = ?, gender = ?, birthday = ?, street_no = ?, street = ?, village = ?, barangay = ?, city_municipality = ?, province = ?, zip_code = ? WHERE id = ?");
-    $stmt->bind_param("sssssssssssssssi", $first_name, $middle_name, $last_name, $school_number, $phone, $email_address, $gender, $date_of_birth, $street_no, $street, $village, $barangay, $city_municipality, $province, $zip_code, $accountID);
+    $stmt = $conn->prepare("UPDATE users SET first_name = ?, middle_name = ?, last_name = ?,  phone = ?, email = ?, gender = ?, birthday = ?, street_no = ?, street = ?, village = ?, barangay = ?, city_municipality = ?, province = ?, zip_code = ? WHERE id = ?");
+    $stmt->bind_param("ssssssssssssssi", $first_name, $middle_name, $last_name, $phone, $email_address, $gender, $date_of_birth, $street_no, $street, $village, $barangay, $city_municipality, $province, $zip_code, $accountID);
     $stmt->execute();
 
     $stmt = $conn->prepare("DELETE FROM student_sections where student_id = ?");

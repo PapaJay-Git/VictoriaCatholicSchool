@@ -105,11 +105,6 @@ function getSession($data) {
                     <?php echo "value='".htmlspecialchars(getSession('password'))."'"  ?> >
                 </div>
                 <div class="mb-3">
-                  <label class="form-label fw-bold text-uppercase">School ID <b class="text-danger">*</b></label>
-                  <input type="text" class="form-control form-control-sm" name="school_number" required placeholder="School ID"
-                  <?php echo "value='".htmlspecialchars(getSession('school_number'))."'"  ?> >
-                </div>
-                <div class="mb-3">
                   <label class="form-label fw-bold text-uppercase">Phone Number <b class="text-danger">*</b></label>
                   <input type="text" class="form-control form-control-sm" name="phone" required placeholder="Phone Number"
                   <?php echo "value='".htmlspecialchars(getSession('phone'))."'"  ?> >

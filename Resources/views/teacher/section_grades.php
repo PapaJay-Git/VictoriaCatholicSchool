@@ -55,7 +55,7 @@ require_once "../includes/header_layout.php";
                                     }else{
                                         $student_grades_row = $student_grades->fetch_assoc();
 
-                                        $final = ($student_grades_row['first_quarter']+$student_grades_row['second_quarter']+$student_grades_row['third_quarter']+$student_grades_row['fourth_quarter']) / 100;
+                                        $final = ($student_grades_row['first_quarter']+$student_grades_row['second_quarter']+$student_grades_row['third_quarter']+$student_grades_row['fourth_quarter']) / 4;
                                         echo "<div class='mx-3 p-3 mt-2 d-block border-bottom-css'>
                                         <input type='hidden' name='student_id[]' value='".$student['id']."'>
                                         <input type='hidden' name='subject_id[]' value='".$subject['id']."'>

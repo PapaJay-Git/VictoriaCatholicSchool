@@ -18,9 +18,6 @@
           <li class="nav-item">
             <a class="navs nav-link mx-2" href="grades.php" id="grades_tab">GRADES</a>
           </li>
-          <li class="nav-item">
-            <a class="navs nav-link mx-2" href="subjects.php" id="subjects_tab">SUBJECTS</a>
-          </li>
           </li>
           <li class="nav-item">
             <a class="navs nav-link mx-2" href="promissories.php" id="promissories_tab">PROMISSORIES</a>

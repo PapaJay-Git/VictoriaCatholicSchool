@@ -43,10 +43,6 @@ require_once "../includes/header_layout.php";
                         <h4 class="bebas-font text-dark d-inline-block">Phone:</h4>
                         <h5 class="bebas-font d-inline-block"><?php echo $auth['phone'] ?></h5>
                     </span>
-                    <span class="d-block">
-                        <h4 class="bebas-font text-dark d-inline-block">School ID:</h4>
-                        <h5 class="bebas-font d-inline-block"><?php echo $auth['school_number'] == 0 ? 'NONE' : $auth['school_number']?></h5>
-                    </span>
                 </span>
             </div>
             <div class="col-md-12 mt-5 ">

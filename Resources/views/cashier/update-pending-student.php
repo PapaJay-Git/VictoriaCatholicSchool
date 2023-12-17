@@ -172,8 +172,8 @@ function isTabSet($tab){
             <input type="text" class="form-control form-control-sm"name="last_name" required placeholder="Last name" <?php echo "value='".htmlspecialchars(getSession('last_name'))."'"  ?> >
         </div>
         <div class="mb-3">
-            <label class="form-label fw-bold text-uppercase">School ID</label>
-            <input type="text" class="form-control form-control-sm" name="school_number" required placeholder="School ID" <?php echo "value='".htmlspecialchars(getSession('school_number'))."'"  ?> >
+            <label class="form-label fw-bold text-uppercase">Student No</label>
+            <input type="text" class="form-control form-control-sm"  <?php echo "value='VCS000".$row['id']."'"  ?> disabled>
         </div>
         <div class="mb-3">
             <label class="form-label fw-bold text-uppercase">Phone Number</label>

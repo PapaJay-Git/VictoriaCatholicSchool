@@ -37,10 +37,6 @@ try {
         }
     }
     
-    if($error){
-        errorSender("$fieldName is required", $fileName);
-    }
-
     $street_no = sanitize_input($_POST['street_no']);
     $street = sanitize_input($_POST['street']);
     $village = isset($_POST['village']) ? sanitize_input($_POST['village']) : NULL;
@@ -76,6 +72,11 @@ try {
     $_SESSION['father_email'] = isset($_POST['father_email']) ? sanitize_input($_POST['father_email']) : NULL;
     $_SESSION['father_occupation'] = isset($_POST['father_occupation']) ? sanitize_input($_POST['father_occupation']) : NULL;
 
+    if($error){
+        errorSender("$fieldName is required", $fileName);
+    }
+
+    
 
     $_SESSION['middle_name'] = isset($_POST['middle_name']) ? sanitize_input($_POST['middle_name']) : NULL;
     
@@ -245,7 +246,7 @@ try {
     $stmt->bind_param("ssssssssssssssss", $first_name, $middle_name, $last_name, $password, $phone_number, $email_address, $gender, $date_of_birth, $role, $street_no, $street, $village, $barangay, $city_municipality, $province, $zip_code);
     $stmt->execute();
     $studentID = $conn->insert_id;
-
+   
     $stmt = $conn->prepare("INSERT INTO unregistered_students (student_id, requested_grade, student_type)
     VALUES (?, ?, ?)");
     $stmt->bind_param("iss", $studentID, $grade, $student_type);
@@ -256,6 +257,8 @@ try {
     $stmt->bind_param("sssssssss", $_POST[$guardian_account.'_first_name'], $_POST[$guardian_account.'_middle_name'], $_POST[$guardian_account.'_last_name'], $password, $_POST[$guardian_account.'_phone'], $_POST[$guardian_account.'_email'], $_POST[$guardian_account.'_occupation'], $guardian_role, $guardian_account);
     $stmt->execute();
     $guardianID = $conn->insert_id;
+
+   
 
     if($is_guardian){
         $guardian_type1 = 'guardian';
@@ -360,6 +363,10 @@ try {
 
         <h3>NOTE:</h3>
         <h4>Kindly print this message and present it to the admin office for verification. This will serve as your stab verification.</h4>
+
+        <h4>Default Password for Parent and Student</h4>
+        <h5><strong>Student Last Name</strong> and <strong>Student Birth Year</strong> all lowercase</h5>
+        <h5>Example is delacruz_2003</h5>
     </body>
     </html>';
     }

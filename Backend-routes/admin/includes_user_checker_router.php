@@ -210,17 +210,19 @@ function validate_student_type($student_type){
 
 function validateBirthday($birthday) {
     $dateArray = explode('-', $birthday);
-    global $fileName;
+    global $fileName; 
 
     if (count($dateArray) != 3 || !checkdate($dateArray[1], $dateArray[2], $dateArray[0])) {
         errorSender("Invalid birthday.", $fileName);
     }
 
-    $currentDate = new DateTime();
     $providedDate = new DateTime($birthday);
+    $currentDate = new DateTime();
+    $tenYearsAgo = $currentDate->sub(new DateInterval('P10Y'));
 
-    if ($providedDate > $currentDate) {
-        errorSender("Invalid birthday.", $fileName);
+    // Check if the provided date is within the last 10 years
+    if ($providedDate >= $tenYearsAgo) {
+        errorSender("Invalid birthday. The birthday must not be within the last 10 years.", $fileName);
     }
 
     return $birthday;

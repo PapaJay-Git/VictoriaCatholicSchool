@@ -4,6 +4,7 @@ session_start();
 function getSession($data) {
     if (isset($_SESSION[$data])) {
       $session_value = $_SESSION[$data];
+      unset($_SESSION[$data]);
       return $session_value;
     }
   
@@ -106,7 +107,7 @@ function getSession($data) {
             <div class="col-lg-6 mb-3">
                 <label>Grade Level <b class="text-danger">*</b></label>
                 <select name="grade" oninput="this.className = ''" id="grade">
-                    <option <?php echo getSession('grade') == '7'  ? 'selected' : '' ?> value="7"  >7</option>
+                    <option <?php echo getSession('grade') == '7'  ? 'selected' : '' ?> value="7" >7</option>
                     <option <?php echo getSession('grade') == '8'  ? 'selected' : '' ?>  value="8"  >8</option>
                     <option <?php echo getSession('grade') == '9'  ? 'selected' : '' ?> value="9"  >9</option>
                     <option <?php echo getSession('grade') == '10'  ? 'selected' : '' ?> value="10"  >10</option>
@@ -330,24 +331,31 @@ function getSession($data) {
 <!-- <script src="../../js/regis.js"></script> -->
 
 <script>
-     document.addEventListener("DOMContentLoaded", function() {
-      function handleLoad() {
-        var student_type = document.getElementById("student_type").value;
-        var grade = document.getElementById("grade");
+    //  document.addEventListener("DOMContentLoaded", function() {
+    //     function handleLoad() {
+    //         var studentTypeElement = document.getElementById("student_type");
+    //         var gradeElement = document.getElementById("grade");
 
-        if(student_type == 'new'){
-            var optionToSelect = "7";
-            grade.value = optionToSelect;
-            grade.disabled = true;
-        }else{
-            grade.disabled = false;
-        }
-      }
+    //         if (studentTypeElement.value === 'new') {
+    //             document.getElementById("defaultOption").selected = true;
+    //             gradeElement.disabled = true;
 
-      window.addEventListener("load", handleLoad);
+    //             // Manually dispatch a change event
+    //             var event = new Event('change', { bubbles: true });
+    //             gradeElement.dispatchEvent(event);
+    //         } else {
+    //             gradeElement.disabled = false;
 
-      document.getElementById("student_type").addEventListener("change", handleLoad);
-    });
+    //             // Manually dispatch a change event
+    //             var event = new Event('change', { bubbles: true });
+    //             gradeElement.dispatchEvent(event);
+    //         }
+    //     }
+
+    //   window.addEventListener("load", handleLoad);
+
+    //   document.getElementById("student_type").addEventListener("change", handleLoad);
+    // });
 
     function handleAgree() {
         var checkBox = document.getElementById("checkBox");

@@ -16,7 +16,7 @@ try {
     FROM users 
     LEFT JOIN sections 
     ON users.id = sections.advisory_teacher_id 
-    WHERE users.id = ?
+    WHERE sections.advisory_teacher_id = ?
     ");
     $stmt->bind_param("s", $auth['id']);
     $stmt->execute();

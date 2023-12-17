@@ -195,6 +195,7 @@ function getSession($data) {
         <div class="row">
             <div class="col-lg-12 mb-3">
                 <label>Which Parent/Guadian will have an account? <b class="text-danger">*</b></label>
+                <small class="d-block fw-bold">Only the selected Parent/Guardian is Required</small>
                 <select name="guardian_that_will_have_an_account" oninput="this.className = ''">
                     <option <?php echo getSession('guardian_that_will_have_an_account') == 'mother'  ? 'selected' : '' ?> value="mother"  >Mother</option>
                     <option <?php echo getSession('guardian_that_will_have_an_account') == 'father'  ? 'selected' : '' ?> value="father"  >Father</option>

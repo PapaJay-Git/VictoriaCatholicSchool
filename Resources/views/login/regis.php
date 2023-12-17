@@ -98,14 +98,14 @@ function getSession($data) {
         <div class="row">
             <div class="col-lg-6 mb-3">
                 <label>What type of student are you? <b class="text-danger">*</b></label>
-                <select name="student_type" oninput="this.className = ''">
+                <select name="student_type" oninput="this.className = ''" id="student_type">
                     <option value="new"  <?php echo (getSession('student_type') == 'new' ? 'selected' : '') ?> >New Student</option>
                     <option value="transfer" <?php echo (getSession('student_type') == 'transfer'  ? 'selected' : '') ?> >Transferee</option>
                 </select>
             </div>
             <div class="col-lg-6 mb-3">
                 <label>Grade Level <b class="text-danger">*</b></label>
-                <select name="grade" oninput="this.className = ''">
+                <select name="grade" oninput="this.className = ''" id="grade">
                     <option <?php echo getSession('grade') == '7'  ? 'selected' : '' ?> value="7"  >7</option>
                     <option <?php echo getSession('grade') == '8'  ? 'selected' : '' ?>  value="8"  >8</option>
                     <option <?php echo getSession('grade') == '9'  ? 'selected' : '' ?> value="9"  >9</option>
@@ -123,7 +123,7 @@ function getSession($data) {
                 <input type="text" placeholder="First Name" oninput="this.className = ''" name="first_name" <?php echo "value='".htmlspecialchars(getSession('first_name'))."'"  ?> >
             </div>
             <div class="col-lg-4 mb-3">
-                <label>Middlle Name <b class="text-danger">*</b></label>
+                <label>Middlle Name </label>
                 <input type="text" placeholder="Middle Name" oninput="this.className = ''" name="middle_name" <?php echo "value='".htmlspecialchars(getSession('middle_name'))."'"  ?> >
             </div>
         </div>
@@ -136,7 +136,7 @@ function getSession($data) {
                 </select>
             </div>
             <div class="col-lg-6 mb-3">
-                <label>Birthday <b class="text-danger">*</b></label>
+                <label>Date of Birth <b class="text-danger">*</b></label>
                 <input type="date" oninput="this.className = ''" name="birthday" <?php echo "value='".htmlspecialchars(getSession('birthday'))."'"  ?> >
             </div>
         </div>
@@ -151,7 +151,7 @@ function getSession($data) {
             </div>
         </div>
         <div class="row">
-            <h5 class="fw-bold mt-3">Student Address</h5>
+            <h5 class="fw-bold mt-3">Current Address</h5>
             <div class="col-lg-2 mb-3">
                 <label class="form-label">Street # / Unit # <b class="text-danger">*</b></label>
                 <input type="text" class="form-control form-control-sm"name="street_no" required
@@ -330,7 +330,24 @@ function getSession($data) {
 <!-- <script src="../../js/regis.js"></script> -->
 
 <script>
-    
+     document.addEventListener("DOMContentLoaded", function() {
+      function handleLoad() {
+        var student_type = document.getElementById("student_type").value;
+        var grade = document.getElementById("grade");
+
+        if(student_type == 'new'){
+            var optionToSelect = "7";
+            grade.value = optionToSelect;
+            grade.disabled = true;
+        }else{
+            grade.disabled = false;
+        }
+      }
+
+      window.addEventListener("load", handleLoad);
+
+      document.getElementById("student_type").addEventListener("change", handleLoad);
+    });
 
     function handleAgree() {
         var checkBox = document.getElementById("checkBox");

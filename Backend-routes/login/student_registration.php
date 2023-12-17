@@ -26,7 +26,7 @@ try {
 
     // required array
 
-    $required_fields = ['grade', 'first_name', 'middle_name', 'last_name', 'phone', 'email', 'gender', 'birthday', 'student_type', 'street_no', 'street', 'city_municipality', 'guardian_that_will_have_an_account'];
+    $required_fields = ['grade', 'first_name',  'last_name', 'phone', 'email', 'gender', 'birthday', 'student_type', 'street_no', 'street', 'city_municipality', 'guardian_that_will_have_an_account'];
 
     // required checker
     foreach ($required_fields as $field) {
@@ -75,6 +75,9 @@ try {
     $_SESSION['father_phone'] = isset($_POST['father_phone']) ? sanitize_input($_POST['father_phone']) : NULL;
     $_SESSION['father_email'] = isset($_POST['father_email']) ? sanitize_input($_POST['father_email']) : NULL;
     $_SESSION['father_occupation'] = isset($_POST['father_occupation']) ? sanitize_input($_POST['father_occupation']) : NULL;
+
+
+    $_SESSION['middle_name'] = isset($_POST['middle_name']) ? sanitize_input($_POST['middle_name']) : NULL;
     
 
     checkIfGradeIsValid($_POST['grade']);
@@ -88,7 +91,7 @@ try {
     $grade = $_POST['grade'];
     $last_name = validate_name(sanitize_input($_POST['last_name']));
     $first_name = validate_name(sanitize_input($_POST['first_name']));
-    $middle_name = validate_name(sanitize_input($_POST['middle_name']));
+    $middle_name = isset($_POST['middle_name']) && trim($_POST['middle_name']) != '' ? validate_name(sanitize_input($_POST['middle_name'])) : NULL;
     $gender = validate_gender($_POST['gender']);
     $phone_number = validate_phone_number(sanitize_input($_POST['phone']));
     $email_address = validate_email($_POST['email']);

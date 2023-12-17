@@ -19,7 +19,7 @@ require_once "../includes/header_layout.php";
         <div class="d-flex justify-content-between align-items-center mb-5">
             <div>
                 <h2 class="fw-bold">STUDENTS OF <?php echo $section['name']."-".$section['grade'] ?> </h2>
-                <h5 class="text-uppercase">TEACHER ADVISOR: <?php echo $section['first_name']." ".$section['last_name']." - ".$section['school_number'] ?></h5>
+                <h5 class="text-uppercase">TEACHER ADVISOR: <?php echo $section['first_name']." ".$section['last_name']." - ".$section['email'] ?></h5>
             </div>
             <div class="btn-group">
                 <a href="view_classes.php?id=<?php echo $gradeID ?>" class="btn btn-sm btn-danger fw-bold">BACK</a>

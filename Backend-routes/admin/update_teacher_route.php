@@ -48,8 +48,6 @@ try {
     $gender = validate_gender($_POST['gender']);
     $date_of_birth = validateBirthday($_POST['birthday']);
 
-    isSchoolNumberExistsOtherThanMe($school_number, $conn, $accountID);
-
     isPhoneNumberExistsOtherThanMe($phone, $conn, $accountID);
     
     isEmailExistsOtherThanMe($email_address, $conn, $accountID);

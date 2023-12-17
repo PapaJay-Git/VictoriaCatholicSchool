@@ -51,8 +51,6 @@ try {
     $role = 'teacher';
     
 
-    isSchoolNumberExists($school_number, $conn);
-
     isPhoneNumberExists($phone_number, $conn);
     
     isEmailExists($email_address, $conn);

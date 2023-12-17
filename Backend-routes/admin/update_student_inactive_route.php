@@ -62,8 +62,6 @@ try {
     $sectionID = $_POST['section'];
     $student_type = validate_student_type($_POST['student_type']);
 
-    isSchoolNumberExistsOtherThanMe($school_number, $conn, $accountID);
-
     isPhoneNumberExistsOtherThanMe($phone, $conn, $accountID);
     
     isEmailExistsOtherThanMe($email_address, $conn, $accountID);

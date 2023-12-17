@@ -23,7 +23,7 @@ try {
     isSectionIDExists($accountID, $conn);
 
     $stmt = $conn->prepare("
-    SELECT sections.*, users.first_name, users.last_name, users.school_number 
+    SELECT sections.*, users.first_name, users.last_name, users.email
     FROM sections LEFT JOIN users ON sections.advisory_teacher_id = users.id
     WHERE sections.id = ?");
     $stmt->bind_param("s", $accountID);

@@ -18,7 +18,7 @@ try {
     isPOST();
 
     // required array
-    $required_fields = ['section','first_name', 'middle_name', 'last_name', 'school_number', 'phone', 'email', 'birthday', 'gender', 'student_type', 'street_no', 'street', 'city_municipality'];
+    $required_fields = ['section','first_name', 'middle_name', 'last_name', 'phone', 'email', 'birthday', 'gender', 'student_type', 'street_no', 'street', 'city_municipality'];
 
     
     // required checker
@@ -51,7 +51,6 @@ try {
     $first_name = validate_name(sanitize_input($_POST['first_name']));
     $middle_name = validate_name(sanitize_input($_POST['middle_name']));
     $last_name = validate_name(sanitize_input($_POST['last_name']));
-    $school_number = sanitize_input($_POST['school_number']);
     $phone_number = validate_phone_number(sanitize_input($_POST['phone']));
     $email_address = validate_email($_POST['email']);
     $gender = validate_gender($_POST['gender']);
@@ -71,16 +70,14 @@ try {
     $student_type = validate_student_type($_POST['student_type']);
     
 
-    isSchoolNumberExists($school_number, $conn);
-
     isPhoneNumberExists($phone_number, $conn);
     
     isEmailExists($email_address, $conn);
 
     isSectionIDExists($sectionID, $conn);
 
-    $stmt = $conn->prepare("INSERT INTO users (first_name, middle_name, last_name, password, school_number, phone, email, gender, birthday, role, street_no, street, village, barangay, city_municipality, province, zip_code) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-    $stmt->bind_param("sssssssssssssssss", $first_name, $middle_name, $last_name, $password, $school_number, $phone_number, $email_address, $gender, $date_of_birth, $role, $street_no, $street, $village, $barangay, $city_municipality, $province, $zip_code);
+    $stmt = $conn->prepare("INSERT INTO users (first_name, middle_name, last_name, password,  phone, email, gender, birthday, role, street_no, street, village, barangay, city_municipality, province, zip_code) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+    $stmt->bind_param("ssssssssssssssss", $first_name, $middle_name, $last_name, $password, $phone_number, $email_address, $gender, $date_of_birth, $role, $street_no, $street, $village, $barangay, $city_municipality, $province, $zip_code);
     $stmt->execute();
     $insertedUserId = $conn->insert_id;
 

@@ -61,8 +61,6 @@ try {
     $date_of_birth = validateBirthday($_POST['birthday']);
     $sectionID = $_POST['section'];
 
-    isSchoolNumberExistsOtherThanMe($school_number, $conn, $accountID);
-
     isPhoneNumberExistsOtherThanMe($phone, $conn, $accountID);
     
     isEmailExistsOtherThanMe($email_address, $conn, $accountID);

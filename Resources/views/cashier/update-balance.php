@@ -53,10 +53,6 @@ function getSession($data) {
             <label for="balance" class="fw-bold">Balance</label>
             <input id="balance" name="balance" type="double" class="form-control form-control" value="<?php echo htmlspecialchars(getSession('balance'))  ?>" placeholder="Balance..." required>
         </div>
-        <div class="mb-3 ms-1 d-flex flex-column mt-3">
-            <label for="info" class="fw-bold">Info</label>
-            <textarea name="info" id="info" cols="30" rows="3" class="form-control form-control-sm" placeholder="Info..." required maxlength="255"><?php echo htmlspecialchars(getSession('info'))  ?></textarea>
-        </div>
         <div class="d-flex justify-content-end my-5">
             <button class="btn btn-sm fw-bold btn-primary me-1" type="submit">UPDATE</button>
             <a href="student_balance.php" class="btn btn-danger btn-sm fw-bold">BACK</a>

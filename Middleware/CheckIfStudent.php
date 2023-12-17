@@ -2,8 +2,8 @@
 require_once $_SERVER['DOCUMENT_ROOT']."/Connections/DB_connection.php";
 
 $role = 'student';
-$stmt = $conn->prepare("SELECT users.*, COALESCE(descriptive_balance, 'NONE')  as balance, 
-COALESCE(date, 'NONE')  as date, COALESCE(info, 'NONE')  as info  
+$stmt = $conn->prepare("SELECT users.*, COALESCE(balance, 'NONE')  as balance, 
+COALESCE(date, 'NONE') as date
 FROM users 
 LEFT JOIN student_balance ON users.id = student_balance.student_id
 WHERE role = ? AND users.id = ?");

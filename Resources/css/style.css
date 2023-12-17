@@ -165,3 +165,13 @@ select.selected {
 	display: inline-block; 
 	padding-bottom: 5px;
 }
+
+.grade-css{
+	width: 60px !important;
+	height: 20px;
+}
+
+.border-bottom-css{
+	border: 1px solid black;
+	width: fit-content;
+}

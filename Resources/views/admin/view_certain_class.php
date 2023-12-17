@@ -34,7 +34,7 @@ require_once "../includes/header_layout.php";
                     <th scope="col">First Name</th>
                     <th scope="col">Last Name</th>
                     <th scope="col">Email</th>
-                    <th scope="col">School Number</th>
+                    <th scope="col">School ID</th>
                   </tr>
                 </thead>
                 <tbody id="tbody-sections">

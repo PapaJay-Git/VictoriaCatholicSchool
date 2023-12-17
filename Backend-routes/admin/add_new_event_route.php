@@ -54,7 +54,7 @@ try {
     foreach ($required_fields as $field) {
         unset($_SESSION[$field]);
     }
-    successSender("Section Added Successfully", $fileName);
+    successSender("Event Added Successfully", $fileName);
 
 } catch (Exception $e) {
 

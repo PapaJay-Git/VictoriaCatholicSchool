@@ -44,28 +44,12 @@ require_once "../includes/header_layout.php";
                         <h5 class="bebas-font d-inline-block"><?php echo $auth['phone'] ?></h5>
                     </span>
                     <span class="d-block">
-                        <h4 class="bebas-font text-dark d-inline-block">School Number:</h4>
+                        <h4 class="bebas-font text-dark d-inline-block">School ID:</h4>
                         <h5 class="bebas-font d-inline-block"><?php echo $auth['school_number'] == 0 ? 'NONE' : $auth['school_number']?></h5>
                     </span>
                 </span>
             </div>
-            <div class="col-md-12 mt-5 ">
-                <span class="d-block px-2">
-                    <h3 class="bebas-font text-dark border-bottom-navy">BALANCE</h3>
-                    <span class="d-block">
-                        <h4 class="bebas-font text-dark d-inline-block">Amount: </h4>
-                        <h5 class="bebas-font d-inline-block"><?php echo $auth['balance']; ?></h5>
-                    </span>
-                    <span class="d-block">
-                        <h4 class="bebas-font text-dark d-inline-block">Due Date: </h4>
-                        <h5 class="bebas-font d-inline-block"><?php echo $auth['date']; ?></h5>
-                    </span>
-                    <span class="d-block">
-                        <h4 class="bebas-font text-danger d-inline-block">INFO: </h4>
-                        <h5 class="bebas-font d-inline-block"><?php echo $auth['info'] ?></h5>
-                    </span>
-                </span>
-            </div>
+            
             <div class="col-md-12 mt-5 ">
                 <span class="d-block px-2">
                     <h3 class="bebas-font text-dark border-bottom-navy">OTHER INFO</h3>

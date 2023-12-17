@@ -319,7 +319,7 @@ function isSubjectIDExists($id, $conn) {
     }
 }
 
-// Function to check if a school number already exists
+// Function to check if a School ID already exists
 function isSchoolNumberExists($schoolNumber, $conn) {
     global $fileName;
 
@@ -330,7 +330,7 @@ function isSchoolNumberExists($schoolNumber, $conn) {
     mysqli_stmt_store_result($stmt);
     
     if(mysqli_stmt_num_rows($stmt) > 0){
-        errorSender('School number already exist!', $fileName);
+        errorSender('School ID already exist!', $fileName);
     }
 }
 
@@ -399,7 +399,7 @@ function validatePassword($password, $confirmPassword) {
 }
 
 
-// Function to check if a school number already exists
+// Function to check if a School ID already exists
 function isSchoolNumberExistsOtherThanMe($schoolNumber, $conn, $accountID) {
     global $fileName;
 
@@ -410,7 +410,7 @@ function isSchoolNumberExistsOtherThanMe($schoolNumber, $conn, $accountID) {
     mysqli_stmt_store_result($stmt);
     
     if(mysqli_stmt_num_rows($stmt) > 0){
-        errorSender('School number already exist!', $fileName);
+        errorSender('School ID already exist!', $fileName);
     }
 }
 

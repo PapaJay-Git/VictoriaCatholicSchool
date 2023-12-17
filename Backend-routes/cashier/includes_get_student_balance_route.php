@@ -22,7 +22,7 @@ try {
 
     $is_complete = 1;
     $stmt = $conn->prepare("
-    SELECT users.*, sections.name as section_name, sections.grade as section_grade, student_balance.date, student_balance.descriptive_balance AS balance, info, student_payment.value, student_payment.payment_type
+    SELECT users.*, sections.name as section_name, sections.grade as section_grade, student_balance.date, student_balance.balance, student_payment.value, student_payment.payment_type
     FROM users 
     LEFT JOIN student_sections ON users.id = student_sections.student_id
     LEFT JOIN sections ON student_sections.section_id = sections.id

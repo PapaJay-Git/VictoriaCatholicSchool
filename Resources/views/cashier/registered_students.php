@@ -31,7 +31,7 @@ function cropText($text, $maxLength = 25, $ellipsis = '...') {
                     <th scope="col">#</th>
                     <th scope="col">Name</th>
                     <th scope="col">Email</th>
-                    <th scope="col">School Number</th>
+                    <th scope="col">School ID</th>
                     <th scope="col">Section</th>
                     <th scope="col">Action</th>
                   </tr>

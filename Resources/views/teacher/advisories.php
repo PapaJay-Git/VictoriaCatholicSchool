@@ -36,6 +36,7 @@ require_once "../includes/header_layout.php";
                                 <td>
                                     <a href='advisory_students.php?id=".$advisory['id']."' class='btn btn-primary btn-sm fw-bold'>STUDENTS</a>
                                     <a href='advisory_schedules.php?id=".$advisory['id']."' class='btn btn-primary btn-sm fw-bold'>SCHEDULES</a>
+                                    <a href='section_grades.php?id=".$advisory['id']."' class='btn btn-primary btn-sm fw-bold'>GRADES</a>
                                 </td>
                             </tr>
                             

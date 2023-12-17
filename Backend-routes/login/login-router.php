@@ -6,8 +6,8 @@ require_once $_SERVER['DOCUMENT_ROOT']."/Connections/DB_connection.php";
 session_unset();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $enteredEmail = $_POST['email'];
-    $enteredPassword = $_POST['password'];
+    $enteredEmail = trim($_POST['email']);
+    $enteredPassword = trim($_POST['password']);
 
     $stmt = $conn->prepare("SELECT role, id, password FROM users WHERE email = ?");
     $stmt->bind_param("s", $enteredEmail);

@@ -22,7 +22,7 @@ try {
 
     checkIfUserExists($accountID, $role, $conn);
 
-    $required_fields = ['balance', 'date', 'info'];
+    $required_fields = ['balance', 'date'];
 
     // required checker
     foreach ($required_fields as $field) {
@@ -39,7 +39,6 @@ try {
 
     $balance = $_POST['balance'];
     $date = $_POST['date'];
-    $info = $_POST['info'];
 
     if(!is_numeric($balance)){
         errorSender("Invalid balance", $fileName);
@@ -49,16 +48,16 @@ try {
         errorSender("Invalid date", $fileName);
     }
 
-    if(mb_strlen($info) > 255){
-        errorSender("Info limit is only 255 characters", $fileName);
-    }
+    // if(mb_strlen($info) > 255){
+    //     errorSender("Info limit is only 255 characters", $fileName);
+    // }
 
     $stmt = $conn->prepare("DELETE FROM student_balance where student_id = ?");
     $stmt->bind_param("i", $accountID);
     $stmt->execute();
 
-    $stmt = $conn->prepare("INSERT INTO student_balance (student_id, date, descriptive_balance, info) VALUES (?, ?, ?, ?)");
-    $stmt->bind_param("isds", $accountID, $date, $balance, $info);
+    $stmt = $conn->prepare("INSERT INTO student_balance (student_id, date, balance) VALUES (?, ?, ?)");
+    $stmt->bind_param("isd", $accountID, $date, $balance, );
     $stmt->execute();
 
     $stmt->close();

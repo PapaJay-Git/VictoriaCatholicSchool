@@ -41,7 +41,7 @@ function getSession($data) {
                 <span>EVENTS</span>
                 <button class="btn btn-primary btn-sm fw-bold" data-bs-toggle="modal" data-bs-target="#addModal">ADD EVENT</button>
             </div>
-            <div class="card-body text-center py-5"> 
+            <div class="card-body py-5"> 
                 <div class="table-responsive">
                 <table id="teachersTable">
                     <thead>
@@ -62,6 +62,7 @@ function getSession($data) {
                                 <small class="text-dark">
                                 <?php echo $count++ ?>
                                 </small>
+                            </td>
                             <td>
                                 <small class="text-dark"><?php echo limitString($event['title'], 15) ?></small>
                             </td>
@@ -73,6 +74,7 @@ function getSession($data) {
                             </td>
                             <td>
                                 <a class="btn btn-sm btn-primary fw-bold" href="update-events.php?id=<?php echo $event['id'] ?>">UPDATE</a>
+                                <button class="btn btn-sm btn-danger fw-bold" onclick="confirmDelete('../../../Backend-routes/admin/delete_event.php?id=<?php echo $event['id'] ?>')">DELETE</button>
                             </td>
                         </tr>
                     <?php 

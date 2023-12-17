@@ -71,13 +71,6 @@ $schedules = [
             </div>
     </div>
 </div>
-</body>
-<?php
-	require_once "../includes/includes_scripts.php";
-?>
-<script> setActive('assigned_subjects_tab'); </script>
-    	
-
 
 </body>
 

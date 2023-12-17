@@ -164,8 +164,8 @@ function isChecked($columnName){
             <textarea name="address" class="form-control" id="adress" cols="30" rows="4" placeholder="Address" required><?php echo htmlspecialchars(getSession('address'));  ?> </textarea>
         </div>
         <div class="mb-3">
-            <label class="form-label fw-bold text-uppercase">School Number</label>
-            <input type="text" class="form-control form-control-sm" name="school_number" required placeholder="School Number" <?php echo "value='".htmlspecialchars(getSession('school_number'))."'"  ?> >
+            <label class="form-label fw-bold text-uppercase">School ID</label>
+            <input type="text" class="form-control form-control-sm" name="school_number" required placeholder="School ID" <?php echo "value='".htmlspecialchars(getSession('school_number'))."'"  ?> >
         </div>
         <div class="mb-3">
             <label class="form-label fw-bold text-uppercase">Phone Number</label>

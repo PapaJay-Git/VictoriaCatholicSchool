@@ -2,6 +2,7 @@
 
 require_once $_SERVER['DOCUMENT_ROOT']."/Middleware/CheckIfLoggedIn.php";
 require_once $_SERVER['DOCUMENT_ROOT']."/Middleware/CheckIfTeacher.php";
+require_once $_SERVER['DOCUMENT_ROOT']."/Backend-routes/admin/includes_get_events_home.php";
 
 $title = "Teacher - Home";
 
@@ -15,17 +16,27 @@ require_once "../includes/header_layout.php";
      <div class="container mt-5">
         <div class="card">
             <div class="card-header fw-bold">
-                TEACHER DASHBOARD
+                EVENTS
             </div>
-            <div class="card-body text-center py-5"> 
-                <h3 class="card-title text-uppercase bebas-font d-block">WELCOME <?php echo $auth['first_name']." ".$auth['last_name'] ?></h3>
-                <h1 class="card-text bebas-font d-block mt-5">DO SOMETHING SPECIAL TODAY</h1>
+            <div class="card-body py-5"> 
+                <?php
+                    $count = 0;
+                     foreach($events as $event){
+                        $count++;
+                        echo "
+                        <div class='mb-3'>
+                            <strong class='d-block'>{$count}. {$event['title']}</strong>
+                            <span class='d-block ms-3'>{$event['description']}</span>
+                        </div>";
+                    }
+
+                    if($count == 0){
+                        echo "<div class='text-center'>NO EVENTS</div>";
+                    }
+                ?>
             </div>
         </div>
      </div>
-    	
-
-
 </body>
 
 <?php

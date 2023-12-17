@@ -41,7 +41,7 @@ function getSession($data) {
                     <th scope="col">First Name</th>
                     <th scope="col">Last Name</th>
                     <th scope="col">Email</th>
-                    <th scope="col">School Number</th>
+                    <th scope="col">School ID</th>
                     <th scope="col">Section</th>
                     <th scope="col">Action</th>
                   </tr>
@@ -126,8 +126,8 @@ function getSession($data) {
                   <textarea name="address" class="form-control" id="adress" cols="30" rows="4" placeholder="Address" required><?php echo htmlspecialchars(getSession('address'));  ?> </textarea>
                 </div>
                 <div class="mb-3">
-                  <label class="form-label fw-bold text-uppercase">School Number</label>
-                  <input type="text" class="form-control form-control-sm" name="school_number" required placeholder="School Number"
+                  <label class="form-label fw-bold text-uppercase">School ID</label>
+                  <input type="text" class="form-control form-control-sm" name="school_number" required placeholder="School ID"
                   <?php echo "value='".htmlspecialchars(getSession('school_number'))."'"  ?> >
                 </div>
                 <div class="mb-3">

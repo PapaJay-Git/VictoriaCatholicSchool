@@ -4,9 +4,7 @@ try {
 
     require_once $_SERVER['DOCUMENT_ROOT']."/Connections/DB_connection.php";
     require_once $_SERVER['DOCUMENT_ROOT']."/Middleware/CheckIfLoggedIn.php";
-    require_once $_SERVER['DOCUMENT_ROOT']."/Middleware/CheckIfAdmin.php";
 
-    $role = 'teacher';
     $stmt = $conn->prepare("SELECT * FROM events ORDER BY updated_at DESC");
     $stmt->execute();
     $events = $stmt->get_result();

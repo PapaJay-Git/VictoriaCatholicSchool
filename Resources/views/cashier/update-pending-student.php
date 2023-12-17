@@ -70,32 +70,65 @@ function isTabSet($tab){
     </div>
     <div class="pb-2 px-2"  id="guardian-tab" <?php echo isTabSet('guardian') ?>>
         <form method="POST" action="../../../Backend-routes/cashier/update_student_pending_guardian_route.php" onsubmit="submitRequest('updateStudentFormGuardian', event)" id="updateStudentFormGuardian">
-        <h5 class="mb-2 fw-bold text-uppercase" id="exampleModalLabel">GUARDIAN OF PENDING <?php echo $unregistered_info['student_type'] ?> STUDENT</h5>
+        <h5 class="mb-2 fw-bold text-uppercase" id="exampleModalLabel"><?php echo $row['guardian_guardian_type'] ?> INFORMATION</h5>
         <input type="hidden" name="id" value="<?php echo $row['id'] ?>">
         <div class="mb-3 mt-5">
-            <label class="form-label fw-bold text-uppercase">Guardian First name</label>
+            <label class="form-label fw-bold text-uppercase"> First name</label>
             <input type="text" class="form-control form-control-sm" name="guardian_first_name" required placeholder="First Name" <?php echo "value='".htmlspecialchars(getSession('guardian_first_name'))."'"  ?> >
         </div>
         <div class="mb-3">
-            <label class="form-label fw-bold text-uppercase">Guardian Middle name</label>
+            <label class="form-label fw-bold text-uppercase"> Middle name</label>
             <input type="text" class="form-control form-control-sm" name="guardian_middle_name" required placeholder="Middle name" <?php echo "value='".htmlspecialchars(getSession('guardian_middle_name'))."'"  ?> >
         </div>
         <div class="mb-3">
-            <label class="form-label fw-bold text-uppercase">Guardian Last name</label>
+            <label class="form-label fw-bold text-uppercase"> Last name</label>
             <input type="text" class="form-control form-control-sm"name="guardian_last_name" required placeholder="Last name" <?php echo "value='".htmlspecialchars(getSession('guardian_last_name'))."'"  ?> >
         </div>
         <div class="mb-3">
-            <label class="form-label fw-bold text-uppercase">Guardian Phone Number</label>
+            <label class="form-label fw-bold text-uppercase"> Phone Number</label>
             <input type="text" class="form-control form-control-sm" name="guardian_phone" required placeholder="Phone Number" <?php echo "value='".htmlspecialchars(getSession('guardian_phone'))."'"  ?> >
         </div>
         <div class="mb-3">
-            <label class="form-label fw-bold text-uppercase">Guardian Email Address</label>
+            <label class="form-label fw-bold text-uppercase"> Email Address</label>
             <input type="text" class="form-control form-control-sm" name="guardian_email" required placeholder="Email Adress" <?php echo "value='".htmlspecialchars(getSession('guardian_email'))."'"  ?> >
         </div>
         <div class="mb-3">
-            <label class="form-label fw-bold text-uppercase">Guardian Occupation</label>
+            <label class="form-label fw-bold text-uppercase"> Occupation</label>
             <input type="text" class="form-control form-control-sm" name="guardian_occupation" required placeholder="Occupation" <?php echo "value='".htmlspecialchars(getSession('guardian_occupation'))."'"  ?> >
         </div>
+
+        <?php
+            foreach($parents as $parent){
+                ?>
+                <hr class="mt-5">
+                    <h5 class="mb-2 fw-bold text-uppercase"><?php echo $parent['type'] ?> INFORMATION</h5>
+                    <div class="mb-3 mt-5">
+                        <label class="form-label fw-bold text-uppercase">First name</label>
+                        <input type="text" class="form-control form-control-sm"  value="<?php echo $parent['first_name']?>" disabled>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label fw-bold text-uppercase">Middle name</label>
+                        <input type="text" class="form-control form-control-sm" value="<?php echo $parent['middle_name']?>" disabled>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label fw-bold text-uppercase">Last name</label>
+                        <input type="text" class="form-control form-control-sm" value="<?php echo $parent['last_name']?>" disabled>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label fw-bold text-uppercase">Phone Number</label>
+                        <input type="text" class="form-control form-control-sm" value="<?php echo $parent['phone']?>" disabled>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label fw-bold text-uppercase">Email Address</label>
+                        <input type="text" class="form-control form-control-sm" value="<?php echo $parent['email']?>" disabled>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label fw-bold text-uppercase">Occupation</label>
+                        <input type="text" class="form-control form-control-sm" value="<?php echo $parent['occupation']?>" disabled>
+                    </div>
+                <?php
+            }
+        ?>
 
         <div class="d-flex justify-content-end my-5">
             <button class="btn btn-sm fw-bold btn-primary me-1" type="submit">UPDATE</button>
@@ -139,10 +172,6 @@ function isTabSet($tab){
             <input type="text" class="form-control form-control-sm"name="last_name" required placeholder="Last name" <?php echo "value='".htmlspecialchars(getSession('last_name'))."'"  ?> >
         </div>
         <div class="mb-3">
-            <label class="form-label fw-bold text-uppercase">Address</label>
-            <textarea name="address" class="form-control" id="adress" cols="30" rows="4" placeholder="Address" required><?php echo htmlspecialchars(getSession('address'));  ?> </textarea>
-        </div>
-        <div class="mb-3">
             <label class="form-label fw-bold text-uppercase">School ID</label>
             <input type="text" class="form-control form-control-sm" name="school_number" required placeholder="School ID" <?php echo "value='".htmlspecialchars(getSession('school_number'))."'"  ?> >
         </div>
@@ -173,6 +202,45 @@ function isTabSet($tab){
         <div class="mb-3">
             <label class="form-label fw-bold text-uppercase">Date of Birth</label>
             <input type="date" class="form-control form-control-sm" name="birthday" required    <?php echo "value='".htmlspecialchars(getSession('birthday'))."'"  ?> >
+        </div><div class="mb-3">
+            <h5 class="form-label fw-bold text-uppercase">Address</h5>
+            <div class="border border-dark p-2">
+            <div class="p-2">
+                <label class="form-label fw-bold text-uppercase">Street # / Unit # <b class="text-danger">*</b></label>
+                <input type="text" class="form-control form-control-sm"name="street_no" required
+                <?php echo "value='".htmlspecialchars(getSession('street_no'))."'"  ?> >
+            </div>
+            <div class="p-2">
+                <label class="form-label fw-bold text-uppercase">Street <b class="text-danger">*</b></label>
+                <input type="text" class="form-control form-control-sm"name="street" required
+                <?php echo "value='".htmlspecialchars(getSession('street'))."'"  ?> >
+            </div>
+            <div class="p-2">
+                <label class="form-label fw-bold text-uppercase">Subdivision/Village/Bldg</label>
+                <input type="text" class="form-control form-control-sm"name="village"
+                <?php echo "value='".htmlspecialchars(getSession('village'))."'"  ?> >
+            </div>
+            <div class="p-2">
+                <label class="form-label fw-bold text-uppercase">Barangay</label>
+                <input type="text" class="form-control form-control-sm"name="barangay"
+                <?php echo "value='".htmlspecialchars(getSession('barangay'))."'"  ?> >
+            </div>
+            <div class="p-2">
+                <label class="form-label fw-bold text-uppercase">City/Municipality <b class="text-danger">*</b></label>
+                <input type="text" class="form-control form-control-sm"name="city_municipality" required
+                <?php echo "value='".htmlspecialchars(getSession('city_municipality'))."'"  ?> >
+            </div>
+            <div class="p-2">
+                <label class="form-label fw-bold text-uppercase">Province</label>
+                <input type="text" class="form-control form-control-sm"name="province"
+                <?php echo "value='".htmlspecialchars(getSession('province'))."'"  ?> >
+            </div>
+            <div class="p-2">
+                <label class="form-label fw-bold text-uppercase">Zip Code</label>
+                <input type="text" class="form-control form-control-sm"name="zip_code"
+                <?php echo "value='".htmlspecialchars(getSession('zip_code'))."'"  ?> >
+            </div>
+            </div>
         </div>
 
         <div class="d-flex justify-content-end my-5">

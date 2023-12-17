@@ -60,10 +60,6 @@ require_once "../includes/header_layout.php";
                         <h4 class="bebas-font text-dark d-inline-block">Birthday:</h4>
                         <h5 class="bebas-font d-inline-block"><?php echo $auth['birthday']; ?></h5>
                     </span>
-                    <span class="d-block">
-                        <h4 class="bebas-font text-dark d-inline-block">Address:</h4>
-                        <h5 class="bebas-font d-inline-block"><?php echo $auth['address']; ?></h5>
-                    </span>
                 </span>
 
             </div>

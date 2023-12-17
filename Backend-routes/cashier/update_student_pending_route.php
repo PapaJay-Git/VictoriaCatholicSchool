@@ -24,7 +24,7 @@ try {
 
     checkIfUserExists($accountID, $role, $conn);
 
-    $required_fields = ['section', 'first_name', 'middle_name', 'last_name', 'address', 'school_number', 'phone', 'email', 'gender', 'birthday', 'student_type'];
+    $required_fields = ['section', 'first_name', 'middle_name', 'last_name', 'school_number', 'phone', 'email', 'gender', 'birthday', 'student_type','street_no', 'street', 'city_municipality'];
 
     // required checker
     foreach ($required_fields as $field) {
@@ -38,12 +38,23 @@ try {
     if($error){
         errorSender("$fieldName is required", $fileName);
     }
+    $street_no = sanitize_input($_POST['street_no']);
+    $street = sanitize_input($_POST['street']);
+    $village = isset($_POST['village']) ? sanitize_input($_POST['village']) : NULL;
+    $barangay = isset($_POST['barangay']) ? sanitize_input($_POST['barangay']) : NULL;
+    $city_municipality = sanitize_input($_POST['city_municipality']);
+    $province = isset($_POST['province']) ? sanitize_input($_POST['province']) : NULL;
+    $zip_code = isset($_POST['zip_code']) ? sanitize_input($_POST['zip_code']) : NULL;
+
+    $_SESSION['village'] = $village;
+    $_SESSION['barangay'] = $barangay;
+    $_SESSION['province'] = $province;
+    $_SESSION['zip_code'] = $zip_code;
 
       // input data
     $first_name = validate_name(sanitize_input($_POST['first_name']));
     $middle_name = validate_name(sanitize_input($_POST['middle_name']));
     $last_name = validate_name(sanitize_input($_POST['last_name']));
-    $address = sanitize_input($_POST['address']);
     $school_number = sanitize_input($_POST['school_number']);
     $phone = validate_phone_number(sanitize_input($_POST['phone']));
     $email_address = validate_email($_POST['email']);
@@ -60,8 +71,8 @@ try {
 
     isSectionIDExists($sectionID, $conn);
     
-    $stmt = $conn->prepare("UPDATE users SET first_name = ?, middle_name = ?, last_name = ?, address = ?, school_number = ?, phone = ?, email = ?, gender = ?, birthday = ? WHERE id = ?");
-    $stmt->bind_param("sssssssssi", $first_name, $middle_name, $last_name, $address, $school_number, $phone, $email_address, $gender, $date_of_birth, $accountID);
+    $stmt = $conn->prepare("UPDATE users SET first_name = ?, middle_name = ?, last_name = ?,  school_number = ?, phone = ?, email = ?, gender = ?, birthday = ?, street_no = ?, street = ?, village = ?, barangay = ?, city_municipality = ?, province = ?, zip_code = ? WHERE id = ?");
+    $stmt->bind_param("sssssssssssssssi", $first_name, $middle_name, $last_name, $school_number, $phone, $email_address, $gender, $date_of_birth, $street_no, $street, $village, $barangay, $city_municipality, $province, $zip_code, $accountID);
     $stmt->execute();
 
     $stmt = $conn->prepare("DELETE FROM student_sections where student_id = ?");

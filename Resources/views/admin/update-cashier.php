@@ -85,10 +85,6 @@ function isPasswordSet($tab){
             <input type="text" class="form-control form-control-sm"name="last_name" required placeholder="Last name" <?php echo "value='".htmlspecialchars(getSession('last_name'))."'"  ?> >
         </div>
         <div class="mb-3">
-            <label class="form-label fw-bold text-uppercase">Address</label>
-            <textarea name="address" class="form-control" id="adress" cols="30" rows="4" placeholder="Address" required><?php echo htmlspecialchars(getSession('address'));  ?> </textarea>
-        </div>
-        <div class="mb-3">
             <label class="form-label fw-bold text-uppercase">School ID</label>
             <input type="text" class="form-control form-control-sm" name="school_number" required placeholder="School ID" <?php echo "value='".htmlspecialchars(getSession('school_number'))."'"  ?> >
         </div>

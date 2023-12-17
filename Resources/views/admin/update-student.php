@@ -160,10 +160,6 @@ function isChecked($columnName){
             <input type="text" class="form-control form-control-sm"name="last_name" required placeholder="Last name" <?php echo "value='".htmlspecialchars(getSession('last_name'))."'"  ?> >
         </div>
         <div class="mb-3">
-            <label class="form-label fw-bold text-uppercase">Address</label>
-            <textarea name="address" class="form-control" id="adress" cols="30" rows="4" placeholder="Address" required><?php echo htmlspecialchars(getSession('address'));  ?> </textarea>
-        </div>
-        <div class="mb-3">
             <label class="form-label fw-bold text-uppercase">School ID</label>
             <input type="text" class="form-control form-control-sm" name="school_number" required placeholder="School ID" <?php echo "value='".htmlspecialchars(getSession('school_number'))."'"  ?> >
         </div>
@@ -194,6 +190,46 @@ function isChecked($columnName){
         <div class="mb-3">
             <label class="form-label fw-bold text-uppercase">Date of Birth</label>
             <input type="date" class="form-control form-control-sm" name="birthday" required    <?php echo "value='".htmlspecialchars(getSession('birthday'))."'"  ?> >
+        </div>
+        <div class="mb-3">
+            <h5 class="form-label fw-bold text-uppercase">Address</h5>
+            <div class="border border-dark p-2">
+            <div class="p-2">
+                <label class="form-label fw-bold text-uppercase">Street # / Unit # <b class="text-danger">*</b></label>
+                <input type="text" class="form-control form-control-sm"name="street_no" required
+                <?php echo "value='".htmlspecialchars(getSession('street_no'))."'"  ?> >
+            </div>
+            <div class="p-2">
+                <label class="form-label fw-bold text-uppercase">Street <b class="text-danger">*</b></label>
+                <input type="text" class="form-control form-control-sm"name="street" required
+                <?php echo "value='".htmlspecialchars(getSession('street'))."'"  ?> >
+            </div>
+            <div class="p-2">
+                <label class="form-label fw-bold text-uppercase">Subdivision/Village/Bldg</label>
+                <input type="text" class="form-control form-control-sm"name="village"
+                <?php echo "value='".htmlspecialchars(getSession('village'))."'"  ?> >
+            </div>
+            <div class="p-2">
+                <label class="form-label fw-bold text-uppercase">Barangay</label>
+                <input type="text" class="form-control form-control-sm"name="barangay"
+                <?php echo "value='".htmlspecialchars(getSession('barangay'))."'"  ?> >
+            </div>
+            <div class="p-2">
+                <label class="form-label fw-bold text-uppercase">City/Municipality <b class="text-danger">*</b></label>
+                <input type="text" class="form-control form-control-sm"name="city_municipality" required
+                <?php echo "value='".htmlspecialchars(getSession('city_municipality'))."'"  ?> >
+            </div>
+            <div class="p-2">
+                <label class="form-label fw-bold text-uppercase">Province</label>
+                <input type="text" class="form-control form-control-sm"name="province"
+                <?php echo "value='".htmlspecialchars(getSession('province'))."'"  ?> >
+            </div>
+            <div class="p-2">
+                <label class="form-label fw-bold text-uppercase">Zip Code</label>
+                <input type="text" class="form-control form-control-sm"name="zip_code"
+                <?php echo "value='".htmlspecialchars(getSession('zip_code'))."'"  ?> >
+            </div>
+            </div>
         </div>
 
         <div class="d-flex justify-content-end my-5">

@@ -18,7 +18,7 @@ try {
     isPOST();
 
     // required array
-    $required_fields = ['first_name', 'middle_name', 'last_name', 'address', 'school_number', 'phone', 'email', 'birthday', 'gender'];
+    $required_fields = ['first_name', 'middle_name', 'last_name', 'school_number', 'phone', 'email', 'birthday', 'gender'];
 
     // required checker
     foreach ($required_fields as $field) {
@@ -34,17 +34,17 @@ try {
     }
 
     // input data
-    $default_password = "P@ssword123";
     $first_name = validate_name(sanitize_input($_POST['first_name']));
     $middle_name = validate_name(sanitize_input($_POST['middle_name']));
     $last_name = validate_name(sanitize_input($_POST['last_name']));
-    $password = password_hash($default_password, PASSWORD_DEFAULT); 
-    $address = sanitize_input($_POST['address']);
     $school_number = sanitize_input($_POST['school_number']);
     $phone_number = validate_phone_number(sanitize_input($_POST['phone']));
     $email_address = validate_email($_POST['email']);
     $gender = validate_gender($_POST['gender']);
     $date_of_birth = validateBirthday($_POST['birthday']);
+    
+    $default_password = strtolower($last_name)."_".date("Y", strtotime($date_of_birth));
+    $password = password_hash($default_password, PASSWORD_DEFAULT); 
     $role = 'cashier';
     
 
@@ -54,9 +54,9 @@ try {
     
     isEmailExists($email_address, $conn);
 
-    $stmt = $conn->prepare("INSERT INTO users (first_name, middle_name, last_name, password, address, school_number, phone, email, gender, birthday, role) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+    $stmt = $conn->prepare("INSERT INTO users (first_name, middle_name, last_name, password, school_number, phone, email, gender, birthday, role) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
-    $stmt->bind_param("ssssssssssss", $first_name, $middle_name, $last_name, $password, $address, $school_number, $phone_number, $email_address, $gender, $date_of_birth, $role);
+    $stmt->bind_param("ssssssssss", $first_name, $middle_name, $last_name, $password, $school_number, $phone_number, $email_address, $gender, $date_of_birth, $role);
 
     $stmt->execute();
     $stmt->close();

@@ -35,7 +35,7 @@ try {
         )
         OR
         (checklists.is_complete IS NULL OR checklists.is_complete <> ?)
-    )
+    ) ORDER BY users.updated_at DESC
     ");
     $stmt->bind_param("si", $role, $is_complete);
     $stmt->execute();

@@ -18,8 +18,9 @@ try {
     isPOST();
 
     // required array
-    $required_fields = ['section','first_name', 'middle_name', 'last_name', 'address', 'school_number', 'phone', 'email', 'birthday', 'gender', 'student_type'];
+    $required_fields = ['section','first_name', 'middle_name', 'last_name', 'school_number', 'phone', 'email', 'birthday', 'gender', 'student_type', 'street_no', 'street', 'city_municipality'];
 
+    
     // required checker
     foreach ($required_fields as $field) {
         $_SESSION[$field] = sanitize_input($_POST[$field]);
@@ -33,18 +34,34 @@ try {
         errorSender("$fieldName is required", $fileName);
     }
 
+    $street_no = sanitize_input($_POST['street_no']);
+    $street = sanitize_input($_POST['street']);
+    $village = isset($_POST['village']) ? sanitize_input($_POST['village']) : NULL;
+    $barangay = isset($_POST['barangay']) ? sanitize_input($_POST['barangay']) : NULL;
+    $city_municipality = sanitize_input($_POST['city_municipality']);
+    $province = isset($_POST['province']) ? sanitize_input($_POST['province']) : NULL;
+    $zip_code = isset($_POST['zip_code']) ? sanitize_input($_POST['zip_code']) : NULL;
+
+    $_SESSION['village'] = $village;
+    $_SESSION['barangay'] = $barangay;
+    $_SESSION['province'] = $province;
+    $_SESSION['zip_code'] = $zip_code;
+
     // input data
-    $default_password = "P@ssword123";
     $first_name = validate_name(sanitize_input($_POST['first_name']));
     $middle_name = validate_name(sanitize_input($_POST['middle_name']));
     $last_name = validate_name(sanitize_input($_POST['last_name']));
-    $password = password_hash($default_password, PASSWORD_DEFAULT); 
-    $address = sanitize_input($_POST['address']);
     $school_number = sanitize_input($_POST['school_number']);
     $phone_number = validate_phone_number(sanitize_input($_POST['phone']));
     $email_address = validate_email($_POST['email']);
     $gender = validate_gender($_POST['gender']);
     $date_of_birth = validateBirthday($_POST['birthday']);
+
+    
+
+ 
+    $default_password = strtolower($last_name)."_".date("Y", strtotime($date_of_birth));
+    $password = password_hash($default_password, PASSWORD_DEFAULT); 
     $role = 'student';
     $sectionID = $_POST['section'];
     $student_type = validate_student_type($_POST['student_type']);
@@ -58,8 +75,8 @@ try {
 
     isSectionIDExists($sectionID, $conn);
 
-    $stmt = $conn->prepare("INSERT INTO users (first_name, middle_name, last_name, password, address, school_number, phone, email, gender, birthday, role) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-    $stmt->bind_param("sssssssssss", $first_name, $middle_name, $last_name, $password, $address, $school_number, $phone_number, $email_address, $gender, $date_of_birth, $role);
+    $stmt = $conn->prepare("INSERT INTO users (first_name, middle_name, last_name, password, school_number, phone, email, gender, birthday, role, street_no, street, village, barangay, city_municipality, province, zip_code) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+    $stmt->bind_param("sssssssssssssssss", $first_name, $middle_name, $last_name, $password, $school_number, $phone_number, $email_address, $gender, $date_of_birth, $role, $street_no, $street, $village, $barangay, $city_municipality, $province, $zip_code);
     $stmt->execute();
     $insertedUserId = $conn->insert_id;
 

@@ -24,7 +24,7 @@ try {
 
     checkIfUserExists($accountID, $role, $conn);
 
-    $required_fields = ['first_name', 'middle_name', 'last_name', 'address', 'school_number', 'phone', 'email', 'gender', 'birthday'];
+    $required_fields = ['first_name', 'middle_name', 'last_name', 'school_number', 'phone', 'email', 'gender', 'birthday'];
 
     // required checker
     foreach ($required_fields as $field) {
@@ -43,7 +43,6 @@ try {
     $first_name = validate_name(sanitize_input($_POST['first_name']));
     $middle_name = validate_name(sanitize_input($_POST['middle_name']));
     $last_name = validate_name(sanitize_input($_POST['last_name']));
-    $address = sanitize_input($_POST['address']);
     $school_number = sanitize_input($_POST['school_number']);
     $phone = validate_phone_number(sanitize_input($_POST['phone']));
     $email_address = validate_email($_POST['email']);
@@ -56,9 +55,9 @@ try {
     
     isEmailExistsOtherThanMe($email_address, $conn, $accountID);
     
-    $stmt = $conn->prepare("UPDATE users SET first_name = ?, middle_name = ?, last_name = ?, address = ?, school_number = ?, phone = ?, email = ?, gender = ?, birthday = ? WHERE id = ?");
+    $stmt = $conn->prepare("UPDATE users SET first_name = ?, middle_name = ?, last_name = ?, school_number = ?, phone = ?, email = ?, gender = ?, birthday = ? WHERE id = ?");
 
-    $stmt->bind_param("sssssssssi", $first_name, $middle_name, $last_name, $address, $school_number, $phone, $email_address, $gender, $date_of_birth, $accountID);
+    $stmt->bind_param("ssssssssi", $first_name, $middle_name, $last_name, $school_number, $phone, $email_address, $gender, $date_of_birth, $accountID);
     
     $stmt->execute();
     $stmt->close();

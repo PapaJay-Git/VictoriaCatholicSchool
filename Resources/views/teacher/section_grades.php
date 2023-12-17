@@ -22,7 +22,8 @@ require_once "../includes/header_layout.php";
                         <h5 class="fw-bold"><?php echo $section_data['grade']." ".$section_data['name']." STUDENT GRADES" ?></h5>
                         <a href="advisories.php" class="btn btn-danger btn-sm fw-bold">BACK</a>
                     </div>
-                    <form action="">
+                    <form method="POST" action="../../../Backend-routes/teacher/update_student_grades.php" onsubmit="submitRequest('updateStudentGrade', event)" id="updateStudentGrade">
+                        <input type="hidden" name="section_id" value="<?php echo $section_data['id'] ?>">
                         <?php 
                             $count = 1;
                             foreach($students as $student){ 
@@ -37,42 +38,56 @@ require_once "../includes/header_layout.php";
                                     $student_grades = $stmt->get_result();
                                     if($student_grades->num_rows <= 0){
                                         echo "<div class='mx-3 p-3 mt-2 d-block border-bottom-css'>
-                                        <input type='hidden' name='student_id' value='".$student['id']."'>
+                                        <input type='hidden' name='student_id[]' value='".$student['id']."'>
+                                        <input type='hidden' name='subject_id[]' value='".$subject['id']."'>
                                         <small class='fw-bold'>".$subject['name'].": </small>
                                         <small>First</small>
-                                        <input type='double' class='grade-css' value='0' required name='first[]'>
+                                        <input type='number' class='grade-css' step='0.01' min='0.00' max='100.00' value='0' required name='first[]'>
                                         <small>Second</small>
-                                        <input type='double' class='grade-css' value='0' required name='second[]'>
+                                        <input type='number' class='grade-css' step='0.01' min='0.00' max='100.00' value='0' required name='second[]'>
                                         <small>Third</small>
-                                        <input type='double' class='grade-css' value='0' required name='third[]'>
+                                        <input type='number' class='grade-css' step='0.01' min='0.00' max='100.00' value='0' required name='third[]'>
                                         <small>Fourth</small>
-                                        <input type='double' class='grade-css' value='0' required name='fourth[]'>
+                                        <input type='number' class='grade-css' step='0.01' min='0.00' max='100.00' value='0' required name='fourth[]'>
                                         <small class='ps-3 fw-bold'>Final</small>
-                                        <small>0</small>
+                                        <small>0 / 100</small>
                                         </div>"; 
                                     }else{
+                                        $student_grades_row = $student_grades->fetch_assoc();
+
+                                        $final = ($student_grades_row['first_quarter']+$student_grades_row['second_quarter']+$student_grades_row['third_quarter']+$student_grades_row['fourth_quarter']) / 100;
                                         echo "<div class='mx-3 p-3 mt-2 d-block border-bottom-css'>
-                                        <input type='hidden' name='student_id' value='".$student['id']."'>
+                                        <input type='hidden' name='student_id[]' value='".$student['id']."'>
+                                        <input type='hidden' name='subject_id[]' value='".$subject['id']."'>
                                         <small class='fw-bold'>".$subject['name'].": </small>
                                         <small>First</small>
-                                        <input type='double' class='grade-css' value='0' required name='first[]' value='".$student_grades['first_quarter']."'>
+                                        <input type='number' class='grade-css' step='0.01' min='0.00' max='100.00' required name='first[]' value='".$student_grades_row['first_quarter']."'>
                                         <small>Second</small>
-                                        <input type='double' class='grade-css' value='0' required name='second[]' value='".$student_grades['second_quarter']."'>
+                                        <input type='number' class='grade-css' step='0.01' min='0.00' max='100.00' required name='second[]' value='".$student_grades_row['second_quarter']."'>
                                         <small>Third</small>
-                                        <input type='double' class='grade-css' value='0' required name='third[]' value='".$student_grades['third_quarter']."'>
+                                        <input type='number' class='grade-css' step='0.01' min='0.00' max='100.00' required name='third[]' value='".$student_grades_row['third_quarter']."'>
                                         <small>Fourth</small>
-                                        <input type='double' class='grade-css' value='0' required name='fourth[]' value='".$student_grades['fourth_quarter']."'>
+                                        <input type='number' class='grade-css' step='0.01' min='0.00' max='100.00' required name='fourth[]' value='".$student_grades_row['fourth_quarter']."'>
                                         <small class='ps-3 fw-bold'>Final</small>
-                                        <small>9232</small>
+                                        <small>$final / 100</small>
                                         </div>"; 
                                     }
 
                                 }
                                 
                             } 
-                            
+                     
+
                             if($students->num_rows == 0){
-                                echo "<div class='d-flex justify-content-center mt-5 fw-bold align-items-center'>EMPTY</div>";
+                                echo "<div class='d-flex justify-content-center mt-5 fw-bold align-items-center'>NO STUDENTS TO BE GRADED</div>
+                                ";
+                            }else{
+                                echo "
+                                <div class='d-flex justify-content-end align-items-center mt-3'>
+                                    <div class='btn-group '>
+                                        <button type='submit' class='btn btn-primary btn-sm fw-bold'>UPDATE</button>
+                                    <a href='advisories.php' class='btn btn-sm btn-danger fw-bold'>CANCEL</a></div>
+                                </div>"; 
                             }
                         ?>
                         </form>

@@ -39,6 +39,15 @@ try {
     if($result->num_rows > 0){
         errorSender('Cannot delete a student who already has a payment.', $fileName);
     }
+
+    $stmt = $conn->prepare("SELECT * FROM student_grades WHERE student_id = ?");
+    $stmt->bind_param("i", $accountID);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if($result->num_rows > 0){
+        errorSender('Cannot delete a student who already has a grade.', $fileName);
+    }
     // checker
 
     $stmt = $conn->prepare("SELECT guardian_id FROM guardians WHERE student_id = ?");

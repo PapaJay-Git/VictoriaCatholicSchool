@@ -26,7 +26,7 @@ try {
 
     // required array
 
-    $required_fields = ['grade', 'first_name',  'last_name', 'phone', 'email', 'gender', 'birthday', 'student_type', 'street_no', 'street', 'city_municipality', 'guardian_that_will_have_an_account'];
+    $required_fields = ['grade', 'first_name',  'last_name', 'phone', 'email', 'gender', 'birthday', 'student_type', 'barangay', 'province', 'city_municipality', 'zip_code', 'guardian_that_will_have_an_account'];
 
     // required checker
     foreach ($required_fields as $field) {
@@ -36,17 +36,23 @@ try {
             $fieldName = $field;
         }
     }
-    
-    $street_no = sanitize_input($_POST['street_no']);
-    $street = sanitize_input($_POST['street']);
+    // OPTIONAL
+    $street_no = isset($_POST['street_no'])  ? sanitize_input($_POST['street_no']) : NULL;
+    $street = isset($_POST['street'])  ? sanitize_input($_POST['street']) : NULL;
     $village = isset($_POST['village']) ? sanitize_input($_POST['village']) : NULL;
-    $barangay = isset($_POST['barangay']) ? sanitize_input($_POST['barangay']) : NULL;
+    // REQUIRED
+    $barangay = sanitize_input($_POST['barangay']);
     $city_municipality = sanitize_input($_POST['city_municipality']);
-    $province = isset($_POST['province']) ? sanitize_input($_POST['province']) : NULL;
-    $zip_code = isset($_POST['zip_code']) ? sanitize_input($_POST['zip_code']) : NULL;
+    $province = sanitize_input($_POST['province']);
+    $zip_code = sanitize_input($_POST['zip_code']);
     $guardian_account = $_POST['guardian_that_will_have_an_account'];
 
+    
+    $_SESSION['street_no'] = $street_no;
+    $_SESSION['street'] = $street;
     $_SESSION['village'] = $village;
+
+    $_SESSION['city_municipality'] = $city_municipality;
     $_SESSION['barangay'] = $barangay;
     $_SESSION['province'] = $province;
     $_SESSION['zip_code'] = $zip_code;
@@ -228,7 +234,10 @@ $default_password = str_replace(' ', '', $default_password);
 
 
     if($_POST[$guardian_account.'_email'] == $email_address){
-        errorSender($guardian_account+' account email and student email can\'t be the same!', $fileName);
+        errorSender(strtoupper($guardian_account).' account email and student email can\'t be the same!', $fileName);
+    }
+    if($_POST[$guardian_account.'_phone'] == $phone_number){
+        errorSender(strtoupper($guardian_account).' account phone number and student phone number can\'t be the same!', $fileName);
     }
     
     //student
@@ -342,7 +351,6 @@ $default_password = str_replace(' ', '', $default_password);
             <li>Certificate of Good Moral</li>
             <li>Photocopy of Baptismal and Birth Certificate (NSO Certificate)</li>
             <li>Honorary Dismissal</li>
-            <li>Previous year Report Card</li>
         </ul>
         
         <h4>Transferees:</h4>
@@ -351,7 +359,6 @@ $default_password = str_replace(' ', '', $default_password);
             <li>Certificate of Good Moral</li>
             <li>Photocopy of Baptismal and Birth Certificate (NSO Certificate)</li>
             <li>Honorary Dismissal</li>
-            <li>Previous year Report Card</li>
         </ul>
         
         <h3>Mode of Payment:</h3>
@@ -415,7 +422,10 @@ $default_password = str_replace(' ', '', $default_password);
     }
 
     unset(
+        $_SESSION['street_no'],
+        $_SESSION['street'],
         $_SESSION['village'],
+        $_SESSION['city_municipality'],
         $_SESSION['barangay'],
         $_SESSION['province'],
         $_SESSION['zip_code'],

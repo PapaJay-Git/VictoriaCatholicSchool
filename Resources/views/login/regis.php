@@ -154,13 +154,13 @@ function getSession($data) {
         <div class="row">
             <h5 class="fw-bold mt-3">Current Address</h5>
             <div class="col-lg-2 mb-3">
-                <label class="form-label">Street # / Unit # <b class="text-danger">*</b></label>
-                <input type="text" class="form-control form-control-sm"name="street_no" required
+                <label class="form-label">Street # / Unit # </label>
+                <input type="text" class="form-control form-control-sm"name="street_no"
                 <?php echo "value='".htmlspecialchars(getSession('street_no'))."'"  ?> placeholder="Street # / Unit # ">
             </div>
             <div class="col-lg-4 mb-3">
-                <label class="form-label">Street <b class="text-danger">*</b></label>
-                <input type="text" class="form-control form-control-sm"name="street" required
+                <label class="form-label">Street </label>
+                <input type="text" class="form-control form-control-sm"name="street"
                 <?php echo "value='".htmlspecialchars(getSession('street'))."'"  ?> placeholder="Street">
             </div>
             <div class="col-lg-6 mb-3">
@@ -169,8 +169,8 @@ function getSession($data) {
                 <?php echo "value='".htmlspecialchars(getSession('village'))."'"  ?> placeholder="Subdivision/Village/Bldg">
             </div>
             <div class="col-lg-4 mb-3">
-                <label class="form-label">Barangay</label>
-                <input type="text" class="form-control form-control-sm"name="barangay"
+                <label class="form-label">Barangay <b class="text-danger">*</b></label>
+                <input type="text" class="form-control form-control-sm"name="barangay"  required
                 <?php echo "value='".htmlspecialchars(getSession('barangay'))."'"  ?> placeholder="Barangay">
             </div>
             <div class="col-lg-3 mb-3">
@@ -179,13 +179,13 @@ function getSession($data) {
                 <?php echo "value='".htmlspecialchars(getSession('city_municipality'))."'"  ?> placeholder="City/Municipality">
             </div>
             <div class="col-lg-3 mb-3">
-                <label class="form-label">Province</label>
-                <input type="text" class="form-control form-control-sm"name="province"
+                <label class="form-label">Province <b class="text-danger">*</b></label>
+                <input type="text" class="form-control form-control-sm"name="province"  required
                 <?php echo "value='".htmlspecialchars(getSession('province'))."'"  ?> placeholder="Province">
             </div>
             <div class="col-lg-2 mb-3">
-                <label class="form-label">Zip Code</label>
-                <input type="text" class="form-control form-control-sm"name="zip_code"
+                <label class="form-label">Zip Code <b class="text-danger">*</b></label>
+                <input type="text" class="form-control form-control-sm"name="zip_code"  required
                 <?php echo "value='".htmlspecialchars(getSession('zip_code'))."'"  ?> placeholder="Zip Code">
             </div>
         </div>

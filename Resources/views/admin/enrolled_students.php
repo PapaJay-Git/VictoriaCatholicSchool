@@ -42,6 +42,7 @@ function cropText($text, $maxLength = 25, $ellipsis = '...') {
                 <tbody id="tbody-sections">
                 <?php
                   foreach($students as $student){
+                    $lockQuestion = $student['is_locked'] == 1 ? 'Are you sure you want to unlock this account?' : 'Are you sure you want to lock this account?';
                     echo "
                       <tr>
                           <td>".$count++."</td>
@@ -53,6 +54,23 @@ function cropText($text, $maxLength = 25, $ellipsis = '...') {
                           <td>".($student['balance'] == NULL ? '<b>None</b>' : cropText($student['balance']))."</td>
                           <td>
                           <a class='btn btn-sm btn-primary fw-bold' href='update-complete-student.php?id=".$student['id']."'>UPDATE</a>
+                          ";
+                          ?>
+                           <form class="d-inline" method="GET" action="../../../Backend-routes/admin/lock_user.php" onsubmit="submitRequest('lockUser<?php echo $student['id'] ?>', event, '<?php echo $lockQuestion; ?>')" id="lockUser<?php echo $student['id'] ?>">
+
+                          <input type="hidden" name="id" value="<?php echo $student['id'] ?>">
+                          <input type="hidden" name="url" value="enrolled_students.php">
+                          <?php
+                            if($student['is_locked'] == 1){
+                              echo '<button class="btn btn-sm fw-bold btn-dark" type="submit">LOCKED</button>';
+                            }else{
+                              echo '<button class="btn btn-sm fw-bold btn-success" type="submit">LOCK</button>';
+                            }
+
+                          ?>  
+                          </form>
+                          <?php
+                      echo "
                           </td>
                       </tr>
                   ";

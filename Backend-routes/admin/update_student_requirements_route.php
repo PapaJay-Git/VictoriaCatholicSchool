@@ -28,7 +28,6 @@ try {
     $good_moral = isset($_POST['good_moral']) ? 1 : 0;
     $baptisaml_of_birth = isset($_POST['baptisaml_of_birth']) ? 1 : 0;
     $nso_certificate = isset($_POST['nso_certificate']) ? 1 : 0;
-    $previous_year_report_card = isset($_POST['previous_year_report_card']) ? 1 : 0;
     $honorary_dismissal = isset($_POST['honorary_dismissal']) ? 1 : 0;
 
     $stmt = $conn->prepare("SELECT student_type FROM registered_students WHERE student_id = ?");
@@ -45,17 +44,17 @@ try {
 
     $sendNotification = false;
 
-    if($row['student_type'] == 'transfer' && $baptisaml_of_birth == 1 && $nso_certificate == 1 && $previous_year_report_card == 1 && $honorary_dismissal == 1 ){
+    if($row['student_type'] == 'transfer' && $baptisaml_of_birth == 1 && $nso_certificate == 1 && $honorary_dismissal == 1 ){
        
         $sendNotification = true;
-    }else if($row['student_type'] == 'new' && $baptisaml_of_birth == 1 && $nso_certificate == 1 && $previous_year_report_card == 1){
+    }else if($row['student_type'] == 'new' && $baptisaml_of_birth == 1 && $nso_certificate == 1){
         $sendNotification = true;
     }
 
     if($sendNotification){
         $is_complete = 1;
-        $stmt = $conn->prepare("INSERT INTO checklists(student_id, form_138, good_moral, baptisaml_of_birth, nso_certificate, previous_year_report_card, honorary_dismissal, is_complete) VALUES(?,?,?,?,?,?,?,?)");
-        $stmt->bind_param("iiiiiiii", $accountID, $form_138, $good_moral, $baptisaml_of_birth, $nso_certificate, $previous_year_report_card, $honorary_dismissal, $is_complete);
+        $stmt = $conn->prepare("INSERT INTO checklists(student_id, form_138, good_moral, baptisaml_of_birth, nso_certificate,honorary_dismissal, is_complete) VALUES(?,?,?,?,?,?,?)");
+        $stmt->bind_param("iiiiiii", $accountID, $form_138, $good_moral, $baptisaml_of_birth, $nso_certificate,$honorary_dismissal, $is_complete);
         $stmt->execute();
 
         $cashier = 'cashier';
@@ -77,8 +76,8 @@ try {
         }
     }else{
     
-        $stmt = $conn->prepare("INSERT INTO checklists(student_id, form_138, good_moral, baptisaml_of_birth, nso_certificate, previous_year_report_card, honorary_dismissal) VALUES(?,?,?,?,?,?,?)");
-        $stmt->bind_param("iiiiiii", $accountID, $form_138, $good_moral, $baptisaml_of_birth, $nso_certificate, $previous_year_report_card, $honorary_dismissal);
+        $stmt = $conn->prepare("INSERT INTO checklists(student_id, form_138, good_moral, baptisaml_of_birth, nso_certificate,honorary_dismissal) VALUES(?,?,?,?,?,?)");
+        $stmt->bind_param("iiiiii", $accountID, $form_138, $good_moral, $baptisaml_of_birth, $nso_certificate,$honorary_dismissal);
         $stmt->execute();
     }
 

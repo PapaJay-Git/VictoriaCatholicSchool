@@ -27,7 +27,7 @@ function getSession($data) {
      ?>
      <div class="container mt-5">
         <div class="d-flex justify-content-between align-items-center mb-5">
-            <h2 class="fw-bold">GRADE <?php echo $accountID ?> CLASSES</h2>
+            <h5 class="fw-bold">GRADE <?php echo $accountID ?> CLASSES</h5>
             <div class="btn-group">
                 <a href="classes.php" class="btn btn-sm btn-danger fw-bold">BACK</a>
             </div>

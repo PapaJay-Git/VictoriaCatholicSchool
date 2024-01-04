@@ -8,6 +8,7 @@ $title = "Teacher - Assigned Subjects";
 
 require_once "../includes/header_layout.php";
 
+$count = 1;
 
 $days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday'];
 
@@ -34,40 +35,45 @@ $schedules = [
                         <h5 class="fw-bold">MY ASSIGNED SUBJECTS</h5>
                         <a href="advisories.php" class="btn btn-danger btn-sm fw-bold">BACK</a>
                     </div>
-                        <?php 
-                            $count = 1;
-                            if($classes->num_rows > 0){
-                                foreach($classes as $class){ 
-                                    echo "<label class='mt-4 d-block'>".$count++.".<b> ".$class['subject_name']."</b></label>
-                                        <small class='d-block ps-3 pb-4'>".$class['section_name']."-".$class['section_grade']."</small>";
-        
-                                    foreach ($days as $day) {
-                                        if ($class["is_$day"] == TRUE || $class["is_$day"] == 1) {
-                                            echo "<div class='px-3 mt-2'>
-                                            <small >".ucfirst($day)."  </small>";
-                                        
-                                            foreach ($schedules as $schedule) {
-                                                if ($class["{$day}_start_time"] == $schedule) {
-                                                    echo "<small >$schedule</small>";
-                                                }
-                                            }
-                                        
-                                            foreach ($schedules as $schedule) {
-                                                if ($class["{$day}_end_time"] == $schedule) {
-                                                    echo "<small> - $schedule</small>";
-                                                } 
-                                            }  
-                                            echo "</div>";   
-                                        } 
-                                    
-                                    }
-                                    
-                                } 
-                            }else{
-                                echo "<div class='d-flex justify-content-center mt-5 fw-bold align-items-center'>EMPTY</div>";
+                    <div class="table-responsive">
+                        <table id="teachersTable">
+                            <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">SUBJECT NAME</th>
+                                <th scope="col">SECTION</th>
+                                <th scope="col">Action</th>
+                            </tr>
+                            </thead>
+                            <tbody id="tbody-teachers">
+                            <?php
+                            foreach($classes as $class){
+                                ?>
+                                <tr>
+                                <td>
+                                    <small class="text-dark">
+                                    <?php echo $count++ ?>
+                                    </small></td>
+                                <td>
+                                    <small class="text-dark"><?php echo $class['subject_name'] ?></small>
+                                </td>
+                                <td>
+                                    <small class="text-dark"><?php echo $class['section_name']."-".$class['section_grade'] ?></small>
+                                </td>
+                                <td>
+                                    <a class="btn btn-sm btn-primary fw-bold" href="students.php?<?php echo "subject_id=".$class['subject_id']."&section_id=".$class['section_id'] ?>">STUDENTS</a>
+
+                                  
+                                </td>
+                                </tr>
+                            <?php 
                             }
-                        ?>
+                            ?>
+                            </tbody>
+                        </table>
                     </div>
+        
+                </div>
             </div>
     </div>
 </div>
@@ -77,4 +83,6 @@ $schedules = [
 <?php
 	require_once "../includes/includes_scripts.php";
 ?>
-    <script> setActive('assigned_subjects_tab'); </script>
+
+<script src="../../js/admin/teachers.js"></script>
+<script> setActive('assigned_subjects_tab'); </script>

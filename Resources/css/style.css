@@ -126,12 +126,12 @@ table{
 
 
 /* Custom border color when value is 1 */
-select.selected {
+/* select.selected {
 	background-color: grey;
 	color: white;
 	border: 1px solid black;
 	font-weight: bold;
-}
+} */
 
 .active-tab{
 	border-bottom: 3px solid #f8f9fa;
@@ -175,3 +175,5 @@ select.selected {
 	border: 1px solid black;
 	width: fit-content;
 }
+
+  

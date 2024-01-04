@@ -37,5 +37,10 @@ if($result->num_rows <= 0){
 
     header("Location: ../../Resources/views/login/login.php");
     exit;
-
 }
+
+$stmt = $conn->prepare("SELECT * FROM users WHERE id = ? ");
+$stmt->bind_param("i", $student_id);
+$stmt->execute();
+$result = $stmt->get_result();
+$student = $result->fetch_assoc();

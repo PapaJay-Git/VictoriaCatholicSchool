@@ -32,7 +32,7 @@ require_once "../includes/header_layout.php";
             <div class="col-lg-7 mt-4">
                 <span class="bg-primary d-block d-lg-inline-block p-3 rounded">
                     <h1 class="bebas-font text-white text-uppercase"><?php echo $auth['first_name']." ".$auth['middle_name']." ".$auth['last_name'] ?> </h1>
-                    <small class="text-white fw-bold"> GUARDIAN </small>
+                    <small class="text-white fw-bold text-uppercase"> <?php echo $auth['guardian_type'] ?? 'GUARDIAN' ?> </small>
                 </span>
                 <span class="mt-1 p-2 d-block">
                     <span class="d-block">

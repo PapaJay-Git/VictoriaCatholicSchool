@@ -42,9 +42,9 @@ $days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday'];
                                 foreach($classes as $data){ 
                                     echo "<label class='mt-5 '>".$count++.".<b> ".$subject['name']."</b></label>
                                     <input type='hidden' name='subject[]' value='".$subject['id']."'>
-                                    <div class='border-bottom px-2 mb-3'>
+                                    <div class='border-bottom px-2 mb-3 pb-2'>
                                         <small >Subject Teacher: </small>
-                                        <select name='teacher[]' class='border rounded my-2' >
+                                        <select name='teacher[]' class='border rounded my-2 select' >
                                         <option value='' disabled selected>Select an option</option>";
                                         foreach($teachers as $teacher){
                                             if($data['teacher_id'] == $teacher['id']){
@@ -57,23 +57,23 @@ $days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday'];
                                     </div>";
         
                                     foreach ($days as $day) {
-                                        echo "<div class='border-bottom px-2 mb-3'>
+                                        echo "<div class='border-bottom px-2 mb-3 pb-2'>
                                             <small >In ".ucfirst($day).": </small>";
                                                       
                                         if ($data["is_$day"] == TRUE || $data["is_$day"] == 1) {
-                                            echo "<select name='is_{$day}[]' class='my-2 me-3 border rounded selected' required onchange='changeBorderColor(this)'>
+                                            echo "<select name='is_{$day}[]' class='my-2 me-3 px-3 border rounded selected select' required onchange='changeBorderColor(this)'>
                                             <option value='1' selected>TRUE</option>
                                                   <option value='0'>FALSE</option>";
                                         } else {
                                             echo "
-                                            <select name='is_{$day}[]' class='my-2 me-3 border rounded' required onchange='changeBorderColor(this)'>
+                                            <select name='is_{$day}[]' class='my-2 me-3 px-3 border rounded select' required onchange='changeBorderColor(this)'>
                                             <option value='1'>TRUE</option>
                                                   <option value='0' selected>FALSE</option>";
                                         }
                                     
                                         echo "</select>
-                                              <small >Start Time: </small>
-                                              <select name='{$day}_start_time[]' class='my-2 me-3 border rounded' required>";
+                                              <small > Start Time: </small>
+                                              <select name='{$day}_start_time[]' class='my-2 me-3 px-3 border rounded select' required>";
                                     
                                         foreach ($schedules as $schedule) {
                                             if ($data["{$day}_start_time"] == $schedule) {
@@ -84,8 +84,8 @@ $days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday'];
                                         }
                                     
                                         echo "</select>
-                                              <small >End Time: </small>
-                                              <select name='{$day}_end_time[]' class='my-2 me-3 border rounded' >";
+                                              <small > End Time: </small>
+                                              <select name='{$day}_end_time[]' class='my-2 me-3 px-3 border rounded select' >";
                                     
                                         foreach ($schedules as $schedule) {
                                             if ($data["{$day}_end_time"] == $schedule) {
@@ -103,9 +103,9 @@ $days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday'];
                             }else{
                                 echo "<label class='mt-5 '>".$count++.".<b> ".$subject['name']."</b></label>
                                 <input type='hidden' name='subject[]' value='".$subject['id']."'>
-                                <div class='border-bottom px-2 mb-3'>
+                                <div class='border-bottom px-2 mb-3 pb-2'>
                                     <small >Subject Teacher: </small>
-                                    <select name='teacher[]' class='border rounded my-2' required>
+                                    <select name='teacher[]' class='border rounded my-2 select' required>
                                     <option value='' disabled selected>Select an option</option>";
                                     foreach($teachers as $teacher){
                                         echo "<option value='".$teacher['id']."'>".$teacher['first_name']." ".$teacher['last_name']." : ".$teacher['email']."</option>";
@@ -114,24 +114,24 @@ $days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday'];
                                 </div>";
     
                                 foreach ($days as $day) {
-                                    echo"<div class='border-bottom px-2 mb-3'>";
+                                    echo"<div class='border-bottom px-2 mb-3 pb-2'>";
 
                                     echo"<small >In ".ucfirst($day).": </small>
-                                        <select name='is_{$day}[]' class='my-2 me-3 border rounded' required onchange='changeBorderColor(this)'>
+                                        <select name='is_{$day}[]' class='my-2 me-3 px-3 border rounded select' required onchange='changeBorderColor(this)'>
                                             <option value='1'>TRUE</option>
                                             <option value='0' selected>FALSE</option>
                                         </select>";
 
-                                    echo"<small >Start Time: </small>
-                                        <select name='{$day}_start_time[]' class='my-2 me-3 border rounded' required>";
+                                    echo"<small > Start Time: </small>
+                                        <select name='{$day}_start_time[]' class='my-2 me-3 px-3 border rounded select' required>";
                                         foreach ($schedules as $schedule) {
                                             echo "<option value='$schedule'>$schedule</option>";
                                         }
                                     echo "</select>";
 
 
-                                    echo"<small >End Time: </small>
-                                        <select name='{$day}_end_time[]' class='my-2 me-3 border rounded' required>";
+                                    echo"<small > End Time: </small>
+                                        <select name='{$day}_end_time[]' class='my-2 me-3 px-3 border rounded select' required>";
                                         foreach ($schedules as $schedule) {
                                             echo "<option value='$schedule'>$schedule</option>";
                                         }

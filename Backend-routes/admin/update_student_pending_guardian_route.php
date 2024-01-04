@@ -24,7 +24,7 @@ try {
 
     checkIfUserExists($accountID, $role, $conn);
 
-    $required_fields = ['guardian_first_name', 'guardian_middle_name', 'guardian_last_name', 'guardian_phone', 'guardian_email', 'guardian_occupation'];
+    $required_fields = ['guardian_first_name', 'guardian_last_name', 'guardian_phone', 'guardian_email', 'guardian_occupation'];
 
     // required checker
     foreach ($required_fields as $field) {
@@ -41,7 +41,7 @@ try {
 
       // input data
     $first_name = validate_name(sanitize_input($_POST['guardian_first_name']));
-    $middle_name = validate_name(sanitize_input($_POST['guardian_middle_name']));
+    $middle_name = isset($_POST['guardian_middle_name']) ? sanitize_input($_POST['guardian_middle_name']) : NULL;
     $last_name = validate_name(sanitize_input($_POST['guardian_last_name']));
     $phone = validate_phone_number(sanitize_input($_POST['guardian_phone']));
     $guardian_occupation = sanitize_input($_POST['guardian_occupation']);
@@ -64,8 +64,14 @@ try {
         $stmt->execute();
 
     }else{
+        $stmt = $conn->prepare("SELECT * FROM users WHERE id = ?");
+        $stmt->bind_param("i", $accountID);
+        $stmt->execute();
+        $result_student = $stmt->get_result();
+        $student_info = $result_student->fetch_assoc();
+
         $guardian_role = 'guardian';
-        $default_password = "P@ssword123";
+        $default_password = strtolower($student_info['last_name'])."_".date("Y", strtotime($student_info['birthday']));
         $password = password_hash($default_password, PASSWORD_DEFAULT); 
 
         isPhoneNumberExists($phone, $conn);

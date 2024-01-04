@@ -24,7 +24,7 @@ try {
     $stmt = $conn->prepare("
     SELECT users.*, student_sections.section_id , registered_students.student_type,
     checklists.form_138, checklists.good_moral, checklists.baptisaml_of_birth,
-    checklists.nso_certificate, checklists.previous_year_report_card, checklists.honorary_dismissal,
+    checklists.nso_certificate, checklists.honorary_dismissal,
     guardian_user.first_name as guardian_first_name, guardian_user.middle_name as guardian_middle_name, guardian_user.last_name as guardian_last_name, guardian_user.email as guardian_email, guardian_user.phone as guardian_phone,guardian_user.occupation as guardian_occupation, guardian_user.guardian_type as guardian_guardian_type
     FROM users 
     LEFT JOIN student_sections

@@ -203,7 +203,6 @@ session_start();
           <li class="list-group-item bg-body-tertiary border-0 ml-3 text-black"><i class="fa-solid fa-circle-check"></i> Original Form 138-A</li>
           <li class="list-group-item bg-body-tertiary border-0 ml-3 text-black"><i class="fa-solid fa-circle-check"></i> Certificate of Good Moral</li>
           <li class="list-group-item bg-body-tertiary border-0 ml-3 text-black"><i class="fa-solid fa-circle-check"></i> Photocopy of Baptismal and Birth Certificate (NSO Certifies)</li>
-          <li class="list-group-item bg-body-tertiary border-0 ml-3 text-black mb-3"><i class="fa-solid fa-circle-check"></i> Previous year Report Card</li>
         </ul>
 
         <ul class="list-group">
@@ -212,7 +211,6 @@ session_start();
           <li class="list-group-item bg-body-tertiary border-0 ml-3 text-black"><i class="fa-solid fa-circle-check"></i> Certificate of Good Moral</li>
           <li class="list-group-item bg-body-tertiary border-0 ml-3 text-black"><i class="fa-solid fa-circle-check"></i> Photocopy of Baptismal and Birth Certificate (NSO Certifies)</li>
           <li class="list-group-item bg-body-tertiary border-0 ml-3 text-black"><i class="fa-solid fa-circle-check"></i> Honorary Dismissal</li>
-          <li class="list-group-item bg-body-tertiary border-0 ml-3 text-black"><i class="fa-solid fa-circle-check"></i> Previous year Report Card</li>
         </ul>
 
       </div>

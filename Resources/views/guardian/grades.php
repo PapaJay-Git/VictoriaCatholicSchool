@@ -1,0 +1,122 @@
+<?php
+
+require_once $_SERVER['DOCUMENT_ROOT']."/Middleware/CheckIfLoggedIn.php";
+require_once $_SERVER['DOCUMENT_ROOT']."/Middleware/CheckIfGuardian.php";
+require_once $_SERVER['DOCUMENT_ROOT']."/Backend-routes/guardian/includes_get_grades.php";
+
+$title = $student['first_name']." ".$student['last_name']." - Grades";
+
+require_once "../includes/header_layout.php";
+
+$count = 1;
+?>
+<body>
+<?php 
+    include "includes/navbar.php";
+?>
+<div class="container my-5">
+    <div class="row pb-2 px-2">
+        
+            <div class="card shadow">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center mb-5">
+                        <h5 class="fw-bold text-uppercase"><?php echo $student['first_name']." ".$student['last_name']." - Grades";?></h5>
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-sm fw-bold btn-dark" data-bs-toggle="modal" data-bs-target="#calculationModal">SEE CALCULATION</button>
+                        </div>
+                    </div>
+                    <div class="table-responsive ">
+                            <table id="gradesTable">
+                                <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Subject</th>
+                                    <th scope="col">1st</th>
+                                    <th scope="col">2nd</th>
+                                    <th scope="col">3rd</th>
+                                    <th scope="col">4th</th>
+                                    <th scope="col">Final</th>
+                                </tr>
+                                </thead>
+                                <tbody id="tbody-grades">
+                                    <?php
+                                    foreach ($subjects as $subject) {
+                                        $stmt = $conn->prepare("SELECT * FROM student_grades  WHERE subject_id = ? AND student_id = ?");
+                                        $stmt->bind_param("ii", $subject['id'], $student['id']);
+                                        $stmt->execute();
+                                        $student_grades = $stmt->get_result();
+                                        if($student_grades->num_rows <= 0){
+                                            echo "
+                                            <tr>
+                                                <td>
+                                                    <small>".$count++."</small>
+                                                </td>
+                                                <td>
+                                                    <small class='fw-bold text-uppercase'>".$subject['name']."</small>
+                                                </td>
+                                                <td>
+                                                    <small>0</small>
+                                                </td>
+                                                <td>
+                                                    <small>0</small>
+                                                </td>
+                                                <td>
+                                                    <small>0</small>
+                                                </td>
+                                                <td>
+                                                    <small>0</small>
+                                                </td>
+                                                <td>
+                                                    <small>0 / 100</small>
+                                                </td>
+                                            </tr>"; 
+                                        }else{
+                                            $student_grades_row = $student_grades->fetch_assoc();
+    
+                                            $final = ($student_grades_row['first_quarter'] * 0.20 +
+                                                    $student_grades_row['second_quarter'] * 0.20 +
+                                                    $student_grades_row['third_quarter'] * 0.20 +
+                                                    $student_grades_row['fourth_quarter'] * 0.40);
+                                            
+                                            echo "
+                                            <tr>
+                                                <td>
+                                                    <small>".$count++."</small>
+                                                </td>
+                                                <td>
+                                                    <small class='fw-bold text-uppercase'>".$subject['name']."</small>
+                                                </td>
+                                                <td>
+                                                    <small>".$student_grades_row['first_quarter']."</small>
+                                                </td>
+                                                <td>
+                                                    <small>".$student_grades_row['second_quarter']."</small>
+                                                </td>
+                                                <td>
+                                                    <small>".$student_grades_row['third_quarter']."</small>
+                                                </td>
+                                                <td>
+                                                    <small>".$student_grades_row['fourth_quarter']."</small>
+                                                </td>
+                                                <td>
+                                                    <small>$final / 100</small>
+                                                </td>
+                                            </tr>"; 
+                                        }
+                                    } 
+                                    ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+            </div>
+    </div>
+</div>
+</body>
+
+<?php
+	require_once "../includes/includes_scripts.php";
+	require_once "../includes/grade_calculation.php";
+?>
+<script src="../../js/admin/grades.js"></script>
+<script> setActive('grades_tab'); </script>

@@ -24,7 +24,7 @@ try {
 
     checkIfUserExists($accountID, $role, $conn);
 
-    $required_fields = ['section', 'first_name', 'middle_name', 'last_name', 'phone', 'email', 'gender', 'birthday', 'student_type','street_no', 'street', 'city_municipality'];
+    $required_fields = ['section', 'first_name', 'last_name', 'phone', 'email', 'gender', 'birthday', 'barangay', 'province', 'city_municipality', 'zip_code'];
 
     // required checker
     foreach ($required_fields as $field) {
@@ -38,22 +38,29 @@ try {
     if($error){
         errorSender("$fieldName is required", $fileName);
     }
-    $street_no = sanitize_input($_POST['street_no']);
-    $street = sanitize_input($_POST['street']);
+    // OPTIONAL
+    $street_no = isset($_POST['street_no'])  ? sanitize_input($_POST['street_no']) : NULL;
+    $street = isset($_POST['street'])  ? sanitize_input($_POST['street']) : NULL;
     $village = isset($_POST['village']) ? sanitize_input($_POST['village']) : NULL;
-    $barangay = isset($_POST['barangay']) ? sanitize_input($_POST['barangay']) : NULL;
+    // REQUIRED
+    $barangay = sanitize_input($_POST['barangay']);
     $city_municipality = sanitize_input($_POST['city_municipality']);
-    $province = isset($_POST['province']) ? sanitize_input($_POST['province']) : NULL;
-    $zip_code = isset($_POST['zip_code']) ? sanitize_input($_POST['zip_code']) : NULL;
+    $province = sanitize_input($_POST['province']);
+    $zip_code = sanitize_input($_POST['zip_code']);
+    $guardian_account = $_POST['guardian_that_will_have_an_account'];
 
+    $_SESSION['street_no'] = $street_no;
+    $_SESSION['street'] = $street;
     $_SESSION['village'] = $village;
+
+    $_SESSION['city_municipality'] = $city_municipality;
     $_SESSION['barangay'] = $barangay;
     $_SESSION['province'] = $province;
     $_SESSION['zip_code'] = $zip_code;
 
       // input data
     $first_name = validate_name(sanitize_input($_POST['first_name']));
-    $middle_name = validate_name(sanitize_input($_POST['middle_name']));
+    $middle_name = isset($_POST['middle_name']) ? sanitize_input($_POST['middle_name']) : NULL;
     $last_name = validate_name(sanitize_input($_POST['last_name']));
     $phone = validate_phone_number(sanitize_input($_POST['phone']));
     $email_address = validate_email($_POST['email']);
@@ -124,6 +131,11 @@ try {
     foreach ($required_fields as $field) {
         unset($_SESSION[$field]);
     }
+    unset(
+        $_SESSION['street_no'],
+        $_SESSION['street'],
+        $_SESSION['village'],
+    );
     successSender("Student Confirmed Successfully", $fileName);
 
 } catch (Exception $e) {

@@ -29,8 +29,8 @@ require_once "../includes/header_layout.php";
                            echo "
                            <div class='py-3'>
                            <input type='hidden' name='section[]' value='".$section['id']."'>
-                           ".$count++.". ".$section['name']."-".$section['grade']."
-                           <select name='teacher[]' class='form-control form-control-sm my-2 me-3 border rounded p-1' required>
+                           <h5>".$count++.". ".$section['name']."-".$section['grade']."</h5>
+                           <select name='teacher[]' class='my-5 me-3 select' required>
                             <option value='' disabled selected>Select an option</option>";
                                     foreach ($teachers as $teacher) {
                                     $isSelected = ((string)$teacher['id'] == $section['advisory_teacher_id']) ? 'selected' : '';

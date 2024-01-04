@@ -41,6 +41,7 @@ function limitString($inputString, $maxLength = 15) {
                         <th scope="col">Student No</th>
                         <th scope="col">Section</th>
                         <th scope="col">Promissory</th>
+                        <th scope="col">From Parent/Guardian</th>
                         <th scope="col">Date</th>
                         <th scope="col">Action</th>
                     </tr>
@@ -68,6 +69,9 @@ function limitString($inputString, $maxLength = 15) {
                         </td>
                         <td>
                             <small class="text-dark"><?php echo limitString($promissory['note']) ?></small>
+                        </td>
+                        <td>
+                            <small class="text-dark text-uppercase"><?php echo $promissory['parent_info'] ?></small>
                         </td>
                         <td>
                             <small class="text-dark"><?php echo $promissory['created_at'] ?></small>

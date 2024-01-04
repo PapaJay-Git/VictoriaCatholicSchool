@@ -413,6 +413,16 @@ function isEmailExistsOtherThanMe($email, $conn, $accountID) {
     
 }
 
+function validate_guardian_type($guardian_type){
+    global $fileName;
+
+    if($guardian_type != "mother" && $guardian_type != "father" && $guardian_type != "guardian"){
+        errorSender("Invalid Guardian/Parent type.", $fileName);
+    }
+
+    return $guardian_type;
+}
+
 function validatePassword($password, $confirmPassword) {
     global $fileName;
 

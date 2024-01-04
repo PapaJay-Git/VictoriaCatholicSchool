@@ -26,7 +26,7 @@ function getSession($data) {
      ?>
      <div class="container mt-5">
         <div class="d-flex justify-content-between align-items-center mb-5">
-          <h2 class="fw-bold">CASHIERS</h2>
+          <h5 class="fw-bold">CASHIERS</h5>
           <a href="#" class="btn btn-sm fw-bold btn-dark" data-bs-toggle="modal" data-bs-target="#addModal">Add New Cashier</a>
         </div>
 
@@ -44,6 +44,7 @@ function getSession($data) {
                 <tbody id="tbody-teachers">
                   <?php
                   foreach($result as $row){
+                    $lockQuestion = $row['is_locked'] == 1 ? 'Are you sure you want to unlock this account?' : 'Are you sure you want to lock this account?';
                     ?>
                     <tr>
                       <td>
@@ -62,6 +63,20 @@ function getSession($data) {
                       <td>
                           <a class="btn btn-sm btn-primary fw-bold" href="update-cashier.php?id=<?php echo $row['id'] ?>">UPDATE</a>
                           <button class="btn btn-sm btn-danger fw-bold" onclick="confirmDelete('../../../Backend-routes/admin/delete_cashier_route.php?id=<?php echo $row['id'] ?>')">DELETE</button>
+
+                          <form class="d-inline" method="GET" action="../../../Backend-routes/admin/lock_user.php" onsubmit="submitRequest('lockUser<?php echo $row['id'] ?>', event, '<?php echo $lockQuestion; ?>')" id="lockUser<?php echo $row['id'] ?>">
+
+                          <input type="hidden" name="id" value="<?php echo $row['id'] ?>">
+                          <input type="hidden" name="url" value="cashiers.php">
+                          <?php
+                            if($row['is_locked'] == 1){
+                              echo '<button class="btn btn-sm fw-bold btn-dark" type="submit">LOCKED</button>';
+                            }else{
+                              echo '<button class="btn btn-sm fw-bold btn-success" type="submit">LOCK</button>';
+                            }
+
+                          ?>  
+                          </form>
                       </td>
                     </tr>
                   <?php 
@@ -89,7 +104,7 @@ function getSession($data) {
                 </div>
                 <div class="mb-3">
                   <label class="form-label fw-bold text-uppercase">Middle name <b class="text-danger">*</b></label>
-                  <input type="text" class="form-control form-control-sm" name="middle_name" required placeholder="Middle name"
+                  <input type="text" class="form-control form-control-sm" name="middle_name" placeholder="Middle name"
                   <?php echo "value='".htmlspecialchars(getSession('middle_name'))."'"  ?> >
                 </div>
                 <div class="mb-3">

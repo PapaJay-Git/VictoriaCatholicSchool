@@ -24,7 +24,7 @@ try {
 
     checkIfUserExists($accountID, $role, $conn);
 
-    $required_fields = ['first_name', 'middle_name', 'last_name', 'phone', 'email', 'gender', 'birthday'];
+    $required_fields = ['first_name', 'last_name', 'phone', 'email', 'gender', 'birthday'];
 
     // required checker
     foreach ($required_fields as $field) {
@@ -41,7 +41,7 @@ try {
 
       // input data
     $first_name = validate_name(sanitize_input($_POST['first_name']));
-    $middle_name = validate_name(sanitize_input($_POST['middle_name']));
+    $middle_name = isset($_POST['middle_name']) ? sanitize_input($_POST['middle_name']) : NULL;
     $last_name = validate_name(sanitize_input($_POST['last_name']));
     $phone = validate_phone_number(sanitize_input($_POST['phone']));
     $email_address = validate_email($_POST['email']);

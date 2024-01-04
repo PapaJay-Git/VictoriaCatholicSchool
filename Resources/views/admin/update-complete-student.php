@@ -85,9 +85,17 @@ function isChecked($columnName){
 
     <div class="pb-2 px-2"  id="guardian-tab" <?php echo isTabSet('guardian') ?>>
         <form method="POST" action="../../../Backend-routes/admin/update_student_complete_guardian_route.php" onsubmit="submitRequest('updateStudentFormGuardian', event)" id="updateStudentFormGuardian">
-        <h5 class="mb-2 fw-bold text-uppercase" id="exampleModalLabel"><?php echo $row['guardian_guardian_type'] ?> INFORMATION</h5>
+        <h5 class="mb-2 fw-bold text-uppercase" id="exampleModalLabel"><?php echo $row['guardian_guardian_type'] ?? 'PARENT/GUARDIAN' ?> INFORMATION</h5>
         <input type="hidden" name="id" value="<?php echo $row['id'] ?>">
         <div class="mb-3 mt-5">
+            <label class="form-label fw-bold text-uppercase" >Guardian/Parent Type</label>
+            <select name="guardian_guardian_type" class="form-control form-control-sm">
+                <option <?php echo getSession('guardian_guardian_type') == 'mother'  ? 'selected' : '' ?> value="mother"  >Mother</option>
+                <option <?php echo getSession('guardian_guardian_type') == 'father'  ? 'selected' : '' ?> value="father"  >Father</option>
+                <option <?php echo getSession('guardian_guardian_type') == 'guardian'  ? 'selected' : '' ?> value="guardian"  >Guardian</option>
+            </select>
+        </div>
+        <div class="mb-3">
             <label class="form-label fw-bold text-uppercase"> First name</label>
             <input type="text" class="form-control form-control-sm" name="guardian_first_name" required placeholder="First Name" <?php echo "value='".htmlspecialchars(getSession('guardian_first_name'))."'"  ?> >
         </div>
@@ -181,7 +189,7 @@ function isChecked($columnName){
         </div>
         <div class="mb-3">
             <label class="form-label fw-bold text-uppercase">Middle name</label>
-            <input type="text" class="form-control form-control-sm" name="middle_name" required placeholder="Middle name" <?php echo "value='".htmlspecialchars(getSession('middle_name'))."'"  ?> >
+            <input type="text" class="form-control form-control-sm" name="middle_name" placeholder="Middle name" <?php echo "value='".htmlspecialchars(getSession('middle_name'))."'"  ?> >
         </div>
         <div class="mb-3">
             <label class="form-label fw-bold text-uppercase">Last name</label>
@@ -223,13 +231,13 @@ function isChecked($columnName){
             <h5 class="form-label fw-bold text-uppercase">Address</h5>
             <div class="border border-dark p-2">
             <div class="p-2">
-                <label class="form-label fw-bold text-uppercase">Street # / Unit # <b class="text-danger">*</b></label>
-                <input type="text" class="form-control form-control-sm"name="street_no" required
+                <label class="form-label fw-bold text-uppercase">Street # / Unit # </label>
+                <input type="text" class="form-control form-control-sm"name="street_no"
                 <?php echo "value='".htmlspecialchars(getSession('street_no'))."'"  ?> >
             </div>
             <div class="p-2">
-                <label class="form-label fw-bold text-uppercase">Street <b class="text-danger">*</b></label>
-                <input type="text" class="form-control form-control-sm"name="street" required
+                <label class="form-label fw-bold text-uppercase">Street </label>
+                <input type="text" class="form-control form-control-sm"name="street"
                 <?php echo "value='".htmlspecialchars(getSession('street'))."'"  ?> >
             </div>
             <div class="p-2">
@@ -238,8 +246,8 @@ function isChecked($columnName){
                 <?php echo "value='".htmlspecialchars(getSession('village'))."'"  ?> >
             </div>
             <div class="p-2">
-                <label class="form-label fw-bold text-uppercase">Barangay</label>
-                <input type="text" class="form-control form-control-sm"name="barangay"
+                <label class="form-label fw-bold text-uppercase">Barangay <b class="text-danger">*</b></label>
+                <input type="text" class="form-control form-control-sm"name="barangay" required
                 <?php echo "value='".htmlspecialchars(getSession('barangay'))."'"  ?> >
             </div>
             <div class="p-2">
@@ -248,13 +256,13 @@ function isChecked($columnName){
                 <?php echo "value='".htmlspecialchars(getSession('city_municipality'))."'"  ?> >
             </div>
             <div class="p-2">
-                <label class="form-label fw-bold text-uppercase">Province</label>
-                <input type="text" class="form-control form-control-sm"name="province"
+                <label class="form-label fw-bold text-uppercase">Province <b class="text-danger">*</b></label>
+                <input type="text" class="form-control form-control-sm"name="province" required
                 <?php echo "value='".htmlspecialchars(getSession('province'))."'"  ?> >
             </div>
             <div class="p-2">
-                <label class="form-label fw-bold text-uppercase">Zip Code</label>
-                <input type="text" class="form-control form-control-sm"name="zip_code"
+                <label class="form-label fw-bold text-uppercase">Zip Code <b class="text-danger">*</b></label>
+                <input type="text" class="form-control form-control-sm"name="zip_code" required
                 <?php echo "value='".htmlspecialchars(getSession('zip_code'))."'"  ?> >
             </div>
             </div>

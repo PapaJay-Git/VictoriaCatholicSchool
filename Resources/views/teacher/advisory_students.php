@@ -18,7 +18,7 @@ require_once "../includes/header_layout.php";
      <div class="container mt-5">
         <div class="d-flex justify-content-between align-items-center mb-5">
             <div>
-                <h2 class="fw-bold">STUDENTS OF <?php echo $section['name']."-".$section['grade'] ?> </h2>
+                <h5 class="fw-bold">STUDENTS OF <?php echo $section['name']."-".$section['grade'] ?> </h5>
             </div>
             <div class="btn-group">
                 <a href="advisories.php" class="btn btn-sm btn-danger fw-bold">BACK</a>

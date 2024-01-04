@@ -7,8 +7,9 @@ try {
     require_once $_SERVER['DOCUMENT_ROOT']."/Middleware/CheckIfTeacher.php";
 
     $section_id = isset($_POST['section_id']) ? $_POST['section_id'] : NULL;
+    $subject_id = isset($_POST['subject_id']) ? $_POST['subject_id'] : NULL;
     // redirection file name
-    $fileName = "Location: ../../Resources/views/teacher/section_grades.php?id=$section_id";
+    $fileName = "Location: ../../Resources/views/teacher/students.php?section_id=$section_id&subject_id=$subject_id";
     $error = false;
     $fieldName = NULL;
 
@@ -17,20 +18,38 @@ try {
 
     isPOST();
 
+    $required_fields = ['section_id', 'subject_id'];
+
+    // required checker
+    foreach ($required_fields as $field) {
+        $_SESSION[$field] = sanitize_input($_POST[$field]);
+        if (empty($_POST[$field])) {
+            $error = true;
+            $fieldName = $field;
+        }
+    }
+    
+    if($error){
+        errorSender("$fieldName is required", $fileName);
+    }
+
+    $section_id = $_POST['section_id'];
+    $subject_id = $_POST['subject_id'];
+
     isSectionIDExists($section_id, $conn);
 
-    $stmt = $conn->prepare("SELECT * FROM sections where id = ? and advisory_teacher_id = ?");
-    $stmt->bind_param("ii", $section_id, $auth['id']);
+    isSubjectIDExists($subject_id, $conn);
+
+    $stmt = $conn->prepare("SELECT * FROM classes where section_id = ? and subject_id = ? and teacher_id = ?");
+    $stmt->bind_param("iii", $section_id, $subject_id, $auth['id']);
     $stmt->execute();
     $result = $stmt->get_result();
 
     if($result->num_rows <= 0){
-        errorSender("Access on this section DENIED!", $fileName);
+        errorSender("Access on this class is DENIED!", $fileName);
     }
 
-    $section_data = $result->fetch_assoc();
-
-    $required_fields = ['student_id', 'subject_id', 'first', 'second', 'third', 'fourth'];
+    $required_fields = ['student_id', 'first', 'second', 'third', 'fourth'];
 
     foreach ($required_fields as $field) {
         if (isset($_POST[$field]) && is_array($_POST[$field])) {
@@ -51,15 +70,13 @@ try {
     }
 
     $student_ids = $_POST['student_id'];
-    $subject_ids = $_POST['subject_id'];
     $firsts = $_POST['first'];
     $seconds = $_POST['second'];
     $thirds = $_POST['third'];
     $fourths = $_POST['fourth'];
 
     if (
-        count($student_ids) !== count($subject_ids) ||
-        count($subject_ids) !== count($firsts) ||
+        count($student_ids) !== count($firsts) ||
         count($firsts) !== count($seconds) ||
         count($seconds) !== count($thirds) ||
         count($thirds) !== count($fourths)
@@ -75,17 +92,6 @@ try {
 
         if($result->num_rows == 0){
             errorSender("Invalid student ID", $fileName);
-        }
-    }
-
-    foreach($subject_ids as $subject_id){
-        $stmt = $conn->prepare("SELECT * FROM subjects WHERE grade = ? AND id = ?");
-        $stmt->bind_param("si", $section_data['grade'], $subject_id);
-        $stmt->execute();
-        $result = $stmt->get_result();
-
-        if($result->num_rows == 0){
-            errorSender("Invalid Subject ID", $fileName);
         }
     }
 
@@ -108,7 +114,6 @@ try {
 
     for ($count = 0; $count < count($student_ids); $count++) {
         $student_id = $_POST['student_id'][$count];
-        $subject_id = $_POST['subject_id'][$count];
         $first = $_POST['first'][$count];
         $second = $_POST['second'][$count];
         $third = $_POST['third'][$count];

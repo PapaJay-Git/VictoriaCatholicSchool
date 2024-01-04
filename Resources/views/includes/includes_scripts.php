@@ -12,9 +12,19 @@
 <script src="../../js/assets/dataTables/vfs_fonts.js"></script>
 <script src="../../js/assets/dataTables/buttons.html5.min.js"></script>
 <script src="../../js/assets/dataTables/buttons.print.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
 
 <script src="../../js/global.js"></script>
+
+<script>
+  $(document).ready(function() {
+    $('.select').select2({
+      maximumSelectionSize: 5, // Set the maximum number of visible options
+      placeholder: 'Select an option', // Optional placeholder text
+    });
+  });
+</script>
 
 <?php
     if(isset($_SESSION['error'])){

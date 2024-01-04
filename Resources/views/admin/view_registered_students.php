@@ -27,7 +27,7 @@ function getSession($data) {
      ?>
      <div class="container mt-5">
         <div class="d-flex justify-content-between align-items-center mb-5">
-            <h2 class="fw-bold">REGISTERED STUDENTS</h2>
+            <h5 class="fw-bold">REGISTERED STUDENTS</h5>
             <div class="btn-group">
                 <a href="students-add.php" class="btn btn-sm fw-bold btn-dark" data-bs-toggle="modal" data-bs-target="#addModal">ADD STUDENT</a>
                 <a href="students.php" class="btn btn-sm btn-danger fw-bold">BACK</a>
@@ -50,6 +50,7 @@ function getSession($data) {
                 <tbody id="tbody-sections">
                 <?php
                   foreach($students as $student){
+                    $lockQuestion = $student['is_locked'] == 1 ? 'Are you sure you want to unlock this account?' : 'Are you sure you want to lock this account?';
                     echo "
                       <tr>
                           <td>".$count++."</td>
@@ -61,6 +62,23 @@ function getSession($data) {
                           <td>
                           <a class='btn btn-sm btn-primary fw-bold' href='update-student.php?id=".$student['id']."'>UPDATE</a>
                           <button class='btn btn-sm btn-danger fw-bold' onclick=".'"'."confirmDelete('../../../Backend-routes/admin/delete_student_route.php?id=".$student['id']."')".'"'.">DELETE</button>
+                          ";
+                          ?>
+                          <form class="d-inline" method="GET" action="../../../Backend-routes/admin/lock_user.php" onsubmit="submitRequest('lockUser<?php echo $student['id'] ?>', event, '<?php echo $lockQuestion; ?>')" id="lockUser<?php echo $student['id'] ?>">
+
+                          <input type="hidden" name="id" value="<?php echo $student['id'] ?>">
+                          <input type="hidden" name="url" value="view_registered_students.php">
+                          <?php
+                            if($student['is_locked'] == 1){
+                              echo '<button class="btn btn-sm fw-bold btn-dark" type="submit">LOCKED</button>';
+                            }else{
+                              echo '<button class="btn btn-sm fw-bold btn-success" type="submit">LOCK</button>';
+                            }
+
+                          ?>  
+                          </form>
+                          <?php
+                      echo "
                           </td>
                       </tr>
                   ";
@@ -110,7 +128,7 @@ function getSession($data) {
                 </div>
                 <div class="mb-3">
                   <label class="form-label fw-bold text-uppercase">Middle name <b class="text-danger">*</b></label>
-                  <input type="text" class="form-control form-control-sm" name="middle_name" required placeholder="Middle name"
+                  <input type="text" class="form-control form-control-sm" name="middle_name" placeholder="Middle name"
                   <?php echo "value='".htmlspecialchars(getSession('middle_name'))."'"  ?> >
                 </div>
                 <div class="mb-3">
@@ -160,13 +178,13 @@ function getSession($data) {
                   <h5 class="form-label fw-bold text-uppercase">Address</h5>
                   <div class="border border-dark p-2">
                     <div class="p-2">
-                      <label class="form-label fw-bold text-uppercase">Street # / Unit # <b class="text-danger">*</b></label>
-                      <input type="text" class="form-control form-control-sm"name="street_no" required
+                      <label class="form-label fw-bold text-uppercase">Street # / Unit # </label>
+                      <input type="text" class="form-control form-control-sm"name="street_no"
                       <?php echo "value='".htmlspecialchars(getSession('street_no'))."'"  ?> >
                     </div>
                     <div class="p-2">
-                      <label class="form-label fw-bold text-uppercase">Street <b class="text-danger">*</b></label>
-                      <input type="text" class="form-control form-control-sm"name="street" required
+                      <label class="form-label fw-bold text-uppercase">Street</label>
+                      <input type="text" class="form-control form-control-sm"name="street"
                       <?php echo "value='".htmlspecialchars(getSession('street'))."'"  ?> >
                     </div>
                     <div class="p-2">
@@ -175,8 +193,8 @@ function getSession($data) {
                       <?php echo "value='".htmlspecialchars(getSession('village'))."'"  ?> >
                     </div>
                     <div class="p-2">
-                      <label class="form-label fw-bold text-uppercase">Barangay</label>
-                      <input type="text" class="form-control form-control-sm"name="barangay"
+                      <label class="form-label fw-bold text-uppercase">Barangay <b class="text-danger">*</b></label>
+                      <input type="text" class="form-control form-control-sm"name="barangay" required
                       <?php echo "value='".htmlspecialchars(getSession('barangay'))."'"  ?> >
                     </div>
                     <div class="p-2">
@@ -185,13 +203,13 @@ function getSession($data) {
                       <?php echo "value='".htmlspecialchars(getSession('city_municipality'))."'"  ?> >
                     </div>
                     <div class="p-2">
-                      <label class="form-label fw-bold text-uppercase">Province</label>
-                      <input type="text" class="form-control form-control-sm"name="province"
+                      <label class="form-label fw-bold text-uppercase">Province <b class="text-danger">*</b></label>
+                      <input type="text" class="form-control form-control-sm"name="province" required
                       <?php echo "value='".htmlspecialchars(getSession('province'))."'"  ?> >
                     </div>
                     <div class="p-2">
-                      <label class="form-label fw-bold text-uppercase">Zip Code</label>
-                      <input type="text" class="form-control form-control-sm"name="zip_code"
+                      <label class="form-label fw-bold text-uppercase">Zip Code <b class="text-danger">*</b></label>
+                      <input type="text" class="form-control form-control-sm"name="zip_code" required
                       <?php echo "value='".htmlspecialchars(getSession('zip_code'))."'"  ?> >
                     </div>
                   </div>

@@ -8,6 +8,7 @@ $title = "Teacher - ".$section_data['grade']." ".$section_data['name']." Student
 
 require_once "../includes/header_layout.php";
 
+$count = 1;
 ?>
 <body>
 <?php 
@@ -20,76 +21,111 @@ require_once "../includes/header_layout.php";
                 <div class="card-body">
                     <div class="d-flex justify-content-between align-items-center mb-5">
                         <h5 class="fw-bold"><?php echo $section_data['grade']." ".$section_data['name']." STUDENT GRADES" ?></h5>
-                        <a href="advisories.php" class="btn btn-danger btn-sm fw-bold">BACK</a>
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-sm fw-bold btn-dark" data-bs-toggle="modal" data-bs-target="#calculationModal">SEE CALCULATION</button>
+                            <a href="advisories.php" class="btn btn-danger btn-sm fw-bold">BACK</a>
+                        </div>
                     </div>
-                    <form method="POST" action="../../../Backend-routes/teacher/update_student_grades.php" onsubmit="submitRequest('updateStudentGrade', event)" id="updateStudentGrade">
-                        <input type="hidden" name="section_id" value="<?php echo $section_data['id'] ?>">
-                        <?php 
-                            $count = 1;
-                            foreach($students as $student){ 
-                                echo "<label class='mt-4 d-block text-uppercase'>".$count++.".<b> ".$student['first_name']." ".$student['last_name']."</b></label>
-                                    <small class='d-block ps-3'>".$student['email']."</small>";
-
-                                foreach ($subjects as $subject) {
-                                    $stmt = $conn->prepare("SELECT * FROM student_grades  WHERE subject_id = ? AND student_id = ?");
-                                    $stmt->bind_param("ii", $subject['id'], $student['id']);
-                                    $stmt->execute();
-                                    $student_grades = $stmt->get_result();
-                                    if($student_grades->num_rows <= 0){
-                                        echo "<div class='mx-3 p-3 mt-2 d-block border-bottom-css'>
-                                        <input type='hidden' name='student_id[]' value='".$student['id']."'>
-                                        <input type='hidden' name='subject_id[]' value='".$subject['id']."'>
-                                        <small class='fw-bold'>".$subject['name'].": </small>
-                                        <small>First</small>
-                                        <input type='number' class='grade-css' step='0.01' min='0.00' max='100.00' value='0' required name='first[]'>
-                                        <small>Second</small>
-                                        <input type='number' class='grade-css' step='0.01' min='0.00' max='100.00' value='0' required name='second[]'>
-                                        <small>Third</small>
-                                        <input type='number' class='grade-css' step='0.01' min='0.00' max='100.00' value='0' required name='third[]'>
-                                        <small>Fourth</small>
-                                        <input type='number' class='grade-css' step='0.01' min='0.00' max='100.00' value='0' required name='fourth[]'>
-                                        <small class='ps-3 fw-bold'>Final</small>
-                                        <small>0 / 100</small>
-                                        </div>"; 
-                                    }else{
-                                        $student_grades_row = $student_grades->fetch_assoc();
-
-                                        $final = ($student_grades_row['first_quarter']+$student_grades_row['second_quarter']+$student_grades_row['third_quarter']+$student_grades_row['fourth_quarter']) / 4;
-                                        echo "<div class='mx-3 p-3 mt-2 d-block border-bottom-css'>
-                                        <input type='hidden' name='student_id[]' value='".$student['id']."'>
-                                        <input type='hidden' name='subject_id[]' value='".$subject['id']."'>
-                                        <small class='fw-bold'>".$subject['name'].": </small>
-                                        <small>First</small>
-                                        <input type='number' class='grade-css' step='0.01' min='0.00' max='100.00' required name='first[]' value='".$student_grades_row['first_quarter']."'>
-                                        <small>Second</small>
-                                        <input type='number' class='grade-css' step='0.01' min='0.00' max='100.00' required name='second[]' value='".$student_grades_row['second_quarter']."'>
-                                        <small>Third</small>
-                                        <input type='number' class='grade-css' step='0.01' min='0.00' max='100.00' required name='third[]' value='".$student_grades_row['third_quarter']."'>
-                                        <small>Fourth</small>
-                                        <input type='number' class='grade-css' step='0.01' min='0.00' max='100.00' required name='fourth[]' value='".$student_grades_row['fourth_quarter']."'>
-                                        <small class='ps-3 fw-bold'>Final</small>
-                                        <small>$final / 100</small>
-                                        </div>"; 
-                                    }
-
-                                }
-                                
-                            } 
-                     
-
-                            if($students->num_rows == 0){
-                                echo "<div class='d-flex justify-content-center mt-5 fw-bold align-items-center'>NO STUDENTS TO BE GRADED</div>
-                                ";
-                            }else{
-                                echo "
-                                <div class='d-flex justify-content-end align-items-center mt-3'>
-                                    <div class='btn-group '>
-                                        <button type='submit' class='btn btn-primary btn-sm fw-bold'>UPDATE</button>
-                                    <a href='advisories.php' class='btn btn-sm btn-danger fw-bold'>CANCEL</a></div>
-                                </div>"; 
-                            }
-                        ?>
-                        </form>
+                    <div class="table-responsive ">
+                            <table id="gradesTable">
+                                <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Subject</th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Email</th>
+                                    <th scope="col">1st</th>
+                                    <th scope="col">2nd</th>
+                                    <th scope="col">3rd</th>
+                                    <th scope="col">4th</th>
+                                    <th scope="col">Final</th>
+                                </tr>
+                                </thead>
+                                <tbody id="tbody-grades">
+                                    <?php
+                                        foreach($students as $student){ 
+                                            foreach ($subjects as $subject) {
+                                                $stmt = $conn->prepare("SELECT * FROM student_grades  WHERE subject_id = ? AND student_id = ?");
+                                                $stmt->bind_param("ii", $subject['id'], $student['id']);
+                                                $stmt->execute();
+                                                $student_grades = $stmt->get_result();
+                                                if($student_grades->num_rows <= 0){
+                                                    echo "
+                                                    <tr>
+                                                        <td>
+                                                            <small>".$count++."</small>
+                                                        </td>
+                                                        <td>
+                                                            <small class='fw-bold text-uppercase'>".$subject['name']."</small>
+                                                        </td>
+                                                        <td>
+                                                            <small>".$student['first_name']." ".$student['last_name']."</small>
+                                                        </td>
+                                                        <td>
+                                                            <small>".$student['email']."</small>
+                                                        </td>
+                                                        <td>
+                                                            <small>0</small>
+                                                        </td>
+                                                        <td>
+                                                            <small>0</small>
+                                                        </td>
+                                                        <td>
+                                                            <small>0</small>
+                                                        </td>
+                                                        <td>
+                                                            <small>0</small>
+                                                        </td>
+                                                        <td>
+                                                            <small>0 / 100</small>
+                                                        </td>
+                                                    </tr>"; 
+                                                }else{
+                                                    $student_grades_row = $student_grades->fetch_assoc();
+            
+                                                    $final = ($student_grades_row['first_quarter'] * 0.20 +
+                                                            $student_grades_row['second_quarter'] * 0.20 +
+                                                            $student_grades_row['third_quarter'] * 0.20 +
+                                                            $student_grades_row['fourth_quarter'] * 0.40);
+                                                    
+                                                    echo "
+                                                    <tr>
+                                                        <td>
+                                                            <small>".$count++."</small>
+                                                        </td>
+                                                        <td>
+                                                            <small class='fw-bold text-uppercase'>".$subject['name']."</small>
+                                                        </td>
+                                                        <td>
+                                                            <input type='hidden' name='student_id[]' value='".$student['id']."'>
+                                                            <small>".$student['first_name']." ".$student['last_name']."</small>
+                                                        </td>
+                                                        <td>
+                                                            <small>".$student['email']."</small>
+                                                        </td>
+                                                        <td>
+                                                            <small>".$student_grades_row['first_quarter']."</small>
+                                                        </td>
+                                                        <td>
+                                                            <small>".$student_grades_row['second_quarter']."</small>
+                                                        </td>
+                                                        <td>
+                                                            <small>".$student_grades_row['third_quarter']."</small>
+                                                        </td>
+                                                        <td>
+                                                            <small>".$student_grades_row['fourth_quarter']."</small>
+                                                        </td>
+                                                        <td>
+                                                            <small>$final / 100</small>
+                                                        </td>
+                                                    </tr>"; 
+                                                }
+                                            }
+                                        } 
+                                    ?>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
             </div>
     </div>
@@ -98,5 +134,7 @@ require_once "../includes/header_layout.php";
 
 <?php
 	require_once "../includes/includes_scripts.php";
+	require_once "../includes/grade_calculation.php";
 ?>
-    <script> setActive('advisories_tab'); </script>
+<script src="../../js/admin/grades.js"></script>
+<script> setActive('advisories_tab'); </script>

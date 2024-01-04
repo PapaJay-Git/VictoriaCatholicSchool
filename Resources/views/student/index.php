@@ -46,14 +46,25 @@ require_once "../includes/header_layout.php";
                     </div>
                     <div class="card-body "> 
                         <span class="d-block ">
-                            <span class="d-block">
-                                <strong class="text-dark d-inline-block">Amount: </strong>
-                                <span class="d-inline-block"><?php echo $auth['balance']; ?></span>
-                            </span>
-                            <span class="d-block">
-                                <strong class="text-dark d-inline-block">Due Date: </strong>
-                                <span class="d-inline-block"><?php echo $auth['date']; ?></span>
-                            </span>
+                            <?php
+                                if($auth['payment_type'] == 'full'){
+                                    echo '
+                                    <span class="d-block">
+                                        <strong class="text-dark d-inline-block">Fully Paid</strong>
+                                    </span>';
+                                }else{
+                                    ?>
+                                    <span class="d-block">
+                                        <strong class="text-dark d-inline-block">Amount: </strong>
+                                        <span class="d-inline-block"><?php echo $auth['balance']; ?></span>
+                                    </span>
+                                    <span class="d-block">
+                                        <strong class="text-dark d-inline-block">Due Date: </strong>
+                                        <span class="d-inline-block"><?php echo $auth['date']; ?></span>
+                                    </span>
+                                    <?php
+                                }
+                            ?>
                         </span>
                     </div>
                 </div>

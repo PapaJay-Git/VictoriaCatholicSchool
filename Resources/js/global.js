@@ -13,12 +13,12 @@ function logout() {
 }
 
 
-function submitRequest(formId, event) {
+function submitRequest(formId, event, question = null) {
     event.preventDefault();
 
     Swal.fire({
         title: "Are you sure?",
-        text: "Are you sure you want to submit this form?",
+        text: question ?? "Are you sure you want to submit this form?",
         showCancelButton: true,
         confirmButtonText: "CONFIRM",
         cancelButtonText: 'CANCEL',
@@ -44,6 +44,7 @@ function confirmDelete(url, type = 'User') {
       }
     });
   }
+
 
 function showPasswordTab(){
     var passTab = document.getElementById('password-tab');
@@ -108,13 +109,13 @@ function changeBorderColor(selectElement) {
     var selectedValue = selectElement.value;
 
     // Check if the selected value is 1
-    if (selectedValue === "1") {
-        // Add the CSS class to change the border color to yellow
-        selectElement.classList.add("selected");
-    } else {
-        // Remove the CSS class if the value is not 1
-        selectElement.classList.remove("selected");
-    }
+    // if (selectedValue === "1") {
+    //     // Add the CSS class to change the border color to yellow
+    //     selectElement.classList.add("selected");
+    // } else {
+    //     // Remove the CSS class if the value is not 1
+    //     selectElement.classList.remove("selected");
+    // }
 }
 
 function setActive(id){

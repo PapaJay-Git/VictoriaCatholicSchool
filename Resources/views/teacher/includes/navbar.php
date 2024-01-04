@@ -13,6 +13,9 @@
             <a class="navs nav-link mx-2" aria-current="page" href="index.php" id="home_tab">HOME</a>
           </li>
           <li class="nav-item">
+            <a class="navs nav-link mx-2" href="schedules.php" id="schedules_tab">SCHEDULES</a>
+          </li>
+          <li class="nav-item">
             <a class="navs nav-link mx-2" href="assigned_subjects.php" id="assigned_subjects_tab">ASSIGNED SUBJECTS</a>
           </li>
           <li class="nav-item">

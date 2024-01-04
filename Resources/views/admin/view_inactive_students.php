@@ -27,7 +27,7 @@ function getSession($data) {
      ?>
      <div class="container mt-5">
         <div class="d-flex justify-content-between align-items-center mb-5">
-            <h2 class="fw-bold">INACTIVE STUDENTS</h2>
+            <h5 class="fw-bold">INACTIVE STUDENTS</h5>
             <div class="btn-group">
                 <a href="students.php" class="btn btn-sm btn-danger fw-bold">BACK</a>
             </div>

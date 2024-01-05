@@ -2,10 +2,8 @@
 require_once $_SERVER['DOCUMENT_ROOT']."/Connections/DB_connection.php";
 
 $role = 'student';
-$stmt = $conn->prepare("SELECT users.*, COALESCE(balance, 'NONE')  as balance, 
-COALESCE(date, 'NONE') as date, COALESCE(payment_type, 'NONE') as payment_type
+$stmt = $conn->prepare("SELECT users.*, COALESCE(payment_type, 'NONE') as payment_type
 FROM users 
-LEFT JOIN student_balance ON users.id = student_balance.student_id
 LEFT JOIN student_payment ON users.id = student_payment.student_id
 WHERE role = ? AND users.id = ?");
 $stmt->bind_param("si", $role, $_SESSION['id']);

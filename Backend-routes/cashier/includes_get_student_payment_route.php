@@ -45,6 +45,13 @@ try {
     if($result->num_rows == 0){
         errorSender('Invalid ID', $fileName);
     }
+
+    $stmt = $conn->prepare("SELECT date FROM paidMonths WHERE student_id = ?");
+    $stmt->bind_param("i", $accountID);
+    $stmt->execute(); 
+    $paidMonthsResult = $stmt->get_result();
+    $paidMonths = $paidMonthsResult->fetch_all(MYSQLI_ASSOC);
+    
 } catch (Exception $e) {
 
     errorSender('error '.$e->getMessage(), $fileName);

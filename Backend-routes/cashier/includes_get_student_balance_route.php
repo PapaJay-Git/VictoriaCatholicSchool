@@ -22,11 +22,10 @@ try {
 
     $is_complete = 1;
     $stmt = $conn->prepare("
-    SELECT users.*, sections.name as section_name, sections.grade as section_grade, student_balance.date, student_balance.balance, student_payment.value, student_payment.payment_type
+    SELECT users.*, sections.name as section_name, sections.grade as section_grade, student_payment.value, student_payment.payment_type
     FROM users 
     LEFT JOIN student_sections ON users.id = student_sections.student_id
     LEFT JOIN sections ON student_sections.section_id = sections.id
-    LEFT JOIN student_balance ON users.id = student_balance.student_id
     LEFT JOIN student_payment ON users.id = student_payment.student_id
     LEFT JOIN checklists ON users.id = checklists.student_id
     WHERE users.id = ? AND
@@ -51,6 +50,12 @@ try {
     if($result->num_rows == 0){
         errorSender('Invalid ID', $fileName);
     }
+
+    $stmt = $conn->prepare("SELECT date FROM paidMonths WHERE student_id = ?");
+    $stmt->bind_param("i", $accountID);
+    $stmt->execute(); 
+    $paidMonthsResult = $stmt->get_result();
+    $paidMonths = $paidMonthsResult->fetch_all(MYSQLI_ASSOC);
 
 } catch (Exception $e) {
 

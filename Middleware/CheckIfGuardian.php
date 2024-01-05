@@ -39,7 +39,10 @@ if($result->num_rows <= 0){
     exit;
 }
 
-$stmt = $conn->prepare("SELECT * FROM users WHERE id = ? ");
+$stmt = $conn->prepare("SELECT users.*, COALESCE(payment_type, 'NONE') as payment_type
+FROM users 
+LEFT JOIN student_payment ON users.id = student_payment.student_id
+WHERE users.id = ?");
 $stmt->bind_param("i", $student_id);
 $stmt->execute();
 $result = $stmt->get_result();

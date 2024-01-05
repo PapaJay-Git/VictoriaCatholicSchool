@@ -88,10 +88,6 @@ try {
     $stmt->bind_param("i", $accountID);
     $stmt->execute();
 
-    $stmt = $conn->prepare("DELETE FROM student_balance WHERE student_id = ?");
-    $stmt->bind_param("i", $accountID);
-    $stmt->execute();
-
     $stmt = $conn->prepare("DELETE FROM promissory WHERE student_id = ?");
     $stmt->bind_param("i", $accountID);
     $stmt->execute();

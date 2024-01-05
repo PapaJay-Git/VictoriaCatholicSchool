@@ -34,7 +34,6 @@ function cropText($text, $maxLength = 25, $ellipsis = '...') {
                     <th scope="col">Student No</th>
                     <th scope="col">Section</th>
                     <th scope="col">Payment Type</th>
-                    <th scope="col">Balance</th>
                     <th scope="col">Action</th>
                   </tr>
                 </thead>
@@ -48,8 +47,7 @@ function cropText($text, $maxLength = 25, $ellipsis = '...') {
                           <td>{$student['email']}</td>
                           <td>VCS00{$student['id']}</td>
                           <td>".($student['section_name'] == NULL ? 'None' : $student['section_name']." ".$student['section_grade'])."</td>
-                          <td class='text-uppercase fw-bold text-primary'>".$student['payment_type']." PAYMENT</td>
-                          <td>".($student['balance'] == NULL ? '<b>None</b>' : cropText($student['balance']))."</td>
+                          <td class='text-uppercase fw-bold text-primary'>".($student['payment_type'] == 'down' ? 'INSTALLMENT' : 'FULL PAYMENT')."</td>
                           <td>
                           <a class='btn btn-sm btn-primary fw-bold' href='update-balance.php?id=".$student['id']."'>UPDATE</a>
                           </td>

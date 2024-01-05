@@ -8,6 +8,46 @@ $title = "Student - Home";
 
 require_once "../includes/header_layout.php";
 
+$currentYear = date('Y');
+
+$currentMonth = date('n');
+
+if ($currentMonth >= 5) {
+    $currentYear += 1;
+}else{
+    $currentYear -= 1;
+}
+
+$stmt = $conn->prepare("SELECT date FROM paidMonths WHERE student_id = ?");
+$stmt->bind_param("i", $auth['id']);
+$stmt->execute(); 
+$paidMonthsResult = $stmt->get_result();
+$paidMonths = $paidMonthsResult->fetch_all(MYSQLI_ASSOC);
+
+
+$acceptableMonths = [
+    $currentYear."-7",
+    $currentYear."-8",
+    $currentYear."-9",
+    $currentYear."-10",
+    $currentYear."-11",
+    $currentYear."-12",
+    ($currentYear+1)."-1",
+    ($currentYear+1)."-2",
+    ($currentYear+1)."-3"
+];
+
+$countMatches = 0;
+
+foreach ($paidMonths as $paidMonth) {
+    $paidDate = $paidMonth['date'];
+    if (in_array($paidDate, $acceptableMonths)) {
+        $countMatches++;
+    }
+}
+
+$balance = (9 - $countMatches) * 1131.3;
+
 ?>
 <body>
     <?php 
@@ -42,7 +82,7 @@ require_once "../includes/header_layout.php";
             <div class="col-xxl-3 col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 mt-3">
                 <div class="card">
                     <div class="card-header fw-bold">
-                        BALANCE
+                        PAYMENT/BALANCE
                     </div>
                     <div class="card-body "> 
                         <span class="d-block ">
@@ -50,19 +90,72 @@ require_once "../includes/header_layout.php";
                                 if($auth['payment_type'] == 'full'){
                                     echo '
                                     <span class="d-block">
-                                        <strong class="text-dark d-inline-block">Fully Paid</strong>
+                                        <small class="text-dark fw-bold d-block">FULL PAYMENT</small>
+                                        <small class="text-dark d-block">TOTAL: ₱21,884.7</small>
                                     </span>';
                                 }else{
-                                    ?>
+                                    echo '
                                     <span class="d-block">
-                                        <strong class="text-dark d-inline-block">Amount: </strong>
-                                        <span class="d-inline-block"><?php echo $auth['balance']; ?></span>
-                                    </span>
-                                    <span class="d-block">
-                                        <strong class="text-dark d-inline-block">Due Date: </strong>
-                                        <span class="d-inline-block"><?php echo $auth['date']; ?></span>
-                                    </span>
-                                    <?php
+                                        <small class="text-dark fw-bold d-block">INSTALLMENT</small>
+                                        <small>MONTHS TO BE PAID</small>
+                                        <small class="d-block ms-1  text-secondary mt-2">Checked checkboxes are paid months.</small>
+                                        <small class="d-block ms-1  text-secondary ">Each month is ₱1,131.3 </small>
+                                        <small class="d-block ms-1  text-secondary mb-2">June is included on Down Payment.</small>
+                                        <div class="ms-1">
+                                            <input type="checkbox" id="june" checked disabled>
+                                            <label for="june">June '.$currentYear.'</label>
+                                        </div>
+
+                                        <div class="ms-1">
+                                            <input type="checkbox" id="july" disabled '. (!empty($paidMonths) && in_array($currentYear.'-7', array_column($paidMonths, 'date')) ? 'checked' : '').' >
+                                            <label for="july">July '.$currentYear.'</label>
+                                        </div>
+
+                                        <div class="ms-1">
+                                            <input type="checkbox" id="august" disabled '. (!empty($paidMonths) && in_array($currentYear.'-8', array_column($paidMonths, 'date')) ? 'checked' : '').' >
+                                            <label for="august">August '.$currentYear.'</label>
+                                        </div>
+                                        
+                                        <div class="ms-1">
+                                            <input type="checkbox" id="september" disabled '. (!empty($paidMonths) && in_array($currentYear.'-9', array_column($paidMonths, 'date')) ? 'checked' : '').' >
+                                            <label for="september">September '.$currentYear.'</label>
+                                        </div>
+                                        
+                                        <div class="ms-1">
+                                            <input type="checkbox" id="October" disabled '. (!empty($paidMonths) && in_array($currentYear.'-10', array_column($paidMonths, 'date')) ? 'checked' : '').' >
+                                            <label for="October">October '.$currentYear.'</label>
+                                        </div>
+
+                                        <div class="ms-1">
+                                            <input type="checkbox" id="November" disabled '. (!empty($paidMonths) && in_array($currentYear.'-11', array_column($paidMonths, 'date')) ? 'checked' : '').' >
+                                            <label for="November">November '.$currentYear.'</label>
+                                        </div>
+
+                                        <div class="ms-1">
+                                            <input type="checkbox" id="December" disabled '. (!empty($paidMonths) && in_array($currentYear.'-12', array_column($paidMonths, 'date')) ? 'checked' : '').' >
+                                            <label for="December">December '.$currentYear.'</label>
+                                        </div>
+
+                                        <div class="ms-1">
+                                            <input type="checkbox" id="January" disabled '. (!empty($paidMonths) && in_array(($currentYear+1).'-1', array_column($paidMonths, 'date')) ? 'checked' : '').' >
+                                            <label for="January">January '.($currentYear+1).'</label>
+                                        </div>
+
+                                        <div class="ms-1">
+                                            <input type="checkbox" id="February" disabled '. (!empty($paidMonths) && in_array(($currentYear+1).'-2', array_column($paidMonths, 'date')) ? 'checked' : '').' >
+                                            <label for="February">February '.($currentYear+1).'</label>
+                                        </div>
+
+                                        <div class="ms-1">
+                                            <input type="checkbox" id="March" disabled '. (!empty($paidMonths) && in_array(($currentYear+1).'-3', array_column($paidMonths, 'date')) ? 'checked' : '').' >
+                                            <label for="March">March '.($currentYear+1).'</label>
+                                        </div>
+
+                                        <div class="ms-1 mt-3">
+                                            <small><b>REMAINING BALANCE</b>: ₱ '.$balance.'<small>
+                                        </div>
+
+                                    </span>';
                                 }
                             ?>
                         </span>

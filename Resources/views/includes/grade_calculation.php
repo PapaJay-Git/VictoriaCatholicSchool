@@ -12,7 +12,7 @@
                             <small><b>1st Quarter</b> * 0.20 + </small><br>
                             <small><b>2nd Quarter</b> * 0.20 + </small><br>
                             <small><b>3rd Quarter</b> * 0.20 +</small> <br>
-                            <small><b>4th Quarter</b> * 0.40 </small><br>
+                            <small><b>4th Quarter</b> * 0.40</small><br>
                             <small><b>= Final</b></small>
                         </div>
                     </div>

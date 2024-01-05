@@ -363,9 +363,18 @@ $default_password = str_replace(' ', '', $default_password);
         
         <h3>Mode of Payment:</h3>
         <p>Payment should be made through the cashier\'s office only.</p>
-        <p><strong>Full Payment:</strong> P21,000-23,000 tuition range</p>
-        <p><strong>Down Payment:</strong> Upon Enrollment - 10% of the school\'s tuition</p>
-        <p><strong>Installment:</strong> P2,875 per month</p>
+        <p><strong>FULL PAYMENT:</strong> ₱ 21,884.7</p><br>
+        <p><strong>INSTALLMENT:</strong></p>
+        <p>MISCELLANEOUS FEE: ₱ 1,460.10</p>
+        <p>TUITION FEE-MONTHLY: ₱ 881.10</p>
+        <p>COMPUTER FEE-MONTHLY: ₱ 200.10</p>
+        <p>SECURITY GUARD FEE-MONTHLY: ₱ 50.10</p>
+        <p>OTHER FEES: ₱ 3,665.10</p>
+        <p>TOTAL ASSESSMENT FEE: ₱ 6,256.10</p>
+        <p>READING MATERIALS: ₱ 5,406.5</p>
+        <p>TOTAL AMOUNT TO PAY:  ₱ 11,663</p>
+        <p><strong>MONTHLY:</strong> ₱ 1,131.3</p>
+        <p><strong>TOTAL:</strong> ₱ 21,884.7</p>
         
         <p>For any further inquiries, please feel free to contact us. We look forward to welcoming you to our school community!</p>
         
@@ -381,7 +390,8 @@ $default_password = str_replace(' ', '', $default_password);
     </body>
     </html>';
     }
-
+    
+    //FOR STUDENT
     $mail1 = new PHPMailer(true);
     $mail1->isSMTP();                                       
     $mail1->Host       = 'smtp.gmail.com';                     
@@ -397,7 +407,10 @@ $default_password = str_replace(' ', '', $default_password);
     $mail1->Subject = 'Enrollment Requirements';
     $mail1->Body = emailBody($first_name, $last_name);
     $mail1->send();
+    //FOR STUDENT
 
+
+    //FOR PARENT/GUARDIAN
     $mail2 = new PHPMailer(true);
     $mail2->isSMTP();                                       
     $mail2->Host       = 'smtp.gmail.com';                     
@@ -413,6 +426,7 @@ $default_password = str_replace(' ', '', $default_password);
     $mail2->Subject = 'Enrollment Requirements';
     $mail2->Body = emailBody($_POST[$guardian_account.'_first_name'], $_POST[$guardian_account.'_last_name']);
     $mail2->send();
+    //FOR PARENT/GUARDIAN
 
     $stmt->close();
     $conn->close();

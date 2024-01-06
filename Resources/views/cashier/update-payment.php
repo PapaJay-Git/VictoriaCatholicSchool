@@ -129,6 +129,9 @@ $payment_type = getSession('payment_type');
                         <?php echo !empty($paidMonths) && in_array(($currentYear+1).'-3', array_column($paidMonths, 'date')) ? 'checked' : ''?>>
                         <label for="march">March <?php echo $currentYear+1 ?></label>
                     </div>
+                    <div class="ms-1 mt-3">
+                        <small><b>REMAINING BALANCE:</b> <small id="remainingBalance"></small><small>
+                    </div>
                 </div>
             </div>
         </div>
@@ -151,6 +154,54 @@ $payment_type = getSession('payment_type');
 <script> setActive('registered_students_tab'); </script>
 
 <script>
+    let inputCheckboxes = document.querySelectorAll('input[type=checkbox]');
+    
+    let currentDate = new Date();
+    let currentYear = currentDate.getFullYear();
+    let currentMonth = currentDate.getMonth() + 1;
+
+    if (currentMonth >= 5) {
+        currentYear += 1;
+    } else {
+        currentYear -= 1;
+    }
+
+    let acceptableMonths = [
+        `${currentYear}-7`,
+        `${currentYear}-8`,
+        `${currentYear}-9`,
+        `${currentYear}-10`,
+        `${currentYear}-11`,
+        `${currentYear}-12`,
+        `${currentYear + 1}-1`,
+        `${currentYear + 1}-2`,
+        `${currentYear + 1}-3`
+    ];
+
+    function computeRemainingBalance(){
+
+        let countMatches = 0;
+        var remainingBalance = document.getElementById('remainingBalance');
+
+        inputCheckboxes.forEach(checkbox => {
+            if (checkbox.checked) {
+                let paidDate = checkbox.value; 
+                if (acceptableMonths.includes(paidDate)) {
+                    countMatches++;
+                }
+            }
+        });
+        
+        var balance = (9 - countMatches) * 1131.3;
+        remainingBalance.innerHTML = '₱'+parseFloat(balance.toFixed(2));
+    }
+
+    window.addEventListener('load', computeRemainingBalance);
+
+    inputCheckboxes.forEach(checkbox => {
+        checkbox.addEventListener('change', computeRemainingBalance);
+    });
+
     function checkPaymentType(){
         var paymentType = document.getElementById('payment_type');
         var selectedPaymentType = paymentType.value;

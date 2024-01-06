@@ -68,9 +68,9 @@ $payment_type = getSession('payment_type');
                 </div>
                 <div class="col-12 col-md-6">
                     <h4>MONTHS TO BE PAID</h4>
-                    <small class="d-block fw-bold text-secondary mb-2">Check Months that are already paid.</small>
-                    <small class="d-block ms-1  text-secondary mb-2">₱1,131.3 each month</small>
-                    <small class="d-block ms-1  text-secondary mb-2">June is included on Down Payment</small>
+                    <small class="d-block fw-bold text-secondary mb-2">Checked checkboxes are paid months.</small>
+                    <small class="d-block ms-1  text-secondary mb-2">Each month is ₱1,131.3</small>
+                    <small class="d-block ms-1  text-secondary mb-2">June is included on Down Payment.</small>
                     <div class="ms-1">
                         <input type="checkbox" id="june" checked disabled>
                         <label for="june">June <?php echo $currentYear ?></label>

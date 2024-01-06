@@ -45,15 +45,14 @@ try {
 
     $promissory = $_POST['promissory'];
 
-    if (mb_strlen($promissory) > 800) {
-        errorSender("Limited to only 800 characters", $fileName);
+    if ($promissory !== 'payment') {
+        errorSender("Invalid selected promissory.", $fileName);
     }
     
    
     $stmt = $conn->prepare("INSERT INTO promissory (note, student_id) VALUES (?, ?)");
     $stmt->bind_param("si", $promissory, $student_id);
     $stmt->execute();
-
 
     // notification
     $data = 'Promissory';
@@ -76,13 +75,13 @@ try {
     $admins = $stmt->get_result();
 
 
-    foreach($subject_teachers as $subject_teachers){
+    foreach($subject_teachers as $subject_teacher){
         $stmt = $conn->prepare("DELETE FROM notifications where notifiable_id = ? AND data = ?");
-        $stmt->bind_param("is", $subject_teachers['teacher_id'], $data);
+        $stmt->bind_param("is", $subject_teacher['teacher_id'], $data);
         $stmt->execute();
 
         $stmt = $conn->prepare("INSERT INTO notifications (data, notifiable_id) VALUES (?, ?)");
-        $stmt->bind_param("si", $data, $subject_teachers['teacher_id']);
+        $stmt->bind_param("si", $data, $subject_teacher['teacher_id']);
         $stmt->execute();
     }
     foreach($admins as $admin){

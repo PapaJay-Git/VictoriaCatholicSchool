@@ -152,7 +152,8 @@ $balance = (9 - $countMatches) * 1131.3;
                                         </div>
 
                                         <div class="ms-1 mt-3">
-                                            <small><b>REMAINING BALANCE</b>: ₱ '.$balance.'<small>
+                                            <small class="d-block"><b>REMAINING BALANCE</b>: ₱ '.$balance.'<small>
+                                            <small class="d-block fw-bold text-secondary">'.((9 - $countMatches) > 0 ? 'Next Payment should be on 15th of the Month.' : '').'<small>
                                         </div>
 
                                     </span>';

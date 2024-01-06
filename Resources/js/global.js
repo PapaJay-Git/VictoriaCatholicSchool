@@ -118,10 +118,16 @@ function changeBorderColor(selectElement) {
     // }
 }
 
-function setActive(id){
+function setActive(id) {
     var tab = document.getElementById(id);
+    if (tab) {
+        tab.classList.add('active-tab');
+    }
 
-    tab.classList.add('active-tab');
+    var elementsWithClass = document.getElementsByClassName(id);
+    for (var i = 0; i < elementsWithClass.length; i++) {
+        elementsWithClass[i].classList.add('active-tab');
+    }
 }
 
 function showPassword() {

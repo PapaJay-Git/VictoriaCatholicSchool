@@ -9,11 +9,11 @@
                     <div class="text-dark">
                         <small class="fw-bold">The final grade is calculated as follows:</small><br>
                         <div class="ms-2">
-                            <small><b>1st Quarter</b> * 0.20 + </small><br>
-                            <small><b>2nd Quarter</b> * 0.20 + </small><br>
-                            <small><b>3rd Quarter</b> * 0.20 +</small> <br>
-                            <small><b>4th Quarter</b> * 0.40</small><br>
-                            <small><b>= Final</b></small>
+                            <small><b>1st Quarter</b> (20%) + </small><br>
+                            <small><b>2nd Quarter</b> (20%) + </small><br>
+                            <small><b>3rd Quarter</b> (20%) +</small> <br>
+                            <small><b>4th Quarter</b> (40%)</small><br>
+                            <small><b>= Final (100%)</b> </small>
                         </div>
                     </div>
                 </div>

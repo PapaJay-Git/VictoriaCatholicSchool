@@ -131,6 +131,7 @@ $payment_type = getSession('payment_type');
                     </div>
                     <div class="ms-1 mt-3">
                         <small><b>REMAINING BALANCE:</b> <small id="remainingBalance"></small><small>
+                        <small class="d-block fw-bold text-secondary" id="nextPayment"></small>
                     </div>
                 </div>
             </div>
@@ -182,6 +183,7 @@ $payment_type = getSession('payment_type');
 
         let countMatches = 0;
         var remainingBalance = document.getElementById('remainingBalance');
+        var nextPayment = document.getElementById('nextPayment');
 
         inputCheckboxes.forEach(checkbox => {
             if (checkbox.checked) {
@@ -191,9 +193,10 @@ $payment_type = getSession('payment_type');
                 }
             }
         });
-        
+
         var balance = (9 - countMatches) * 1131.3;
         remainingBalance.innerHTML = '₱'+parseFloat(balance.toFixed(2));
+        nextPayment.innerHTML = ((9 - countMatches) > 0 ? 'Next Payment should be on 15th of the Month.' : '');
     }
 
     window.addEventListener('load', computeRemainingBalance);

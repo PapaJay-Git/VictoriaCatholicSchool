@@ -5,9 +5,6 @@ use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
 try {
-
-
-
     require_once $_SERVER['DOCUMENT_ROOT']."/Connections/DB_connection.php";
     require_once $_SERVER['DOCUMENT_ROOT']."/PHPMailer/src/Exception.php";
     require_once $_SERVER['DOCUMENT_ROOT']."/PHPMailer/src/PHPMailer.php";
@@ -363,18 +360,18 @@ $default_password = str_replace(' ', '', $default_password);
         
         <h3>Mode of Payment:</h3>
         <p>Payment should be made through the cashier\'s office only.</p>
-        <p><strong>FULL PAYMENT:</strong> ₱ 21,884.7</p><br>
+        <p><strong>FULL PAYMENT:</strong> Php 21,884.7</p><br>
         <p><strong>INSTALLMENT:</strong></p>
-        <p>MISCELLANEOUS FEE: ₱ 1,460.10</p>
-        <p>TUITION FEE-MONTHLY: ₱ 881.10</p>
-        <p>COMPUTER FEE-MONTHLY: ₱ 200.10</p>
-        <p>SECURITY GUARD FEE-MONTHLY: ₱ 50.10</p>
-        <p>OTHER FEES: ₱ 3,665.10</p>
-        <p>TOTAL ASSESSMENT FEE: ₱ 6,256.10</p>
-        <p>READING MATERIALS: ₱ 5,406.5</p>
-        <p>TOTAL AMOUNT TO PAY:  ₱ 11,663</p>
-        <p><strong>MONTHLY:</strong> ₱ 1,131.3</p>
-        <p><strong>TOTAL:</strong> ₱ 21,884.7</p>
+        <p>MISCELLANEOUS FEE: Php 1,460.10</p>
+        <p>TUITION FEE-MONTHLY: Php 881.10</p>
+        <p>COMPUTER FEE-MONTHLY: Php 200.10</p>
+        <p>SECURITY GUARD FEE-MONTHLY: Php 50.10</p>
+        <p>OTHER FEES: Php 3,665.10</p>
+        <p>TOTAL ASSESSMENT FEE: Php 6,256.10</p>
+        <p>READING MATERIALS: Php 5,406.5</p>
+        <p>TOTAL AMOUNT TO PAY:  Php 11,663</p>
+        <p><strong>MONTHLY:</strong> Php 1,131.3</p>
+        <p><strong>TOTAL:</strong> Php 21,884.7</p>
         
         <p>For any further inquiries, please feel free to contact us. We look forward to welcoming you to our school community!</p>
         
@@ -382,7 +379,7 @@ $default_password = str_replace(' ', '', $default_password);
         <p>The Victoria Catholic School of Tarlac Team</p>
 
         <h3>NOTE:</h3>
-        <h4>Kindly print this message and present it to the admin office for verification. This will serve as your stab verification.</h4>
+        <h4>Kindly print this message and present it to the admin office for you verification. This will serve as your stub verification.</h4>
 
         <h4>Default Password for Parent and Student</h4>
         <h5><strong>Student Last Name</strong> and <strong>Student Birth Year</strong> all lowercase</h5>

@@ -24,7 +24,11 @@ try {
        exit();
     }
 
-    $stmt = $conn->prepare("SELECT * FROM promissory where student_id = ? ORDER BY created_at DESC");
+    $stmt = $conn->prepare("SELECT promissory.*, users.first_name, users.last_name, users.guardian_type 
+    FROM promissory
+    LEFT JOIN guardians ON promissory.student_id = guardians.student_id
+    LEFT JOIN users ON guardians.guardian_id = users.id
+    where promissory.student_id = ? ORDER BY created_at DESC");
     $stmt->bind_param("i", $auth['id']);
     $stmt->execute();
     $notes = $stmt->get_result();

@@ -22,7 +22,6 @@ $count = 1;
                     <div class="d-flex justify-content-between align-items-center mb-5">
                         <h5 class="fw-bold"><?php echo $section_data['grade']." ".$section_data['name']." STUDENT GRADES" ?></h5>
                         <div class="btn-group">
-                            <button type="button" class="btn btn-sm fw-bold btn-dark" data-bs-toggle="modal" data-bs-target="#calculationModal">SEE CALCULATION</button>
                             <a href="advisories.php" class="btn btn-danger btn-sm fw-bold">BACK</a>
                         </div>
                     </div>
@@ -34,11 +33,11 @@ $count = 1;
                                     <th scope="col">Subject</th>
                                     <th scope="col">Name</th>
                                     <th scope="col">Email</th>
-                                    <th scope="col">1st</th>
-                                    <th scope="col">2nd</th>
-                                    <th scope="col">3rd</th>
-                                    <th scope="col">4th</th>
-                                    <th scope="col">Final</th>
+                                    <th scope="col">1st <small>(20%)</small></th>
+                                    <th scope="col">2nd <small>(20%)</small></th>
+                                    <th scope="col">3rd <small>(20%)</small></th>
+                                    <th scope="col">4th <small>(40%)</small></th>
+                                    <th scope="col">Final Rating</th>
                                 </tr>
                                 </thead>
                                 <tbody id="tbody-grades">
@@ -77,7 +76,7 @@ $count = 1;
                                                             <small>0</small>
                                                         </td>
                                                         <td>
-                                                            <small>0 / 100</small>
+                                                            <small>0</small>
                                                         </td>
                                                     </tr>"; 
                                                 }else{
@@ -116,7 +115,7 @@ $count = 1;
                                                             <small>".$student_grades_row['fourth_quarter']."</small>
                                                         </td>
                                                         <td>
-                                                            <small>$final / 100</small>
+                                                            <small>".number_format($final, 2)."</small>
                                                         </td>
                                                     </tr>"; 
                                                 }

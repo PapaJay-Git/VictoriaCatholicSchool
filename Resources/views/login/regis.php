@@ -99,18 +99,18 @@ function getSession($data) {
         <div class="row">
             <div class="col-lg-6 mb-3">
                 <label>What type of student are you? <b class="text-danger">*</b></label>
-                <select name="student_type" oninput="this.className = ''" id="student_type">
-                    <option value="new"  <?php echo (getSession('student_type') == 'new' ? 'selected' : '') ?> >New Student</option>
-                    <option value="transfer" <?php echo (getSession('student_type') == 'transfer'  ? 'selected' : '') ?> >Transferee</option>
+                <select name="student_type" oninput="this.className = ''" id="student_type" onchange="checkStudentType()">
+                    <option value="new"  <?php echo (getSession('student_type') == 'new' ? 'selected' : '') ?> id="typeNew">New Student</option>
+                    <option value="transfer" <?php echo (getSession('student_type') == 'transfer'  ? 'selected' : '') ?> id="typeTransfer">Transferee</option>
                 </select>
             </div>
             <div class="col-lg-6 mb-3">
                 <label>Grade Level <b class="text-danger">*</b></label>
-                <select name="grade" oninput="this.className = ''" id="grade">
-                    <option <?php echo getSession('grade') == '7'  ? 'selected' : '' ?> value="7" >7</option>
-                    <option <?php echo getSession('grade') == '8'  ? 'selected' : '' ?>  value="8"  >8</option>
-                    <option <?php echo getSession('grade') == '9'  ? 'selected' : '' ?> value="9"  >9</option>
-                    <option <?php echo getSession('grade') == '10'  ? 'selected' : '' ?> value="10"  >10</option>
+                <select name="grade" oninput="this.className = ''" id="grade" onchange="checkGradeLevel()">
+                    <option <?php echo getSession('grade') == '7'  ? 'selected' : '' ?> value="7" id="level7">7</option>
+                    <option <?php echo getSession('grade') == '8'  ? 'selected' : '' ?>  value="8"  id="level8">8</option>
+                    <option <?php echo getSession('grade') == '9'  ? 'selected' : '' ?> value="9"  id="level9">9</option>
+                    <option <?php echo getSession('grade') == '10'  ? 'selected' : '' ?> value="10"  id="level10">10</option>
                 </select>
             </div>
         </div>
@@ -332,31 +332,43 @@ function getSession($data) {
 <!-- <script src="../../js/regis.js"></script> -->
 
 <script>
-    //  document.addEventListener("DOMContentLoaded", function() {
-    //     function handleLoad() {
-    //         var studentTypeElement = document.getElementById("student_type");
-    //         var gradeElement = document.getElementById("grade");
 
-    //         if (studentTypeElement.value === 'new') {
-    //             document.getElementById("defaultOption").selected = true;
-    //             gradeElement.disabled = true;
+    function checkStudentType(){
+        var student_type = document.getElementById('student_type');
 
-    //             // Manually dispatch a change event
-    //             var event = new Event('change', { bubbles: true });
-    //             gradeElement.dispatchEvent(event);
-    //         } else {
-    //             gradeElement.disabled = false;
+        var grade = document.getElementById('grade');
 
-    //             // Manually dispatch a change event
-    //             var event = new Event('change', { bubbles: true });
-    //             gradeElement.dispatchEvent(event);
-    //         }
-    //     }
+        if(student_type && grade){
+            if(student_type.value == 'new'){
+                grade.value = "7";
+            }else{
+                if(grade.value == "7"){
+                    grade.value = "8";
+                }
+            }
+        }
+    }
+    function checkGradeLevel(){
+        var student_type = document.getElementById('student_type');
 
-    //   window.addEventListener("load", handleLoad);
+        var grade = document.getElementById('grade');
 
-    //   document.getElementById("student_type").addEventListener("change", handleLoad);
-    // });
+        if(student_type && grade){
+            if(grade.value == '7'){
+                student_type.value = "new";
+            }else{
+                if(student_type.value == 'new'){
+                    grade.value = '7'
+                }
+            }
+        }
+    }
+
+    $(function(){
+        checkStudentType();
+        checkGradeLevel();
+    });
+
 
     function handleAgree() {
         var checkBox = document.getElementById("checkBox");

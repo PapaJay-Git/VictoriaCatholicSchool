@@ -32,7 +32,6 @@ $count = 1;
                         <div class="d-flex justify-content-end mb-3">
                             <div class="btn-group">
                                 <button type="submit" class="btn btn-sm btn-primary fw-bold">UPDATE</button>
-                                <button type="button" class="btn btn-sm fw-bold btn-dark" data-bs-toggle="modal" data-bs-target="#calculationModal">SEE CALCULATION</button>
                                 <a href="assigned_subjects.php" class="btn btn-danger btn-sm fw-bold">BACK</a>
                             </div>
                         </div>
@@ -43,11 +42,11 @@ $count = 1;
                                     <th scope="col">#</th>
                                     <th scope="col">Name</th>
                                     <th scope="col">Email</th>
-                                    <th scope="col">1st</th>
-                                    <th scope="col">2nd</th>
-                                    <th scope="col">3rd</th>
-                                    <th scope="col">4th</th>
-                                    <th scope="col">Final</th>
+                                    <th scope="col">1st <small>(20%)</small></th>
+                                    <th scope="col">2nd <small>(20%)</small></th>
+                                    <th scope="col">3rd <small>(20%)</small></th>
+                                    <th scope="col">4th <small>(40%)</small></th>
+                                    <th scope="col">Final Rating</th>
                                 </tr>
                                 </thead>
                                 <tbody id="tbody-grades">
@@ -87,7 +86,7 @@ $count = 1;
                                                             <input type='number' class='grade-css' step='0.01' min='0.00' max='100.00' value='0' required name='fourth[]'>
                                                         </td>
                                                         <td>
-                                                            <small>0 / 100</small>
+                                                            <small>0</small>
                                                         </td>
                                                     </tr>"; 
                                                 }else{
@@ -112,19 +111,23 @@ $count = 1;
                                                             <small>".$student['email']."</small>
                                                         </td>
                                                         <td>
+                                                            <small class='d-none'>".$student_grades_row['first_quarter']."</small>
                                                             <input type='number' class='grade-css' step='0.01' min='0.00' max='100.00' required name='first[]' value='".$student_grades_row['first_quarter']."'>
                                                         </td>
                                                         <td>
+                                                            <small class='d-none'>".$student_grades_row['second_quarter']."</small>
                                                             <input type='number' class='grade-css' step='0.01' min='0.00' max='100.00' required name='second[]' value='".$student_grades_row['second_quarter']."'>
                                                         </td>
                                                         <td>
+                                                            <small class='d-none'>".$student_grades_row['third_quarter']."</small>
                                                             <input type='number' class='grade-css' step='0.01' min='0.00' max='100.00' required name='third[]' value='".$student_grades_row['third_quarter']."'>
                                                         </td>
                                                         <td>
+                                                            <small class='d-none'>".$student_grades_row['fourth_quarter']."</small>
                                                             <input type='number' class='grade-css' step='0.01' min='0.00' max='100.00' required name='fourth[]' value='".$student_grades_row['fourth_quarter']."'>
                                                         </td>
                                                         <td>
-                                                            <small>$final / 100</small>
+                                                            <small>".number_format($final, 2)."</small>
                                                         </td>
                                                     </tr>"; 
                                                 }

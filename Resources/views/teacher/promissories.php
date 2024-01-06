@@ -41,6 +41,7 @@ function limitString($inputString, $maxLength = 15) {
                         <th scope="col">Student No</th>
                         <th scope="col">Section</th>
                         <th scope="col">Promissory</th>
+                        <th scope="col">Status</th>
                         <th scope="col">From Parent/Guardian</th>
                         <th scope="col">Date</th>
                         <th scope="col">Action</th>
@@ -68,7 +69,15 @@ function limitString($inputString, $maxLength = 15) {
                             <small class="text-dark"><?php echo $promissory['section_name']."-".$promissory['section_grade'] ?></small>
                         </td>
                         <td>
-                            <small class="text-dark"><?php echo limitString($promissory['note']) ?></small>
+                            <small class="fw-bold text-uppercase">Examination</small>
+                        </td>
+                        <td>
+                            <?php 
+                                echo ($promissory['is_approved'] == 0 ? 
+                                "<small class='fw-bold text-uppercase text-primary'>PENDING</small>" : 
+                                "<small class='fw-bold text-uppercase text-success'>APPROVED</small>"
+                                )  
+                            ?>
                         </td>
                         <td>
                             <small class="text-dark text-uppercase"><?php echo $promissory['parent_info'] ?></small>

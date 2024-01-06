@@ -31,6 +31,14 @@ require_once "../includes/header_layout.php";
                                     </a>
                                 </div>';
                         }
+                        if ($notification['data'] == 'Approved_promissory') {
+                            echo '
+                                <div>
+                                    <a href="promissories.php" class="alert alert-primary w-100 d-flex justify-content-between text-decoration-none" role="alert">
+                                        <span>Admin approved one or more promissory from your students\' guardian</span> <small>' . $dateTime->format('F j, Y, g:i a') . '</small>
+                                    </a>
+                                </div>';
+                        }
                         
                     }
                 ?>

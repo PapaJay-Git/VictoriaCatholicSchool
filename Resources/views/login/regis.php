@@ -106,11 +106,13 @@ function getSession($data) {
             </div>
             <div class="col-lg-6 mb-3">
                 <label>Grade Level <b class="text-danger">*</b></label>
-                <select name="grade" oninput="this.className = ''" id="grade" onchange="checkGradeLevel()">
-                    <option <?php echo getSession('grade') == '7'  ? 'selected' : '' ?> value="7" id="level7">7</option>
-                    <option <?php echo getSession('grade') == '8'  ? 'selected' : '' ?>  value="8"  id="level8">8</option>
-                    <option <?php echo getSession('grade') == '9'  ? 'selected' : '' ?> value="9"  id="level9">9</option>
-                    <option <?php echo getSession('grade') == '10'  ? 'selected' : '' ?> value="10"  id="level10">10</option>
+                <select name="grade" oninput="this.className = ''" id="gradeTransfer" disabled style="display: none;">
+                    <option <?php echo getSession('grade') == '8'  ? 'selected' : '' ?>  value="8" >8</option>
+                    <option <?php echo getSession('grade') == '9'  ? 'selected' : '' ?> value="9"  >9</option>
+                    <option <?php echo getSession('grade') == '10'  ? 'selected' : '' ?> value="10" >10</option>
+                </select>
+                <select name="grade" oninput="this.className = ''" id="gradeNew" disabled style="display: none;">
+                    <option <?php echo getSession('grade') == '7'  ? 'selected' : '' ?> value="7" >7</option> 
                 </select>
             </div>
         </div>
@@ -336,37 +338,43 @@ function getSession($data) {
     function checkStudentType(){
         var student_type = document.getElementById('student_type');
 
-        var grade = document.getElementById('grade');
+        var gradeNew = document.getElementById('gradeNew');
+        var gradeTransfer = document.getElementById('gradeTransfer');
 
-        if(student_type && grade){
+        if(student_type && gradeNew && gradeTransfer){
             if(student_type.value == 'new'){
-                grade.value = "7";
+                gradeNew.style.display = "block";
+                gradeNew.disabled = false;
+
+                gradeTransfer.style.display = "none";
+                gradeTransfer.disabled = true;
             }else{
-                if(grade.value == "7"){
-                    grade.value = "8";
-                }
+                gradeNew.style.display = "none";
+                gradeNew.disabled = true;
+
+                gradeTransfer.style.display = "block";
+                gradeTransfer.disabled = false;
             }
         }
     }
-    function checkGradeLevel(){
-        var student_type = document.getElementById('student_type');
+    // function checkGradeLevel(){
+    //     var student_type = document.getElementById('student_type');
 
-        var grade = document.getElementById('grade');
+    //     var grade = document.getElementById('grade');
 
-        if(student_type && grade){
-            if(grade.value == '7'){
-                student_type.value = "new";
-            }else{
-                if(student_type.value == 'new'){
-                    grade.value = '7'
-                }
-            }
-        }
-    }
+    //     if(student_type && grade){
+    //         if(grade.value == '7'){
+    //             student_type.value = "new";
+    //         }else{
+    //             if(student_type.value == 'new'){
+    //                 grade.value = '7'
+    //             }
+    //         }
+    //     }
+    // }
 
     $(function(){
         checkStudentType();
-        checkGradeLevel();
     });
 
 

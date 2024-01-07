@@ -31,6 +31,18 @@ $days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday'];
                 </div>
                     <input type="hidden" name='section' value='<?php echo $row['id'] ?>'>
                     <input type="hidden" name='grade' value='<?php echo $row['grade'] ?>'>
+
+                    <div class="mt-5">
+                        <label for="findSubject" class="fw-bold pe-2">FIND A SUBJECT</label>
+                        <select name="findSubject" id="findSubject" class="my-2 me-3 px-5 select" onchange="findSubjectLocation()">
+                            <option value="" disabled selected>FIND A SUBJECT</option>
+                            <?php
+                                foreach($subjects as $subject){
+                                    echo "<option value='".$subject['name']."'>".$subject['name']."</option>";
+                                }
+                            ?>
+                        </select>
+                    </div>
                     <?php 
                         $count = 1;
                         foreach($subjects as $subject){
@@ -40,7 +52,7 @@ $days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday'];
                             $classes = $stmt->get_result();
                             if($classes->num_rows > 0){
                                 foreach($classes as $data){ 
-                                    echo "<label class='mt-5 '>".$count++.".<b> ".$subject['name']."</b></label>
+                                    echo "<label class='mt-5' id='".$subject['name']."'>".$count++.".<b> ".$subject['name']."</b></label>
                                     <input type='hidden' name='subject[]' value='".$subject['id']."'>
                                     <div class='border-bottom px-2 mb-3 pb-2'>
                                         <small >Subject Teacher: </small>
@@ -101,7 +113,7 @@ $days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday'];
                                     
                                 } 
                             }else{
-                                echo "<label class='mt-5 '>".$count++.".<b> ".$subject['name']."</b></label>
+                                echo "<label class='mt-5' id='".$subject['name']."'>".$count++.".<b> ".$subject['name']."</b></label>
                                 <input type='hidden' name='subject[]' value='".$subject['id']."'>
                                 <div class='border-bottom px-2 mb-3 pb-2'>
                                     <small >Subject Teacher: </small>
@@ -159,4 +171,24 @@ $days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday'];
 <?php
 	require_once "../includes/includes_scripts.php";
 ?>
-<script> setActive('sections_tab'); </script>
+<script>
+
+    setActive('sections_tab'); 
+
+    function findSubjectLocation(){
+        var findSubject = document.getElementById('findSubject');
+        var subject = document.getElementById(findSubject.value);
+        
+        if (subject) {
+            var elementRect = subject.getBoundingClientRect();
+            var absoluteElementTop = elementRect.top + window.pageYOffset;
+            var middle = absoluteElementTop - (window.innerHeight / 5);
+
+            window.scrollTo({
+                top: middle,
+                behavior: 'smooth'
+            });
+        }
+
+    }
+</script>

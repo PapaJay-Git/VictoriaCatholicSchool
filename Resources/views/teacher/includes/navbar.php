@@ -16,7 +16,7 @@
             <a class="navs nav-link mx-2" href="schedules.php" id="schedules_tab">SCHEDULES</a>
           </li>
           <li class="nav-item">
-            <a class="navs nav-link mx-2" href="assigned_subjects.php" id="assigned_subjects_tab">ASSIGNED SUBJECTS</a>
+            <a class="navs nav-link mx-2" href="assigned_subjects.php" id="assigned_subjects_tab">SUBJECTS</a>
           </li>
           <li class="nav-item">
             <a class="navs nav-link mx-2" href="advisories.php" id="advisories_tab">ADVISORIES</a>

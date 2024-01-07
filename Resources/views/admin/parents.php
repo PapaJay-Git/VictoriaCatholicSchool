@@ -26,7 +26,7 @@ function getSession($data) {
      ?>
      <div class="container mt-5">
         <div class="d-flex justify-content-between align-items-center mb-5">
-          <h5 class="fw-bold">PARENT/GUARDIAN ACCOUNTS</h5>
+          <h5 >PARENT/GUARDIAN ACCOUNTS</h5>
         </div>
 
            <div class="table-responsive">

@@ -22,7 +22,7 @@ $days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday'];
             <div class="card shadow">
                 <div class="card-body">
                     <div>
-                        <h5 class="fw-bold">SECTION <?php echo $row['name']."-".$row['grade'] ?></h5>
+                        <h5>SECTION <?php echo $row['name']."-".$row['grade'] ?></h5>
                         <small>Adviser: <?php echo $row['first_name']." ".$row['last_name'].", ".$row['email'] ?></small>
                     </div>
                         <?php 

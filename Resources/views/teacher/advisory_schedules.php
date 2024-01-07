@@ -22,7 +22,7 @@ $days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday'];
             <div class="card shadow">
                 <div class="card-body">
                     <div class="d-flex justify-content-between align-items-center">
-                        <h5 class="fw-bold">SECTION <?php echo $row['name']."-".$row['grade'] ?></h5>
+                        <h5 >SECTION <?php echo $row['name']."-".$row['grade'] ?></h5>
                         <a href="advisories.php" class="btn btn-danger btn-sm fw-bold">BACK</a>
                     </div>
                         <?php 

@@ -17,7 +17,7 @@ require_once "../includes/header_layout.php";
      ?>
      <div class="container mt-5">
         <div class="d-flex justify-content-between align-items-center mb-5">
-            <h5 class="fw-bold">SCHOOL CLASSES</h5>
+            <h5 >SCHOOL CLASSES</h5>
         </div>
 
            <div class="table-responsive">

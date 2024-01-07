@@ -27,7 +27,7 @@ function getSession($data) {
      ?>
      <div class="container mt-5">
         <div class="d-flex justify-content-between align-items-center mb-5">
-            <h5 class="fw-bold">REGISTERED STUDENTS</h5>
+            <h5 >REGISTERED STUDENTS</h5>
             <div class="btn-group">
                 <a href="students-add.php" class="btn btn-sm fw-bold btn-dark" data-bs-toggle="modal" data-bs-target="#addModal">ADD STUDENT</a>
                 <a href="students.php" class="btn btn-sm btn-danger fw-bold">BACK</a>

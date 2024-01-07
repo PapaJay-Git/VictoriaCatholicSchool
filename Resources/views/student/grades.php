@@ -5,6 +5,7 @@ require_once $_SERVER['DOCUMENT_ROOT']."/Middleware/CheckIfStudent.php";
 require_once $_SERVER['DOCUMENT_ROOT']."/Backend-routes/student/includes_get_grades.php";
 
 $finalAverage = 0;
+$subjectThatHasGrade = 0;
 foreach ($subjects as $subject) {
     $stmt = $conn->prepare("SELECT * FROM student_grades  WHERE subject_id = ? AND student_id = ?");
     $stmt->bind_param("ii", $subject['id'], $auth['id']);
@@ -18,10 +19,18 @@ foreach ($subjects as $subject) {
                 $student_grades_row['third_quarter'] * 0.20 +
                 $student_grades_row['fourth_quarter'] * 0.40);
         $finalAverage += $final;
+
+        if($student_grades_row['first_quarter'] > 0 &&
+            $student_grades_row['second_quarter'] > 0 &&
+            $student_grades_row['third_quarter'] > 0 &&
+            $student_grades_row['fourth_quarter'] > 0){
+                $subjectThatHasGrade++;
+        }
     }
 } 
 
-$title = $auth['first_name']." ".$auth['last_name']."      Final Average: ".number_format($finalAverage/$subjects->num_rows, 2);
+$finalAverageResult = ($subjects->num_rows == $subjectThatHasGrade) ? "Final Average: ".number_format($finalAverage/$subjects->num_rows, 2) : 'PENDING GRADES';
+$title = $auth['first_name']." ".$auth['last_name']."      ".$finalAverageResult;
 
 require_once "../includes/header_layout.php";
 
@@ -37,9 +46,9 @@ $count = 1;
             <div class="card shadow">
                 <div class="card-body">
                     <div class="d-flex justify-content-between align-items-center mb-5">
-                        <h5>MY GRADES</h5>
+                        <h5>GRADES</h5>
 
-                        <h5>Final Average: <?php echo number_format($finalAverage/$subjects->num_rows, 2); ?></h5>
+                        <h5><?php echo $finalAverageResult ?></h5>
                     </div>
                     <div class="table-responsive ">
                             <table id="gradesTable">

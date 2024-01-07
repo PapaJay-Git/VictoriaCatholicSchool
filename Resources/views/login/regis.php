@@ -207,7 +207,7 @@ function getSession($data) {
         </div>
         <div class="row  mt-2">
             <div class="col-lg-12">
-                <h5 class="fw-bold">Mother</h5>
+                <h5 >Mother</h5>
             </div>
             <div class="col-lg-4 mb-3">
                 <label>Last Name</label>
@@ -239,7 +239,7 @@ function getSession($data) {
 
         <div class="row mt-3">
             <div class="col-lg-12">
-                <h5 class="fw-bold">Father</h5>
+                <h5 >Father</h5>
             </div>
             <div class="col-lg-4 mb-3">
                 <label>Last Name</label>
@@ -270,7 +270,7 @@ function getSession($data) {
 
         <div class="row  mt-3">
             <div class="col-lg-12">
-                <h5 class="fw-bold">Guardian</h5>
+                <h5 >Guardian</h5>
             </div>
             <div class="col-lg-4 mb-3">
                 <label>Last Name</label>

@@ -10,8 +10,6 @@ try {
     require_once $_SERVER['DOCUMENT_ROOT']."/PHPMailer/src/PHPMailer.php";
     require_once $_SERVER['DOCUMENT_ROOT']."/PHPMailer/src/SMTP.php";
 
-    echo $_POST['grade'];
-    exit();
     // redirection file name
     $fileName = "Location: ../../Resources/views/login/regis.php";
 

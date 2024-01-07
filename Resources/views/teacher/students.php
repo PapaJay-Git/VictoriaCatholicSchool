@@ -21,8 +21,8 @@ $count = 1;
                 <div class="card-body">
                     <div class="d-flex justify-content-between align-items-center mb-5">
                         <div>
-                            <h5 class="fw-bold"><?php echo $section['grade']." ".$section['name'] ?></h5>
-                            <h5 class="fw-bold"><?php echo $subject['name']?></h5>
+                            <h5 ><?php echo $section['grade']." ".$section['name'] ?></h5>
+                            <h5 ><?php echo $subject['name']?></h5>
                         </div>
                     </div>
                     <form method="POST" action="../../../Backend-routes/teacher/update_student_grades.php" onsubmit="submitRequest('updateStudentGrade', event)" id="updateStudentGrade">

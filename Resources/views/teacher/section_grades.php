@@ -20,7 +20,7 @@ $count = 1;
             <div class="card shadow">
                 <div class="card-body">
                     <div class="d-flex justify-content-between align-items-center mb-5">
-                        <h5 class="fw-bold"><?php echo $section_data['grade']." ".$section_data['name']." STUDENT GRADES" ?></h5>
+                        <h5 ><?php echo $section_data['grade']." ".$section_data['name']." STUDENT GRADES" ?></h5>
                         <div class="btn-group">
                             <a href="advisories.php" class="btn btn-danger btn-sm fw-bold">BACK</a>
                         </div>

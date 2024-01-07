@@ -32,7 +32,7 @@ $schedules = [
             <div class="card shadow">
                 <div class="card-body">
                     <div class="d-flex justify-content-between align-items-center mb-5">
-                        <h5 class="fw-bold">MY ASSIGNED SUBJECTS</h5>
+                        <h5 >ASSIGNED SUBJECTS</h5>
                         <a href="advisories.php" class="btn btn-danger btn-sm fw-bold">BACK</a>
                     </div>
                     <div class="table-responsive">

@@ -26,7 +26,7 @@ function getSession($data) {
      ?>
      <div class="container mt-5">
         <div class="d-flex justify-content-between align-items-center mb-5">
-          <h5 class="fw-bold">CASHIERS</h5>
+          <h5 >CASHIERS</h5>
           <a href="#" class="btn btn-sm fw-bold btn-dark" data-bs-toggle="modal" data-bs-target="#addModal">Add New Cashier</a>
         </div>
 

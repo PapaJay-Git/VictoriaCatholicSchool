@@ -5,6 +5,7 @@ require_once $_SERVER['DOCUMENT_ROOT']."/Middleware/CheckIfGuardian.php";
 require_once $_SERVER['DOCUMENT_ROOT']."/Backend-routes/guardian/includes_get_grades.php";
 
 $finalAverage = 0;
+$subjectThatHasGrade = 0;
 foreach ($subjects as $subject) {
     $stmt = $conn->prepare("SELECT * FROM student_grades  WHERE subject_id = ? AND student_id = ?");
     $stmt->bind_param("ii", $subject['id'], $student['id']);
@@ -18,10 +19,18 @@ foreach ($subjects as $subject) {
                 $student_grades_row['third_quarter'] * 0.20 +
                 $student_grades_row['fourth_quarter'] * 0.40);
         $finalAverage += $final;
+
+        if($student_grades_row['first_quarter'] > 0 &&
+           $student_grades_row['second_quarter'] > 0 &&
+           $student_grades_row['third_quarter'] > 0 &&
+           $student_grades_row['fourth_quarter'] > 0){
+            $subjectThatHasGrade++;
+        }
     }
 } 
 
-$title = $student['first_name']." ".$student['last_name']."      Final Average: ".number_format($finalAverage/$subjects->num_rows, 2);
+$finalAverageResult = ($subjects->num_rows == $subjectThatHasGrade) ? "Final Average: ".number_format($finalAverage/$subjects->num_rows, 2) : 'PENDING GRADES';
+$title = $student['first_name']." ".$student['last_name']."     ".$finalAverageResult;
 
 require_once "../includes/header_layout.php";
 
@@ -36,10 +45,13 @@ $count = 1;
         
             <div class="card shadow">
                 <div class="card-body">
-                    <div class="d-flex justify-content-between align-items-center mb-5">
-                        <h5 class="fw-bold text-uppercase"><?php echo $student['first_name']." ".$student['last_name']." - Grades";?></h5>
+                    <div class="d-flex justify-content-between  mb-5">
+                        <span>
+                            <h5 class="text-uppercase"><?php echo $student['first_name']." ".$student['last_name']." - Grades";?></h5>
+                            <small class="d-block text-uppercase"><?php echo $section_data['name']." ".$section_data['grade'];?></small>
+                        </span>
                         
-                        <h5>Final Average: <?php echo number_format($finalAverage/$subjects->num_rows, 2); ?></h5>
+                        <h5><?php echo $finalAverageResult ?></h5>
                     </div>
                     <div class="table-responsive ">
                             <table id="gradesTable">

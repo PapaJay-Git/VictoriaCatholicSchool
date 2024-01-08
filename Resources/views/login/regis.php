@@ -64,10 +64,11 @@ function getSession($data) {
             <h6 class="card-subtitle mb-2 text-muted">Victoria Catholic School</h6>
             <p class="card-text">
                 <p class="d-block">
-                    We respect the fundamental rights of all individuals to the privacy of their personal data, and we commit to the responsible and lawful treatment of all personal data we handle. Moreover, we aim to comply with the requirements of all relevant personal data privacy and protection laws, particularly the Data Privacy Act of 2012 (DPA) and its implementing rules and regulations, while upholding our legitimate interests and effectively carrying out our responsibilities as an educational institution.</p>
+                    The Victoria Catholic School firmly pledges to handle personal data properly and respects each individual's right to privacy. The goal of Victoria Catholic School is to adhere to all data privacy legislation, including the Data Privacy Act of 2012 (DPA), in order to fulfill the school's managerial obligations as a learning institution.
+                </p>
 
                 <p class="d-block mt-3">
-                    This Data Privacy Policy is meant to help you understand what personal information we collect, why we collect it, and what we do with it. This policy applies to all STI ESG, Inc. offices, schools, websites, apps, and services.
+                    This policy aims to explain the personal information that the school gathers, along with the complete justification and application of that information for all school-related services.
                 </p>
                 <div class="mt-3 d-flex justify-content-end align-items-center">
                     <input type="checkbox" id="checkBox" class="me-2">

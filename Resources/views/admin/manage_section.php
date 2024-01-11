@@ -54,7 +54,7 @@ $days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday'];
                                 foreach($classes as $data){ 
                                     echo "<label class='mt-5' id='".$subject['name']."'>".$count++.".<b> ".$subject['name']."</b></label>
                                     <input type='hidden' name='subject[]' value='".$subject['id']."'>
-                                    <div class='border-bottom px-2 mb-3 pb-2'>
+                                    <div class='px-2 mb-3 pb-2'>
                                         <small >Subject Teacher: </small>
                                         <select name='teacher[]' class='border rounded my-2 select' >
                                         <option value='' disabled selected>Select an option</option>";
@@ -66,14 +66,32 @@ $days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday'];
                                             }
                                         }
                                         echo "</select>
-                                    </div>";
+                                    </div>
+                                    
+                                    
+                                    <div class='table-responsive ps-2'>
+                                    <table class='table table-bordered '>
+                                    <thead>
+                                        <tr>
+                                        <th scope='col'>Day</th>
+                                        <th scope='col'>Set Day</th>
+                                        <th scope='col'>Start Time</th>
+                                        <th scope='col'>End Time</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>";
         
+                               
                                     foreach ($days as $day) {
-                                        echo "<div class='border-bottom px-2 mb-3 pb-2'>
-                                            <small >In ".ucfirst($day).": </small>";
-                                                      
+                                        echo "
+                                        <tr>
+                                            <td><small>".ucfirst($day)."</small></td>
+                                            
+                                        <td>";
+                                                
                                         if ($data["is_$day"] == TRUE || $data["is_$day"] == 1) {
-                                            echo "<select name='is_{$day}[]' class='my-2 me-3 px-3 border rounded selected select' required onchange='changeBorderColor(this)'>
+                                            echo "
+                                            <select name='is_{$day}[]' class='my-2 me-3 px-3 border rounded selected select' required onchange='changeBorderColor(this)'>
                                             <option value='1' selected>TRUE</option>
                                                   <option value='0'>FALSE</option>";
                                         } else {
@@ -84,7 +102,9 @@ $days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday'];
                                         }
                                     
                                         echo "</select>
-                                              <small > Start Time: </small>
+                                        </td>
+
+                                        <td>
                                               <select name='{$day}_start_time[]' class='my-2 me-3 px-3 border rounded select' required>";
                                     
                                         foreach ($schedules as $schedule) {
@@ -96,7 +116,8 @@ $days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday'];
                                         }
                                     
                                         echo "</select>
-                                              <small > End Time: </small>
+                                        </td>
+                                        <td>
                                               <select name='{$day}_end_time[]' class='my-2 me-3 px-3 border rounded select' >";
                                     
                                         foreach ($schedules as $schedule) {
@@ -108,14 +129,22 @@ $days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday'];
                                         }
                                     
                                         echo "</select>
-                                              </div>";
+                                        </td>
+                                        </tr>";
                                     }
+
+                                    echo "
+                                    
+                                    </tbody>
+                                </table>
+                                </div>";
                                     
                                 } 
                             }else{
-                                echo "<label class='mt-5' id='".$subject['name']."'>".$count++.".<b> ".$subject['name']."</b></label>
+                                echo "
+                                <label class='mt-5' id='".$subject['name']."'>".$count++.".<b> ".$subject['name']."</b></label>
                                 <input type='hidden' name='subject[]' value='".$subject['id']."'>
-                                <div class='border-bottom px-2 mb-3 pb-2'>
+                                <div class='px-2 mb-3 pb-2'>
                                     <small >Subject Teacher: </small>
                                     <select name='teacher[]' class='border rounded my-2 select' required>
                                     <option value='' disabled selected>Select an option</option>";
@@ -123,33 +152,58 @@ $days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday'];
                                         echo "<option value='".$teacher['id']."'>".$teacher['first_name']." ".$teacher['last_name']." : ".$teacher['email']."</option>";
                                     }
                                     echo "</select>
-                                </div>";
-    
+                                </div>
+
+
+                                <div class='table-responsive ps-2'>
+                                <table class='table table-bordered '>
+                                <thead>
+                                    <tr>
+                                    <th scope='col'>Day</th>
+                                    <th scope='col'>Set Day</th>
+                                    <th scope='col'>Start Time</th>
+                                    <th scope='col'>End Time</th>
+                                    </tr>
+                                </thead>
+                                <tbody>";
+
                                 foreach ($days as $day) {
-                                    echo"<div class='border-bottom px-2 mb-3 pb-2'>";
+                                    echo"
+                                    <tr>
+                                        <td><small >".ucfirst($day)."</small></td>
+                                        <td>
+                                            <select name='is_{$day}[]' class='my-2 me-3 px-3 border rounded select' required onchange='changeBorderColor(this)'>
+                                                <option value='1'>TRUE</option>
+                                                <option value='0' selected>FALSE</option>
+                                            </select>
+                                        </td>";
 
-                                    echo"<small >In ".ucfirst($day).": </small>
-                                        <select name='is_{$day}[]' class='my-2 me-3 px-3 border rounded select' required onchange='changeBorderColor(this)'>
-                                            <option value='1'>TRUE</option>
-                                            <option value='0' selected>FALSE</option>
-                                        </select>";
-
-                                    echo"<small > Start Time: </small>
-                                        <select name='{$day}_start_time[]' class='my-2 me-3 px-3 border rounded select' required>";
-                                        foreach ($schedules as $schedule) {
-                                            echo "<option value='$schedule'>$schedule</option>";
-                                        }
-                                    echo "</select>";
+                                    echo"
+                                        <td>
+                                            <select name='{$day}_start_time[]' class='my-2 me-3 px-3 border rounded select' required>";
+                                            foreach ($schedules as $schedule) {
+                                                echo "<option value='$schedule'>$schedule</option>";
+                                            }
+                                        echo "</select>
+                                        
+                                        </td>";
 
 
-                                    echo"<small > End Time: </small>
-                                        <select name='{$day}_end_time[]' class='my-2 me-3 px-3 border rounded select' required>";
-                                        foreach ($schedules as $schedule) {
-                                            echo "<option value='$schedule'>$schedule</option>";
-                                        }
-                                    echo "</select>
-                                          </div>";
+                                    echo"
+                                        <td>
+                                            <select name='{$day}_end_time[]' class='my-2 me-3 px-3 border rounded select' required>";
+                                            foreach ($schedules as $schedule) {
+                                                echo "<option value='$schedule'>$schedule</option>";
+                                            }
+                                        echo "</select>
+                                        </td>
+                                    </tr>";
                                 }
+
+                                echo "
+                                    </tbody>
+                                </table>
+                            </div>";
                             }
                         }
                         

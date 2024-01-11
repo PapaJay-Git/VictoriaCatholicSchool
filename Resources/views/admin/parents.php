@@ -19,6 +19,11 @@ function getSession($data) {
 
   return null; 
 }
+
+function convertTxt($string = null){
+
+  return $string == null ? 'None' : ucwords(strtolower($string));
+}
 ?>
 <body>
     <?php 
@@ -36,6 +41,7 @@ function getSession($data) {
                     <th scope="col">#</th>
                     <th scope="col">Parent/Guardian Info</th>
                     <th scope="col">Student Info</th>
+                    <th scope="col">Student Section</th>
                     <th scope="col">Action</th>
                   </tr>
                 </thead>
@@ -50,10 +56,13 @@ function getSession($data) {
                           <?php echo $count++ ?>
                         </small></td>
                       <td>
-                          <small class="text-dark text-uppercase"><?php echo $row['first_name'].' '.$row['last_name'].', '.$row['email'] ?></small>
+                          <small class="text-dark"><?php echo convertTxt($row['last_name']).' '.convertTxt($row['first_name']).', '.ucfirst($row['email']) ?></small>
                       </td>
                       <td>
-                        <small class="text-dark text-uppercase"><?php echo $row['student_full_name'].", ".$row['student_email'] ?></small>
+                        <small class="text-dark"><?php echo convertTxt($row['student_full_name']).", ".convertTxt($row['student_email']); ?></small>
+                      </td>
+                      <td>
+                        <small class="text-dark"><?php echo $row['section_name'] == NULL ? 'None' : $row['section_name']." - ".$row['grade'];  ?></small>
                       </td>
                       <td>
                           <a class="btn btn-sm btn-primary fw-bold" href="update-parent.php?id=<?php echo $row['id'] ?>">UPDATE</a>

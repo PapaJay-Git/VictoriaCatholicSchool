@@ -69,7 +69,10 @@ $payment_type = getSession('payment_type');
                 <div class="col-12 col-md-6">
                     <h4>MONTHS TO BE PAID</h4>
                     <small class="d-block fw-bold text-secondary mb-2">Checked checkboxes are paid months.</small>
-                    <small class="d-block ms-1  text-secondary mb-2">Each month is ₱1,131.3</small>
+                    <span class="d-block mb-2 ms-1 ">
+                        <small class="fw-bold text-dark">EACH MONTH</small> 
+                        <small class="fw-bold text-primary ">₱1,131.3</small>
+                    </span>
                     <small class="d-block ms-1  text-secondary mb-2">June is included on Down Payment.</small>
                     <div class="ms-1">
                         <input type="checkbox" id="june" checked disabled>
@@ -129,9 +132,9 @@ $payment_type = getSession('payment_type');
                         <?php echo !empty($paidMonths) && in_array(($currentYear+1).'-3', array_column($paidMonths, 'date')) ? 'checked' : ''?>>
                         <label for="march">March <?php echo $currentYear+1 ?></label>
                     </div>
-                    <div class="ms-1 mt-3">
-                        <small><b>REMAINING BALANCE:</b> <small id="remainingBalance"></small><small>
-                        <small class="d-block fw-bold text-secondary" id="nextPayment"></small>
+                    <div class="ms-1 mt-3"> 
+                        <h5 class="d-block"><b>REMAINING BALANCE:</b> <h5 class="fw-bold text-primary" id="remainingBalance"></h5></h5>
+                        <small class="d-block fw-bold text-dark" id="nextPayment"></small>
                     </div>
                 </div>
             </div>

@@ -32,7 +32,7 @@ require_once "../includes/header_layout.php";
             <div class="col-lg-7 mt-4">
                 <span class="bg-primary d-block d-lg-inline-block p-3 rounded">
                     <h1 class="bebas-font text-white text-uppercase"><?php echo $auth['first_name']." ".$auth['middle_name']." ".$auth['last_name'] ?> </h1>
-                    <small class="text-white fw-bold"> STUDENT </small>
+                    <small class="text-white fw-bold"> STUDENT <?php echo "VCS00".$auth['id']?></small>
                 </span>
                 <span class="mt-1 p-2 d-block">
                     <span class="d-block">
@@ -43,36 +43,52 @@ require_once "../includes/header_layout.php";
                         <h4 class="bebas-font text-dark d-inline-block">Phone:</h4>
                         <h5 class="bebas-font d-inline-block"><?php echo $auth['phone'] ?></h5>
                     </span>
-                    <span class="d-block">
-                        <h4 class="bebas-font text-dark d-inline-block">Student No:</h4>
-                        <h5 class="bebas-font d-inline-block"><?php echo "VCS00".$auth['id']?></h5>
+                    <span class="d-block mt-3">
+                        <button class="btn btn-sm btn-primary fw-bold" data-bs-targe="#otherInfo" data-bs-toggle="modal">OTHER INFO</button>
                     </span>
                 </span>
             </div>
             
-            <div class="col-md-12 mt-5 ">
-                <span class="d-block px-2">
-                    <h3 class="bebas-font text-dark border-bottom-navy">OTHER INFO</h3>
-                    <span class="d-block pt-3">
-                        <h4 class="bebas-font text-dark d-inline-block">Gender:</h4>
-                        <h5 class="bebas-font d-inline-block text-uppercase"><?php echo $auth['gender']; ?></h5>
-                    </span>
-                    <span class="d-block">
-                        <h4 class="bebas-font text-dark d-inline-block">Birthday:</h4>
-                        <h5 class="bebas-font d-inline-block"><?php echo $auth['birthday']; ?></h5>
-                    </span>
-                    <span class="d-block">
-                        <h4 class="bebas-font text-dark block">Address:</h4>
-                        <h5 class="bebas-font block"><?php echo $auth['street_no']." ".$auth['street']." ".$auth['village']." ".$auth['city_municipality']." ".$auth['province']." ".$auth['zip_code']; ?></h5>
-                    </span>
-                </span>
 
-            </div>
 
 
         </div>
     </div>
 </body>
+
+
+
+<div class="modal fade" id="otherInfo" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title bebas-font text-dark border-bottom-navy" id="exampleModalLabel">OTHER INFO</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">            
+                <div class="col-md-12 mt-5 ">
+                    <span class="d-block px-2">
+                        <span class="d-block pt-3">
+                            <h4 class="bebas-font text-dark d-inline-block">Gender:</h4>
+                            <h5 class="bebas-font d-inline-block text-uppercase"><?php echo $auth['gender']; ?></h5>
+                        </span>
+                        <span class="d-block">
+                            <h4 class="bebas-font text-dark d-inline-block">Birthday:</h4>
+                            <h5 class="bebas-font d-inline-block"><?php echo $auth['birthday']; ?></h5>
+                        </span>
+                        <span class="d-block">
+                            <h4 class="bebas-font text-dark block">Address:</h4>
+                            <h5 class="bebas-font block"><?php echo $auth['street_no']." ".$auth['street']." ".$auth['village']." ".$auth['city_municipality']." ".$auth['province']." ".$auth['zip_code']; ?></h5>
+                        </span>
+                    </span>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-sm fw-bold btn-danger" data-bs-dismiss="modal">CLOSE</button>
+            </div>
+          </div>
+        </div>
+    </div>
 
 <?php
 	require_once "../includes/includes_scripts.php";

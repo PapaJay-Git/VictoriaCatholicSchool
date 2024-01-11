@@ -29,8 +29,8 @@ foreach ($subjects as $subject) {
     }
 } 
 
-$finalAverageResult = ($subjects->num_rows == $subjectThatHasGrade) ? "Final Average: ".number_format($finalAverage/$subjects->num_rows, 2) : 'PENDING GRADES';
-$title = $auth['first_name']." ".$auth['last_name']."      ".$finalAverageResult;
+$finalAverageResult = ($subjects->num_rows == $subjectThatHasGrade) ? "Final Average: ".number_format($finalAverage/$subjects->num_rows, 2) : 'Pending Grades';
+$title = ucwords($auth['first_name'])." ".ucwords($auth['last_name'])."      ".$finalAverageResult;
 
 require_once "../includes/header_layout.php";
 

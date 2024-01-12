@@ -75,13 +75,15 @@ try {
     $_SESSION['father_email'] = isset($_POST['father_email']) ? sanitize_input($_POST['father_email']) : NULL;
     $_SESSION['father_occupation'] = isset($_POST['father_occupation']) ? sanitize_input($_POST['father_occupation']) : NULL;
 
+    $_SESSION['middle_name'] = isset($_POST['middle_name']) ? sanitize_input($_POST['middle_name']) : NULL;
+
     if($error){
         errorSender("$fieldName is required", $fileName);
     }
 
-    
-
-    $_SESSION['middle_name'] = isset($_POST['middle_name']) ? sanitize_input($_POST['middle_name']) : NULL;
+    if(!is_numeric($zip_code)){
+        errorSender("Zip code is not numeric.", $fileName);
+    }
     
 
     checkIfGradeIsValid($_POST['grade']);

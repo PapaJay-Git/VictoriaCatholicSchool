@@ -11,15 +11,111 @@ require_once "../includes/header_layout.php";
 
 $days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday'];
 
-$schedules = [
-    '7:00 AM', '7:30 AM', '8:00 AM', '8:30 AM',
-    '9:00 AM', '9:30 AM', '10:00 AM', '10:30 AM',
-    '11:00 AM', '11:30 AM', '12:00 PM', '12:30 PM',
-    '1:00 PM', '1:30 PM', '2:00 PM', '2:30 PM',
-    '3:00 PM', '3:30 PM', '4:00 PM', '4:30 PM',
-    '5:00 PM', '5:30 PM', '6:00 PM'
+$monday = [];
+$tuesday = [];
+$wednesday = [];
+$thursday = [];
+$friday = [];
+
+foreach($classes as $class){ 
+    foreach ($days as $day) {
+        if ($class["is_$day"] == TRUE || $class["is_$day"] == 1) {  
+            $currentArray = [
+                "start" => $class["{$day}_start_time"],
+                "end" => $class["{$day}_end_time"]
+            ];
+            
+            switch ($day) {
+                case 'monday':
+                    $monday[] = $currentArray;
+                    break;
+                case 'tuesday':
+                    $tuesday[] = $currentArray;
+                    break;
+                case 'wednesday':
+                    $wednesday[] = $currentArray;
+                    break;
+                case 'thursday':
+                    $thursday[] = $currentArray;
+                    break;
+                case 'friday':
+                    $friday[] = $currentArray;
+                    break;
+                default:
+                    // Handle unexpected day value
+                    break;
+            }
+        } 
+    }
+} 
+
+function hasDuplicateTimeRanges($schedulesArray) {
+    global $errorDays;
+    $startSet = [];
+    $endSet = [];
+
+    foreach ($schedulesArray as $scheduleData) {
+        $startTime = date('H:i:s', strtotime($scheduleData['start']));
+        $endTime = date('H:i:s', strtotime($scheduleData['end']));
+
+        if (in_array($startTime, $startSet) || in_array($endTime, $endSet)) {
+            return true; 
+        }
+
+        $startSet[] = $startTime;
+        $endSet[] = $endTime;
+    }
+
+    foreach ($schedulesArray as $index1 => $scheduleData1) {
+        $start1 = date('H:i:s', strtotime($scheduleData1['start']));
+        $end1 = date('H:i:s', strtotime($scheduleData1['end']));
+
+        foreach($schedulesArray as $index2 => $scheduleData2){
+            $start2 = date('H:i:s', strtotime($scheduleData2['start']));
+            $end2 = date('H:i:s', strtotime($scheduleData2['end']));
+
+            if($index1 !== $index2){
+                if($start1 >= $start2 && $end1 <= $end2 ||
+                   $start1 < $start2 && $end1 > $end2 ||
+                   $start1 < $end2 && $end1 >= $end2 ){
+                    return true;
+                }
+            }
+        }
+    }
+
+    return false; // No duplicates       
+}
+function isConflictDays($days) {
+    $errorDays = [];
+
+    foreach ($days as $day => $timeRanges) {
+        if (hasDuplicateTimeRanges($timeRanges)) {
+            $errorDays[] = $day;
+        }
+    }
+
+    if (!empty($errorDays)) {
+        $errorList = implode(', ', $errorDays);
+        return "There's a conflict on your schedule ($errorList). Please contact your admin.";
+    }
+
+    return '';
+}
+
+$daysIndexed = [
+    'Monday' => $monday,
+    'Tuesday' => $tuesday,
+    'Wednesday' => $wednesday,
+    'Thursday' => $thursday,
+    'Friday' => $friday,
 ];
 
+$result = isConflictDays($daysIndexed);
+// print_r($monday);
+
+
+// exit();
 ?>
 <body>
 <?php 
@@ -33,11 +129,12 @@ $schedules = [
                     <div class="d-flex justify-content-between align-items-center mb-5">
                         <h5 >ASSIGNED SUBJECT SCHEDULES</h5>
                     </div>
+                    <label class="text-danger"><?php echo $result ?></label>
                         <?php 
                             $count = 1;
                             if($classes->num_rows > 0){
                                 foreach($classes as $class){ 
-                                    echo "<label class='mt-4 d-block'>".$count++.".<b> ".$class['subject_name']."</b></label>
+                                    echo "<label class='mt-3 d-block'>".$count++.".<b> ".$class['subject_name']."</b></label>
                                         <small class='d-block ps-3 pb-4'>".$class['section_name']."-".$class['section_grade']."</small>
                                         
                                         
@@ -54,21 +151,12 @@ $schedules = [
         
                                     foreach ($days as $day) {
                                         if ($class["is_$day"] == TRUE || $class["is_$day"] == 1) {
-                                            echo "<tr>
-                                                    <td><small >".ucfirst($day)."  </small></td>";
-                                                
-                                                    foreach ($schedules as $schedule) {
-                                                        if ($class["{$day}_start_time"] == $schedule) {
-                                                            echo "<td><small >$schedule</small></td>";
-                                                        }
-                                                    }
-                                                
-                                                    foreach ($schedules as $schedule) {
-                                                        if ($class["{$day}_end_time"] == $schedule) {
-                                                            echo "<td><small> - $schedule</small></td>";
-                                                        } 
-                                                    }  
-                                            echo "</tr>";   
+                                            echo "
+                                            <tr>
+                                                <td><small >".ucfirst($day)."  </small></td>
+                                                <td><small >".$class["{$day}_start_time"]."</small></td>
+                                                <td><small>".$class["{$day}_end_time"]."</small></td>
+                                            </tr>";   
                                         } 
                                     
                                     }

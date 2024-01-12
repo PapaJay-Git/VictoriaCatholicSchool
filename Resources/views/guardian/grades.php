@@ -91,16 +91,20 @@ $count = 1;
                                                     <small>0</small>
                                                 </td>
                                                 <td>
-                                                    <small>0</small>
+                                                    <small>0.00</small>
                                                 </td>
                                             </tr>"; 
                                         }else{
                                             $student_grades_row = $student_grades->fetch_assoc();
     
-                                            $final = ($student_grades_row['first_quarter'] * 0.20 +
-                                                    $student_grades_row['second_quarter'] * 0.20 +
-                                                    $student_grades_row['third_quarter'] * 0.20 +
-                                                    $student_grades_row['fourth_quarter'] * 0.40);
+                                            $final = ($student_grades_row['first_quarter'] == 0 ||
+                                                        $student_grades_row['second_quarter'] == 0 ||
+                                                        $student_grades_row['third_quarter'] == 0 ||
+                                                        $student_grades_row['fourth_quarter'] == 0) ? 0 :
+                                                        ($student_grades_row['first_quarter'] * 0.20 +
+                                                        $student_grades_row['second_quarter'] * 0.20 +
+                                                        $student_grades_row['third_quarter'] * 0.20 +
+                                                        $student_grades_row['fourth_quarter'] * 0.40);
                                             
                                             echo "
                                             <tr>

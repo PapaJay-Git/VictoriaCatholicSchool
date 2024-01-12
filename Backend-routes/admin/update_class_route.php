@@ -113,8 +113,24 @@ try {
 
     $grade = getGradeBySectionID($_POST['section'], $conn);
 
-    foreach($_POST['subject'] as $subject){
+    foreach($_POST['subject'] as $index => $subject){
         checkIfSubjectIsTheAsGrade($subject, $grade, $conn);
+
+        foreach ($days as $day) {
+            $isDayKey = 'is_' . $day;
+            $startKey = $day . '_start_time';
+            $endKey = $day . '_end_time';
+
+            if($_POST[$isDayKey][$index] == 1){
+                $start = date('H:i:s', strtotime($_POST[$startKey][$index]));
+                $end = date('H:i:s', strtotime($_POST[$endKey][$index]));
+
+                if($start >= $end){
+                    errorSender("Enabled Days End time should always be higher than start time!", $fileName);
+                }
+            }
+        
+        }
     }
 
     $stmt = $conn->prepare("DELETE FROM classes WHERE section_id = ?");

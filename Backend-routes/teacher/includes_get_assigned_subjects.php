@@ -15,7 +15,9 @@ try {
     FROM classes 
     LEFT JOIN sections ON classes.section_id = sections.id
     LEFT JOIN subjects ON classes.subject_id = subjects.id
-    WHERE teacher_id = ?");
+    WHERE teacher_id = ? 
+    ORDER BY section_grade ASC
+    ");
     $stmt->bind_param("s", $auth['id']);
     $stmt->execute();
     

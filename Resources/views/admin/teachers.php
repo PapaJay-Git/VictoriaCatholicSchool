@@ -79,7 +79,7 @@ function convertTxt($string = null){
                             }
                             if($advisories->num_rows == 0){
                               ?>
-                                <small class="text-secondary d-block">None</small>
+                                <small class="d-block">FLOATING TEACHER</small>
                               <?php
                             }
                           ?>

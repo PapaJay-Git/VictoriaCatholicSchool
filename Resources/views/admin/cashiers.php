@@ -51,7 +51,7 @@ function convertTxt($string = null){
                     ?>
                     <tr>
                       <td>
-                          <small class="text-dark"><?php echo convertTxt($row['first_name'].", ".$row['last_name']) ?></small>
+                          <small class="text-dark"><?php echo convertTxt($row['last_name'].", ".$row['first_name']) ?></small>
                       </td>
                       <td>
                           <small class="text-dark"><?php echo $row['email'] ?></small>

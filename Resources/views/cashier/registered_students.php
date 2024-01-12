@@ -14,6 +14,11 @@ function cropText($text, $maxLength = 25, $ellipsis = '...') {
     return mb_strlen($text) > $maxLength ? mb_substr($text, 0, $maxLength) . $ellipsis : $text;
 }
 
+function convertTxt($string = null){
+
+  return $string == null ? '' : ucwords(strtolower($string));
+}
+
 ?>
 <body>
     <?php 
@@ -28,7 +33,6 @@ function cropText($text, $maxLength = 25, $ellipsis = '...') {
               <table id="sectionsTable">
                 <thead>
                   <tr>
-                    <th scope="col">#</th>
                     <th scope="col">Name</th>
                     <th scope="col">Email</th>
                     <th scope="col">Student No</th>
@@ -41,8 +45,7 @@ function cropText($text, $maxLength = 25, $ellipsis = '...') {
                   foreach($students as $student){
                     echo "
                       <tr>
-                          <td>".$count++."</td>
-                          <td>{$student['first_name']} {$student['last_name']}</td>
+                          <td>".convertTxt($student['last_name'].", ".$student['first_name'])."</td>
                           <td>{$student['email']}</td>
                           <td>VCS00{$student['id']}</td>
                           <td>".($student['section_name'] == NULL ? 'None' : $student['section_name']." ".$student['section_grade'])."</td>

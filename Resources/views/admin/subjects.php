@@ -24,7 +24,6 @@ require_once "../includes/header_layout.php";
               <table id="sectionsTable">
                 <thead>
                   <tr>
-                    <th scope="col">#</th>
                     <th scope="col">Grade</th>
                     <th scope="col">Number of Subjects</th>
                     <th scope="col">Action</th>
@@ -35,11 +34,6 @@ require_once "../includes/header_layout.php";
                   foreach($result as $row){
                     ?>
                     <tr>
-                      <td>
-                        <small class="text-dark">
-                          <?php echo $count++ ?>
-                        </small>
-                      </td>
                       <td >
                         <small class="text-dark">
                           <?php echo $row['grade'] ?>

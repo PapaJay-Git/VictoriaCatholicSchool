@@ -43,21 +43,10 @@ require_once "../includes/header_layout.php";
                         <h4 class="bebas-font text-dark d-inline-block">Phone:</h4>
                         <h5 class="bebas-font d-inline-block"><?php echo $auth['phone'] ?></h5>
                     </span>
-                </span>
-            </div>
-            <div class="col-md-12 mt-5 ">
-                <span class="d-block px-2">
-                    <h3 class="bebas-font text-dark border-bottom-navy">OTHER INFO</h3>
-                    <span class="d-block pt-3">
-                        <h4 class="bebas-font text-dark d-inline-block">Gender:</h4>
-                        <h5 class="bebas-font d-inline-block text-uppercase"><?php echo $auth['gender']; ?></h5>
-                    </span>
-                    <span class="d-block">
-                        <h4 class="bebas-font text-dark d-inline-block">Birthday:</h4>
-                        <h5 class="bebas-font d-inline-block"><?php echo $auth['birthday']; ?></h5>
+                    <span class="d-block mt-3">
+                        <button class="btn btn-sm btn-primary fw-bold" data-bs-target="#otherInfo" data-bs-toggle="modal">OTHER INFO</button>
                     </span>
                 </span>
-
             </div>
 
 
@@ -65,6 +54,32 @@ require_once "../includes/header_layout.php";
     </div>
 </body>
 
+
+
+<div class="modal fade" id="otherInfo" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title bebas-font text-dark border-bottom-navy" id="exampleModalLabel">OTHER INFO</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">            
+                <div class="col-md-12">
+                    <span class="d-block px-2">
+                        <span class="d-block mt-3">
+                            <h4 class="bebas-font text-dark d-inline-block">Gender:</h4>
+                            <h5 class="bebas-font d-inline-block text-uppercase"><?php echo $auth['gender']; ?></h5>
+                        </span>
+                        <span class="d-block mt-3">
+                            <h4 class="bebas-font text-dark d-inline-block">Birthday:</h4>
+                            <h5 class="bebas-font d-inline-block"><?php echo $auth['birthday']; ?></h5>
+                        </span>
+                    </span>
+                </div>
+            </div>
+          </div>
+        </div>
+    </div>
 <?php
 	require_once "../includes/includes_scripts.php";
 ?>

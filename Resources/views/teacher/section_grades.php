@@ -9,6 +9,12 @@ $title = "Teacher - ".$section_data['grade']." ".$section_data['name']." Student
 require_once "../includes/header_layout.php";
 
 $count = 1;
+
+function convertTxt($string = null){
+
+    return $string == null ? '' : ucwords(strtolower($string));
+  }
+
 ?>
 <body>
 <?php 
@@ -29,7 +35,6 @@ $count = 1;
                             <table id="gradesTable">
                                 <thead>
                                 <tr>
-                                    <th scope="col">#</th>
                                     <th scope="col">Subject</th>
                                     <th scope="col">Name</th>
                                     <th scope="col">Email</th>
@@ -52,13 +57,10 @@ $count = 1;
                                                     echo "
                                                     <tr>
                                                         <td>
-                                                            <small>".$count++."</small>
-                                                        </td>
-                                                        <td>
                                                             <small class='fw-bold text-uppercase'>".$subject['name']."</small>
                                                         </td>
                                                         <td>
-                                                            <small>".$student['first_name']." ".$student['last_name']."</small>
+                                                            <small>".convertTxt($student['last_name'].', '.$student['first_name'])."</small>
                                                         </td>
                                                         <td>
                                                             <small>".$student['email']."</small>
@@ -90,14 +92,11 @@ $count = 1;
                                                     echo "
                                                     <tr>
                                                         <td>
-                                                            <small>".$count++."</small>
-                                                        </td>
-                                                        <td>
                                                             <small class='fw-bold text-uppercase'>".$subject['name']."</small>
                                                         </td>
                                                         <td>
                                                             <input type='hidden' name='student_id[]' value='".$student['id']."'>
-                                                            <small>".$student['first_name']." ".$student['last_name']."</small>
+                                                            <small>".convertTxt($student['last_name'].', '.$student['first_name'])."</small>
                                                         </td>
                                                         <td>
                                                             <small>".$student['email']."</small>

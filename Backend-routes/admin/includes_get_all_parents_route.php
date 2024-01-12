@@ -8,7 +8,7 @@ try {
     require_once $_SERVER['DOCUMENT_ROOT']."/Middleware/CheckIfAdmin.php";
 
     $role = 'guardian';
-    $stmt = $conn->prepare("SELECT parents.*, CONCAT(student.last_name, ',',student.first_name, ' ', student.middle_name) as student_full_name, student.email as student_email, sections.name as section_name, sections.grade
+    $stmt = $conn->prepare("SELECT parents.*, CONCAT(student.last_name, ', ',student.first_name, ' ', student.middle_name) as student_full_name, student.email as student_email, sections.name as section_name, sections.grade
     FROM users as parents 
     LEFT JOIN guardians ON parents.id = guardians.guardian_id 
     LEFT JOIN users as student ON guardians.student_id = student.id

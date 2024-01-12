@@ -19,6 +19,11 @@ function getSession($data) {
 
   return null; 
 }
+
+function convertTxt($string = null){
+
+  return $string == null ? '' : ucwords(strtolower($string));
+}
 ?>
 <body>
     <?php 
@@ -34,9 +39,7 @@ function getSession($data) {
               <table id="teachersTable">
                 <thead>
                   <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">First Name</th>
-                    <th scope="col">Last Name</th>
+                    <th scope="col">Name</th>
                     <th scope="col">Email</th>
                     <th scope="col">Action</th>
                   </tr>
@@ -48,14 +51,7 @@ function getSession($data) {
                     ?>
                     <tr>
                       <td>
-                        <small class="text-dark">
-                          <?php echo $count++ ?>
-                        </small></td>
-                      <td>
-                          <small class="text-dark"><?php echo $row['first_name'] ?></small>
-                      </td>
-                      <td>
-                          <small class="text-dark"><?php echo $row['last_name'] ?></small>
+                          <small class="text-dark"><?php echo convertTxt($row['first_name'].", ".$row['last_name']) ?></small>
                       </td>
                       <td>
                           <small class="text-dark"><?php echo $row['email'] ?></small>

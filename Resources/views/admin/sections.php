@@ -24,7 +24,6 @@ require_once "../includes/header_layout.php";
               <table id="sectionsTable">
                 <thead>
                   <tr>
-                    <th scope="col">#</th>
                     <th scope="col">Title</th>
                     <th scope="col">Number of Sections</th>
                     <th scope="col">Action</th>
@@ -32,32 +31,22 @@ require_once "../includes/header_layout.php";
                 </thead>
                 <tbody id="tbody-sections">
                 <tr>
-                      <td>
-                        <small class="text-dark">
-                          <?php echo $count++ ?>
-                        </small>
-                      </td>
-                      <td>
-                        <small class="text-dark">
-                          Manage Advisory
-                        </small>
-                      </td>
-                      <td>
-                        <?php echo $sectionCount ?>
-                      </td>
-                      <td>
-                          <a class="btn btn-sm btn-primary fw-bold" href="view_advisory.php">OPEN</a>
-                      </td>
-                    </tr>
+                  <td>
+                    <small class="text-dark">
+                      Manage Advisory
+                    </small>
+                  </td>
+                  <td>
+                    <?php echo $sectionCount ?>
+                  </td>
+                  <td>
+                      <a class="btn btn-sm btn-primary fw-bold" href="view_advisory.php">OPEN</a>
+                  </td>
+                </tr>
                   <?php
                   foreach($result as $row){
                     ?>
                     <tr>
-                      <td>
-                        <small class="text-dark">
-                          <?php echo $count++ ?>
-                        </small>
-                      </td>
                       <td>
                         <small class="text-dark">
                           Grade <?php echo $row['grade'] ?>

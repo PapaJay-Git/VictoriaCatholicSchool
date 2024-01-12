@@ -37,7 +37,6 @@ function getSession($data) {
               <table id="sectionsTable">
                 <thead>
                   <tr>
-                    <th scope="col">#</th>
                     <th scope="col">Class Names</th>
                     <th scope="col">Action</th>
                   </tr>
@@ -47,11 +46,6 @@ function getSession($data) {
                   foreach($result as $row){
                     ?>
                     <tr>
-                      <td>
-                        <small class="text-dark">
-                          <?php echo $count++ ?>
-                        </small>
-                      </td>
                       <td>
                         <small class="text-dark">
                           <?php echo strtoupper($row['name'])."-".$accountID ?>

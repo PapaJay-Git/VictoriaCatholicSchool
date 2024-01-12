@@ -57,7 +57,6 @@ $count = 1;
                             <table id="gradesTable">
                                 <thead>
                                 <tr>
-                                    <th scope="col">#</th>
                                     <th scope="col">Subject</th>
                                     <th scope="col">1st <small>(20%)</small></th>
                                     <th scope="col">2nd <small>(20%)</small></th>
@@ -76,9 +75,6 @@ $count = 1;
                                         if($student_grades->num_rows <= 0){
                                             echo "
                                             <tr>
-                                                <td>
-                                                    <small>".$count++."</small>
-                                                </td>
                                                 <td>
                                                     <small class='fw-bold text-uppercase'>".$subject['name']."</small>
                                                 </td>
@@ -108,9 +104,6 @@ $count = 1;
                                             
                                             echo "
                                             <tr>
-                                                <td>
-                                                    <small>".$count++."</small>
-                                                </td>
                                                 <td>
                                                     <small class='fw-bold text-uppercase'>".$subject['name']."</small>
                                                 </td>

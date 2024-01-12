@@ -39,7 +39,6 @@ $schedules = [
                         <table id="teachersTable">
                             <thead>
                             <tr>
-                                <th scope="col">#</th>
                                 <th scope="col">SUBJECT NAME</th>
                                 <th scope="col">SECTION</th>
                                 <th scope="col">Action</th>
@@ -50,10 +49,6 @@ $schedules = [
                             foreach($classes as $class){
                                 ?>
                                 <tr>
-                                <td>
-                                    <small class="text-dark">
-                                    <?php echo $count++ ?>
-                                    </small></td>
                                 <td>
                                     <small class="text-dark"><?php echo $class['subject_name'] ?></small>
                                 </td>

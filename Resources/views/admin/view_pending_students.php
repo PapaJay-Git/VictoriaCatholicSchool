@@ -20,6 +20,11 @@ function getSession($data) {
     return null; 
 }
 
+function convertTxt($string = null){
+
+  return $string == null ? '' : ucwords(strtolower($string));
+}
+
 ?>
 <body>
     <?php 
@@ -37,9 +42,7 @@ function getSession($data) {
               <table id="sectionsTable">
                 <thead>
                   <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">First Name</th>
-                    <th scope="col">Last Name</th>
+                    <th scope="col">Name</th>
                     <th scope="col">Email</th>
                     <th scope="col">Enrolled Grade</th>
                     <th scope="col">Student Type</th>
@@ -53,9 +56,7 @@ function getSession($data) {
                     $dateTime = new DateTime($student['created_at']);
                     echo "
                       <tr>
-                          <td>".$count++."</td>
-                          <td>{$student['first_name']}</td>
-                          <td>{$student['last_name']}</td>
+                          <td>".convertTxt($student['last_name'].', '.$student['first_name'])." </td>
                           <td>{$student['email']}</td>
                           <td>{$student['requested_grade']}</td>
                           <td>".strtoupper($student['student_type'])."</td>

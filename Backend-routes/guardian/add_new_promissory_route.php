@@ -75,15 +75,15 @@ try {
     $admins = $stmt->get_result();
 
 
-    foreach($subject_teachers as $subject_teacher){
-        $stmt = $conn->prepare("DELETE FROM notifications where notifiable_id = ? AND data = ?");
-        $stmt->bind_param("is", $subject_teacher['teacher_id'], $data);
-        $stmt->execute();
+    // foreach($subject_teachers as $subject_teacher){
+    //     $stmt = $conn->prepare("DELETE FROM notifications where notifiable_id = ? AND data = ?");
+    //     $stmt->bind_param("is", $subject_teacher['teacher_id'], $data);
+    //     $stmt->execute();
 
-        $stmt = $conn->prepare("INSERT INTO notifications (data, notifiable_id) VALUES (?, ?)");
-        $stmt->bind_param("si", $data, $subject_teacher['teacher_id']);
-        $stmt->execute();
-    }
+    //     $stmt = $conn->prepare("INSERT INTO notifications (data, notifiable_id) VALUES (?, ?)");
+    //     $stmt->bind_param("si", $data, $subject_teacher['teacher_id']);
+    //     $stmt->execute();
+    // }
     foreach($admins as $admin){
         $stmt = $conn->prepare("DELETE FROM notifications where notifiable_id = ? AND data = ?");
         $stmt->bind_param("is", $admin['id'], $data);
@@ -93,15 +93,15 @@ try {
         $stmt->bind_param("si", $data, $admin['id']);
         $stmt->execute();
     }
-    foreach($avisors as $avisor){
-        $stmt = $conn->prepare("DELETE FROM notifications where notifiable_id = ? AND data = ?");
-        $stmt->bind_param("is", $avisor['advisory_teacher_id'], $data);
-        $stmt->execute();
+    // foreach($avisors as $avisor){
+    //     $stmt = $conn->prepare("DELETE FROM notifications where notifiable_id = ? AND data = ?");
+    //     $stmt->bind_param("is", $avisor['advisory_teacher_id'], $data);
+    //     $stmt->execute();
 
-        $stmt = $conn->prepare("INSERT INTO notifications (data, notifiable_id) VALUES (?, ?)");
-        $stmt->bind_param("si", $data, $avisor['advisory_teacher_id']);
-        $stmt->execute();
-    }
+    //     $stmt = $conn->prepare("INSERT INTO notifications (data, notifiable_id) VALUES (?, ?)");
+    //     $stmt->bind_param("si", $data, $avisor['advisory_teacher_id']);
+    //     $stmt->execute();
+    // }
 
     $stmt->close();
     $conn->close();

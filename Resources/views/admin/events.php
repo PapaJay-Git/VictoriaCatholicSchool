@@ -46,7 +46,6 @@ function getSession($data) {
                 <table id="teachersTable">
                     <thead>
                     <tr>
-                        <th scope="col">#</th>
                         <th scope="col">Title</th>
                         <th scope="col">Description</th>
                         <th scope="col">Show Until</th>
@@ -58,11 +57,6 @@ function getSession($data) {
                     foreach($events as $event){
                         ?>
                         <tr>
-                            <td>
-                                <small class="text-dark">
-                                <?php echo $count++ ?>
-                                </small>
-                            </td>
                             <td>
                                 <small class="text-dark"><?php echo limitString($event['title'], 15) ?></small>
                             </td>

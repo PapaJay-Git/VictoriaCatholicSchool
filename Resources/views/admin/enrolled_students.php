@@ -24,6 +24,11 @@ if ($currentMonth >= 5) {
     $currentYear -= 1;
 }
 
+function convertTxt($string = null){
+
+  return $string == null ? '' : ucwords(strtolower($string));
+}
+
 ?>
 <body>
     <?php 
@@ -39,7 +44,6 @@ if ($currentMonth >= 5) {
               <table id="sectionsTable">
                 <thead>
                   <tr>
-                    <th scope="col">#</th>
                     <th scope="col">Name</th>
                     <th scope="col">Email</th>
                     <th scope="col">Student No</th>
@@ -71,8 +75,7 @@ if ($currentMonth >= 5) {
                     $lockQuestion = $student['is_locked'] == 1 ? 'Are you sure you want to unlock this account?' : 'Are you sure you want to lock this account?';
                     echo "
                       <tr>
-                          <td>".$count++."</td>
-                          <td>{$student['first_name']} {$student['last_name']}</td>
+                          <td>".convertTxt($student['last_name'].', '.$student['first_name'])." </td>
                           <td>{$student['email']}</td>
                           <td>VCS00{$student['id']}</td>
                           <td>".($student['section_name'] == NULL ? 'None' : $student['section_name']." ".$student['section_grade'])."</td>

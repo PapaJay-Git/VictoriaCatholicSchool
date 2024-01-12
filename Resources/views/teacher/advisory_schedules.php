@@ -43,28 +43,45 @@ $days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday'];
                                                 }
                                             }
                                             echo "</small>
-                                        </div>";
+                                        </div>
+                                        
+                                        <div class='table-responsive ps-2'>
+                                        <table class='table table-bordered '>
+                                            <thead>
+                                                <tr>
+                                                <th scope='col'>Day</th>
+                                                <th scope='col'>Start Time</th>
+                                                <th scope='col'>End Time</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                        ";
             
                                         foreach ($days as $day) {
                                             if ($data["is_$day"] == TRUE || $data["is_$day"] == 1) {
-                                                echo "<div class='px-3 mb-3'>
-                                                <small >".ucfirst($day)."  </small>";
+                                                echo "
+                                                <tr>
+                                                    <td><small >".ucfirst($day)."  </small></td>";
                                             
                                                 foreach ($schedules as $schedule) {
                                                     if ($data["{$day}_start_time"] == $schedule) {
-                                                        echo "<small >$schedule</small>";
+                                                        echo "<td><small >$schedule</small></td>";
                                                     }
                                                 }
                                             
                                                 foreach ($schedules as $schedule) {
                                                     if ($data["{$day}_end_time"] == $schedule) {
-                                                        echo "<small> - $schedule</small>";
+                                                        echo "<td><small> - $schedule</small></td>";
                                                     } 
                                                 }  
-                                                echo "</div>";   
+                                               
+                                            echo "</tr>";     
                                             } 
                                         
                                         }
+                                        echo "</tbody>
+                                    </table>
+                                </div>";
                                         
                                     } 
                                 }else{

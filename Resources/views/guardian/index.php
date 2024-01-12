@@ -99,7 +99,10 @@ $balance = (9 - $countMatches) * 1131.3;
                                         <small class="text-dark fw-bold d-block">INSTALLMENT</small>
                                         <small>MONTHS TO BE PAID</small>
                                         <small class="d-block ms-1  text-secondary mt-2">Checked checkboxes are paid months.</small>
-                                        <small class="d-block ms-1  text-secondary ">Each month is ₱1,131.3 </small>
+                                        <span class="d-block mb-2 ms-1 ">
+                                            <small class="fw-bold text-dark">EACH MONTH</small> 
+                                            <small class="fw-bold text-primary ">₱1,131.3</small>
+                                        </span>
                                         <small class="d-block ms-1  text-secondary mb-2">June is included on Down Payment.</small>
                                         <div class="ms-1">
                                             <input type="checkbox" id="june" checked disabled>
@@ -152,8 +155,8 @@ $balance = (9 - $countMatches) * 1131.3;
                                         </div>
 
                                         <div class="ms-1 mt-3">
-                                            <small><b>REMAINING BALANCE</b>: ₱ '.$balance.'<small>
-                                            <small class="d-block fw-bold text-secondary">'.((9 - $countMatches) > 0 ? 'Next Payment should be on 15th of the Month.' : '').'<small>
+                                            <h5 class="d-block"><b>REMAINING BALANCE:</b> <h5 class="fw-bold text-primary" id="remainingBalance">₱ '.$balance.'</h5></h5>
+                                            <small class="d-block fw-bold text-dark">'.((9 - $countMatches) > 0 ? 'Next Payment should be on 15th of the Month.' : '').'</small>
                                         </div>
 
                                     </span>';

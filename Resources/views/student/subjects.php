@@ -32,9 +32,12 @@ $days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday'];
                                 $stmt->bind_param("ii", $sectionID, $subject['id']);
                                 $stmt->execute();
                                 $classes = $stmt->get_result();
+
+                                echo "<label class='mt-5 '>".$count++.".<b> ".$subject['name']."</b></label>";
+
                                 if($classes->num_rows > 0){
                                     foreach($classes as $data){ 
-                                        echo "<label class='mt-5 '>".$count++.".<b> ".$subject['name']."</b></label>
+                                        echo "
                                         <div class='px-3 mt-3 mb-3'>
                                             <small >Teacher: ";
                                             foreach($teachers as $teacher){
@@ -43,32 +46,54 @@ $days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday'];
                                                 }
                                             }
                                             echo "</small>
-                                        </div>";
+                                        </div>
+                                        
+                                        <div class='table-responsive ps-2'>
+                                        <table class='table table-bordered '>
+                                            <thead>
+                                                <tr>
+                                                <th scope='col'>Day</th>
+                                                <th scope='col'>Start Time</th>
+                                                <th scope='col'>End Time</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>";
             
                                         foreach ($days as $day) {
                                             if ($data["is_$day"] == TRUE || $data["is_$day"] == 1) {
-                                                echo "<div class='px-3 mb-3'>
-                                                <small >".ucfirst($day)."  </small>";
+                                                echo "
+                                                    <tr>
+                                                        <td><small >".ucfirst($day)."</small></td>
+                                                        ";
+                                                
                                             
-                                                foreach ($schedules as $schedule) {
-                                                    if ($data["{$day}_start_time"] == $schedule) {
-                                                        echo "<small >$schedule</small>";
-                                                    }
-                                                }
-                                            
-                                                foreach ($schedules as $schedule) {
-                                                    if ($data["{$day}_end_time"] == $schedule) {
-                                                        echo "<small> - $schedule</small>";
-                                                    } 
-                                                }  
-                                                echo "</div>";   
+                                                        foreach ($schedules as $schedule) {
+                                                            if ($data["{$day}_start_time"] == $schedule) {
+                                                                echo "
+                                                                        <td>
+                                                                            <small >$schedule</small>
+                                                                        </td>";
+                                                            }
+                                                        }
+                                                    
+                                                        foreach ($schedules as $schedule) {
+                                                            if ($data["{$day}_end_time"] == $schedule) {
+                                                                echo "<td>
+                                                                        <small> $schedule</small>
+                                                                        </td>";
+                                                            } 
+                                                        }  
+                                                echo "</tr>";
+                                                 
                                             } 
                                         
                                         }
+                                        echo "</tbody>
+                                        </table>
+                                    </div>";  
+                                        
                                         
                                     } 
-                                }else{
-                                    echo "<label class='mt-5 d-block'>".$count++.".<b> ".$subject['name']."</b></label>";
                                 }
                             }
                             

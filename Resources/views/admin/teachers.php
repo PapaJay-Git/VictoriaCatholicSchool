@@ -19,6 +19,11 @@ function getSession($data) {
 
   return null; 
 }
+
+function convertTxt($string = null){
+
+  return $string == null ? '' : ucwords(strtolower($string));
+}
 ?>
 <body>
     <?php 
@@ -34,31 +39,50 @@ function getSession($data) {
               <table id="teachersTable">
                 <thead>
                   <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">First Name</th>
-                    <th scope="col">Last Name</th>
+                    <th scope="col">Name</th>
                     <th scope="col">Email</th>
+                    <th scope="col">Advisories</th>
                     <th scope="col">Action</th>
                   </tr>
                 </thead>
                 <tbody id="tbody-teachers">
                   <?php
                   foreach($result as $row){
+
+                    $stmt = $conn->prepare("SELECT * FROM sections WHERE advisory_teacher_id = ?");
+                    $stmt->bind_param('i', $row['id']);
+                    $stmt->execute();
+                    $advisories = $stmt->get_result();
+
                     $lockQuestion = $row['is_locked'] == 1 ? 'Are you sure you want to unlock this account?' : 'Are you sure you want to lock this account?';
                     ?>
                     <tr>
                       <td>
-                        <small class="text-dark">
-                          <?php echo $count++ ?>
-                        </small></td>
-                      <td>
-                          <small class="text-dark"><?php echo $row['first_name'] ?></small>
-                      </td>
-                      <td>
-                          <small class="text-dark"><?php echo $row['last_name'] ?></small>
+                          <small class="text-dark"><?php echo convertTxt($row['last_name'].", ".$row['first_name']) ?></small>
                       </td>
                       <td>
                           <small class="text-dark"><?php echo $row['email'] ?></small>
+                      </td>
+                      <td>
+                          <?php 
+                            $advisory_count = 0;
+                            foreach($advisories as $advisory){
+                              $advisory_count++;
+                              ?>
+                                <small class="text-dark d-block">
+                                    <?php 
+                                        echo $advisory['name']."-".$advisory['grade'];
+                                        echo ($advisories->num_rows > 1) ? (($advisories->num_rows > $advisory_count) ? ', ' : '') : '';
+                                     ?>
+                                </small>
+                              <?php
+                            }
+                            if($advisories->num_rows == 0){
+                              ?>
+                                <small class="text-secondary d-block">None</small>
+                              <?php
+                            }
+                          ?>
                       </td>
                       <td>
                           <a class="btn btn-sm btn-primary fw-bold" href="update-teacher.php?id=<?php echo $row['id'] ?>">UPDATE</a>

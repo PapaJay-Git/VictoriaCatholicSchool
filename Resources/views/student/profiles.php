@@ -44,7 +44,7 @@ require_once "../includes/header_layout.php";
                         <h5 class="bebas-font d-inline-block"><?php echo $auth['phone'] ?></h5>
                     </span>
                     <span class="d-block mt-3">
-                        <button class="btn btn-sm btn-primary fw-bold" data-bs-targe="#otherInfo" data-bs-toggle="modal">OTHER INFO</button>
+                        <button class="btn btn-sm btn-primary fw-bold" data-bs-target="#otherInfo" data-bs-toggle="modal">OTHER INFO</button>
                     </span>
                 </span>
             </div>
@@ -66,25 +66,22 @@ require_once "../includes/header_layout.php";
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">            
-                <div class="col-md-12 mt-5 ">
+                <div class="col-md-12">
                     <span class="d-block px-2">
                         <span class="d-block pt-3">
                             <h4 class="bebas-font text-dark d-inline-block">Gender:</h4>
                             <h5 class="bebas-font d-inline-block text-uppercase"><?php echo $auth['gender']; ?></h5>
                         </span>
-                        <span class="d-block">
+                        <span class="d-block mt-3">
                             <h4 class="bebas-font text-dark d-inline-block">Birthday:</h4>
                             <h5 class="bebas-font d-inline-block"><?php echo $auth['birthday']; ?></h5>
                         </span>
-                        <span class="d-block">
+                        <span class="d-block mt-3">
                             <h4 class="bebas-font text-dark block">Address:</h4>
                             <h5 class="bebas-font block"><?php echo $auth['street_no']." ".$auth['street']." ".$auth['village']." ".$auth['city_municipality']." ".$auth['province']." ".$auth['zip_code']; ?></h5>
                         </span>
                     </span>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-sm fw-bold btn-danger" data-bs-dismiss="modal">CLOSE</button>
             </div>
           </div>
         </div>

@@ -32,35 +32,49 @@ $schedules = [
                 <div class="card-body">
                     <div class="d-flex justify-content-between align-items-center mb-5">
                         <h5 >ASSIGNED SUBJECT SCHEDULES</h5>
-                        <a href="advisories.php" class="btn btn-danger btn-sm fw-bold">BACK</a>
                     </div>
                         <?php 
                             $count = 1;
                             if($classes->num_rows > 0){
                                 foreach($classes as $class){ 
                                     echo "<label class='mt-4 d-block'>".$count++.".<b> ".$class['subject_name']."</b></label>
-                                        <small class='d-block ps-3 pb-4'>".$class['section_name']."-".$class['section_grade']."</small>";
+                                        <small class='d-block ps-3 pb-4'>".$class['section_name']."-".$class['section_grade']."</small>
+                                        
+                                        
+                                        <div class='table-responsive ps-2'>
+                                        <table class='table table-bordered '>
+                                            <thead>
+                                                <tr>
+                                                <th scope='col'>Day</th>
+                                                <th scope='col'>Start Time</th>
+                                                <th scope='col'>End Time</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>";
         
                                     foreach ($days as $day) {
                                         if ($class["is_$day"] == TRUE || $class["is_$day"] == 1) {
-                                            echo "<div class='px-3 mt-2'>
-                                            <small >".ucfirst($day)."  </small>";
-                                        
-                                            foreach ($schedules as $schedule) {
-                                                if ($class["{$day}_start_time"] == $schedule) {
-                                                    echo "<small >$schedule</small>";
-                                                }
-                                            }
-                                        
-                                            foreach ($schedules as $schedule) {
-                                                if ($class["{$day}_end_time"] == $schedule) {
-                                                    echo "<small> - $schedule</small>";
-                                                } 
-                                            }  
-                                            echo "</div>";   
+                                            echo "<tr>
+                                                    <td><small >".ucfirst($day)."  </small></td>";
+                                                
+                                                    foreach ($schedules as $schedule) {
+                                                        if ($class["{$day}_start_time"] == $schedule) {
+                                                            echo "<td><small >$schedule</small></td>";
+                                                        }
+                                                    }
+                                                
+                                                    foreach ($schedules as $schedule) {
+                                                        if ($class["{$day}_end_time"] == $schedule) {
+                                                            echo "<td><small> - $schedule</small></td>";
+                                                        } 
+                                                    }  
+                                            echo "</tr>";   
                                         } 
                                     
                                     }
+                                    echo "</tbody>
+                                    </table>
+                                </div>";
                                     
                                 } 
                             }else{

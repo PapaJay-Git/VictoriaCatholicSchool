@@ -10,6 +10,11 @@ $count = 1;
 
 require_once "../includes/header_layout.php";
 
+function convertTxt($string = null){
+
+  return $string == null ? '' : ucwords(strtolower($string));
+}
+
 ?>
 <body>
     <?php 
@@ -30,9 +35,7 @@ require_once "../includes/header_layout.php";
               <table id="sectionsTable">
                 <thead>
                   <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">First Name</th>
-                    <th scope="col">Last Name</th>
+                    <th scope="col">Name</th>
                     <th scope="col">Email</th>
                     <th scope="col">Student No</th>
                   </tr>
@@ -42,9 +45,7 @@ require_once "../includes/header_layout.php";
                   foreach($students as $student){
                     echo "
                       <tr>
-                          <td>".$count++."</td>
-                          <td>{$student['first_name']}</td>
-                          <td>{$student['last_name']}</td>
+                          <td>".convertTxt($student['last_name'].', '.$student['first_name'])." </td>
                           <td>{$student['email']}</td>
                           <td>VCS00{$student['id']}</td>
                       </tr>

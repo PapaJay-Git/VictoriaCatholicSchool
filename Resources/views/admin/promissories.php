@@ -20,6 +20,10 @@ function limitString($inputString, $maxLength = 15) {
     return $limitedString;
 }
 
+function convertTxt($string = null){
+
+    return $string == null ? '' : ucwords(strtolower($string));
+  }
 ?>
 <body>
     <?php 
@@ -35,7 +39,6 @@ function limitString($inputString, $maxLength = 15) {
                 <table id="teachersTable">
                     <thead>
                     <tr>
-                        <th scope="col">#</th>
                         <th scope="col">Name</th>
                         <th scope="col">Email</th>
                         <th scope="col">Student No</th>
@@ -53,11 +56,7 @@ function limitString($inputString, $maxLength = 15) {
                         ?>
                         <tr>
                         <td>
-                            <small class="text-dark">
-                            <?php echo $count++ ?>
-                            </small></td>
-                        <td>
-                            <small class="text-dark"><?php echo $promissory['first_name']." ".$promissory['last_name'] ?></small>
+                            <small class="text-dark"><?php echo convertTxt($promissory['last_name'].', '.$promissory['first_name']) ?></small>
                         </td>
                         <td>
                             <small class="text-dark"><?php echo $promissory['email'] ?></small>
@@ -80,7 +79,7 @@ function limitString($inputString, $maxLength = 15) {
                             ?>
                         </td>
                         <td>
-                            <small class="text-dark text-uppercase"><?php echo $promissory['parent_info'] ?></small>
+                            <small class="text-dark"><?php echo convertTxt($promissory['parent_info']) ?></small>
                         </td>
                         <td>
                             <small class="text-dark"><?php echo $promissory['created_at'] ?></small>

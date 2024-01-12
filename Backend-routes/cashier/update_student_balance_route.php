@@ -62,14 +62,17 @@ try {
     ];
 
     if($payment_type == 'down'){
+
         if(isset($_POST['month']) && !is_array($_POST['month'])){
             errorSender('Month is not in array format', $fileName);
         }
 
-        $stmt = $conn->prepare("DELETE FROM paidMonths where student_id = ? and date = ?");
-        foreach($acceptableMonths as $acceptableMonth){
-            $stmt->bind_param("is", $accountID, $acceptableMonth);
-            $stmt->execute();
+        if(!isset($_POST['month'])){
+            $stmt = $conn->prepare("DELETE FROM paidMonths where student_id = ? and date = ?");
+            foreach($acceptableMonths as $acceptableMonth){
+                $stmt->bind_param("is", $accountID, $acceptableMonth);
+                $stmt->execute();
+            }
         }
 
         if(isset($_POST['month']) && is_array($_POST['month'])){
@@ -79,6 +82,20 @@ try {
                     errorSender('One or more date is invalid', $fileName);
                 }
             }
+
+            for($i = 8; $i > 0;$i--){
+                //echo $acceptableMonths[$i]." ".$acceptableMonths[($i-1)]."<br>";
+                if(in_array($acceptableMonths[$i], $months) && !in_array($acceptableMonths[$i-1], $months)){
+                     errorSender('You cannot skip a Month.', $fileName);
+                }
+            }
+
+            $stmt = $conn->prepare("DELETE FROM paidMonths where student_id = ? and date = ?");
+            foreach($acceptableMonths as $acceptableMonth){
+                $stmt->bind_param("is", $accountID, $acceptableMonth);
+                $stmt->execute();
+            }
+
             $stmt = $conn->prepare("INSERT INTO paidMonths(student_id, date) values(?,?) ");
             foreach($months as $month){
                 $stmt->bind_param("is", $accountID, $month);

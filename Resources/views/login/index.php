@@ -1,5 +1,5 @@
 <?php
-session_start();
+require_once $_SERVER['DOCUMENT_ROOT']."/Backend-routes/admin/includes_get_events_home.php";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -24,6 +24,9 @@ session_start();
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 	
+
+  <link rel="stylesheet" href="../../owlcarousel/owl.carousel.min.css">
+  <link rel="stylesheet" href="../../owlcarousel/owl.theme.default.min.css">
 </head>
 
 <body class="body-home">
@@ -222,6 +225,49 @@ session_start();
 </section>
 <!-- Admission -->
 
+
+<!-- Events -->
+<section id="about">
+  <div class="bg-black">
+    <div class="container py-4">
+      <div class="row">
+      
+      <div class="p-5 mb-2 bg-black">
+          <h3 class="display-6 text-white fw-bold pb-4"><span style="border-bottom: 3px solid #ffd308; padding-bottom: 10px;">VCS EVENTS</span></h3>
+      </div>
+
+      <div class="owl-carousel owl-theme">
+          
+        <?php foreach($events as $event){ ?>
+
+                  <div class="col-lg-12 mb-3">
+                    <div class="h-100 p-5 bg-white border">
+                      <h2 class="text-black fw-bold "><span style="border-bottom: 3px solid #ffd308; padding-bottom: 5px;"><?php echo $event['title'] ?></span></h2>
+                      <p class="pt-3"><?php echo $event['description']; ?></p>
+                    </div>
+                  </div>
+
+        <?php }
+        
+        if($events->num_rows == 0){
+            ?>
+
+            <div class="col-lg-12 mb-3">
+              <div class="h-100 p-5 bg-white border">
+                <h2 class="text-black fw-bold "><span style="border-bottom: 3px solid #ffd308; padding-bottom: 5px;">No Events Available</span></h2>
+                <p class="pt-3">STAY TUNED</p>
+              </div>
+            </div>
+          <?php
+        }
+        ?>
+      </div>      
+    </div>
+  </div>
+</section>
+<!-- Events -->
+
+
 <!-- Contact -->
 <section id="contact">
   <div class="bg-white text-black">
@@ -287,3 +333,23 @@ session_start();
 <?php
 	require_once "../includes/includes_scripts.php";
 ?>
+<script src="../../owlcarousel/owl.carousel.min.js"></script>
+
+<script>
+  $('.owl-carousel').owlCarousel({
+    loop:true,
+    margin:10,
+    nav:true,
+    responsive:{
+        0:{
+            items:1
+        },
+        600:{
+            items:1
+        },
+        1000:{
+            items:1
+        }
+    }
+})
+</script>

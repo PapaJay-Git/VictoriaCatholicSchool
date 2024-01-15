@@ -81,6 +81,7 @@ function convertTxt($string = null){
                           <td>".($student['section_name'] == NULL ? 'None' : $student['section_name']." ".$student['section_grade'])."</td>
                           <td class='text-primary'>".($student['payment_type'] == 'down' ? ($paidMonthsCount == 9 ? 'FULLY PAID' : 'INSTALLMENT') : 'FULL PAYMENT')."</td>
                           <td>
+                          <a href='/student_full_info'>PRINT</a>
                           <a class='btn btn-sm btn-primary fw-bold' href='update-complete-student.php?id=".$student['id']."'>UPDATE</a>
                           ";
                           ?>

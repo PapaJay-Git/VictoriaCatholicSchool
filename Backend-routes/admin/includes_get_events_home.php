@@ -3,7 +3,7 @@
 try {
 
     require_once $_SERVER['DOCUMENT_ROOT']."/Connections/DB_connection.php";
-    require_once $_SERVER['DOCUMENT_ROOT']."/Middleware/CheckIfLoggedIn.php";
+    // require_once $_SERVER['DOCUMENT_ROOT']."/Middleware/CheckIfLoggedIn.php";
 
     $todayDate = date("Y-m-d"); // Get the current date in the format "YYYY-MM-DD"
 

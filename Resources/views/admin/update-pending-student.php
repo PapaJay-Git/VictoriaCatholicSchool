@@ -41,7 +41,7 @@ function isTabSet($tab){
     <div class="d-flex justify-content-between align-items-center">
         <div class="btn-group mb-5">
             <div class="btn btn-primary btn-sm fw-bold" onclick="hidePasswordTab2()">BASIC INFO</div>
-            <div class="btn btn-primary btn-sm fw-bold" onclick="showGuadianTab2()">GUARDIAN</div>
+            <div class="btn btn-primary btn-sm fw-bold" onclick="showGuadianTab2()">PARENT/GUARDIAN</div>
             <div class="btn btn-secondary btn-sm fw-bold" onclick="showPasswordTab2()">PASSWORD</div>
         </div>
         
@@ -70,7 +70,7 @@ function isTabSet($tab){
     </div>
     <div class="pb-2 px-2"  id="guardian-tab" <?php echo isTabSet('guardian') ?>>
         <form method="POST" action="../../../Backend-routes/admin/update_student_pending_guardian_route.php" onsubmit="submitRequest('updateStudentFormGuardian', event)" id="updateStudentFormGuardian">
-        <h5 class="mb-2 fw-bold text-uppercase" id="exampleModalLabel"><?php echo $row['guardian_guardian_type'] ?> INFORMATION</h5>
+        <h5 class="mb-2 fw-bold text-uppercase" id="exampleModalLabel"><?php echo $row['guardian_guardian_type'] ?> INFORMATION - WITH ACCOUNT</h5>
         <input type="hidden" name="id" value="<?php echo $row['id'] ?>">
         <div class="mb-3 mt-5">
             <label class="form-label fw-bold text-uppercase"> First name</label>

@@ -85,10 +85,10 @@ function isChecked($columnName){
 
     <div class="pb-2 px-2"  id="guardian-tab" <?php echo isTabSet('guardian') ?>>
         <form method="POST" action="../../../Backend-routes/admin/update_student_complete_guardian_route.php" onsubmit="submitRequest('updateStudentFormGuardian', event)" id="updateStudentFormGuardian">
-        <h5 class="mb-2 fw-bold text-uppercase" id="exampleModalLabel"><?php echo $row['guardian_guardian_type'] ?? 'PARENT/GUARDIAN' ?> INFORMATION</h5>
+        <h5 class="mb-2 fw-bold text-uppercase" id="exampleModalLabel"><?php echo $row['guardian_guardian_type'] ?? 'PARENT/GUARDIAN' ?> INFORMATION - WITH ACCOUNT</h5>
         <input type="hidden" name="id" value="<?php echo $row['id'] ?>">
         <div class="mb-3 mt-5">
-            <label class="form-label fw-bold text-uppercase" >Guardian/Parent Type</label>
+            <label class="form-label fw-bold text-uppercase" >Relationship</label>
             <select name="guardian_guardian_type" class="form-control form-control-sm">
                 <option <?php echo getSession('guardian_guardian_type') == 'mother'  ? 'selected' : '' ?> value="mother"  >Mother</option>
                 <option <?php echo getSession('guardian_guardian_type') == 'father'  ? 'selected' : '' ?> value="father"  >Father</option>

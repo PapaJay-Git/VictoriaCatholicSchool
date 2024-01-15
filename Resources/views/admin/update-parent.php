@@ -72,7 +72,7 @@ function isPasswordSet($tab){
         <h5 class="mb-2 fw-bold text-uppercase" id="exampleModalLabel"><?php echo $row['guardian_type'] ?? 'PARENT/GUARDIAN' ?> INFORMATION</h5>
         <input type="hidden" name="id" value="<?php echo $row['id'] ?>">
         <div class="mb-3 mt-5">
-            <label class="form-label fw-bold text-uppercase" >Guardian/Parent Type</label>
+            <label class="form-label fw-bold text-uppercase" >Relationship</label>
             <select name="guardian_type" class="form-control form-control-sm">
                 <option <?php echo getSession('guardian_type') == 'mother'  ? 'selected' : '' ?> value="mother"  >Mother</option>
                 <option <?php echo getSession('guardian_type') == 'father'  ? 'selected' : '' ?> value="father"  >Father</option>

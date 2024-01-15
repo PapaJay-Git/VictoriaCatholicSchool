@@ -44,7 +44,8 @@ try {
     $resultSet = $stmt->get_result();
     $row = $resultSet->fetch_assoc();
 
-    $stmt = $conn->prepare("SELECT * FROM sections");
+    $stmt = $conn->prepare("SELECT * FROM sections WHERE grade = ?");
+    $stmt->bind_param("s", $unregistered_info['requested_grade']);
     $stmt->execute();
     $sections = $stmt->get_result();
 

@@ -56,7 +56,7 @@ function convertTxt($string = null){
                           <?php echo $count++ ?>
                         </small></td>
                       <td>
-                          <small class="text-dark"><?php echo convertTxt($row['last_name']).' '.convertTxt($row['first_name']).', '.ucfirst($row['email']) ?></small>
+                          <small class="text-dark"><?php echo convertTxt($row['guardian_type']).', '.convertTxt($row['last_name']).' '.convertTxt($row['first_name']).', '.ucfirst($row['email']) ?></small>
                       </td>
                       <td>
                         <small class="text-dark"><?php echo convertTxt($row['student_full_name']).", ".convertTxt($row['student_email']); ?></small>

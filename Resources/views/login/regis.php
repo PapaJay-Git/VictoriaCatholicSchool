@@ -132,14 +132,18 @@ function getSession($data) {
             </div>
         </div>
         <div class="row">
-            <div class="col-lg-6 mb-3">
+            <div class="col-lg-4 mb-3">
+                <label>LRN <b class="text-danger">*</b></label>
+                <input type="number" oninput="this.className = ''" name="lrn" <?php echo "value='".htmlspecialchars(getSession('lrn'))."'"  ?> placeholder="LRN">
+            </div>
+            <div class="col-lg-4 mb-3">
                 <label>Gender <b class="text-danger">*</b></label>
                 <select name="gender" oninput="this.className = ''">
                     <option value="Male" <?php echo getSession('gender')== 'Male'  ? 'selected' : '' ?> >Male</option>
                     <option value="Female" <?php echo getSession('gender')== 'Female'  ? 'selected' : '' ?> >Female</option>
                 </select>
             </div>
-            <div class="col-lg-6 mb-3">
+            <div class="col-lg-4 mb-3">
                 <label>Date of Birth <b class="text-danger">*</b></label>
                 <input type="date" oninput="this.className = ''" name="birthday" <?php echo "value='".htmlspecialchars(getSession('birthday'))."'"  ?> >
             </div>

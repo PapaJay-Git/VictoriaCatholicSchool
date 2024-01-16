@@ -121,6 +121,10 @@ function isChecked($columnName){
             <input type="text" class="form-control form-control-sm"name="last_name" required placeholder="Last name" <?php echo "value='".htmlspecialchars(getSession('last_name'))."'"  ?> >
         </div>
         <div class="mb-3">
+            <label class="form-label fw-bold text-uppercase">LRN</label>
+            <input type="numeric" class="form-control form-control-sm" name="lrn" required placeholder="LRN" <?php echo "value='".htmlspecialchars(getSession('lrn'))."'"  ?> >
+        </div>
+        <div class="mb-3">
             <label class="form-label fw-bold text-uppercase">Student No</label>
             <input type="text" class="form-control form-control-sm"  <?php echo "value='VCS000".$row['id']."'"  ?> disabled>
         </div>

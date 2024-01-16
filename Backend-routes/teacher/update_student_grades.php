@@ -97,17 +97,30 @@ try {
 
     for ($count = 0; $count < count($fourths); $count++) {
 
-        if($fourths[$count] < 0 || $fourths[$count] > 100){
-            errorSender("Grades should only be between 0 to 100", $fileName);
+        if(($fourths[$count] > 0 && $fourths[$count] < 60 ) || $fourths[$count] < 0 || $fourths[$count] > 100){
+            errorSender("Grades should only be 0 or between 60 to 100", $fileName);
         }
-        if($thirds[$count] < 0 || $thirds[$count] > 100){
-            errorSender("Grades should only be between 0 to 100", $fileName);
+        if(($thirds[$count] > 0 && $thirds[$count] < 60 ) || $thirds[$count] < 0 || $thirds[$count] > 100){
+            errorSender("Grades should only be 0 or between 60 to 100", $fileName);
         }
-        if($seconds[$count] < 0 || $seconds[$count] > 100){
-            errorSender("Grades should only be between 0 to 100", $fileName);
+        if(($seconds[$count] > 0 && $seconds[$count] < 60 ) || $seconds[$count] < 0 || $seconds[$count] > 100){
+            errorSender("Grades should only be 0 or between 60 to 100", $fileName);
         }
-        if($firsts[$count] < 0 || $firsts[$count] > 100){
-            errorSender("Grades should only be between 0 to 100", $fileName);
+        if(($firsts[$count] > 0 && $firsts[$count] < 60 ) || $firsts[$count] < 0 || $firsts[$count] > 100){
+            errorSender("Grades should only be 0 or between 60 to 100", $fileName);
+        }
+    }
+
+    for ($count = 0; $count < count($fourths); $count++) {
+
+        if($firsts[$count] == 0 && $seconds[$count] > 0){
+            errorSender("1st quarter is required if 2nd quarter has value", $fileName);
+        }
+        if($seconds[$count] == 0 && $thirds[$count] > 0){
+            errorSender("2nd quarter is required if 3rd quarter has value", $fileName);
+        }
+        if($thirds[$count] == 0 && $fourths[$count] > 0){
+            errorSender("3rd quarter is required if 4th quarter has value", $fileName);
         }
 
     }

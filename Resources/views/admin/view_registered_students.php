@@ -45,6 +45,7 @@ function convertTxt($string = null){
                   <tr>
                     <th scope="col">Name</th>
                     <th scope="col">Email</th>
+                    <th scope="col">LRN</th>
                     <th scope="col">Student No</th>
                     <th scope="col">Section</th>
                     <th scope="col">Action</th>
@@ -58,6 +59,7 @@ function convertTxt($string = null){
                       <tr>
                           <td>".convertTxt($student['last_name'].', '.$student['first_name'])." </td>
                           <td>{$student['email']}</td>
+                          <td>{$student['lrn']}</td>
                           <td>VCS00{$student['id']}</td>
                           <td>".($student['section_name'] == NULL ? 'None' : $student['section_name']." - ".$student['section_grade'])."</td>
                           <td>
@@ -143,6 +145,11 @@ function convertTxt($string = null){
                     <small class="d-block">Example is delacruz_2003</small>
                     <input type="text" class="form-control form-control-sm" name="password" disabled value="delacruz_2003"
                     <?php echo "value='".htmlspecialchars(getSession('password'))."'"  ?> >
+                </div>
+                <div class="mb-3">
+                  <label class="form-label fw-bold text-uppercase">LRN <b class="text-danger">*</b></label>
+                  <input type="text" class="form-control form-control-sm" name="lrn" required placeholder="LRN"
+                  <?php echo "value='".htmlspecialchars(getSession('lrn'))."'"  ?> >
                 </div>
                 <div class="mb-3">
                   <label class="form-label fw-bold text-uppercase">Phone Number <b class="text-danger">*</b></label>

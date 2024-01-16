@@ -142,3 +142,24 @@ function showPassword() {
         }
     }
 }
+
+function togglePasswordVisibility(passwordId) {
+    const passwordInput = document.getElementById(passwordId);
+    const eyeIcon = document.querySelector(`[data-password-id="${passwordId}"]`);
+
+
+    if (passwordInput.type === "password") {
+        passwordInput.type = "text";
+        eyeIcon.textContent = "👁️";
+
+    } else {
+        passwordInput.type = "password";
+        eyeIcon.textContent = "👁️‍🗨️";  
+
+    }
+  }
+
+document.querySelectorAll('.toggle-password').forEach(function(icon) {
+    const passwordId = icon.previousElementSibling.id;
+    icon.setAttribute('data-password-id', passwordId);
+});

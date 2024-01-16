@@ -37,6 +37,7 @@ function convertTxt($string = null){
                                 <tr>
                                     <th scope="col">Subject</th>
                                     <th scope="col">Name</th>
+                                    <th scope="col">LRN</th>
                                     <th scope="col">Email</th>
                                     <th scope="col">1st <small>(20%)</small></th>
                                     <th scope="col">2nd <small>(20%)</small></th>
@@ -61,6 +62,9 @@ function convertTxt($string = null){
                                                         </td>
                                                         <td>
                                                             <small>".convertTxt($student['last_name'].', '.$student['first_name'])."</small>
+                                                        </td>
+                                                        <td>
+                                                            <small>".$student['lrn']."</small>
                                                         </td>
                                                         <td>
                                                             <small>".$student['email']."</small>
@@ -101,6 +105,9 @@ function convertTxt($string = null){
                                                         <td>
                                                             <input type='hidden' name='student_id[]' value='".$student['id']."'>
                                                             <small>".convertTxt($student['last_name'].', '.$student['first_name'])."</small>
+                                                        </td>
+                                                        <td>
+                                                            <small>".$student['lrn']."</small>
                                                         </td>
                                                         <td>
                                                             <small>".$student['email']."</small>

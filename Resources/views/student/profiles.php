@@ -43,6 +43,10 @@ require_once "../includes/header_layout.php";
                         <h4 class="bebas-font text-dark d-inline-block">Phone:</h4>
                         <h5 class="bebas-font d-inline-block"><?php echo $auth['phone'] ?></h5>
                     </span>
+                    <span class="d-block">
+                        <h4 class="bebas-font text-dark d-inline-block">LRN:</h4>
+                        <h5 class="bebas-font d-inline-block"><?php echo $auth['lrn'] ?></h5>
+                    </span>
                     <span class="d-block mt-3">
                         <button class="btn btn-sm btn-primary fw-bold" data-bs-target="#otherInfo" data-bs-toggle="modal">OTHER INFO</button>
                     </span>

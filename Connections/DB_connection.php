@@ -3,7 +3,7 @@ session_start();
 
 $host = 'localhost';
 $username = 'root';
-$password = 'mis101';
+$password = '';
 $database = 'vcs_db';
 
 

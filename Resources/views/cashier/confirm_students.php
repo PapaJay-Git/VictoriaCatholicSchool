@@ -41,6 +41,7 @@ function convertTxt($string = null){
                   <tr>
                     <th scope="col">Name</th>
                     <th scope="col">Email</th>
+                    <th scope="col">LRN</th>
                     <th scope="col">Enrolled Grade</th>
                     <th scope="col">Student Type</th>
                     <th scope="col">Registration Date</th>
@@ -55,6 +56,7 @@ function convertTxt($string = null){
                       <tr>
                           <td>".convertTxt($student['last_name'].", ".$student['first_name'])."</td>
                           <td>{$student['email']}</td>
+                          <td>{$student['lrn']}</td>
                           <td>{$student['requested_grade']}</td>
                           <td>".strtoupper($student['student_type'])."</td>
                           <td>".$dateTime->format('F j, Y, g:i a')."</td>

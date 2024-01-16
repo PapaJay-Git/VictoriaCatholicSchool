@@ -66,10 +66,11 @@ function getSession($data) {
 				<!-- Password -->
 				<div class="mb-2">
 					<label class="form-label text-white fw-bold">Password</label>
-					<input type="password"  class="form-control input-password form-control-lg bg-light fs-6" name="password" placeholder="Password">
+					<div class="password-container">
+						<input type="password"  class="password-input form-control form-control-lg bg-light fs-6" id="password1"  name="password" required placeholder="Password" autocomplete="password">
+						<span class="toggle-password" onclick="togglePasswordVisibility('password1')">👁️‍🗨️</span>
+					</div>
 				</div>
-				<input id="checkBox" type="checkBox" onchange="showPassword()">
-				<label for="checkBox" class="text-light fw-bold">Show</label>
 				<!-- Password -->
 
 				<!-- Login Button -->

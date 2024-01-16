@@ -45,6 +45,7 @@ function convertTxt($string = null){
                   <tr>
                     <th scope="col">Name</th>
                     <th scope="col">Email</th>
+                    <th scope="col">LRN</th>
                     <th scope="col">Student No</th>
                     <th scope="col">Section</th>
                     <th scope="col">Payment Status</th>
@@ -75,6 +76,7 @@ function convertTxt($string = null){
                       <tr>
                           <td>".convertTxt($student['last_name'].", ".$student['first_name'])."</td>
                           <td>{$student['email']}</td>
+                          <td>{$student['lrn']}</td>
                           <td>VCS00{$student['id']}</td>
                           <td>".($student['section_name'] == NULL ? 'None' : $student['section_name']." ".$student['section_grade'])."</td>
                           <td class='text-primary'>".($student['payment_type'] == 'down' ? ($paidMonthsCount == 9 ? 'FULLY PAID' : 'INSTALLMENT') : 'FULL PAYMENT')."</td>

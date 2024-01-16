@@ -24,7 +24,7 @@ try {
 
     checkIfUserExists($accountID, $role, $conn);
 
-    $required_fields = ['section', 'first_name', 'last_name', 'phone', 'email', 'gender', 'birthday', 'student_type', 'barangay', 'province', 'city_municipality', 'zip_code'];
+    $required_fields = ['section', 'first_name', 'last_name', 'phone', 'email', 'gender', 'birthday', 'student_type', 'barangay', 'province', 'city_municipality', 'zip_code', 'lrn'];
 
     // required checker
     foreach ($required_fields as $field) {
@@ -49,6 +49,7 @@ try {
     $province = sanitize_input($_POST['province']);
     $zip_code = sanitize_input($_POST['zip_code']);
     $guardian_account = $_POST['guardian_that_will_have_an_account'];
+    $lrn = $_POST['lrn'];
 
     $_SESSION['street_no'] = $street_no;
     $_SESSION['street'] = $street;
@@ -70,14 +71,24 @@ try {
     $sectionID = $_POST['section'];
     $student_type = validate_student_type($_POST['student_type']);
 
+
     isPhoneNumberExistsOtherThanMe($phone, $conn, $accountID);
     
     isEmailExistsOtherThanMe($email_address, $conn, $accountID);
 
     isSectionIDExists($sectionID, $conn);
+
     
-    $stmt = $conn->prepare("UPDATE users SET first_name = ?, middle_name = ?, last_name = ?,  phone = ?, email = ?, gender = ?, birthday = ?, street_no = ?, street = ?, village = ?, barangay = ?, city_municipality = ?, province = ?, zip_code = ? WHERE id = ?");
-    $stmt->bind_param("ssssssssssssssi", $first_name, $middle_name, $last_name, $phone, $email_address, $gender, $date_of_birth, $street_no, $street, $village, $barangay, $city_municipality, $province, $zip_code, $accountID);
+    if(!is_numeric($lrn)){
+        errorSender("LRN should be numeric.", $fileName);
+    }
+    
+    if(strlen(strval($lrn)) !== 12){
+        errorSender("LRN should be 12 digit.", $fileName);
+    }
+    
+    $stmt = $conn->prepare("UPDATE users SET first_name = ?, middle_name = ?, last_name = ?,  phone = ?, email = ?, gender = ?, birthday = ?, street_no = ?, street = ?, village = ?, barangay = ?, city_municipality = ?, province = ?, zip_code = ?, lrn = ? WHERE id = ?");
+    $stmt->bind_param("ssssssssssssssis", $first_name, $middle_name, $last_name, $phone, $email_address, $gender, $date_of_birth, $street_no, $street, $village, $barangay, $city_municipality, $province, $zip_code, $lrn, $accountID);
     $stmt->execute();
 
     $stmt = $conn->prepare("DELETE FROM student_sections where student_id = ?");

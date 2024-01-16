@@ -41,6 +41,7 @@ function convertTxt($string = null){
                     <tr>
                         <th scope="col">Name</th>
                         <th scope="col">Email</th>
+                        <th scope="col">LRN</th>
                         <th scope="col">Student No</th>
                         <th scope="col">Section</th>
                         <th scope="col">Promissory</th>
@@ -60,6 +61,9 @@ function convertTxt($string = null){
                         </td>
                         <td>
                             <small class="text-dark"><?php echo $promissory['email'] ?></small>
+                        </td>
+                        <td>
+                            <small class="text-dark"><?php echo $promissory['lrn'] ?></small>
                         </td>
                         <td>
                             <small class="text-dark">VCS00<?php echo $promissory['id'] ?></small>

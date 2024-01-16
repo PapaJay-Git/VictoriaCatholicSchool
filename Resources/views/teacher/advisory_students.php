@@ -36,6 +36,7 @@ function convertTxt($string = null){
                 <thead>
                   <tr>
                     <th scope="col">Name</th>
+                    <th scope="col">LRN</th>
                     <th scope="col">Email</th>
                     <th scope="col">Student No</th>
                   </tr>
@@ -46,6 +47,7 @@ function convertTxt($string = null){
                     echo "
                       <tr>
                           <td>".convertTxt($student['last_name'].', '.$student['first_name'])."</td>
+                          <td>{$student['lrn']}</td>
                           <td>{$student['email']}</td>
                           <td>VCS00{$student['id']}</td>
                       </tr>

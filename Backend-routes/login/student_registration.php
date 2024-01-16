@@ -23,7 +23,7 @@ try {
 
     // required array
 
-    $required_fields = ['grade', 'first_name',  'last_name', 'phone', 'email', 'gender', 'birthday', 'student_type', 'barangay', 'province', 'city_municipality', 'zip_code', 'guardian_that_will_have_an_account'];
+    $required_fields = ['grade', 'first_name',  'last_name', 'phone', 'email', 'gender', 'birthday', 'student_type', 'barangay', 'province', 'city_municipality', 'zip_code', 'guardian_that_will_have_an_account', 'lrn'];
 
     // required checker
     foreach ($required_fields as $field) {
@@ -43,6 +43,7 @@ try {
     $province = sanitize_input($_POST['province']);
     $zip_code = sanitize_input($_POST['zip_code']);
     $guardian_account = $_POST['guardian_that_will_have_an_account'];
+    $lrn = $_POST['lrn'];
 
     
     $_SESSION['street_no'] = $street_no;
@@ -84,8 +85,15 @@ try {
     if(!is_numeric($zip_code)){
         errorSender("Zip code is not numeric.", $fileName);
     }
-    
 
+    if(!is_numeric($lrn)){
+        errorSender("LRN should be numeric.", $fileName);
+    }
+    
+    if(strlen(strval($lrn)) !== 12){
+        errorSender("LRN should be 12 digit.", $fileName);
+    }
+    
     checkIfGradeIsValid($_POST['grade']);
 
     if($guardian_account != 'mother' && $guardian_account != 'father' && $guardian_account != 'guardian'){
@@ -254,8 +262,8 @@ $default_password = str_replace(' ', '', $default_password);
     isEmailExists($_POST[$guardian_account.'_email'], $conn);
     //parent
 
-    $stmt = $conn->prepare("INSERT INTO users (first_name, middle_name, last_name, password, phone, email, gender, birthday, role, street_no, street, village, barangay, city_municipality, province, zip_code) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
-    $stmt->bind_param("ssssssssssssssss", $first_name, $middle_name, $last_name, $password, $phone_number, $email_address, $gender, $date_of_birth, $role, $street_no, $street, $village, $barangay, $city_municipality, $province, $zip_code);
+    $stmt = $conn->prepare("INSERT INTO users (first_name, middle_name, last_name, password, phone, email, gender, birthday, role, street_no, street, village, barangay, city_municipality, province, zip_code, lrn) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+    $stmt->bind_param("sssssssssssssssss", $first_name, $middle_name, $last_name, $password, $phone_number, $email_address, $gender, $date_of_birth, $role, $street_no, $street, $village, $barangay, $city_municipality, $province, $zip_code, $lrn);
     $stmt->execute();
     $studentID = $conn->insert_id;
    

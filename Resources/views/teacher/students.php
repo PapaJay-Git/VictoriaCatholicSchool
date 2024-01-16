@@ -47,6 +47,7 @@ function convertTxt($string = null){
                                 <thead>
                                 <tr>
                                     <th scope="col">Name</th>
+                                    <th scope="col">LRN</th>
                                     <th scope="col">Email</th>
                                     <th scope="col">1st <small>(20%)</small></th>
                                     <th scope="col">2nd <small>(20%)</small></th>
@@ -70,23 +71,26 @@ function convertTxt($string = null){
                                                             <small>".convertTxt($student['last_name'].', '.$student['first_name'])."</small>
                                                         </td>
                                                         <td>
+                                                            <small>".$student['lrn']."</small>
+                                                        </td>
+                                                        <td>
                                                             <small>".$student['email']."</small>
                                                         </td>
                                                         <td>
                                                             <small class='d-none'>0</small>
-                                                            <input type='number' class='grade-css' step='0.01' min='0.00' max='100.00' value='0' required name='first[]'>
+                                                            <input type='number' class='grade-css' step='0.01' min='0' max='100.00' value='0' required name='first[]'>
                                                         </td>
                                                         <td>
                                                             <small class='d-none'>0</small>
-                                                            <input type='number' class='grade-css' step='0.01' min='0.00' max='100.00' value='0' required name='second[]'>
+                                                            <input type='number' class='grade-css' step='0.01' min='0' max='100.00' value='0' required name='second[]'>
                                                         </td>
                                                         <td>
                                                             <small class='d-none'>0</small>
-                                                            <input type='number' class='grade-css' step='0.01' min='0.00' max='100.00' value='0' required name='third[]'>
+                                                            <input type='number' class='grade-css' step='0.01' min='0' max='100.00' value='0' required name='third[]'>
                                                         </td>
                                                         <td>
                                                             <small class='d-none'>0</small>
-                                                            <input type='number' class='grade-css' step='0.01' min='0.00' max='100.00' value='0' required name='fourth[]'>
+                                                            <input type='number' class='grade-css' step='0.01' min='0' max='100.00' value='0' required name='fourth[]'>
                                                         </td>
                                                         <td>
                                                             <small>0.00</small>
@@ -112,23 +116,26 @@ function convertTxt($string = null){
                                                             <small>".convertTxt($student['last_name'].', '.$student['first_name'])."</small>
                                                         </td>
                                                         <td>
+                                                            <small>".$student['lrn']."</small>
+                                                        </td>
+                                                        <td>
                                                             <small>".$student['email']."</small>
                                                         </td>
                                                         <td>
                                                             <small class='d-none'>".$student_grades_row['first_quarter']."</small>
-                                                            <input type='number' class='grade-css' step='0.01' min='0.00' max='100.00' required name='first[]' value='".$student_grades_row['first_quarter']."'>
+                                                            <input type='number' class='grade-css' step='0.01' min='0' max='100.00' required name='first[]' value='".$student_grades_row['first_quarter']."'>
                                                         </td>
                                                         <td>
                                                             <small class='d-none'>".$student_grades_row['second_quarter']."</small>
-                                                            <input type='number' class='grade-css' step='0.01' min='0.00' max='100.00' required name='second[]' value='".$student_grades_row['second_quarter']."'>
+                                                            <input type='number' class='grade-css' step='0.01' min='0' max='100.00' required name='second[]' value='".$student_grades_row['second_quarter']."'>
                                                         </td>
                                                         <td>
                                                             <small class='d-none'>".$student_grades_row['third_quarter']."</small>
-                                                            <input type='number' class='grade-css' step='0.01' min='0.00' max='100.00' required name='third[]' value='".$student_grades_row['third_quarter']."'>
+                                                            <input type='number' class='grade-css' step='0.01' min='0' max='100.00' required name='third[]' value='".$student_grades_row['third_quarter']."'>
                                                         </td>
                                                         <td>
                                                             <small class='d-none'>".$student_grades_row['fourth_quarter']."</small>
-                                                            <input type='number' class='grade-css' step='0.01' min='0.00' max='100.00' required name='fourth[]' value='".$student_grades_row['fourth_quarter']."'>
+                                                            <input type='number' class='grade-css' step='0.01' min='0' max='100.00' required name='fourth[]' value='".$student_grades_row['fourth_quarter']."'>
                                                         </td>
                                                         <td>
                                                             <small>".number_format($final, 2)."</small>
@@ -155,3 +162,52 @@ function convertTxt($string = null){
 ?>
 <script src="../../js/admin/grades.js"></script>
 <script> setActive('assigned_subjects_tab'); </script>
+
+<script>
+    var numberInputs = document.querySelectorAll('input[type="number"]');
+    var firsts = document.querySelectorAll('input[name="first[]"]');
+    var seconds = document.querySelectorAll('input[name="second[]"]');
+    var thirds = document.querySelectorAll('input[name="third[]"]');
+    var fourths = document.querySelectorAll('input[name="fourth[]"]');
+
+    function validateNumberInput() {
+      var inputValue = parseFloat(this.value);
+
+      if ((isNaN(inputValue) || inputValue < 60) && inputValue != 0) {
+        this.setCustomValidity('Minimum value is 60');
+      } else {
+        this.setCustomValidity('');
+        checkIfRequired();
+      }
+    }
+
+    function checkIfRequired(){
+        
+        for (var count = 0; count < fourths.length; count++) {
+
+            if(parseFloat(firsts[count].value) == 0 && parseFloat(seconds[count].value) > 0){
+                firsts[count].setCustomValidity("1st quarter is required if 2nd quarter has value");
+            }else{ 
+                firsts[count].setCustomValidity("");
+            }
+
+            if(parseFloat(seconds[count].value) == 0 && parseFloat(thirds[count].value) > 0){
+                seconds[count].setCustomValidity("2nd quarter is required if 3rd quarter has value");
+            }else{ 
+                seconds[count].setCustomValidity("");
+            }
+
+            if(parseFloat(thirds[count].value) == 0 && parseFloat(fourths[count].value) > 0){
+                thirds[count].setCustomValidity("3rd quarter is required if 4th quarter has value");
+            }else{ 
+                thirds[count].setCustomValidity("");
+            }
+
+
+        }
+    }
+
+    numberInputs.forEach(function(input) {
+      input.addEventListener('input', validateNumberInput);
+    });
+  </script>

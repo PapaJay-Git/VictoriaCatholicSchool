@@ -18,7 +18,7 @@ try {
     isPOST();
 
     // required array
-    $required_fields = ['section','first_name', 'last_name', 'phone', 'email', 'birthday', 'gender', 'student_type', 'barangay', 'province', 'city_municipality', 'zip_code'];
+    $required_fields = ['section','first_name', 'last_name', 'phone', 'email', 'birthday', 'gender', 'student_type', 'barangay', 'province', 'city_municipality', 'zip_code', 'lrn'];
 
     
     // required checker
@@ -44,6 +44,7 @@ try {
     $province = sanitize_input($_POST['province']);
     $zip_code = sanitize_input($_POST['zip_code']);
     $guardian_account = $_POST['guardian_that_will_have_an_account'];
+    $lrn = $_POST['lrn'];
 
     $_SESSION['street_no'] = $street_no;
     $_SESSION['street'] = $street;
@@ -53,6 +54,7 @@ try {
     $_SESSION['barangay'] = $barangay;
     $_SESSION['province'] = $province;
     $_SESSION['zip_code'] = $zip_code;
+    $_SESSION['middle_name'] = isset($_POST['middle_name']) ? sanitize_input($_POST['middle_name']) : NULL;
 
     // input data
     $first_name = validate_name(sanitize_input($_POST['first_name']));
@@ -80,8 +82,16 @@ try {
 
     isSectionIDExists($sectionID, $conn);
 
-    $stmt = $conn->prepare("INSERT INTO users (first_name, middle_name, last_name, password,  phone, email, gender, birthday, role, street_no, street, village, barangay, city_municipality, province, zip_code) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-    $stmt->bind_param("ssssssssssssssss", $first_name, $middle_name, $last_name, $password, $phone_number, $email_address, $gender, $date_of_birth, $role, $street_no, $street, $village, $barangay, $city_municipality, $province, $zip_code);
+    if(!is_numeric($lrn)){
+        errorSender("LRN should be numeric.", $fileName);
+    }
+    
+    if(strlen(strval($lrn)) !== 12){
+        errorSender("LRN should be 12 digit.", $fileName);
+    }
+
+    $stmt = $conn->prepare("INSERT INTO users (first_name, middle_name, last_name, password,  phone, email, gender, birthday, role, street_no, street, village, barangay, city_municipality, province, zip_code, lrn) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+    $stmt->bind_param("sssssssssssssssss", $first_name, $middle_name, $last_name, $password, $phone_number, $email_address, $gender, $date_of_birth, $role, $street_no, $street, $village, $barangay, $city_municipality, $province, $zip_code, $lrn);
     $stmt->execute();
     $insertedUserId = $conn->insert_id;
 
@@ -109,6 +119,7 @@ try {
         $_SESSION['street_no'],
         $_SESSION['street'],
         $_SESSION['village'],
+        $_SESSION['middle_name'],
     );
     
     successSender("Student Added Successfully", $fileName);

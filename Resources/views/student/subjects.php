@@ -148,7 +148,7 @@ $result = isConflictDays($daysIndexed);
                                 $stmt->execute();
                                 $classes = $stmt->get_result();
 
-                                echo "<label class=''>".$count++.".<b> ".$subject['name']."</b></label>";
+                                echo "<label class='d-block pb-3'>".$count++.".<b> ".$subject['name']."</b></label>";
 
                                 if($classes->num_rows > 0){
                                     foreach($classes as $data){ 

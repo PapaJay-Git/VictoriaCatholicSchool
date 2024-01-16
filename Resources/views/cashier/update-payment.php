@@ -46,7 +46,7 @@ $payment_type = getSession('payment_type');
         <h5 class="text-uppercase"> <?php echo "{$row['first_name']} {$row['last_name']}"; ?></h5>
         <h5 class="text-uppercase d-block ms-1"> FROM <?php echo ($row['section_name'] == NULL ? 'None' : $row['section_name']."-".$row['section_grade']); ?></h5>
         <small class=" d-block ms-1"><?php echo $row['payment_type'] == 'down'  ? 'CURRENT PAYMENT: INSTALLMENT' : ($row['payment_type'] == 'full'  ? 'CURRENT PAYMENT: FULL PAYMENT' : '') ?> </small>
-        <div class="mb-3 ms-1 d-flex flex-column mt-5">
+        <div class="mb-3 ms-1 d-flex flex-column mt-5 m-w-300px">
             <label for="payment_type" >PAYMENT TYPE</label>
             <select name="payment_type" id="payment_type" class="form-control" required onchange="checkPaymentType()">
                 <option value="down" <?php echo $payment_type == 'down'  ? 'selected' : '' ?>>INSTALLMENT</option>

@@ -30,9 +30,9 @@ function getSession($data) {
         <form method="POST" action="../../../Backend-routes/admin/update_subject_name_route.php?" onsubmit="submitRequest('updateSubjectName', event)" id="updateSubjectName">
             <input type="hidden" name="grade" value="<?php echo $gradeID ?>">
             <input type="hidden" name="id" value="<?php echo $row['id'] ?>">
-            <div class="mb-3">
+            <div class="mb-3 m-w-300px">
                 <label class="form-label fw-bold">SUBJECT NAME</label>
-                <input type="text" class="form-control form-control-sm" name="name" required placeholder="Subject Name"? <?php echo "value='".htmlspecialchars(getSession('name'))."'"  ?> >
+                <input type="text" class="form-control" name="name" required placeholder="Subject Name"? <?php echo "value='".htmlspecialchars(getSession('name'))."'"  ?> >
             </div>
             <div class="d-flex justify-content-end my-5">
                 <button class="btn btn-sm fw-bold btn-primary me-1" type="submit">UPDATE</button>

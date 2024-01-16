@@ -51,3 +51,6 @@ header {
   cursor: pointer;
 }
     
+.m-w-300px{
+    max-width: 300px !important;
+}

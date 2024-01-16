@@ -78,9 +78,9 @@ function getSession($data) {
             </div>
             <div class="modal-body">
                 <input type="hidden" name="id" value="<?php echo $accountID ?>">
-                <div class="mb-3">
+                <div class="mb-3 m-w-300px">
                   <label class="form-label fw-bold text-uppercase">Subject Name</label>
-                  <input type="text" class="form-control form-control-sm" name="subject_name" required placeholder="Subject name" 
+                  <input type="text" class="form-control" name="subject_name" required placeholder="Subject name" 
                   <?php echo "value='".htmlspecialchars(getSession('subject_name'))."'"  ?> >
                 </div>
             </div>

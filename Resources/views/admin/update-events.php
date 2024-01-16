@@ -37,7 +37,7 @@ function getSession($data) {
                     <label class="form-label fw-bold text-uppercase">DESCRIPTION</label>
                     <textarea name="description" class="form-control" id="description" cols="30" rows="4" minlength="1" maxlength="255" placeholder="Description..." required><?php echo getSession('description');  ?></textarea>
                 </div>
-                <div class="mb-3">
+                <div class="mb-3 m-w-300px">
                     <label class="form-label fw-bold text-uppercase">SHOW UNTIL</label>
                     <input type="date" class="form-control form-control-sm" name="show_until" required 
                     <?php echo "value='".htmlspecialchars(getSession('show_until'))."'"  ?> >

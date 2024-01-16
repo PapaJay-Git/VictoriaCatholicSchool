@@ -51,18 +51,30 @@ function showPasswordTab(){
     var infoTab = document.getElementById('info-tab');
     var checklistTab = document.getElementById('checklist-tab');
 
-    passTab.style.display = 'block';
-    infoTab.style.display = 'none';
-    checklistTab.style.display = 'none';
+    if(checklistTab){
+        checklistTab.style.display = 'none';
+    }
+    if(infoTab){
+        infoTab.style.display = 'none';
+    }
+    if(passTab){
+        passTab.style.display = 'block';
+    }
 }
 function hidePasswordTab(){
     var passTab = document.getElementById('password-tab');
     var infoTab = document.getElementById('info-tab');
     var checklistTab = document.getElementById('checklist-tab');
 
-    passTab.style.display = 'none';
-    infoTab.style.display = 'block';
-    checklistTab.style.display = 'none';
+    if(checklistTab){
+        checklistTab.style.display = 'none'
+    }
+    if(infoTab){
+        infoTab.style.display = 'block';
+    }
+    if(passTab){
+        passTab.style.display = 'none';
+    }
 }
 
 function showChecklist(){
@@ -70,9 +82,15 @@ function showChecklist(){
     var infoTab = document.getElementById('info-tab');
     var checklistTab = document.getElementById('checklist-tab');
 
-    passTab.style.display = 'none';
-    infoTab.style.display = 'none';
-    checklistTab.style.display = 'block';
+    if(checklistTab){
+        checklistTab.style.display = 'block'
+    }
+    if(infoTab){
+        infoTab.style.display = 'none';
+    }
+    if(passTab){
+        passTab.style.display = 'none';
+    }
 }
 
 function showPasswordTab2(){
@@ -80,18 +98,30 @@ function showPasswordTab2(){
     var infoTab = document.getElementById('info-tab');
     var guardianTab = document.getElementById('guardian-tab');
 
-    passTab.style.display = 'block';
-    infoTab.style.display = 'none';
-    guardianTab.style.display = 'none';
+    if(guardianTab){
+        guardianTab.style.display = 'none'
+    }
+    if(infoTab){
+        infoTab.style.display = 'none';
+    }
+    if(passTab){
+        passTab.style.display = 'block';
+    }
 }
 function hidePasswordTab2(){
     var passTab = document.getElementById('password-tab');
     var infoTab = document.getElementById('info-tab');
     var guardianTab = document.getElementById('guardian-tab');
 
-    passTab.style.display = 'none';
-    infoTab.style.display = 'block';
-    guardianTab.style.display = 'none';
+    if(guardianTab){
+        guardianTab.style.display = 'none'
+    }
+    if(infoTab){
+        infoTab.style.display = 'block';
+    }
+    if(passTab){
+        passTab.style.display = 'none';
+    }
 }
 
 function showGuadianTab2(){
@@ -99,9 +129,15 @@ function showGuadianTab2(){
     var infoTab = document.getElementById('info-tab');
     var guardianTab = document.getElementById('guardian-tab');
 
-    passTab.style.display = 'none';
-    infoTab.style.display = 'none';
-    guardianTab.style.display = 'block';
+    if(guardianTab){
+        guardianTab.style.display = 'block'
+    }
+    if(infoTab){
+        infoTab.style.display = 'none';
+    }
+    if(passTab){
+        passTab.style.display = 'none';
+    }
 }
 function changeBorderColor(selectElement) {
     console.log(1);

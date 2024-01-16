@@ -82,6 +82,8 @@ try {
         errorSender("$fieldName is required", $fileName);
     }
 
+    isLrnExists($lrn, $conn);
+    
     if(!is_numeric($zip_code)){
         errorSender("Zip code is not numeric.", $fileName);
     }
@@ -114,8 +116,8 @@ try {
 
     $default_password = strtolower($last_name) . "_" . date("Y", strtotime($date_of_birth));
 
-// Remove spaces from the password
-$default_password = str_replace(' ', '', $default_password);
+    // Remove spaces from the password
+    $default_password = str_replace(' ', '', $default_password);
 
     $password = password_hash($default_password, PASSWORD_DEFAULT); 
     

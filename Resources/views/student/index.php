@@ -93,7 +93,7 @@ $balance = (9 - $countMatches) * 1131.3;
                                         <small class="text-dark fw-bold d-block">FULL PAYMENT</small>
                                         <small class="text-dark d-block">TOTAL: ₱21,884.7</small>
                                     </span>';
-                                }else{
+                                }elseif($auth['payment_type'] == 'down'){
                                     echo '
                                     <span class="d-block">
                                         <small class="text-dark fw-bold d-block">INSTALLMENT</small>
@@ -159,6 +159,11 @@ $balance = (9 - $countMatches) * 1131.3;
                                             <small class="d-block fw-bold text-dark">'.((9 - $countMatches) > 0 ? 'Next Payment should be on 15th of the Month.' : '').'</small>
                                         </div>
 
+                                    </span>';
+                                }else{
+                                    echo '
+                                    <span class="d-block">
+                                        <small class="text-dark fw-bold d-block">NO PAYMENT INDICATED YET.</small>
                                     </span>';
                                 }
                             ?>

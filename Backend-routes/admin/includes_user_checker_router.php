@@ -454,6 +454,32 @@ function validatePassword($password, $confirmPassword) {
     return $password;
 }
 
+function isLrnExists($lrn, $conn) {
+    global $fileName;
+
+    $query = "SELECT * FROM users WHERE lrn = ?";
+    $stmt = mysqli_prepare($conn, $query);
+    mysqli_stmt_bind_param($stmt, 's', $lrn);
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_store_result($stmt);
+
+    if(mysqli_stmt_num_rows($stmt) > 0){
+        errorSender('LRN number already exist!', $fileName);
+    }
+}
+function isLrnExistsOtherThanMe($lrn, $conn, $accountID) {
+    global $fileName;
+
+    $query = "SELECT * FROM users WHERE lrn = ? AND id != ?";
+    $stmt = mysqli_prepare($conn, $query);
+    mysqli_stmt_bind_param($stmt, 'si', $lrn, $accountID);
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_store_result($stmt);
+
+    if(mysqli_stmt_num_rows($stmt) > 0){
+        errorSender('LRN number already exist!', $fileName);
+    }
+}
 
 // Function to check if a phone number already exists
 function isPhoneNumberExistsOtherThanMe($phoneNumber, $conn, $accountID) {

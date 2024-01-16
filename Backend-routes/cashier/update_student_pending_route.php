@@ -47,7 +47,6 @@ try {
     $city_municipality = sanitize_input($_POST['city_municipality']);
     $province = sanitize_input($_POST['province']);
     $zip_code = sanitize_input($_POST['zip_code']);
-    $guardian_account = $_POST['guardian_that_will_have_an_account'];
     $lrn = $_POST['lrn'];
 
     $_SESSION['street_no'] = $street_no;
@@ -76,6 +75,7 @@ try {
 
     isSectionIDExists($sectionID, $conn);
 
+    isLrnExistsOtherThanMe($lrn, $conn, $accountID);
         
     if(!is_numeric($lrn)){
         errorSender("LRN should be numeric.", $fileName);

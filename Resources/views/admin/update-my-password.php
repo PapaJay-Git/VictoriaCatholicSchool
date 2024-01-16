@@ -21,17 +21,25 @@ require_once "../includes/header_layout.php";
         <form method="POST" action="../../../Backend-routes/admin/update_my_password_route.php" onsubmit="submitRequest('updateMyPasswod', event)" id="updateMyPasswod">
             <div class="mb-3">
                 <label class="form-label fw-bold text-uppercase d-block">Old Password</label>
-                <input type="password"  class="form-control input-password form-control-sm" name="old_password" required placeholder="Old Password"? >
+                <div class="password-container">
+                    <input type="password"  class="password-input form-control form-control-sm" id="password1"  name="old_password" required placeholder="Old Password" autocomplete="old_password">
+                    <span class="toggle-password" onclick="togglePasswordVisibility('password1')">👁️‍🗨️</span>
+                </div>
             </div>
             <div class="mb-3">
                 <label class="form-label fw-bold text-uppercase d-block">New Password</label>
-                <input type="password"  class="form-control input-password form-control-sm" name="new_password" required placeholder="New Password"? >
+                <div class="password-container">
+                    <input type="password"  class="password-input form-control form-control-sm" id="password2"  name="new_password" required placeholder="New Password" autocomplete="new_password">
+                    <span class="toggle-password" onclick="togglePasswordVisibility('password2')">👁️‍🗨️</span>
+                </div>
             </div>
             <div class="mb-3">
                 <label class="form-label fw-bold text-uppercase d-block">Confirm New Password</label>
-                <input type="password"  class="form-control input-password form-control-sm" name="confirm_password" required placeholder="Confirm New Password" >
-            </div>	<input id="checkBox" type="checkBox" onchange="showPassword()">
-				<label for="checkBox" class="text-dark fw-bold">Show</label>
+                <div class="password-container">
+                    <input type="password"  class="password-input form-control form-control-sm" id="password3"  name="confirm_password" required placeholder="Confirm New Password" autocomplete="confirm_password">
+                    <span class="toggle-password" onclick="togglePasswordVisibility('password3')">👁️‍🗨️</span>
+                </div>
+            </div>
             <div class="d-flex justify-content-end my-5">
                 <button class="btn btn-sm fw-bold btn-primary me-1" type="submit">CHANGE</button>
                 <a href="profiles.php" class="btn btn-danger btn-sm fw-bold">BACK</a>

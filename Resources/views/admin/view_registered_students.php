@@ -94,132 +94,132 @@ function convertTxt($string = null){
 
 </body>
 <div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-dialog modal-dialog-centered modal-xl">
         <div class="modal-content">
           <form method="POST" action="../../../Backend-routes/admin/add_new_student_route.php" onsubmit="submitRequest('addStudentForm', event)" id="addStudentForm">
             <div class="modal-header">
-              <h5 class="modal-title fw-bold" id="exampleModalLabel">STUDENT INFORMATION </h5>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <div class="mb-3">
-                  <?php $student_type = getSession('student_type');?>
-                  <label class="form-label fw-bold text-uppercase">STUDENT TYPE <b class="text-danger">*</b></label>
-                  <select name='student_type' class='form-control form-control-sm my-2 me-3 border rounded p-1' required>
+              <h5 class="form-label mb-3">Student Information</h5>
+              <div class="row">
+                  <div class="col-12 col-md-4 mb-3">
+                    <?php $student_type = getSession('student_type');?>
+                    <label class="form-label">STUDENT TYPE <b class="text-danger">*</b></label>
+                    <select name='student_type' class='form-control my-2 me-3 border rounded p-1' required>
+                      <option value='' disabled selected>Select an option</option>
+                      <option value='new' <?php echo $student_type == 'new' ? 'selected' : '' ?> >NEW</option>
+                      <option value='transfer' <?php echo $student_type == 'transfer' ? 'selected' : '' ?> >TRANSFEREE</option>
+                    </select>
+                  </div>
+                  <div class="col-12 col-md-4 mb-3">
+                    <label class="form-label">SECTION <b class="text-danger">*</b></label>
+                    <select name='section' class='form-control my-2 me-3 border rounded p-1' required>
                     <option value='' disabled selected>Select an option</option>
-                    <option value='new' <?php echo $student_type == 'new' ? 'selected' : '' ?> >NEW</option>
-                    <option value='transfer' <?php echo $student_type == 'transfer' ? 'selected' : '' ?> >TRANSFEREE</option>
-                  </select>
-                </div>
-                <div class="mb-3">
-                  <label class="form-label fw-bold text-uppercase">SECTION <b class="text-danger">*</b></label>
-                  <select name='section' class='form-control form-control-sm my-2 me-3 border rounded p-1' required>
-                  <option value='' disabled selected>Select an option</option>
-                    <?php
-                        $sectionSessionID = getSession('section');
-                        foreach ($sections as $section) {
-                          $isSelected = ((string)$section['id'] == $sectionSessionID) ? 'selected' : '';
-                          echo "<option value='{$section['id']}' $isSelected>{$section['name']} - {$section['grade']}</option>";
-                      }
-                    ?>
-                  </select>
-                </div>
-                <div class="mb-3">
-                  <label class="form-label fw-bold text-uppercase">First name <b class="text-danger">*</b></label>
-                  <input type="text" class="form-control form-control-sm" name="first_name" required placeholder="First_name" 
-                  <?php echo "value='".htmlspecialchars(getSession('first_name'))."'"  ?> >
-                </div>
-                <div class="mb-3">
-                  <label class="form-label fw-bold text-uppercase">Middle name <b class="text-danger">*</b></label>
-                  <input type="text" class="form-control form-control-sm" name="middle_name" placeholder="Middle name"
-                  <?php echo "value='".htmlspecialchars(getSession('middle_name'))."'"  ?> >
-                </div>
-                <div class="mb-3">
-                  <label class="form-label fw-bold text-uppercase">Last name <b class="text-danger">*</b></label>
-                  <input type="text" class="form-control form-control-sm"name="last_name" required placeholder="Last name"
-                  <?php echo "value='".htmlspecialchars(getSession('last_name'))."'"  ?> >
-                </div>
-                <div class="mb-3">
-                  <label class="form-label fw-bold text-uppercase">Default Password</label>
+                      <?php
+                          $sectionSessionID = getSession('section');
+                          foreach ($sections as $section) {
+                            $isSelected = ((string)$section['id'] == $sectionSessionID) ? 'selected' : '';
+                            echo "<option value='{$section['id']}' $isSelected>{$section['name']} - {$section['grade']}</option>";
+                        }
+                      ?>
+                    </select>
+                  </div>
+                  <div class="col-12 col-md-4 mb-3">
+                    <label class="form-label">LRN <b class="text-danger">*</b></label>
+                    <input type="text" class="form-control" name="lrn" required placeholder="LRN"
+                    <?php echo "value='".htmlspecialchars(getSession('lrn'))."'"  ?> >
+                  </div>
+                  <div class="col-12 col-md-4 mb-3">
+                    <label class="form-label">First name <b class="text-danger">*</b></label>
+                    <input type="text" class="form-control" name="first_name" required placeholder="First_name" 
+                    <?php echo "value='".htmlspecialchars(getSession('first_name'))."'"  ?> >
+                  </div>
+                  <div class="col-12 col-md-4 mb-3">
+                    <label class="form-label">Middle name <b class="text-danger">*</b></label>
+                    <input type="text" class="form-control" name="middle_name" placeholder="Middle name"
+                    <?php echo "value='".htmlspecialchars(getSession('middle_name'))."'"  ?> >
+                  </div>
+                  <div class="col-12 col-md-4 mb-3">
+                    <label class="form-label">Last name <b class="text-danger">*</b></label>
+                    <input type="text" class="form-control"name="last_name" required placeholder="Last name"
+                    <?php echo "value='".htmlspecialchars(getSession('last_name'))."'"  ?> >
+                  </div>
+                  <div class="col-12 col-md-4 mb-3">
+                    <label class="form-label">Phone Number <b class="text-danger">*</b></label>
+                    <input type="text" class="form-control" name="phone" required placeholder="Phone Number"
+                    <?php echo "value='".htmlspecialchars(getSession('phone'))."'"  ?> >
+                  </div>
+                  <div class="col-12 col-md-4 mb-3">
+                    <label class="form-label">Email Address <b class="text-danger">*</b></label>
+                    <input type="text" class="form-control" name="email" required placeholder="Email Adress"
+                    <?php echo "value='".htmlspecialchars(getSession('email'))."'"  ?> >
+                  </div>
+                  <div class="col-12 col-md-4 mb-3">
+                    <label class="form-label">Date of Birth <b class="text-danger">*</b></label>
+                    <input type="date" class="form-control" name="birthday" required 
+                    <?php echo "value='".htmlspecialchars(getSession('birthday'))."'"  ?> >
+                  </div>
+                  <div class="col-12 col-md-8 col-lg-4 mb-3">
+                    <label class="form-label">Default Password</label>
                     <small class="d-block"><strong>Last Name</strong> and <strong>Birth Year</strong> all lowercase</small>
                     <small class="d-block">Example is delacruz_2003</small>
-                    <input type="text" class="form-control form-control-sm" name="password" disabled value="delacruz_2003"
+                    <input type="text" class="form-control" name="password" disabled value="delacruz_2003"
                     <?php echo "value='".htmlspecialchars(getSession('password'))."'"  ?> >
-                </div>
-                <div class="mb-3">
-                  <label class="form-label fw-bold text-uppercase">LRN <b class="text-danger">*</b></label>
-                  <input type="text" class="form-control form-control-sm" name="lrn" required placeholder="LRN"
-                  <?php echo "value='".htmlspecialchars(getSession('lrn'))."'"  ?> >
-                </div>
-                <div class="mb-3">
-                  <label class="form-label fw-bold text-uppercase">Phone Number <b class="text-danger">*</b></label>
-                  <input type="text" class="form-control form-control-sm" name="phone" required placeholder="Phone Number"
-                  <?php echo "value='".htmlspecialchars(getSession('phone'))."'"  ?> >
-                </div>
-                <div class="mb-3">
-                  <label class="form-label fw-bold text-uppercase">Email Address <b class="text-danger">*</b></label>
-                  <input type="text" class="form-control form-control-sm" name="email" required placeholder="Email Adress"
-                  <?php echo "value='".htmlspecialchars(getSession('email'))."'"  ?> >
-                </div>
-                <div class="mb-3">
-                  <label class="form-label fw-bold text-uppercase">Gender <b class="text-danger">*</b></label><br>
-                  <?php
-                      if(getSession('gender') == 'Male'){
-                        ?>
-                          <input type="radio" value="Male" checked name="gender"> Male 
-                          <input type="radio" value="Female" name="gender"> Female
-                        <?php
-                      }else{
-                        ?>
-                          <input type="radio" value="Male" name="gender"> Male 
-                          <input type="radio" value="Female" checked name="gender"> Female
-                        <?php
-                      }
-                  ?>
-                </div>
-                <div class="mb-3">
-                  <label class="form-label fw-bold text-uppercase">Date of Birth <b class="text-danger">*</b></label>
-                  <input type="date" class="form-control form-control-sm" name="birthday" required 
-                  <?php echo "value='".htmlspecialchars(getSession('birthday'))."'"  ?> >
-                </div>
-                <div class="mb-3">
-                  <h5 class="form-label fw-bold text-uppercase">Address</h5>
-                  <div class="border border-dark p-2">
-                    <div class="p-2">
-                      <label class="form-label fw-bold text-uppercase">Street # / Unit # </label>
-                      <input type="text" class="form-control form-control-sm"name="street_no"
-                      <?php echo "value='".htmlspecialchars(getSession('street_no'))."'"  ?> >
-                    </div>
-                    <div class="p-2">
-                      <label class="form-label fw-bold text-uppercase">Street</label>
-                      <input type="text" class="form-control form-control-sm"name="street"
-                      <?php echo "value='".htmlspecialchars(getSession('street'))."'"  ?> >
-                    </div>
-                    <div class="p-2">
-                      <label class="form-label fw-bold text-uppercase">Subdivision/Village/Bldg</label>
-                      <input type="text" class="form-control form-control-sm"name="village"
-                      <?php echo "value='".htmlspecialchars(getSession('village'))."'"  ?> >
-                    </div>
-                    <div class="p-2">
-                      <label class="form-label fw-bold text-uppercase">Barangay <b class="text-danger">*</b></label>
-                      <input type="text" class="form-control form-control-sm"name="barangay" required
-                      <?php echo "value='".htmlspecialchars(getSession('barangay'))."'"  ?> >
-                    </div>
-                    <div class="p-2">
-                      <label class="form-label fw-bold text-uppercase">City/Municipality <b class="text-danger">*</b></label>
-                      <input type="text" class="form-control form-control-sm"name="city_municipality" required
-                      <?php echo "value='".htmlspecialchars(getSession('city_municipality'))."'"  ?> >
-                    </div>
-                    <div class="p-2">
-                      <label class="form-label fw-bold text-uppercase">Province <b class="text-danger">*</b></label>
-                      <input type="text" class="form-control form-control-sm"name="province" required
-                      <?php echo "value='".htmlspecialchars(getSession('province'))."'"  ?> >
-                    </div>
-                    <div class="p-2">
-                      <label class="form-label fw-bold text-uppercase">Zip Code <b class="text-danger">*</b></label>
-                      <input type="text" class="form-control form-control-sm"name="zip_code" required
-                      <?php echo "value='".htmlspecialchars(getSession('zip_code'))."'"  ?> >
-                    </div>
+                  </div>
+                  <div class="col-12 col-md-4 mb-3">
+                    <label class="form-label">Gender <b class="text-danger">*</b></label><br>
+                    <?php
+                        if(getSession('gender') == 'Male'){
+                          ?>
+                            <input type="radio" value="Male" checked name="gender"> Male 
+                            <input type="radio" value="Female" name="gender"> Female
+                          <?php
+                        }else{
+                          ?>
+                            <input type="radio" value="Male" name="gender"> Male 
+                            <input type="radio" value="Female" checked name="gender"> Female
+                          <?php
+                        }
+                    ?>
+                  </div>
+              </div>
+              <h5 class="form-label mt-3 mb-3">Address</h5>
+              <div class="row">
+                  <div class="col-12 col-md-4 col-lg-2 mb-3">
+                      <label class="form-label">Street # / Unit # </label>
+                      <input type="text" class="form-control"name="street_no"
+                      <?php echo "value='".htmlspecialchars(getSession('street_no'))."'"  ?> placeholder="Street # / Unit #">
+                  </div>
+                  <div class="col-12 col-md-4 col-lg-3 mb-3">
+                      <label class="form-label">Street</label>
+                      <input type="text" class="form-control"name="street"
+                      <?php echo "value='".htmlspecialchars(getSession('street'))."'"  ?> placeholder="Street">
+                  </div>
+                  <div class="col-12 col-md-4 col-lg-4 mb-3">
+                      <label class="form-label">Subdivision/Village/Bldg</label>
+                      <input type="text" class="form-control"name="village"
+                      <?php echo "value='".htmlspecialchars(getSession('village'))."'"  ?> placeholder="Subdivision/Village/Bldg">
+                  </div>
+                  <div class="col-12 col-md-4 col-lg-3 mb-3">
+                      <label class="form-label">Barangay <b class="text-danger">*</b></label>
+                      <input type="text" class="form-control"name="barangay" required
+                      <?php echo "value='".htmlspecialchars(getSession('barangay'))."'"  ?> placeholder="Barangay">
+                  </div>
+                  <div class="col-12 col-md-4 col-lg-3 mb-3">
+                      <label class="form-label">City/Municipality <b class="text-danger">*</b></label>
+                      <input type="text" class="form-control"name="city_municipality" required
+                      <?php echo "value='".htmlspecialchars(getSession('city_municipality'))."'"  ?> placeholder="City/Municipality">
+                  </div>
+                  <div class="col-12 col-md-4 col-lg-3 mb-3">
+                      <label class="form-label">Province <b class="text-danger">*</b></label>
+                      <input type="text" class="form-control"name="province" required
+                      <?php echo "value='".htmlspecialchars(getSession('province'))."'"  ?> placeholder="Province">
+                  </div>
+                  <div class="col-12 col-md-4 col-lg-2 mb-3">
+                      <label class="form-label">Zip Code <b class="text-danger">*</b></label>
+                      <input type="text" class="form-control"name="zip_code" required
+                      <?php echo "value='".htmlspecialchars(getSession('zip_code'))."'"  ?> placeholder="Zip Code">
                   </div>
                 </div>
               </div>

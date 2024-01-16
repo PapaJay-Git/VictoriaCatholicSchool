@@ -160,6 +160,11 @@ $balance = (9 - $countMatches) * 1131.3;
                                         </div>
 
                                     </span>';
+                                }else{
+                                    echo '
+                                        <span class="d-block">
+                                            <small class="text-dark fw-bold d-block">NO PAYMENT INDICATED YET.</small>
+                                        </span>';
                                 }
                             ?>
                         </span>

@@ -83,7 +83,6 @@ function convertTxt($string = null){
                           <td>".($student['section_name'] == NULL ? 'None' : $student['section_name']." ".$student['section_grade'])."</td>
                           <td class='text-primary'>".($student['payment_type'] == 'down' ? ($paidMonthsCount == 9 ? 'FULLY PAID' : 'INSTALLMENT') : 'FULL PAYMENT')."</td>
                           <td>
-                          <a href='/student_full_info'>PRINT</a>
                           <a class='btn btn-sm btn-primary fw-bold' href='update-complete-student.php?id=".$student['id']."'>UPDATE</a>
                           ";
                           ?>
@@ -100,6 +99,8 @@ function convertTxt($string = null){
 
                           ?>  
                           </form>
+                          
+                          <button type='button' class="btn btn-sm fw-bold btn-dark" onclick="printPDF('../../../Backend-routes/admin/dompdf/student_full_Info.php?id=<?php echo $student['id'] ?>')">PRINT FULL INFO</button>
                           <?php
                       echo "
                           </td>
@@ -111,10 +112,20 @@ function convertTxt($string = null){
               </table>
            </div>
      </div>
-
 </body>
 <?php
 	require_once "../includes/includes_scripts.php";
 ?>
 <script src="../../js/admin/sections.js"></script>
-<script> setActive('students_tab'); </script>
+<script> 
+
+  setActive('students_tab'); 
+
+  function printPDF(url) {
+      var pdfWindow = window.open(url, '_blank');
+
+      pdfWindow.onload = function() {
+          pdfWindow.print();
+      };
+  }
+</script>

@@ -3,7 +3,7 @@
 require_once $_SERVER['DOCUMENT_ROOT']."/Middleware/CheckIfLoggedIn.php";
 require_once $_SERVER['DOCUMENT_ROOT']."/Middleware/CheckIfAdmin.php";
 require_once $_SERVER['DOCUMENT_ROOT']."/Backend-routes/admin/includes_get_promissories.php";
-$title = "Admin - Promissories";
+$title = "Promissories List";
 
 
 require_once "../includes/header_layout.php";
@@ -36,7 +36,7 @@ function convertTxt($string = null){
             </div>
             <div class="card-body py-5"> 
                 <div class="table-responsive">
-                <table id="teachersTable">
+                <table class="table table-bordered table-striped"  id="teachersTable">
                     <thead>
                     <tr>
                         <th scope="col">Name</th>

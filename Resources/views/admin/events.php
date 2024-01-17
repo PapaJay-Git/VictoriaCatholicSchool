@@ -3,7 +3,8 @@
 require_once $_SERVER['DOCUMENT_ROOT']."/Middleware/CheckIfLoggedIn.php";
 require_once $_SERVER['DOCUMENT_ROOT']."/Middleware/CheckIfAdmin.php";
 require_once $_SERVER['DOCUMENT_ROOT']."/Backend-routes/admin/includes_get_events.php";
-$title = "Admin - Events";
+
+$title = "Events List";
 
 
 require_once "../includes/header_layout.php";
@@ -43,7 +44,7 @@ function getSession($data) {
             </div>
             <div class="card-body py-5"> 
                 <div class="table-responsive">
-                <table id="teachersTable">
+                <table class="table table-bordered table-striped"  id="teachersTable">
                     <thead>
                     <tr>
                         <th scope="col">Title</th>

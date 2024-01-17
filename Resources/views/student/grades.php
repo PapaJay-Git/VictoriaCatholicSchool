@@ -30,7 +30,8 @@ foreach ($subjects as $subject) {
 } 
 
 $finalAverageResult = ($subjects->num_rows == $subjectThatHasGrade) ? "Final Average: ".number_format($finalAverage/$subjects->num_rows, 2) : 'Pending Grades';
-$title = ucwords($auth['first_name'])." ".ucwords($auth['last_name'])."      ".$finalAverageResult;
+
+$title = ucwords(strtolower($auth['first_name']))." ".ucwords(strtolower($auth['last_name']))." - ".$finalAverageResult;
 
 require_once "../includes/header_layout.php";
 
@@ -51,7 +52,7 @@ $count = 1;
                         <h5><?php echo $finalAverageResult ?></h5>
                     </div>
                     <div class="table-responsive ">
-                            <table id="gradesTable">
+                            <table class="table table-bordered table-striped"  id="gradesTable">
                                 <thead>
                                 <tr>
                                     <th scope="col">Subject</th>

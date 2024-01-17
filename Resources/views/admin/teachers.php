@@ -4,7 +4,7 @@ require_once $_SERVER['DOCUMENT_ROOT']."/Middleware/CheckIfLoggedIn.php";
 require_once $_SERVER['DOCUMENT_ROOT']."/Middleware/CheckIfAdmin.php";
 require_once $_SERVER['DOCUMENT_ROOT']."/Backend-routes/admin/includes_get_all_teachers_route.php";
 
-$title = "Admin - Teachers";
+$title = "Teachers List";
 
 $count = 1;
 
@@ -36,7 +36,7 @@ function convertTxt($string = null){
         </div>
 
            <div class="table-responsive">
-              <table id="teachersTable">
+              <table class="table table-bordered table-striped"  id="teachersTable">
                 <thead>
                   <tr>
                     <th scope="col">Name</th>

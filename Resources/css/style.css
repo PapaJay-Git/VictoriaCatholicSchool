@@ -97,7 +97,10 @@ tr td{
 }
 table{
     width: 100% !important;
+	border-top: 1px solid black;
 }
+
+
 
 .dataTables_scrollBody::-webkit-scrollbar-track {
     background-color: #F5F5F5;
@@ -124,6 +127,9 @@ table{
     font-weight: bold !important;
 }
 
+.dataTables_filter, .dt-buttons, .dataTables_info{
+	padding-bottom: 30px;
+}
 
 /* Custom border color when value is 1 */
 /* select.selected {

@@ -4,7 +4,7 @@ require_once $_SERVER['DOCUMENT_ROOT']."/Middleware/CheckIfLoggedIn.php";
 require_once $_SERVER['DOCUMENT_ROOT']."/Middleware/CheckIfAdmin.php";
 require_once $_SERVER['DOCUMENT_ROOT']."/Backend-routes/admin/includes_get_all_parents_route.php";
 
-$title = "Admin - Parents/Guardian Accounts";
+$title = "Parents/Guardian Accounts List";
 
 $count = 1;
 
@@ -35,10 +35,9 @@ function convertTxt($string = null){
         </div>
 
            <div class="table-responsive">
-              <table id="teachersTable">
+              <table class="table table-bordered table-striped"  id="teachersTable">
                 <thead>
                   <tr>
-                    <th scope="col">#</th>
                     <th scope="col">Parent/Guardian Info</th>
                     <th scope="col">Student Info</th>
                     <th scope="col">Student Section</th>
@@ -51,10 +50,6 @@ function convertTxt($string = null){
                     $lockQuestion = $row['is_locked'] == 1 ? 'Are you sure you want to unlock this account?' : 'Are you sure you want to lock this account?';
                     ?>
                     <tr>
-                      <td>
-                        <small class="text-dark">
-                          <?php echo $count++ ?>
-                        </small></td>
                       <td>
                           <small class="text-dark"><?php echo convertTxt($row['guardian_type']).', '.convertTxt($row['last_name']).' '.convertTxt($row['first_name']).', '.ucfirst($row['email']) ?></small>
                       </td>

@@ -4,7 +4,7 @@ require_once $_SERVER['DOCUMENT_ROOT']."/Middleware/CheckIfLoggedIn.php";
 require_once $_SERVER['DOCUMENT_ROOT']."/Middleware/CheckIfCashier.php";
 require_once $_SERVER['DOCUMENT_ROOT']."/Backend-routes/cashier/includes_get_complete_requirements_students_route.php";
 
-$title = "Cashier - Registered Students";
+$title = "Registered Students List";
 
 $count = 1;
 
@@ -30,7 +30,7 @@ function convertTxt($string = null){
         </div>
 
            <div class="table-responsive">
-              <table id="sectionsTable">
+              <table class="table table-bordered table-striped"  id="sectionsTable">
                 <thead>
                   <tr>
                     <th scope="col">Name</th>

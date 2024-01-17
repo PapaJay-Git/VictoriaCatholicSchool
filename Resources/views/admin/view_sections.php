@@ -4,7 +4,7 @@ require_once $_SERVER['DOCUMENT_ROOT']."/Middleware/CheckIfLoggedIn.php";
 require_once $_SERVER['DOCUMENT_ROOT']."/Middleware/CheckIfAdmin.php";
 require_once $_SERVER['DOCUMENT_ROOT']."/Backend-routes/admin/includes_get_specific_sections_route.php";
 
-$title = "Admin - Grade $accountID Sections";
+$title = "Grade $accountID Sections List";
 
 $count = 1;
 
@@ -35,11 +35,10 @@ function getSession($data) {
         </div>
 
            <div class="table-responsive">
-              <table id="sectionsTable">
+              <table class="table table-bordered table-striped"  id="sectionsTable">
                 <thead>
                   <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Section Name</th>
+                    <th scope="col">Name</th>
                     <th scope="col">Action</th>
                   </tr>
                 </thead>
@@ -48,11 +47,6 @@ function getSession($data) {
                   foreach($result as $row){
                     ?>
                     <tr>
-                      <td>
-                        <small class="text-dark">
-                          <?php echo $count++ ?>
-                        </small>
-                      </td>
                       <td>
                         <small class="text-dark">
                           <?php echo strtoupper($row['name']) ?>

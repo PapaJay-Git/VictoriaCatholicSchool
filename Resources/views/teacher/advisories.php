@@ -4,7 +4,7 @@ require_once $_SERVER['DOCUMENT_ROOT']."/Middleware/CheckIfLoggedIn.php";
 require_once $_SERVER['DOCUMENT_ROOT']."/Middleware/CheckIfTeacher.php";
 require_once $_SERVER['DOCUMENT_ROOT']."/Backend-routes/teacher/includes_get_advisories.php";
 
-$title = "Teacher - Advisories";
+$title = "Advisories List";
 
 require_once "../includes/header_layout.php";
 
@@ -18,10 +18,9 @@ require_once "../includes/header_layout.php";
             <h5 >SECTION ADVISORIES</h5>
         </div>
         <div class="table-responsive">
-            <table id="tablesID">
+            <table class="table table-bordered table-striped"  id="tablesID">
                 <thead>
                 <tr>
-                    <th scope="col">#</th>
                     <th scope="col">SECTION NAME</th>
                     <th scope="col">Action</th>
                 </tr>
@@ -31,7 +30,6 @@ require_once "../includes/header_layout.php";
                         foreach($advisories as $index => $advisory){
                             echo "
                             <tr>
-                                <td><small class='text-dark'>".($index+1)."</small></td>
                                 <td><small class='text-dark'>".$advisory['name']."</small></td>
                                 <td>
                                     <a href='advisory_students.php?id=".$advisory['id']."' class='btn btn-primary btn-sm fw-bold'>STUDENTS</a>

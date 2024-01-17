@@ -22,10 +22,9 @@ require_once "../includes/header_layout.php";
         </div>
 
            <div class="table-responsive">
-              <table id="studentsTable">
+              <table class="table table-bordered table-striped"  id="studentsTable">
                 <thead>
                   <tr>
-                    <th scope="col">#</th>
                     <th scope="col">Identifier</th>
                     <th scope="col">Number of Students</th>
                     <th scope="col">Action</th>
@@ -34,11 +33,6 @@ require_once "../includes/header_layout.php";
                 <tbody id="tbody-student">
                   
                 <tr>
-                    <td>
-                        <small class="text-dark">
-                          <?php echo $count++ ?>
-                        </small>
-                    </td>
                     <td>
                         <small class="text-dark">ENROLLED STUDENTS</small>
                     </td>
@@ -51,11 +45,6 @@ require_once "../includes/header_layout.php";
                   </tr>
                   <tr>
                     <td>
-                        <small class="text-dark">
-                          <?php echo $count++ ?>
-                        </small>
-                    </td>
-                    <td>
                         <small class="text-dark">REGISTERED</small>
                     </td>
                     <td>
@@ -67,11 +56,6 @@ require_once "../includes/header_layout.php";
                   </tr>
                   <tr>
                     <td>
-                        <small class="text-dark">
-                          <?php echo $count++ ?>
-                        </small>
-                    </td>
-                    <td>
                         <small class="text-dark">PENDING REGISTRATION</small>
                     </td>
                     <td>
@@ -82,11 +66,6 @@ require_once "../includes/header_layout.php";
                     </td>
                   </tr>
                   <tr>
-                    <td>
-                        <small class="text-dark">
-                          <?php echo $count++ ?>
-                        </small>
-                    </td>
                     <td>
                         <small class="text-dark">INACTIVE STUDENTS</small>
                     </td>

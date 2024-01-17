@@ -4,7 +4,7 @@ require_once $_SERVER['DOCUMENT_ROOT']."/Middleware/CheckIfLoggedIn.php";
 require_once $_SERVER['DOCUMENT_ROOT']."/Middleware/CheckIfTeacher.php";
 require_once $_SERVER['DOCUMENT_ROOT']."/Backend-routes/teacher/includes_get_assigned_subjects.php";
 
-$title = "Teacher - Assigned Subjects";
+$title = "Assigned Subjects List";
 
 require_once "../includes/header_layout.php";
 
@@ -36,7 +36,7 @@ $schedules = [
                         <a href="advisories.php" class="btn btn-danger btn-sm fw-bold">BACK</a>
                     </div>
                     <div class="table-responsive">
-                        <table id="teachersTable">
+                        <table class="table table-bordered table-striped"  id="teachersTable">
                             <thead>
                             <tr>
                                 <th scope="col">SUBJECT NAME</th>

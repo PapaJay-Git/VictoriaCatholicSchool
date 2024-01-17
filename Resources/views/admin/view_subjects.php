@@ -4,7 +4,7 @@ require_once $_SERVER['DOCUMENT_ROOT']."/Middleware/CheckIfLoggedIn.php";
 require_once $_SERVER['DOCUMENT_ROOT']."/Middleware/CheckIfAdmin.php";
 require_once $_SERVER['DOCUMENT_ROOT']."/Backend-routes/admin/includes_get_specific_subjects_route.php";
 
-$title = "Admin - Grade $accountID Subjects";
+$title = "Grade $accountID Subjects List";
 
 $count = 1;
 
@@ -27,7 +27,7 @@ function getSession($data) {
      ?>
      <div class="container mt-5">
         <div class="d-flex justify-content-between align-items-center mb-5">
-            <h5 >GRADE <?php echo $accountID ?> SECTIONS</h5>
+            <h5 >GRADE <?php echo $accountID ?> SUBJECTS</h5>
             <div class="btn-group">
                 <a href="teacher-add.php" class="btn btn-sm fw-bold btn-dark" data-bs-toggle="modal" data-bs-target="#addModal">ADD SUBJECT</a>
                 <a href="subjects.php" class="btn btn-sm btn-danger fw-bold">BACK</a>
@@ -35,7 +35,7 @@ function getSession($data) {
         </div>
 
            <div class="table-responsive">
-              <table id="sectionsTable">
+              <table class="table table-bordered table-striped"  id="sectionsTable">
                 <thead>
                   <tr>
                     <th scope="col">Subject Name</th>

@@ -4,7 +4,7 @@ require_once $_SERVER['DOCUMENT_ROOT']."/Middleware/CheckIfLoggedIn.php";
 require_once $_SERVER['DOCUMENT_ROOT']."/Middleware/CheckIfAdmin.php";
 require_once $_SERVER['DOCUMENT_ROOT']."/Backend-routes/admin/includes_get_specific_classes_route.php";
 
-$title = "Admin - Grade $accountID Classes";
+$title = "Grade $accountID Classes List";
 
 $count = 1;
 
@@ -34,7 +34,7 @@ function getSession($data) {
         </div>
 
            <div class="table-responsive">
-              <table id="sectionsTable">
+              <table class="table table-bordered table-striped"  id="sectionsTable">
                 <thead>
                   <tr>
                     <th scope="col">Class Names</th>

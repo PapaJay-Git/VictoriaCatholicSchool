@@ -4,7 +4,7 @@ require_once $_SERVER['DOCUMENT_ROOT']."/Middleware/CheckIfLoggedIn.php";
 require_once $_SERVER['DOCUMENT_ROOT']."/Middleware/CheckIfAdmin.php";
 require_once $_SERVER['DOCUMENT_ROOT']."/Backend-routes/admin/includes_get_class_students_route.php";
 
-$title = "Admin - Students of ".$section['name']."-".$section['grade'];
+$title = $section['name']." ".$section['grade']." - STUDENTS";
 
 $count = 1;
 
@@ -32,7 +32,7 @@ function convertTxt($string = null){
         </div>
 
            <div class="table-responsive">
-              <table id="sectionsTable">
+              <table class="table table-bordered table-striped"  id="sectionsTable">
                 <thead>
                   <tr>
                     <th scope="col">Name</th>

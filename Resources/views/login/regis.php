@@ -134,7 +134,7 @@ function getSession($data) {
         <div class="row">
             <div class="col-lg-4 mb-3">
                 <label>LRN <b class="text-danger">*</b></label>
-                <input type="number" oninput="this.className = ''" name="lrn" <?php echo "value='".htmlspecialchars(getSession('lrn'))."'"  ?> placeholder="LRN">
+                <input type="text" maxlength="12" minlength="12" oninput="this.className = ''" name="lrn" <?php echo "value='".htmlspecialchars(getSession('lrn'))."'"  ?> placeholder="LRN">
             </div>
             <div class="col-lg-4 mb-3">
                 <label>Gender <b class="text-danger">*</b></label>
@@ -215,11 +215,11 @@ function getSession($data) {
                 <h5 >Mother</h5>
             </div>
             <div class="col-lg-4 mb-3">
-                <label>Last Name</label>
+                <label>Last Name <b class="text-danger">*</b></label>
                 <input type="text" placeholder="Last Name" oninput="this.className = ''" name="mother_last_name" <?php echo "value='".htmlspecialchars(getSession('mother_last_name'))."'"  ?> >
             </div>
             <div class="col-lg-4 mb-3">
-                <label>First Name</label>
+                <label>First Name <b class="text-danger">*</b></label>
                 <input type="text" placeholder="First Name" oninput="this.className = ''" name="mother_first_name" <?php echo "value='".htmlspecialchars(getSession('mother_first_name'))."'"  ?> >
             </div>
             <div class="col-lg-4 mb-3">
@@ -229,15 +229,15 @@ function getSession($data) {
         </div>
         <div class="row">
             <div class="col-lg-4 mb-3">
-                <label>Phone Number</label>
+                <label>Phone Number <b class="text-danger">*</b></label>
                 <input type="tel" oninput="this.className = ''" placeholder="Phone (0000-000-0000)" name="mother_phone" <?php echo "value='".htmlspecialchars(getSession('mother_phone'))."'"  ?> >
             </div>
             <div class="col-lg-4 mb-3">
-                <label>Email</label>
+                <label>Email <b class="text-danger">*</b></label>
                 <input type="email" placeholder="Email" oninput="this.className = ''" name="mother_email" name="mother_email" <?php echo "value='".htmlspecialchars(getSession('mother_email'))."'"  ?> >
             </div>
             <div class="col-lg-4 mb-3">
-                <label>Occupation</label>
+                <label>Occupation <b class="text-danger">*</b></label>
                 <input type="text" placeholder="Occupation" oninput="this.className = ''" name="mother_occupation" <?php echo "value='".htmlspecialchars(getSession('mother_occupation'))."'"  ?>>
             </div>
         </div>
@@ -247,11 +247,11 @@ function getSession($data) {
                 <h5 >Father</h5>
             </div>
             <div class="col-lg-4 mb-3">
-                <label>Last Name</label>
+                <label>Last Name <b class="text-danger">*</b></label>
                 <input type="text" placeholder="Last Name" oninput="this.className = ''" name="father_last_name" <?php echo "value='".htmlspecialchars(getSession('father_last_name'))."'"  ?> >
             </div>
             <div class="col-lg-4 mb-3">
-                <label>First Name</label>
+                <label>First Name <b class="text-danger">*</b></label>
                 <input type="text" placeholder="First Name" oninput="this.className = ''" name="father_first_name" <?php echo "value='".htmlspecialchars(getSession('father_first_name'))."'"  ?> >
             </div>
             <div class="col-lg-4 mb-3">
@@ -259,15 +259,15 @@ function getSession($data) {
                 <input type="text" placeholder="Middle Name" oninput="this.className = ''" name="father_middle_name" <?php echo "value='".htmlspecialchars(getSession('father_middle_name'))."'"  ?> >
             </div>
             <div class="col-lg-4 mb-3">
-                <label>Phone Number</label>
+                <label>Phone Number <b class="text-danger">*</b></label>
                 <input type="tel" oninput="this.className = ''" placeholder="Phone (0000-000-0000)" name="father_phone" <?php echo "value='".htmlspecialchars(getSession('father_phone'))."'"  ?> >
             </div>
             <div class="col-lg-4 mb-3">
-                <label>Email</label>
+                <label>Email <b class="text-danger">*</b></label>
                 <input type="email" placeholder="Email" oninput="this.className = ''" name="father_email" name="father_email" <?php echo "value='".htmlspecialchars(getSession('father_email'))."'"  ?> >
             </div>
             <div class="col-lg-4 mb-3">
-                <label>Occupation</label>
+                <label>Occupation <b class="text-danger">*</b></label>
                 <input type="text" placeholder="Occupation" oninput="this.className = ''" name="father_occupation" <?php echo "value='".htmlspecialchars(getSession('father_occupation'))."'"  ?>>
             </div>
         </div>
@@ -278,11 +278,11 @@ function getSession($data) {
                 <h5 >Guardian</h5>
             </div>
             <div class="col-lg-4 mb-3">
-                <label>Last Name</label>
+                <label>Last Name <b class="text-danger">*</b></label>
                 <input type="text" placeholder="Last Name" oninput="this.className = ''" name="guardian_last_name" <?php echo "value='".htmlspecialchars(getSession('guardian_last_name'))."'"  ?> >
             </div>
             <div class="col-lg-4 mb-3">
-                <label>First Name</label>
+                <label>First Name <b class="text-danger">*</b></label>
                 <input type="text" placeholder="First Name" oninput="this.className = ''" name="guardian_first_name" <?php echo "value='".htmlspecialchars(getSession('guardian_first_name'))."'"  ?> >
             </div>
             <div class="col-lg-4 mb-3">
@@ -290,15 +290,15 @@ function getSession($data) {
                 <input type="text" placeholder="Middle Name" oninput="this.className = ''" name="guardian_middle_name" <?php echo "value='".htmlspecialchars(getSession('guardian_middle_name'))."'"  ?> >
             </div>
             <div class="col-lg-4 mb-3">
-                <label>Phone Number</label>
+                <label>Phone Number <b class="text-danger">*</b></label>
                 <input type="tel" oninput="this.className = ''" placeholder="Phone (0000-000-0000)" name="guardian_phone" <?php echo "value='".htmlspecialchars(getSession('guardian_phone'))."'"  ?> >
             </div>
             <div class="col-lg-4 mb-3">
-                <label>Email</label>
+                <label>Email <b class="text-danger">*</b></label>
                 <input type="email" placeholder="Email" oninput="this.className = ''" name="guardian_email" name="guardian_email" <?php echo "value='".htmlspecialchars(getSession('guardian_email'))."'"  ?> >
             </div>
             <div class="col-lg-4 mb-3">
-                <label>Occupation</label>
+                <label>Occupation <b class="text-danger">*</b></label>
                 <input type="text" placeholder="Occupation" oninput="this.className = ''" name="guardian_occupation" <?php echo "value='".htmlspecialchars(getSession('guardian_occupation'))."'"  ?>>
             </div>
         </div>

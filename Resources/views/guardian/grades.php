@@ -54,7 +54,7 @@ $count = 1;
                         <h5><?php echo $finalAverageResult ?></h5>
                     </div>
                     <div class="d-flex justify-content-end py-3">
-                        <a href="../../../Backend-routes/guardian/dompdf/downloadProgressReportCard.php" target="_blank" class="btn btn-sm fw-bold btn-dark">Download Progress Report Card</a>
+                        <a href="../../../Backend-routes/guardian/dompdf/downloadProgressReportCard.php" target="_blank" class="btn btn-sm fw-bold btn-dark">Print Progress Report Card</a>
                     </div>
                     <div class="table-responsive ">
                             <table class="table table-bordered table-striped"  id="gradesTable">

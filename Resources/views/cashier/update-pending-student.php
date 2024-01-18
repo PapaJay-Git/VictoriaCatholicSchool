@@ -185,7 +185,7 @@ function isTabSet($tab){
             </div>
             <div class="col-12 col-md-4 mb-3">
                 <label class="form-label ">LRN</label>
-                <input type="numeric" class="form-control " name="lrn" required placeholder="LRN" <?php echo "value='".htmlspecialchars(getSession('lrn'))."'"  ?> >
+                <input type="text" minlength="12" maxlength="12" class="form-control " name="lrn" required placeholder="LRN" <?php echo "value='".htmlspecialchars(getSession('lrn'))."'"  ?> >
             </div>
             <div class="col-12 col-md-4 mb-3">
                 <label class="form-label ">Phone Number</label>

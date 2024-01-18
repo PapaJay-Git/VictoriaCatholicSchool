@@ -82,6 +82,9 @@ require_once $_SERVER['DOCUMENT_ROOT']."/Backend-routes/admin/includes_get_event
 </section>
 <!-- HOME-->
 
+
+
+
 <!-- Why choose VCS -->
 <div class="bg-warning py-5">
   <div class="container">
@@ -186,86 +189,84 @@ require_once $_SERVER['DOCUMENT_ROOT']."/Backend-routes/admin/includes_get_event
 </section>
 <!-- About -->
 
-<!-- Admission -->
-<section id="admission">
-  <div class="bg-body-tertiary">
-    <div class="container py-4">
-      <div class="row">
-      
-      <!-- Header -->
-      <div class="p-5 mb-4">
-        <h3 class="display-6 text-black fw-bold pb-4"><span style="border-bottom: 3px solid #ffd308; padding-bottom: 10px;">ADMISSON REQUIREMENTS</span></h3>
-
-        <ul class="list-group">
-          <li class="list-group-item disabled bg-body-tertiary border-0 fs-4 fw-bold text-black py-3" aria-disabled="true">Old Student</li>
-          <li class="list-group-item bg-body-tertiary border-0 ml-3 text-black mb-3"><i class="fa-solid fa-circle-check"></i> For Old Students, there are no requirements to be submitted and directly proceed for payment in the cashier’s office.</li>
-        </ul>
-
-        <ul class="list-group">
-          <li class="list-group-item disabled bg-body-tertiary border-0 fs-4 fw-bold text-black py-3" aria-disabled="true">New Student</li>
-          <li class="list-group-item bg-body-tertiary border-0 ml-3 text-black"><i class="fa-solid fa-circle-check"></i> Original Form 138-A</li>
-          <li class="list-group-item bg-body-tertiary border-0 ml-3 text-black"><i class="fa-solid fa-circle-check"></i> Certificate of Good Moral</li>
-          <li class="list-group-item bg-body-tertiary border-0 ml-3 text-black"><i class="fa-solid fa-circle-check"></i> Photocopy of Baptismal and Birth Certificate (NSO Certifies)</li>
-        </ul>
-
-        <ul class="list-group">
-          <li class="list-group-item disabled bg-body-tertiary border-0 fs-4 fw-bold text-black py-3" aria-disabled="true">Transferees</li>
-          <li class="list-group-item bg-body-tertiary border-0 ml-3 text-black"><i class="fa-solid fa-circle-check"></i> Original Form 138-A</li>
-          <li class="list-group-item bg-body-tertiary border-0 ml-3 text-black"><i class="fa-solid fa-circle-check"></i> Certificate of Good Moral</li>
-          <li class="list-group-item bg-body-tertiary border-0 ml-3 text-black"><i class="fa-solid fa-circle-check"></i> Photocopy of Baptismal and Birth Certificate (NSO Certifies)</li>
-          <li class="list-group-item bg-body-tertiary border-0 ml-3 text-black"><i class="fa-solid fa-circle-check"></i> Honorary Dismissal</li>
-        </ul>
-
-      </div>
-      <!-- Header -->
-
-      </div>      
-    </div>
-  </div>
-</section>
-<!-- Admission -->
-
-
 <!-- Events -->
 <section id="about">
-  <div class="bg-black">
+  <div class="bg-">
     <div class="container py-4">
       <div class="row">
       
-      <div class="p-5 mb-2 bg-black">
-          <h3 class="display-6 text-white fw-bold pb-4"><span style="border-bottom: 3px solid #ffd308; padding-bottom: 10px;">VCS EVENTS</span></h3>
+      <div class="col-lg-12 px-5 py-3">
+          <h3 class="display-6 text-dark fw-bold pb-4"><span style="border-bottom: 3px solid #ffd308; padding-bottom: 10px;">EVENTS</span></h3>
       </div>
 
-      <div class="owl-carousel owl-theme">
-          
-        <?php foreach($events as $event){ ?>
+      <?php foreach($events as $event){ ?>
 
-                  <div class="col-lg-12 mb-3">
-                    <div class="h-100 p-5 bg-white border">
-                      <h2 class="text-black fw-bold "><span style="border-bottom: 3px solid #ffd308; padding-bottom: 5px;"><?php echo $event['title'] ?></span></h2>
-                      <p class="pt-3"><?php echo $event['description']; ?></p>
-                    </div>
+                <div class="col-lg-12 mb-3">
+                  <div class="h-100 p-5 bg-white border shadow shadow-lg">
+                    <h2 class="text-black fw-bold "><span style="border-bottom: 3px solid #ffd308; padding-bottom: 5px;"><?php echo $event['title'] ?></span></h2>
+                    <p class="pt-3"><?php echo $event['description']; ?></p>
                   </div>
+                </div>
 
-        <?php }
-        
-        if($events->num_rows == 0){
-            ?>
+      <?php }
+      
+      if($events->num_rows == 0){
+          ?>
 
-            <div class="col-lg-12 mb-3">
-              <div class="h-100 p-5 bg-white border">
-                <h2 class="text-black fw-bold "><span style="border-bottom: 3px solid #ffd308; padding-bottom: 5px;">No Events Available</span></h2>
-                <p class="pt-3">STAY TUNED</p>
-              </div>
+          <div class="col-lg-12 mb-3">
+            <div class="h-100 p-5 bg-white border">
+              <h2 class="text-black fw-bold "><span style="border-bottom: 3px solid #ffd308; padding-bottom: 5px;">No Events Available</span></h2>
+              <p class="pt-3">STAY TUNED</p>
             </div>
-          <?php
-        }
-        ?>
-      </div>      
+          </div>
+        <?php
+      }
+      ?>    
     </div>
   </div>
 </section>
 <!-- Events -->
+
+
+<!-- Admission -->
+<section id="admission">
+  <div class="bg-dark">
+    <div class="container py-4">
+      <div class="row">
+      
+      <!-- Header -->
+      <div class="p-5 mb-4 ">
+        <h3 class="display-6 text-white fw-bold pb-4"><span style="border-bottom: 3px solid #ffd308; padding-bottom: 10px;">ADMISSON REQUIREMENTS</span></h3>
+
+        <ul class="list-group">
+          <li class="list-group-item disabled bg-dark border-0 fs-4 fw-bold text-white py-3" aria-disabled="true">Old Student</li>
+          <li class="list-group-item bg-dark border-0 ml-3 text-white mb-3"><i class="fa-solid fa-circle-check"></i> For Old Students, there are no requirements to be submitted and directly proceed for payment in the cashier’s office.</li>
+        </ul>
+
+        <ul class="list-group">
+          <li class="list-group-item disabled bg-dark border-0 fs-4 fw-bold text-white py-3" aria-disabled="true">New Student</li>
+          <li class="list-group-item bg-dark border-0 ml-3 text-white"><i class="fa-solid fa-circle-check"></i> Original Form 138-A</li>
+          <li class="list-group-item bg-dark border-0 ml-3 text-white"><i class="fa-solid fa-circle-check"></i> Certificate of Good Moral</li>
+          <li class="list-group-item bg-dark border-0 ml-3 text-white"><i class="fa-solid fa-circle-check"></i> Photocopy of Baptismal and Birth Certificate (NSO Certifies)</li>
+        </ul>
+
+        <ul class="list-group">
+          <li class="list-group-item disabled bg-dark border-0 fs-4 fw-bold text-white py-3" aria-disabled="true">Transferees</li>
+          <li class="list-group-item bg-dark border-0 ml-3 text-white"><i class="fa-solid fa-circle-check"></i> Original Form 138-A</li>
+          <li class="list-group-item bg-dark border-0 ml-3 text-white"><i class="fa-solid fa-circle-check"></i> Certificate of Good Moral</li>
+          <li class="list-group-item bg-dark border-0 ml-3 text-white"><i class="fa-solid fa-circle-check"></i> Photocopy of Baptismal and Birth Certificate (NSO Certifies)</li>
+          <li class="list-group-item bg-dark border-0 ml-3 text-white"><i class="fa-solid fa-circle-check"></i> Honorary Dismissal</li>
+        </ul>
+
+      </div>
+      <!-- Header -->
+
+      </div>      
+    </div>
+  </div>
+</section>
+<!-- Admission -->
+
 
 
 <!-- Contact -->

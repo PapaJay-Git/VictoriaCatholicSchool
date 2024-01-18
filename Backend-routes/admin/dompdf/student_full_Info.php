@@ -3,13 +3,22 @@
 require_once '../../../dompdf/autoload.inc.php';
 
 use Dompdf\Dompdf;
-    
+
+
 try {
 
     require_once $_SERVER['DOCUMENT_ROOT']."/Connections/DB_connection.php";
     require_once $_SERVER['DOCUMENT_ROOT']."/Middleware/CheckIfLoggedIn.php";
     require_once $_SERVER['DOCUMENT_ROOT']."/Middleware/CheckIfAdmin.php";
 
+
+
+    $path = '../../../Resources/images/victoria.png';
+    $type = pathinfo($path, PATHINFO_EXTENSION);
+    $data = file_get_contents($path);
+    $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
+
+    
     $dompdf = new Dompdf();
 
     $currentYear = date('Y');
@@ -196,8 +205,8 @@ $html = '
         }
 
         .py-1 {
-            padding-top: 0.25rem;
-            padding-bottom: 0.25rem;
+            padding-top: 0.50rem;
+            padding-bottom: 0.50rem;
         }
 
         .pt-1 {
@@ -218,7 +227,7 @@ $html = '
         }
 
         .text-xs {
-            font-size: 0.55rem;
+            font-size: 0.78rem;
         }
 
         .font-bold {
@@ -272,7 +281,7 @@ $html = '
             font-size: 1.0rem;
         }
         .text-lg {
-            font-size: 0.75rem;
+            font-size: 1.2rem;
         }
 
         @page {
@@ -292,16 +301,21 @@ $html = '
 <body>
     <table class="min-w-full h-auto font-mono whitespace-nowrap">
         <thead>
+
             <tr>
-                <th class="px-1 font-bold text-2xl text-center" colspan="12">Enrolled Student Information Sheet</th>
-            </tr>
-            <tr>
-                <th class="px-1 pt-3 pb-3 font-bold text-xs text-center" colspan="12">School Year 2023-2024</th>
-            </tr>
-            <tr>
-                <th class="px-1 py-1 pt-5 font-bold text-xs text-start" colspan="12">
-                    For your child\'s Benefit, Please keep us informed of any changes
+                <th class="text-center" colspan="4">
+                    <img src="'.$base64.'" width="100" height="100"/>
                 </th>
+                <th class="font-bold text-start" colspan="8">
+                    <div>
+                        <span class="text-2xl text-center">Enrolled Student Information Sheet</span>
+                        <br>
+                        <span class="text-xs text-center">School Year 2023-2024</span>
+                    </div>
+                </th>
+            </tr>
+            <tr>
+                <th class="px-1 pt-5 pb-3 font-bold text-xs text-center" colspan="12"></th>
             </tr>
 
             <tr>
@@ -385,3 +399,6 @@ $dompdf->stream('output.pdf', array('Attachment' => 0));
 
 errorSender('error '.$e->getMessage(), $fileName);
 }
+
+?>
+

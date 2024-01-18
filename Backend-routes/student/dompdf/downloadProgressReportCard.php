@@ -13,6 +13,11 @@ try {
     // validations functions
     require_once $_SERVER['DOCUMENT_ROOT']."/Backend-routes/admin/includes_user_checker_router.php";
 
+    $path = '../../../Resources/images/victoria.png';
+    $type = pathinfo($path, PATHINFO_EXTENSION);
+    $data = file_get_contents($path);
+    $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
+
     $currentYear = date('Y');
 
     $currentMonth = date('n');
@@ -120,10 +125,14 @@ try {
                     $student_grades_row['third_quarter'] * 0.20 +
                     $student_grades_row['fourth_quarter'] * 0.40);
 
-            $first_quarter = calculateLetterGrade($student_grades_row['first_quarter']);
-            $second_quarter = calculateLetterGrade($student_grades_row['second_quarter']);
-            $third_quarter = calculateLetterGrade($student_grades_row['third_quarter']);
-            $fourth_quarter = calculateLetterGrade($student_grades_row['fourth_quarter']);
+          // $first_quarter = calculateLetterGrade($student_grades_row['first_quarter']);
+            // $second_quarter = calculateLetterGrade($student_grades_row['second_quarter']);
+            // $third_quarter = calculateLetterGrade($student_grades_row['third_quarter']);
+            // $fourth_quarter = calculateLetterGrade($student_grades_row['fourth_quarter']);
+            $first_quarter = $student_grades_row['first_quarter'] == 0 ? '' : $student_grades_row['first_quarter'] ;
+            $second_quarter = $student_grades_row['second_quarter'] == 0 ? '' : $student_grades_row['second_quarter'] ;
+            $third_quarter = $student_grades_row['third_quarter'] == 0 ? '' : $student_grades_row['third_quarter'] ;
+            $fourth_quarter = $student_grades_row['fourth_quarter'] == 0 ? '' : $student_grades_row['fourth_quarter'] ;
             
             $subjectGrades .= '                
             <tr>
@@ -199,6 +208,9 @@ try {
             }
             .pt-5 {
                 padding-top: 1.5rem;
+            }
+            .pt-10 {
+                padding-top: 2.5rem;
             }
             .pb-5 {
                 padding-bottom: 0.75rem;
@@ -280,20 +292,26 @@ try {
         <table class="min-w-full h-auto font-mono whitespace-nowrap">
             <thead>
                 <tr>
-                    <th class="px-1 font-bold text-2xl text-center" colspan="11">Victoria Catholic School of Tarlac Inc.</th>
-                </tr>
-                <tr>
-                    <th class="px-1 pt-3 pb-5 font-bold text-xl text-center" colspan="11">Progress Report Card</th>
+                    <th class="text-center" colspan="4">
+                        <img src="'.$base64.'" width="100" height="100"/>
+                    </th>
+                    <th class="font-bold text-start" colspan="8">
+                        <div>
+                            <span class="text-2xl text-center">Victoria Catholic School of Tarlac Inc.</span>
+                            <br>
+                            <span class="text-xs text-center">Progress Report Card</span>
+                        </div>
+                    </th>
                 </tr>
 
                 <tr>
-                    <th class="px-1 py-2 font-bold text-xs text-start border-b-2" colspan="2">'.($auth['first_name']).'</th>
-                    <th class="px-1 py-2 font-bold text-xs text-start" colspan="1"></th>
-                    <th class="px-1 py-2 font-bold text-xs text-start border-b-2" colspan="2">'.($auth['middle_name']).'</th>
-                    <th class="px-1 py-2 font-bold text-xs text-start" colspan="1"></th>
-                    <th class="px-1 py-2 font-bold text-xs text-start border-b-2" colspan="2">'.($auth['last_name']).'</th>
-                    <th class="px-1 py-2 font-bold text-xs text-start" colspan="1"></th>
-                    <th class="px-1 py-2 font-bold text-xs text-start border-b-2" colspan="2">'.($auth['lrn']).'</th>
+                    <th class="px-1 py-2 pt-10 font-bold text-xs text-start border-b-2" colspan="2">'.($auth['first_name']).'</th>
+                    <th class="px-1 py-2 pt-10 font-bold text-xs text-start" colspan="1"></th>
+                    <th class="px-1 py-2 pt-10 font-bold text-xs text-start border-b-2" colspan="2">'.($auth['middle_name']).'</th>
+                    <th class="px-1 py-2 pt-10 font-bold text-xs text-start" colspan="1"></th>
+                    <th class="px-1 py-2 pt-10 font-bold text-xs text-start border-b-2" colspan="2">'.($auth['last_name']).'</th>
+                    <th class="px-1 py-2 pt-10 font-bold text-xs text-start" colspan="1"></th>
+                    <th class="px-1 py-2 pt-10 font-bold text-xs text-start border-b-2" colspan="2">'.($auth['lrn']).'</th>
                 </tr>                
                 <tr>
                     <th class=" py-2 font-bold text-xs text-start" colspan="2">First Name</th>

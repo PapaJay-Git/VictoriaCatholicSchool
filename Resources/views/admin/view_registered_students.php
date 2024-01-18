@@ -127,7 +127,7 @@ function convertTxt($string = null){
                   </div>
                   <div class="col-12 col-md-4 mb-3">
                     <label class="form-label">LRN <b class="text-danger">*</b></label>
-                    <input type="text" class="form-control" name="lrn" required placeholder="LRN"
+                    <input type="text" minlength="12" maxlength="12"  class="form-control" name="lrn" required placeholder="LRN"
                     <?php echo "value='".htmlspecialchars(getSession('lrn'))."'"  ?> >
                   </div>
                   <div class="col-12 col-md-4 mb-3">

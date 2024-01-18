@@ -161,9 +161,9 @@ $payment_type = getSession('payment_type');
 
     let inputCheckboxes = document.querySelectorAll('input[type=checkbox]');
     
-    let currentDate = new Date();
-    let currentYear = currentDate.getFullYear();
-    let currentMonth = currentDate.getMonth() + 1;
+    var currentDate = new Date();
+    var currentYear = currentDate.getFullYear();
+    var currentMonth = currentDate.getMonth() + 1;
 
     if (currentMonth >= 5) {
         currentYear += 1;

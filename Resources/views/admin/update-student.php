@@ -105,14 +105,14 @@ function isChecked($columnName){
                 <label class="form-label ">New Password</label>
                 <div class="password-container">
                     <input type="password"  class="password-input form-control " id="password2"  name="new_password" required placeholder="New Password" autocomplete="new_password">
-                    <span class="toggle-password" onclick="togglePasswordVisibility('password2')">👁️‍🗨️</span>
+                    <span class="toggle-password" onclick="togglePasswordVisibility('password2')"><img src="../../images/see.svg" alt="" style="width: auto; height: 20px;"></span>
                 </div>
             </div>
             <div class="mb-3 m-w-300px">
                 <label class="form-label ">Confirm New Password</label>
                 <div class="password-container">
                     <input type="password"  class="password-input form-control " id="password3"  name="confirm_password" required placeholder="Confirm New Password" autocomplete="confirm_password">
-                    <span class="toggle-password" onclick="togglePasswordVisibility('password3')">👁️‍🗨️</span>
+                    <span class="toggle-password" onclick="togglePasswordVisibility('password3')"><img src="../../images/see.svg" alt="" style="width: auto; height: 20px;"></span>
                 </div>
             </div>
             <div class="d-flex justify-content-end m-w-300px">

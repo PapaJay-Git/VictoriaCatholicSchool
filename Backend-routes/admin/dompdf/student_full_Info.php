@@ -301,12 +301,13 @@ $html = '
 <body>
     <table class="min-w-full h-auto font-mono whitespace-nowrap">
         <thead>
-
             <tr>
-                <th class="text-center" colspan="4">
+                <th class="text-center" colspan="12">
                     <img src="'.$base64.'" width="100" height="100"/>
                 </th>
-                <th class="font-bold text-start" colspan="8">
+            </tr>
+            <tr>
+                <th class="font-bold text-center" colspan="12">
                     <div>
                         <span class="text-2xl text-center">Enrolled Student Information Sheet</span>
                         <br>
@@ -314,6 +315,8 @@ $html = '
                     </div>
                 </th>
             </tr>
+        </thead>
+        <thead>
             <tr>
                 <th class="px-1 pt-5 pb-3 font-bold text-xs text-center" colspan="12"></th>
             </tr>

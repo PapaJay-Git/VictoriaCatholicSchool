@@ -68,7 +68,9 @@ function getSession($data) {
 					<label class="form-label text-white fw-bold">Password</label>
 					<div class="password-container">
 						<input type="password"  class="password-input form-control form-control-lg bg-light fs-6" id="password1"  name="password" required placeholder="Password" autocomplete="password">
-						<span class="toggle-password" onclick="togglePasswordVisibility('password1')">👁️‍🗨️</span>
+						<span class="toggle-password" onclick="togglePasswordVisibility('password1')">
+						<img src="../../images/see.svg" alt="" style="width: auto; height: 20px;">
+						</span>
 					</div>
 				</div>
 				<!-- Password -->

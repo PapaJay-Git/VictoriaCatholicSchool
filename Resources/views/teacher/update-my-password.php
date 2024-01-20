@@ -23,21 +23,21 @@ require_once "../includes/header_layout.php";
                 <label class="form-label fw-bold text-uppercase d-block">Old Password</label>
                 <div class="password-container">
                     <input type="password"  class="password-input form-control form-control-sm" id="password3"  name="old_password" required placeholder="Old Password" autocomplete="old_password">
-                    <span class="toggle-password" onclick="togglePasswordVisibility('password3')">👁️‍🗨️</span>
+                    <span class="toggle-password" onclick="togglePasswordVisibility('password3')"><img src="../../images/see.svg" alt="" style="width: auto; height: 20px;"></span>
                 </div>
             </div>
             <div class="mb-3 m-w-300px">
                 <label class="form-label fw-bold text-uppercase d-block">New Password</label>
                 <div class="password-container">
                     <input type="password"  class="password-input form-control form-control-sm" id="password2"  name="new_password" required placeholder="New Password" >
-                    <span class="toggle-password" onclick="togglePasswordVisibility('password2')">👁️‍🗨️</span>
+                    <span class="toggle-password" onclick="togglePasswordVisibility('password2')"><img src="../../images/see.svg" alt="" style="width: auto; height: 20px;"></span>
                 </div>
             </div>
             <div class="mb-3 m-w-300px">
                 <label class="form-label fw-bold text-uppercase d-block">Confirm New Password</label>
                 <div class="password-container">
                     <input type="password"  class="password-input form-control form-control-sm" id="password1"  name="confirm_password" required placeholder="Confirm New Password" >
-                    <span class="toggle-password" onclick="togglePasswordVisibility('password1')">👁️‍🗨️</span>
+                    <span class="toggle-password" onclick="togglePasswordVisibility('password1')"><img src="../../images/see.svg" alt="" style="width: auto; height: 20px;"></span>
                 </div>
             </div>	
             <div class="d-flex justify-content-end m-w-300px">

@@ -186,11 +186,11 @@ function togglePasswordVisibility(passwordId) {
 
     if (passwordInput.type === "password") {
         passwordInput.type = "text";
-        eyeIcon.textContent = "👁️";
+        eyeIcon.innerHTML = '<img src="../../images/unsee.svg" alt="" style="width: auto; height: 20px;">';
 
     } else {
         passwordInput.type = "password";
-        eyeIcon.textContent = "👁️‍🗨️";  
+        eyeIcon.innerHTML = '<img src="../../images/see.svg" alt="" style="width: auto; height: 20px;">';  
 
     }
   }

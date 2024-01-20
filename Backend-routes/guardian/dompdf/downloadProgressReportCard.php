@@ -270,6 +270,9 @@ try {
             .text-xl {
                 font-size: 0.80rem;
             }
+            .text-xxl {
+                font-size: 1rem;
+            }
             .text-lg {
                 font-size: 0.75rem;
             }
@@ -292,17 +295,20 @@ try {
         <table class="min-w-full h-auto font-mono whitespace-nowrap">
             <thead>
                 <tr>
-                    <th class="text-center" colspan="4">
-                        <img src="'.$base64.'" width="100" height="100"/>
-                    </th>
-                    <th class="font-bold text-start" colspan="8">
-                        <div>
-                            <span class="text-2xl text-center">Victoria Catholic School of Tarlac Inc.</span>
-                            <br>
-                            <span class="text-xs text-center">Progress Report Card</span>
+                    <th colspan="12">
+                        <div style="text-align: center;">
+                            <img src="'.$base64.'" style="max-width: 100px; display: inline-block; vertical-align: middle;">
+                            <div style="display: inline-block; text-align: center; vertical-align: middle; margin-left: 10px;">
+                                <span class="text-2xl text-center">VICTORIA CATHOLIC SCHOOL OF TARLAC INC.</span>
+                                <span style="display: block;" class="text-xs text-center">Sta. Lucia, Victoria, Tarlac</span>
+                                <span style="display: block;" class="text-xs text-center">School Year '.$currentYear.'-'.($currentYear+1).'</span>
+                                <span style="display: block;" class="text-xxl text-center pt-2">PROGRESS REPORT CARD</span>
+                            </div>
                         </div>
                     </th>
                 </tr>
+            </thead>
+            <thead>
 
                 <tr>
                     <th class="px-1 py-2 pt-10 font-bold text-xs text-start border-b-2" colspan="2">'.($student['first_name']).'</th>
